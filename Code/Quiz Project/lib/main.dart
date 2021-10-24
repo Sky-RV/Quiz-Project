@@ -32,6 +32,78 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return Scaffold(
 
+      ////////////////////////////////// MENU BAR /////////////////////////////////
+
+      drawer: Drawer(
+        child: ListView(
+          children: <Widget>[
+
+            UserAccountsDrawerHeader(
+              accountName: const Text("Name", style: TextStyle(fontSize: 20),),
+              accountEmail: const Text("Number", style: TextStyle(fontSize: 14),),
+              onDetailsPressed: () {
+                // Fluttertoast.showToast(
+                //   msg: "This is a Long Toast",
+                //   toastLength: Toast.LENGTH_LONG
+                // );
+              },
+              arrowColor: Colors.black,
+              decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                      colors: [
+                        Color(0xFF363671),
+                        Color(0xFF3E5196),
+                        Color(0xFF4E65B8),
+                      ]
+                  )
+              ),
+            ),
+
+            const ListTile(
+              title: Text("بانک سوال و آزمون"),
+              leading: Icon(Icons.account_balance_sharp),
+            ),
+
+            const ListTile(
+              title: Text("آزمون آنلاین"),
+              leading: Icon(Icons.alarm_on_outlined),
+            ),
+
+            const ListTile(
+              title: Text("آزمون های ویژه دانش آموزی"),
+              leading: Icon(Icons.account_circle),
+            ),
+
+            const ListTile(
+              title: Text("پیام رسان"),
+              leading: Icon(Icons.share),
+            ),
+
+            const ListTile(
+              title: Text("کلاس آنلاین"),
+              leading: Icon(Icons.class__sharp),
+            ),
+
+            const ListTile(
+              title: Text("تکلیف آنلاین"),
+              leading: Icon(Icons.book_online_sharp),
+            ),
+
+            const ListTile(
+              title: Text("دفتر کلاسی"),
+              leading: Icon(Icons.note),
+            ),
+
+            const ListTile(
+              title: Text("فیلم آموزشی"),
+              leading: Icon(Icons.movie_creation_outlined),
+            ),
+
+          ],
+        ),
+      ),
+
+
       /////////////////////////// BOTTOM NAVIGATION BAR ///////////////////////////
 
       bottomNavigationBar: BottomNavigationBar(
