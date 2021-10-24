@@ -60,42 +60,42 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
 
             const ListTile(
-              title: Text("بانک سوال و آزمون"),
+              title: Text("Question Bank", style: TextStyle(color: Colors.black)),
               leading: Icon(Icons.account_balance_sharp),
             ),
 
             const ListTile(
-              title: Text("آزمون آنلاین"),
+              title: Text("Online Test", style: TextStyle(color: Colors.black)),
               leading: Icon(Icons.alarm_on_outlined),
             ),
 
             const ListTile(
-              title: Text("آزمون های ویژه دانش آموزی"),
+              title: Text("Special Student Exams", style: TextStyle(color: Colors.black)),
               leading: Icon(Icons.account_circle),
             ),
 
             const ListTile(
-              title: Text("پیام رسان"),
+              title: Text("Share", style: TextStyle(color: Colors.black)),
               leading: Icon(Icons.share),
             ),
 
             const ListTile(
-              title: Text("کلاس آنلاین"),
+              title: Text("Online Class", style: TextStyle(color: Colors.black)),
               leading: Icon(Icons.class__sharp),
             ),
 
             const ListTile(
-              title: Text("تکلیف آنلاین"),
+              title: Text("Online Homework", style: TextStyle(color: Colors.black)),
               leading: Icon(Icons.book_online_sharp),
             ),
 
             const ListTile(
-              title: Text("دفتر کلاسی"),
+              title: Text("Notebook Class", style: TextStyle(color: Colors.black)),
               leading: Icon(Icons.note),
             ),
 
             const ListTile(
-              title: Text("فیلم آموزشی"),
+              title: Text("Tutorial Movies", style: TextStyle(color: Colors.black),),
               leading: Icon(Icons.movie_creation_outlined),
             ),
 
