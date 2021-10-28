@@ -112,7 +112,11 @@ class _BNB_AccountPageState extends State<BNB_AccountPage> {
 
       body: Center(
         child: Container(
-          
+          width: 315.0,
+          height: 420.0,
+          //color: Colors.white,
+          padding: const EdgeInsets.symmetric(vertical: 76.0, horizontal: 26),
+         // decoration: ,
         ),
       ),
 
