@@ -1,28 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:quiz/BNB_Account.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
+class BNB_Account extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: _buildShrineTheme(),
       title: 'Quiz Project',
-      home: MyHomePage(),
+      home: BNB_AccountPage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class BNB_AccountPage extends StatefulWidget {
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<BNB_AccountPage> createState() => _BNB_AccountPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _BNB_AccountPageState extends State<BNB_AccountPage> {
   int _counterIndex = 0;
 
   @override
@@ -115,10 +110,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
       /////////////////////////////////// BODY /////////////////////////////
 
-      body: Column(
-        children: <Widget>[
-
-        ],
+      body: Center(
+        child: Container(
+          
+        ),
       ),
 
       /////////////////////////// BOTTOM NAVIGATION BAR ///////////////////////////
@@ -139,18 +134,18 @@ class _MyHomePageState extends State<MyHomePage> {
           setState(() {
             _counterIndex = value;
           });
-          if (value == 1){
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => BNB_Account())
-            );
-          }
+          // if (value == 0){
+          //   Navigator.push(
+          //       context,
+          //       MaterialPageRoute(builder: (context) => main())
+          //   );
+          // }
         },
 
         items: const [
           BottomNavigationBarItem(
-            label: 'Home',
-            icon: Icon(Icons.home)
+              label: 'Home',
+              icon: Icon(Icons.home)
           ),
           BottomNavigationBarItem(
               label: 'Account',
@@ -170,7 +165,7 @@ class _MyHomePageState extends State<MyHomePage> {
 ThemeData _buildShrineTheme() {
   final ThemeData base = ThemeData.light();
   return base.copyWith(
-   // colorScheme: _shrineColorScheme,
+    // colorScheme: _shrineColorScheme,
     textTheme: _buildShrineTextTheme(base.textTheme),
   );
 }
