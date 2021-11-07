@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class BNB_Account extends StatelessWidget {
@@ -11,6 +12,8 @@ class BNB_Account extends StatelessWidget {
     );
   }
 }
+
+
 
 class BNB_AccountPage extends StatefulWidget {
   @override
@@ -102,7 +105,7 @@ class _BNB_AccountPageState extends State<BNB_AccountPage> {
       //////////////////////////////////// APP BAR //////////////////////////////
 
       appBar: AppBar(
-        title: const Center(
+        title: Center(
           child: Text("Quiz Project", style: TextStyle(color: Colors.white), textAlign: TextAlign.center,),
         ),
         backgroundColor: Color(0xFF363671),
@@ -110,13 +113,121 @@ class _BNB_AccountPageState extends State<BNB_AccountPage> {
 
       /////////////////////////////////// BODY /////////////////////////////
 
-      body: Center(
-        child: Container(
-          width: 315.0,
-          height: 420.0,
-          //color: Colors.white,
-          padding: const EdgeInsets.symmetric(vertical: 76.0, horizontal: 26),
-         // decoration: ,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Stack(
+            children: <Widget>[
+              Container(
+
+                height: MediaQuery.of(context).size.height,
+                width: double.infinity,
+
+                child: Column(
+                  //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+
+                        SizedBox(height: 10,),
+                        Text("Sign Up", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black),),
+                        SizedBox(height: 20,),
+                    //    Text("Create an university account", style: TextStyle(fontSize: 15, color: Colors.grey),),
+                    //    SizedBox(height: 30,)
+
+                      ],
+                    ),
+
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
+                      child: Column(
+
+                        // Inputs
+                        children: [
+                          UniversityInput(label: "University Name"),
+                          SizedBox(height: 15,),
+
+                          SimpleInput(label: "First Name"),
+                          SizedBox(height: 15,),
+
+                          SimpleInput(label: "Last Name"),
+                          SizedBox(height: 15,),
+
+                          UsernameInput(label: "Username"),
+                          SizedBox(height: 15,),
+
+                          PasswordInput(label: "Password"),
+                          SizedBox(height: 15,),
+
+                          PasswordInput(label: "Confirm Password"),
+                          SizedBox(height: 15,),
+
+                          PhoneInput(label: "Phone"),
+                          SizedBox(height: 15,)
+                        ],
+                      ),
+                    ),
+
+                    SizedBox(height: 20,),
+
+                    // Sign In Button
+
+                    Padding(
+                      // padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
+                      padding: EdgeInsets.symmetric(horizontal: 40),
+                      child: ElevatedButton(
+                        onPressed: (){},
+                        style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.zero,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                        ),
+                        child: Ink(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                Color(0xFFEE537C),
+                                Color(0xFFEB927B)
+                              ],
+                            ),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Container(
+                            width: 180,
+                            height: 35,
+                            alignment: Alignment.center,
+                            child: Text('Sign In', style: TextStyle(fontSize: 13, color: Colors.white),),
+                          ),
+                        ),
+                      ),
+                      // child: MaterialButton(
+                      //   minWidth: double.infinity,
+                      //   height: 60,
+                      //   onPressed: (){},
+                      //
+                      // )
+                    ),
+
+                    // Have an account
+
+                    SizedBox(height: 15,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('Already Have an account? ', style: TextStyle(fontSize: 13, color: Color(0xFF3E5196)),),
+                        TextButton(
+                          onPressed: (){},
+                          child: Text('Log In', style: TextStyle(fontSize: 13, color: Color(0xFF3E5196), fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ],
+                    ),
+
+                  ],
+                ),
+
+              ),
+            ],
+          )
         ),
       ),
 
@@ -165,6 +276,91 @@ class _BNB_AccountPageState extends State<BNB_AccountPage> {
     );
   }
 }
+
+Widget SimpleInput({label}){
+  return TextFormField(
+    style: TextStyle(color: Colors.black),
+    decoration: InputDecoration(
+      hintText: label,
+      border: OutlineInputBorder(),
+      labelStyle: TextStyle(color: Color(0xFF3E5196)),
+    ),
+  );
+}
+
+Widget UsernameInput({label}){
+  return TextFormField(
+    style: TextStyle(color: Colors.black),
+    decoration: InputDecoration(
+        hintText: label,
+      border: OutlineInputBorder(),
+      labelStyle: TextStyle(color: Color(0xFF3E5196)),
+      prefixIcon: Icon(Icons.account_circle)
+    ),
+  );
+}
+
+Widget UniversityInput({label}){
+  return TextFormField(
+    style: TextStyle(color: Colors.black),
+    decoration: InputDecoration(
+        hintText: label,
+        border: OutlineInputBorder(),
+        labelStyle: TextStyle(color: Color(0xFF3E5196)),
+        prefixIcon: Icon(Icons.account_balance_sharp)
+    ),
+  );
+}
+
+Widget PhoneInput({label}){
+  return TextFormField(
+    style: TextStyle(color: Colors.black),
+    keyboardType: TextInputType.phone,
+    decoration: InputDecoration(
+      hintText: label,
+        border: OutlineInputBorder(),
+        labelStyle: TextStyle(color: Color(0xFF3E5196)),
+        prefixIcon: Icon(Icons.phone),
+    ),
+  );
+}
+
+Widget PasswordInput({label}){
+  bool status = true;
+  return TextFormField(
+    style: TextStyle(color: Colors.black),
+    obscureText: status,
+      enableSuggestions: false,
+      autocorrect: false,
+      decoration: InputDecoration(
+          hintText: label,
+      border: OutlineInputBorder(),
+      labelStyle: TextStyle(color: Color(0xFF3E5196)),
+      prefixIcon: Icon(Icons.password),
+        suffixIcon: IconButton(
+          icon: Icon(status ? Icons.visibility : Icons.visibility_off),
+          // onPressed: (){
+          //   setState(() {
+          //     status = !status;
+          //   });
+          // },
+          onPressed: (){},
+        )
+    ),
+  );
+}
+
+// Widget ErrorInput({label}){
+//   return TextFormField(
+//     decoration: InputDecoration(
+//         labelText: label,
+//         border: OutlineInputBorder(),
+//         labelStyle: TextStyle(color: Color(0xFF3E5196)),
+//         suffixIcon: Icon(Icons.visibility),
+//         prefixIcon: Icon(Icons.password)
+//     ),
+//   );
+// }
 
 ThemeData _buildShrineTheme() {
   final ThemeData base = ThemeData.light();

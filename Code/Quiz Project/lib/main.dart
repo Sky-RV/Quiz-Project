@@ -107,7 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
       //////////////////////////////////// APP BAR //////////////////////////////
 
       appBar: AppBar(
-        title: const Center(
+        title: Center(
           child: Text("Quiz Project", style: TextStyle(color: Colors.white), textAlign: TextAlign.center,),
         ),
         backgroundColor: Color(0xFF363671),
