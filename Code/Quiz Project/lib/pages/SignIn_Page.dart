@@ -1,26 +1,26 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class BNB_Account extends StatelessWidget {
+class SignIn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: _buildShrineTheme(),
       title: 'Quiz Project',
-      home: BNB_AccountPage(),
+      home: SignIn_Page(),
     );
   }
 }
 
 
 
-class BNB_AccountPage extends StatefulWidget {
+class SignIn_Page extends StatefulWidget {
   @override
-  State<BNB_AccountPage> createState() => _BNB_AccountPageState();
+  State<SignIn_Page> createState() => _SignIn_PageState();
 }
 
-class _BNB_AccountPageState extends State<BNB_AccountPage> {
+class _SignIn_PageState extends State<SignIn_Page> {
   int _counterIndex = 0;
 
   @override

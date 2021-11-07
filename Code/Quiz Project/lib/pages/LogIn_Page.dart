@@ -1,29 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:quiz/pages/SignIn_Page.dart';
-import 'package:quiz/pages/LogIn_Page.dart';
+import 'package:flutter/cupertino.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
+class LogIn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: _buildShrineTheme(),
       title: 'Quiz Project',
-      home: MyHomePage(),
+      home: LogIn_Page(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class LogIn_Page extends StatefulWidget {
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<LogIn_Page> createState() => _LogIn_PageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _LogIn_PageState extends State<LogIn_Page> {
   int _counterIndex = 0;
 
   @override
@@ -116,10 +112,91 @@ class _MyHomePageState extends State<MyHomePage> {
 
       /////////////////////////////////// BODY /////////////////////////////
 
-      body: Column(
-        children: <Widget>[
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Stack(
+            children: <Widget>[
 
-        ],
+              Container(
+                height: MediaQuery.of(context).size.height,
+                width: double.infinity,
+
+                child: Column(
+                  children: [
+                    Column(
+                      children: [
+                        SizedBox(height: 20,),
+                        Padding(
+                          padding: EdgeInsets.all(5),
+                          child: Image.asset('flutter_assets/images/pic3.png', height: 100, width: 100,),
+                        ),
+                        SizedBox(height: 20,),
+                        Text("Log In", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black),),
+                        SizedBox(height: 150,),
+                      ],
+                    ),
+
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
+                      child: Column(
+
+                        // Inputs
+                        children: [
+                          UsernameInput(label: 'Username'),
+                          SizedBox(height: 40,),
+
+                          PasswordInput(label: 'Password'),
+                          SizedBox(height: 5,),
+                        ],
+
+                      ),
+                    ),
+
+                    SizedBox(height: 5,),
+
+                    TextButton(
+                      onPressed: (){},
+                      child: Text('Forget Password?', style: TextStyle(fontSize: 13, color: Color(0xFFFF0000), fontWeight: FontWeight.bold),),
+                    ),
+
+                    SizedBox(height: 100,),
+
+                    //Log In button
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 40),
+                      child: ElevatedButton(
+                        onPressed: (){},
+                        style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.zero,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                        ),
+                        child: Ink(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                Color(0xFF363671),
+                                Color(0xFFEE537C),
+                              ],
+                            ),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Container(
+                            width: 180,
+                            height: 35,
+                            alignment: Alignment.center,
+                            child: Text('Sign In', style: TextStyle(fontSize: 13, color: Colors.white),),
+                          ),
+                        ),
+                      ),
+                    ),
+
+                  ],
+                ),
+              ),
+
+            ],
+          ),
+        ),
       ),
 
       /////////////////////////// BOTTOM NAVIGATION BAR ///////////////////////////
@@ -140,18 +217,18 @@ class _MyHomePageState extends State<MyHomePage> {
           setState(() {
             _counterIndex = value;
           });
-          if (value == 1){
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => LogIn_Page())
-            );
-          }
+          // if (value == 1){
+          //   Navigator.push(
+          //       context,
+          //       MaterialPageRoute(builder: (context) => LogIn_Page())
+          //   );
+          // }
         },
 
         items: const [
           BottomNavigationBarItem(
-            label: 'Home',
-            icon: Icon(Icons.home)
+              label: 'Home',
+              icon: Icon(Icons.home)
           ),
           BottomNavigationBarItem(
               label: 'Account',
@@ -168,10 +245,47 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
+Widget UsernameInput({label}){
+  return TextFormField(
+    style: TextStyle(color: Colors.black),
+    decoration: InputDecoration(
+        hintText: label,
+        border: OutlineInputBorder(),
+        labelStyle: TextStyle(color: Color(0xFF3E5196)),
+        prefixIcon: Icon(Icons.account_circle)
+    ),
+  );
+}
+
+Widget PasswordInput({label}){
+  bool status = true;
+  return TextFormField(
+    style: TextStyle(color: Colors.black),
+    obscureText: status,
+    enableSuggestions: false,
+    autocorrect: false,
+    decoration: InputDecoration(
+        hintText: label,
+        border: OutlineInputBorder(),
+        labelStyle: TextStyle(color: Color(0xFF3E5196)),
+        prefixIcon: Icon(Icons.password),
+        suffixIcon: IconButton(
+          icon: Icon(status ? Icons.visibility : Icons.visibility_off),
+          // onPressed: (){
+          //   setState(() {
+          //     status = !status;
+          //   });
+          // },
+          onPressed: (){},
+        )
+    ),
+  );
+}
+
 ThemeData _buildShrineTheme() {
   final ThemeData base = ThemeData.light();
   return base.copyWith(
-   // colorScheme: _shrineColorScheme,
+    // colorScheme: _shrineColorScheme,
     textTheme: _buildShrineTextTheme(base.textTheme),
   );
 }
