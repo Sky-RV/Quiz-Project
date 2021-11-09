@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:quiz/pages/LogInPage.dart';
 
 class SignIn extends StatelessWidget {
   @override
@@ -264,7 +265,12 @@ class _SignIn_PageState extends State<SignIn_Page> {
                         children: [
                           Text('Already Have an account? ', style: TextStyle(fontSize: 13, color: Color(0xFF3E5196)),),
                           TextButton(
-                            onPressed: (){},
+                            onPressed: (){
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => LogIn())
+                              );
+                            },
                             child: Text('Log In', style: TextStyle(fontSize: 13, color: Color(0xFF3E5196), fontWeight: FontWeight.bold),
                             ),
                           ),
