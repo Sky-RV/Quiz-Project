@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:quiz/pages/SignInPage.dart';
+import 'package:quiz/pages/UniversityPanel.dart';
 
 class LogIn extends StatelessWidget {
   @override
@@ -27,6 +27,9 @@ class _LogIn_PageState extends State<LogIn_Page> {
 
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
+
+    TextEditingController UserController = TextEditingController();
+    TextEditingController PassController = TextEditingController();
 
     return Scaffold(
 
@@ -192,10 +195,10 @@ class _LogIn_PageState extends State<LogIn_Page> {
 
                         // Inputs
                         children: [
-                          UsernameInput(label: 'Username'),
+                          UsernameInput(label: 'Username', UserController: UserController),
                           SizedBox(height: 40,),
 
-                          PasswordInput(label: 'Password'),
+                          PasswordInput(label: 'Password', PassController: PassController),
                           SizedBox(height: 5,),
                         ],
 
@@ -215,7 +218,19 @@ class _LogIn_PageState extends State<LogIn_Page> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 40),
                       child: ElevatedButton(
-                        onPressed: (){},
+                        onPressed: (){
+
+                          String Username = UserController.text;
+                          String Password = PassController.text;
+
+                          if(Username=='admin' && Password=='admin'){
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => UniversityPanel())
+                            );
+                          }
+
+                        },
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.zero,
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -254,8 +269,9 @@ class _LogIn_PageState extends State<LogIn_Page> {
   }
 }
 
-Widget UsernameInput({label}){
+Widget UsernameInput({label, UserController}){
   return TextFormField(
+    controller: UserController,
     style: TextStyle(color: Colors.black),
     decoration: InputDecoration(
         hintText: label,
@@ -266,9 +282,10 @@ Widget UsernameInput({label}){
   );
 }
 
-Widget PasswordInput({label}){
+Widget PasswordInput({label, PassController}){
   bool status = true;
   return TextFormField(
+    controller: PassController,
     style: TextStyle(color: Colors.black),
     obscureText: status,
     enableSuggestions: false,
