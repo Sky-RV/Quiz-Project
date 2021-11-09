@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:quiz/pages/LogInPage.dart';
+import 'package:quiz/pages/SignInPage.dart';
 
 void main() {
   runApp(MyApp());
@@ -76,7 +78,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 title: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 40),
                   child: ElevatedButton(
-                    onPressed: (){},
+                    onPressed: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SignIn())
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.zero,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -107,7 +114,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 title: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 40),
                   child: ElevatedButton(
-                    onPressed: (){},
+                    onPressed: (){
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => LogIn())
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.zero,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -218,7 +230,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     alignment: MainAxisAlignment.spaceAround,
                     children: [
                       ElevatedButton(
-                        onPressed: (){},
+                        onPressed: (){
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => SignIn())
+                          );
+                        },
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.zero,
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
