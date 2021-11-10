@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quiz/pages/SignInPage.dart';
-import 'package:quiz/pages/LogInPage.dart';
+import 'package:quiz/pages/University/ChangePasswordPage.dart';
 import 'package:quiz/main.dart';
 
 class UniversityPanel extends StatelessWidget {
@@ -104,7 +103,12 @@ class UniversityPanel extends StatelessWidget {
               SizedBox(height: 10,),
               ListTile(
                 title: TextButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ChangePasswordPage(UsernameTXT: UsernameTXT, PasswordTXT: PasswordTXT,))
+                    );
+                  },
                   child: Text("تغییر رمز عبور", style: TextStyle(color: Colors.black),),
                 ),
                 leading: Icon(Icons.vpn_key),

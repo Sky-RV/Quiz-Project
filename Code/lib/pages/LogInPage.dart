@@ -185,7 +185,7 @@ class _LogIn_PageState extends State<LogIn_Page> {
                           //child: Image.asset('flutter_assets/images/pic3.png', height: 100, width: 100,),
                         ),
                         SizedBox(height: 20,),
-                        Text("Log In", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black),),
+                        Text("Log In", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: shrineBlue600),),
                         SizedBox(height: 150,),
                       ],
                     ),

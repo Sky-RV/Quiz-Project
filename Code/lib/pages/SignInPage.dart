@@ -180,7 +180,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
                         children: [
 
                           SizedBox(height: 10,),
-                          Text("Sign Up", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black),),
+                          Text("Sign Up", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: shrineBlue600),),
                           SizedBox(height: 20,),
                           //    Text("Create an university account", style: TextStyle(fontSize: 15, color: Colors.grey),),
                           //    SizedBox(height: 30,)
