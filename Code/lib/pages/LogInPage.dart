@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:quiz/pages/UniversityPanel.dart';
+import 'package:quiz/pages/University/UniversityPanel.dart';
 
 class LogIn extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -226,7 +227,7 @@ class _LogIn_PageState extends State<LogIn_Page> {
                           if(Username=='admin' && Password=='admin'){
                             Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => UniversityPanel())
+                                MaterialPageRoute(builder: (context) => UniversityPanel(UsernameTXT: Username, PasswordTXT: Password,))
                             );
                           }
 
