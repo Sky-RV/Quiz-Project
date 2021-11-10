@@ -294,7 +294,7 @@ Widget SimpleInput({label}){
   return TextFormField(
     style: TextStyle(color: Colors.black),
     decoration: InputDecoration(
-      hintText: label,
+      labelText: label,
       border: OutlineInputBorder(),
       labelStyle: TextStyle(color: Color(0xFF3E5196)),
     ),
@@ -305,7 +305,7 @@ Widget UsernameInput({label}){
   return TextFormField(
     style: TextStyle(color: Colors.black),
     decoration: InputDecoration(
-        hintText: label,
+        labelText: label,
         border: OutlineInputBorder(),
         labelStyle: TextStyle(color: Color(0xFF3E5196)),
         prefixIcon: Icon(Icons.account_circle)
@@ -317,7 +317,7 @@ Widget UniversityInput({label}){
   return TextFormField(
     style: TextStyle(color: Colors.black),
     decoration: InputDecoration(
-        hintText: label,
+        labelText: label,
         border: OutlineInputBorder(),
         labelStyle: TextStyle(color: Color(0xFF3E5196)),
         prefixIcon: Icon(Icons.account_balance_sharp)
@@ -330,7 +330,7 @@ Widget PhoneInput({label}){
     style: TextStyle(color: Colors.black),
     keyboardType: TextInputType.phone,
     decoration: InputDecoration(
-      hintText: label,
+      labelText: label,
       border: OutlineInputBorder(),
       labelStyle: TextStyle(color: Color(0xFF3E5196)),
       prefixIcon: Icon(Icons.phone),
@@ -346,7 +346,7 @@ Widget PasswordInput({label}){
     enableSuggestions: false,
     autocorrect: false,
     decoration: InputDecoration(
-        hintText: label,
+        labelText: label,
         border: OutlineInputBorder(),
         labelStyle: TextStyle(color: Color(0xFF3E5196)),
         prefixIcon: Icon(Icons.password),

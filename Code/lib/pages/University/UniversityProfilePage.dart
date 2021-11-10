@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:quiz/pages/University/UniversityPanel.dart';
+import 'package:quiz/pages/University/ChangePasswordPage.dart';
 import 'package:quiz/pages/University/UniversityProfilePage.dart';
+import 'package:quiz/pages/University/UniversityPanel.dart';
 import 'package:quiz/main.dart';
 
-class ChangePasswordPage extends StatelessWidget {
+class UniversityProfilePage extends StatelessWidget {
 
   String UsernameTXT, PasswordTXT;
-  ChangePasswordPage({Key? key,
+  UniversityProfilePage({Key? key,
     required this.UsernameTXT,
     required this.PasswordTXT}) : super(key: key);
 
@@ -152,34 +153,43 @@ class ChangePasswordPage extends StatelessWidget {
                 child: Column(
                   children: [
 
-                    SizedBox(height: 40,),
-                    Padding(
-                      padding: EdgeInsets.all(5),
-                      child: Text('تغییر رمز عبور', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: shrineBlue600),),
+                    // Image From User
+                    Center(
+                      child: Image.asset('name'),
                     ),
 
                     SizedBox(height: 50,),
+
+                    // Inputs
                     Padding(
-                      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 25),
+                      padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
                       child: Column(
 
-                        // Inputs
                         children: [
-                          PasswordInput(label: "رمز عبور فعلی"),
-                          SizedBox(height: 40,),
+                          UsernameInput(label: "Username", str: UsernameTXT),
+                          SizedBox(height: 15,),
 
-                          PasswordInput(label: "رمز عبور جدید"),
-                          SizedBox(height: 40,),
+                          UniversityInput(label: "University"),
+                          SizedBox(height: 15,),
 
-                          PasswordInput(label: "تایید رمز عبور جدید"),
-                          SizedBox(height: 50,),
+                          SimpleInput(label: "FirstName"),
+                          SizedBox(height: 15,),
+
+                          SimpleInput(label: 'Lastname'),
+                          SizedBox(height: 15,),
+
+                          EmailInput(label: "Email"),
+                          SizedBox(height: 15,),
                         ],
 
                       ),
                     ),
 
-                    // Change Password Button
+                    SizedBox(height: 20,),
+
+                    // Save Button
                     Padding(
+                      // padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
                       padding: EdgeInsets.symmetric(horizontal: 40),
                       child: ElevatedButton(
                         onPressed: (){},
@@ -191,8 +201,8 @@ class ChangePasswordPage extends StatelessWidget {
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
                               colors: [
-                                shrinePink400,
-                                shrinePink300
+                                Color(0xFFEE537C),
+                                Color(0xFFEB927B)
                               ],
                             ),
                             borderRadius: BorderRadius.circular(20),
@@ -201,7 +211,7 @@ class ChangePasswordPage extends StatelessWidget {
                             width: 180,
                             height: 35,
                             alignment: Alignment.center,
-                            child: Text('ذخیره', style: TextStyle(fontSize: 13, color: Colors.white),),
+                            child: Text('Save', style: TextStyle(fontSize: 13, color: Colors.white),),
                           ),
                         ),
                       ),
@@ -220,28 +230,49 @@ class ChangePasswordPage extends StatelessWidget {
   }
 }
 
-Widget PasswordInput({label, PassController}){
-  bool status = true;
+Widget UsernameInput({label, str}){
   return TextFormField(
-    controller: PassController,
     style: TextStyle(color: Colors.black),
-    obscureText: status,
-    enableSuggestions: false,
-    autocorrect: false,
     decoration: InputDecoration(
         labelText: label,
         border: OutlineInputBorder(),
         labelStyle: TextStyle(color: Color(0xFF3E5196)),
-        prefixIcon: Icon(Icons.password),
-        suffixIcon: IconButton(
-          icon: Icon(status ? Icons.visibility : Icons.visibility_off),
-          // onPressed: (){
-          //   setState(() {
-          //     status = !status;
-          //   });
-          // },
-          onPressed: (){},
-        )
+        prefixIcon: Icon(Icons.account_circle)
+    ),
+  );
+}
+
+Widget UniversityInput({label}){
+  return TextFormField(
+    style: TextStyle(color: Colors.black),
+    decoration: InputDecoration(
+        labelText: label,
+        border: OutlineInputBorder(),
+        labelStyle: TextStyle(color: Color(0xFF3E5196)),
+        prefixIcon: Icon(Icons.account_balance_sharp)
+    ),
+  );
+}
+
+Widget SimpleInput({label}){
+  return TextFormField(
+    style: TextStyle(color: Colors.black),
+    decoration: InputDecoration(
+      labelText: label,
+      border: OutlineInputBorder(),
+      labelStyle: TextStyle(color: Color(0xFF3E5196)),
+    ),
+  );
+}
+
+Widget EmailInput({label}){
+  return TextFormField(
+    style: TextStyle(color: Colors.black),
+    decoration: InputDecoration(
+      labelText: label,
+      border: OutlineInputBorder(),
+      labelStyle: TextStyle(color: Color(0xFF3E5196)),
+      prefixIcon: Icon(Icons.email)
     ),
   );
 }

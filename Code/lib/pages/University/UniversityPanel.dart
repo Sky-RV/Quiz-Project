@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quiz/pages/University/ChangePasswordPage.dart';
+import 'package:quiz/pages/University/UniversityProfilePage.dart';
 import 'package:quiz/main.dart';
 
 class UniversityPanel extends StatelessWidget {
@@ -94,7 +95,12 @@ class UniversityPanel extends StatelessWidget {
               SizedBox(height: 10,),
               ListTile(
                 title: TextButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => UniversityProfilePage(UsernameTXT: UsernameTXT, PasswordTXT: PasswordTXT,))
+                    );
+                  },
                   child: Text("پروفایل", style: TextStyle(color: Colors.black),),
                 ),
                 leading: Icon(Icons.account_circle),

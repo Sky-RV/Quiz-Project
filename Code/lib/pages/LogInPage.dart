@@ -275,7 +275,7 @@ Widget UsernameInput({label, UserController}){
     controller: UserController,
     style: TextStyle(color: Colors.black),
     decoration: InputDecoration(
-        hintText: label,
+        labelText: label,
         border: OutlineInputBorder(),
         labelStyle: TextStyle(color: Color(0xFF3E5196)),
         prefixIcon: Icon(Icons.account_circle)
@@ -292,10 +292,10 @@ Widget PasswordInput({label, PassController}){
     enableSuggestions: false,
     autocorrect: false,
     decoration: InputDecoration(
-        hintText: label,
+        labelText: label,
         border: OutlineInputBorder(),
         labelStyle: TextStyle(color: Color(0xFF3E5196)),
-        prefixIcon: Icon(Icons.password),
+        prefixIcon: Icon(Icons.vpn_key),
         suffixIcon: IconButton(
           icon: Icon(status ? Icons.visibility : Icons.visibility_off),
           // onPressed: (){
