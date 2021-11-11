@@ -23,7 +23,7 @@ class UniversityPanel extends StatelessWidget {
 //
 // class _UniversityPanelState extends State<UniversityPanelPage> {
 
-  int _counter = 0;
+  //int _counter = 0;
 
   // void _incrementCounter() {
   //   setState(() {
@@ -31,18 +31,41 @@ class UniversityPanel extends StatelessWidget {
   //   });
   // }
 
+  Map<int, bool> countToValue = <int, bool>{};
+
   @override
   Widget build(BuildContext context) {
 
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
 
-    return Scaffold(
+    return DefaultTabController(
 
-      ////////////////////////////// APP BAR //////////////////////////////
+      length: 3,
+
+      child: Scaffold(
+
+        ////////////////////////////// APP BAR //////////////////////////////
 
         appBar: AppBar(
+
           backgroundColor: shrineBlue900,
+
+          ////////////////////////////// TAB BAR //////////////////////////////
+
+          bottom: TabBar(
+
+            indicatorColor: shrinePink400,
+            labelColor: shrinePink300,
+            unselectedLabelColor: Colors.white70,
+
+            tabs: [
+              Tab(text: 'استاد',),
+              Tab(text: 'دانشجو',),
+              Tab(text: 'کلاس',),
+            ],
+          ),
+
           title: Center(
             child: Text(
               'Quiz Project',
@@ -140,6 +163,87 @@ class UniversityPanel extends StatelessWidget {
 
         ////////////////////////////// BODY //////////////////////////////
 
+        body: TabBarView(
+          children: [
+
+            ////////////////////////////// Teacher //////////////////////////////
+
+            Scaffold(
+              floatingActionButton: FloatingActionButton(
+                backgroundColor: shrinePink300,
+                foregroundColor: Colors.black,
+                onPressed: () {
+                  // Respond to button press
+                },
+                child: Icon(Icons.add),
+              ),
+              body: ListView(
+                children: [
+                  for (int count in List.generate(9, (index) => index + 1))
+                    ListTile(
+                      title: Text('List item 1'),
+                      isThreeLine: true,
+                      subtitle: Text('Secondary text\nTertiary text'),
+                    //  leading: Icon(Icons.label),
+                    //  trailing: ,
+                    ),
+                ],
+              )
+            ),
+
+            ////////////////////////////// Student //////////////////////////////
+
+            Scaffold(
+              floatingActionButton: FloatingActionButton(
+                backgroundColor: shrinePink300,
+                foregroundColor: Colors.black,
+                onPressed: () {
+                  // Respond to button press
+                },
+                child: Icon(Icons.add),
+              ),
+              body: ListView(
+                children: [
+                  for (int count in List.generate(9, (index) => index + 1))
+                    ListTile(
+                      title: Text('List item 1'),
+                      isThreeLine: true,
+                      subtitle: Text('Secondary text\nTertiary text'),
+                      //  leading: Icon(Icons.label),
+                      //  trailing: ,
+                    ),
+                ],
+              ),
+            ),
+
+            ////////////////////////////// Class //////////////////////////////
+
+            Scaffold(
+              floatingActionButton: FloatingActionButton(
+                backgroundColor: shrinePink300,
+                foregroundColor: Colors.black,
+                onPressed: () {
+                  // Respond to button press
+                },
+                child: Icon(Icons.add),
+              ),
+              body: ListView(
+                children: [
+                  for (int count in List.generate(9, (index) => index + 1))
+                    ListTile(
+                      title: Text('List item 1'),
+                      isThreeLine: true,
+                      subtitle: Text('Secondary text\nTertiary text'),
+                      //  leading: Icon(Icons.label),
+                      //  trailing: ,
+                    ),
+                ],
+              ),
+            ),
+          ],
+        ),
+
+      ),
 
     );
   }
