@@ -180,7 +180,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
                         children: [
 
                           SizedBox(height: 10,),
-                          Text("Sign Up", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: shrineBlue600),),
+                          Text("ثبت نام", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: shrineBlue600),),
                           SizedBox(height: 20,),
                           //    Text("Create an university account", style: TextStyle(fontSize: 15, color: Colors.grey),),
                           //    SizedBox(height: 30,)
@@ -194,25 +194,25 @@ class _SignIn_PageState extends State<SignIn_Page> {
 
                           // Inputs
                           children: [
-                            UniversityInput(label: "University Name"),
+                            UniversityInput(label: "دانشگاه"),
                             SizedBox(height: 15,),
 
-                            SimpleInput(label: "First Name"),
+                            SimpleInput(label: "نام"),
                             SizedBox(height: 15,),
 
-                            SimpleInput(label: "Last Name"),
+                            SimpleInput(label: "نام خانوادگی"),
                             SizedBox(height: 15,),
 
-                            UsernameInput(label: "Username"),
+                            UsernameInput(label: "نام کاربری"),
                             SizedBox(height: 15,),
 
-                            PasswordInput(label: "Password"),
+                            PasswordInput(label: "رمز"),
                             SizedBox(height: 15,),
 
-                            PasswordInput(label: "Confirm Password"),
+                            PasswordInput(label: "تایید رمز"),
                             SizedBox(height: 15,),
 
-                            PhoneInput(label: "Phone"),
+                            PhoneInput(label: "شماره تلفن"),
                             SizedBox(height: 15,)
                           ],
                         ),
@@ -245,7 +245,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
                               width: 180,
                               height: 35,
                               alignment: Alignment.center,
-                              child: Text('Sign In', style: TextStyle(fontSize: 13, color: Colors.white),),
+                              child: Text('ثبت نام', style: TextStyle(fontSize: 13, color: Colors.white),),
                             ),
                           ),
                         ),
@@ -263,7 +263,6 @@ class _SignIn_PageState extends State<SignIn_Page> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('Already Have an account? ', style: TextStyle(fontSize: 13, color: Color(0xFF3E5196)),),
                           TextButton(
                             onPressed: (){
                               Navigator.push(
@@ -271,9 +270,10 @@ class _SignIn_PageState extends State<SignIn_Page> {
                                   MaterialPageRoute(builder: (context) => LogIn())
                               );
                             },
-                            child: Text('Log In', style: TextStyle(fontSize: 13, color: Color(0xFF3E5196), fontWeight: FontWeight.bold),
+                            child: Text('ورود', style: TextStyle(fontSize: 13, color: Color(0xFF3E5196), fontWeight: FontWeight.bold),
                             ),
                           ),
+                          Text('از قبل دارای اکانت هستید؟', style: TextStyle(fontSize: 13, color: Color(0xFF3E5196)),),
                         ],
                       ),
 
@@ -294,6 +294,7 @@ Widget SimpleInput({label}){
   return TextFormField(
     style: TextStyle(color: Colors.black),
     decoration: InputDecoration(
+      focusColor: shrinePink400,
       labelText: label,
       border: OutlineInputBorder(),
       labelStyle: TextStyle(color: Color(0xFF3E5196)),

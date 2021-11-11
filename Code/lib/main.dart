@@ -39,10 +39,16 @@ class _MyHomePageState extends State<MyHomePage> {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
 
-    final String card_sub = "لور میوه های انجیر زیادی تولید می کنند که بسیاری از گونه های پرندگان ، خفاش های میوه خوار ، پستانداران و موجودات دیگر را از انها تغذیه می کند ،";
-    final String card1_title = "کوییز آنلاین";
-    final String card2_title = "خدمات ما ویژه اساتید";
-    final String card3_title = "خدمات ما ویژه دانشجویان";
+    final String card1_title = "سامانه آنلاین آزمون ساز";
+    final String card2_title = "خدمات سامانه آزمون آنلاین ویژه اساتید";
+    final String card3_title = "خدمات سامانه آزمون آنلاین ویژه دانشجویان";
+    final String card4_title = "خدمات سامانه آزمون آنلاین ویژه دانشگاه";
+
+    final String card1_sub = "جامع ترین ارائه دهنده خدمات آزمون آنلاین تستی و تشریحی ویژه مدارس، دانشگاه ها و موسسات";
+    final String card2_sub = "امکان ساخت آزمون آنلاین تستی\nامکان ساخت آزمون آنلاین تشریحی\nامکان تصحیح آزمون های تشریحی";
+    final String card3_sub = "امکان شرکت در آزمون های تستی\nامکان شرکت در آزمون های تشریحی\nامکان مرور آزمون";
+    final String card4_sub = "امکان اضافه کردن استاد\nامکان اضافه کردن دانشجو\nامکان اضافه کردن درس ها\nامکان انتساب درس و دانشجو و استاد به همدیگر";
+
     final String btn_text = "بیشتر بخوانید";
 
 
@@ -189,223 +195,294 @@ class _MyHomePageState extends State<MyHomePage> {
 
       ////////////////////////////// BODY //////////////////////////////
 
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15),
-        child: Column(
-          children: [
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 15),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
 
-            SizedBox(height: 10,),
-            Card(
-              shape:
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              elevation: 5,
-              semanticContainer: true,
-              clipBehavior: Clip.antiAliasWithSaveLayer,
-
-              child: Column(
-                children: [
-
-                  Padding(  // title
-                    padding: EdgeInsets.all(16),
-                    child: Text(
-                      "کوییز آنلاین",
-                      style: TextStyle(color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold),
-                    ),
+                SizedBox(height: 10,),
+                Card(
+                  shape:
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
                   ),
+                  elevation: 5,
+                  semanticContainer: true,
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
 
-                  Padding(  // supporting text
-                    padding: EdgeInsets.all(16),
-                    child: Text(
-                      card_sub,
-                      style: TextStyle(color: Colors.black.withOpacity(0.6)),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-
-                  Image.network('https://placeimg.com/640/480/any', fit: BoxFit.contain,),
-
-                  ButtonBar(  // button
-                    alignment: MainAxisAlignment.spaceAround,
+                  child: Column(
                     children: [
-                      ElevatedButton(
-                        onPressed: (){
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => SignIn())
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.zero,
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                        ),
-                        child: Ink(
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                Color(0xFFEE537C),
-                                Color(0xFFEB927B)
-                              ],
-                            ),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Container(
-                            width: 180,
-                            height: 35,
-                            alignment: Alignment.center,
-                            child: Text('رایگانن ثبت نام کنید', style: TextStyle(fontSize: 13, color: Colors.white),),
-                          ),
+
+                      Padding(  // title
+                        padding: EdgeInsets.all(16),
+                        child: Text(
+                          card1_title,
+                          style: TextStyle(color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold),
                         ),
                       ),
-                    ],
-                  ),
 
-                ],
-              ),
-            ),
-
-            SizedBox(height: 10,),
-            Card(
-              shape:
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              elevation: 5,
-              semanticContainer: true,
-              clipBehavior: Clip.antiAliasWithSaveLayer,
-
-              child: Column(
-                children: [
-
-                  Padding(  // title
-                    padding: EdgeInsets.all(16),
-                    child: Text(
-                      card2_title,
-                      style: TextStyle(color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-
-                  Padding(  // supporting text
-                    padding: EdgeInsets.all(16),
-                    child: Text(
-                      card_sub,
-                      style: TextStyle(color: Colors.black.withOpacity(0.6)),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-
-                  Image.network('https://placeimg.com/640/480/any', fit: BoxFit.contain,),
-
-                  ButtonBar(  // button
-                    alignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      ElevatedButton(
-                        onPressed: (){},
-                        style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.zero,
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                        ),
-                        child: Ink(
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                Color(0xFFEE537C),
-                                Color(0xFFEB927B)
-                              ],
-                            ),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Container(
-                            width: 180,
-                            height: 35,
-                            alignment: Alignment.center,
-                            child: Text(btn_text, style: TextStyle(fontSize: 13, color: Colors.white),),
-                          ),
+                      Padding(  // supporting text
+                        padding: EdgeInsets.all(16),
+                        child: Text(
+                          card1_sub,
+                          style: TextStyle(color: Colors.black.withOpacity(0.6)),
+                          textAlign: TextAlign.center,
                         ),
                       ),
+
+                      Image.network('https://placeimg.com/640/480/any', fit: BoxFit.contain,),
+
+                      ButtonBar(  // button
+                        alignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          ElevatedButton(
+                            onPressed: (){
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => SignIn())
+                              );
+                            },
+                            style: ElevatedButton.styleFrom(
+                              padding: EdgeInsets.zero,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                            ),
+                            child: Ink(
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Color(0xFFEE537C),
+                                    Color(0xFFEB927B)
+                                  ],
+                                ),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Container(
+                                width: 180,
+                                height: 35,
+                                alignment: Alignment.center,
+                                child: Text('رایگانن ثبت نام کنید', style: TextStyle(fontSize: 13, color: Colors.white),),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+
                     ],
                   ),
+                ),
 
-                ],
-              ),
-            ),
-
-            SizedBox(height: 10,),
-            Card(
-              shape:
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              elevation: 5,
-              semanticContainer: true,
-              clipBehavior: Clip.antiAliasWithSaveLayer,
-
-              child: Column(
-                children: [
-
-                  Padding(  // title
-                    padding: EdgeInsets.all(16),
-                    child: Text(
-                      card3_title,
-                      style: TextStyle(color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold),
-                    ),
+                SizedBox(height: 10,),
+                Card(
+                  shape:
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
                   ),
+                  elevation: 5,
+                  semanticContainer: true,
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
 
-                  Padding(  // supporting text
-                    padding: EdgeInsets.all(16),
-                    child: Text(
-                      card_sub,
-                      style: TextStyle(color: Colors.black.withOpacity(0.6)),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-
-                  Image.network('https://placeimg.com/640/480/any', fit: BoxFit.contain,),
-
-                  ButtonBar(  // button
-                    alignment: MainAxisAlignment.spaceAround,
+                  child: Column(
                     children: [
-                      ElevatedButton(
-                        onPressed: (){},
-                        style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.zero,
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                        ),
-                        child: Ink(
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                Color(0xFFEE537C),
-                                Color(0xFFEB927B)
-                              ],
-                            ),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Container(
-                            width: 180,
-                            height: 35,
-                            alignment: Alignment.center,
-                            child: Text(btn_text, style: TextStyle(fontSize: 13, color: Colors.white),),
-                          ),
+
+                      Padding(  // title
+                        padding: EdgeInsets.all(16),
+                        child: Text(
+                          card2_title,
+                          style: TextStyle(color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold),
                         ),
                       ),
+
+                      Padding(  // supporting text
+                        padding: EdgeInsets.all(16),
+                        child: Text(
+                          card2_sub,
+                          style: TextStyle(color: Colors.black.withOpacity(0.6)),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+
+                      Image.network('https://placeimg.com/640/480/any', fit: BoxFit.contain,),
+
+                      ButtonBar(  // button
+                        alignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          ElevatedButton(
+                            onPressed: (){},
+                            style: ElevatedButton.styleFrom(
+                              padding: EdgeInsets.zero,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                            ),
+                            child: Ink(
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Color(0xFFEE537C),
+                                    Color(0xFFEB927B)
+                                  ],
+                                ),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Container(
+                                width: 180,
+                                height: 35,
+                                alignment: Alignment.center,
+                                child: Text(btn_text, style: TextStyle(fontSize: 13, color: Colors.white),),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+
                     ],
                   ),
+                ),
 
-                ],
-              ),
+                SizedBox(height: 10,),
+                Card(
+                  shape:
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  elevation: 5,
+                  semanticContainer: true,
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+
+                  child: Column(
+                    children: [
+
+                      Padding(  // title
+                        padding: EdgeInsets.all(16),
+                        child: Text(
+                          card3_title,
+                          style: TextStyle(color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+
+                      Padding(  // supporting text
+                        padding: EdgeInsets.all(16),
+                        child: Text(
+                          card3_sub,
+                          style: TextStyle(color: Colors.black.withOpacity(0.6)),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+
+                      Image.network('https://placeimg.com/640/480/any', fit: BoxFit.contain,),
+
+                      ButtonBar(  // button
+                        alignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          ElevatedButton(
+                            onPressed: (){},
+                            style: ElevatedButton.styleFrom(
+                              padding: EdgeInsets.zero,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                            ),
+                            child: Ink(
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Color(0xFFEE537C),
+                                    Color(0xFFEB927B)
+                                  ],
+                                ),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Container(
+                                width: 180,
+                                height: 35,
+                                alignment: Alignment.center,
+                                child: Text(btn_text, style: TextStyle(fontSize: 13, color: Colors.white),),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+
+                    ],
+                  ),
+                ),
+
+                SizedBox(height: 10,),
+                Card(
+                  shape:
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  elevation: 5,
+                  semanticContainer: true,
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+
+                  child: Column(
+                    children: [
+
+                      Padding(  // title
+                        padding: EdgeInsets.all(16),
+                        child: Text(
+                          card4_title,
+                          style: TextStyle(color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+
+                      Padding(  // supporting text
+                        padding: EdgeInsets.all(16),
+                        child: Text(
+                          card4_sub,
+                          style: TextStyle(color: Colors.black.withOpacity(0.6)),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+
+                      Image.network('https://placeimg.com/640/480/any', fit: BoxFit.contain,),
+
+                      ButtonBar(  // button
+                        alignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          ElevatedButton(
+                            onPressed: (){},
+                            style: ElevatedButton.styleFrom(
+                              padding: EdgeInsets.zero,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                            ),
+                            child: Ink(
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Color(0xFFEE537C),
+                                    Color(0xFFEB927B)
+                                  ],
+                                ),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Container(
+                                width: 180,
+                                height: 35,
+                                alignment: Alignment.center,
+                                child: Text(btn_text, style: TextStyle(fontSize: 13, color: Colors.white),),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+
+                    ],
+                  ),
+                ),
+
+                SizedBox(height: 10,),
+                // computer image
+
+                SizedBox(height: 10,),
+                // contact with us
+
+              ],
             ),
-
-            SizedBox(height: 10,),
-            // computer image
-
-            SizedBox(height: 10,),
-            // contact with us
-
-          ],
+          ),
         ),
-      )
+      ),
 
     );
   }

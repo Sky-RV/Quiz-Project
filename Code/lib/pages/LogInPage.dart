@@ -185,7 +185,7 @@ class _LogIn_PageState extends State<LogIn_Page> {
                           //child: Image.asset('flutter_assets/images/pic3.png', height: 100, width: 100,),
                         ),
                         SizedBox(height: 20,),
-                        Text("Log In", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: shrineBlue600),),
+                        Text("ورود", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: shrineBlue600),),
                         SizedBox(height: 150,),
                       ],
                     ),
@@ -196,10 +196,10 @@ class _LogIn_PageState extends State<LogIn_Page> {
 
                         // Inputs
                         children: [
-                          UsernameInput(label: 'Username', UserController: UserController),
+                          UsernameInput(label: 'نام کاربری', UserController: UserController),
                           SizedBox(height: 40,),
 
-                          PasswordInput(label: 'Password', PassController: PassController),
+                          PasswordInput(label: 'رمز', PassController: PassController),
                           SizedBox(height: 5,),
                         ],
 
@@ -210,7 +210,7 @@ class _LogIn_PageState extends State<LogIn_Page> {
 
                     TextButton(
                       onPressed: (){},
-                      child: Text('Forget Password?', style: TextStyle(fontSize: 13, color: Color(0xFFFF0000), fontWeight: FontWeight.bold),),
+                      child: Text('فراموشی رمز ورود؟', style: TextStyle(fontSize: 13, color: Color(0xFFFF0000), fontWeight: FontWeight.bold),),
                     ),
 
                     SizedBox(height: 100,),
@@ -250,7 +250,7 @@ class _LogIn_PageState extends State<LogIn_Page> {
                             width: 180,
                             height: 35,
                             alignment: Alignment.center,
-                            child: Text('Sign In', style: TextStyle(fontSize: 13, color: Colors.white),),
+                            child: Text('ورود', style: TextStyle(fontSize: 13, color: Colors.white),),
                           ),
                         ),
                       ),

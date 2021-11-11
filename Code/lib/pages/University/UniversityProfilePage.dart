@@ -24,7 +24,7 @@ class UniversityProfilePage extends StatelessWidget {
 //
 // class _UniversityPanelState extends State<UniversityPanelPage> {
 
-  int _counter = 0;
+ // int _counter = 0;
 
   // void _incrementCounter() {
   //   setState(() {
@@ -169,16 +169,16 @@ class UniversityProfilePage extends StatelessWidget {
                           UsernameInput(label: "Username", str: UsernameTXT),
                           SizedBox(height: 15,),
 
-                          UniversityInput(label: "University"),
+                          UniversityInput(label: "University", str: 'چمران'),
                           SizedBox(height: 15,),
 
-                          SimpleInput(label: "FirstName"),
+                          SimpleInput(label: "FirstName", str: 'یگانه'),
                           SizedBox(height: 15,),
 
-                          SimpleInput(label: 'Lastname'),
+                          SimpleInput(label: 'Lastname', str: 'غنی'),
                           SizedBox(height: 15,),
 
-                          EmailInput(label: "Email"),
+                          EmailInput(label: "Email", str: PasswordTXT),
                           SizedBox(height: 15,),
                         ],
 
@@ -233,6 +233,7 @@ class UniversityProfilePage extends StatelessWidget {
 Widget UsernameInput({label, str}){
   return TextFormField(
     style: TextStyle(color: Colors.black),
+    initialValue: str,
     decoration: InputDecoration(
         labelText: label,
         border: OutlineInputBorder(),
@@ -242,8 +243,9 @@ Widget UsernameInput({label, str}){
   );
 }
 
-Widget UniversityInput({label}){
+Widget UniversityInput({label, str}){
   return TextFormField(
+    initialValue: str,
     style: TextStyle(color: Colors.black),
     decoration: InputDecoration(
         labelText: label,
@@ -254,8 +256,9 @@ Widget UniversityInput({label}){
   );
 }
 
-Widget SimpleInput({label}){
+Widget SimpleInput({label, str}){
   return TextFormField(
+    initialValue: str,
     style: TextStyle(color: Colors.black),
     decoration: InputDecoration(
       labelText: label,
@@ -265,8 +268,9 @@ Widget SimpleInput({label}){
   );
 }
 
-Widget EmailInput({label}){
+Widget EmailInput({label, str}){
   return TextFormField(
+    initialValue: str,
     style: TextStyle(color: Colors.black),
     decoration: InputDecoration(
       labelText: label,
