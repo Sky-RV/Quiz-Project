@@ -28,6 +28,10 @@ class _AddTeacher_State extends State<AddTeacher_Page>{
       ////////////////////////////// APP BAR //////////////////////////////
 
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white,),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
         backgroundColor: shrineBlue900,
         title: Center(
           child: Text(

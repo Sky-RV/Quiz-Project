@@ -28,6 +28,10 @@ class _AddLesson_State extends State<AddLesson_Page>{
       ////////////////////////////// APP BAR //////////////////////////////
 
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white,),
+          onPressed: () => Navigator.pop(context),
+        ),
         backgroundColor: shrineBlue900,
         title: Center(
           child: Text(

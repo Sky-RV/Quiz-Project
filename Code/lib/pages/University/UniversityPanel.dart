@@ -52,6 +52,13 @@ class UniversityPanel extends StatelessWidget {
 
         appBar: AppBar(
 
+          actions: [
+            IconButton(
+              onPressed: (){},
+              icon: Icon(Icons.search),
+            ),
+          ],
+
           backgroundColor: shrineBlue900,
 
           ////////////////////////////// TAB BAR //////////////////////////////
@@ -172,6 +179,14 @@ class UniversityPanel extends StatelessWidget {
             ////////////////////////////// Teacher //////////////////////////////
 
             Scaffold(
+              // appBar: AppBar(
+              //   actions: [
+              //     IconButton(
+              //       onPressed: (){},
+              //       icon: Icon(Icons.search),
+              //     ),
+              //   ],
+              // ),
               floatingActionButton: FloatingActionButton(
                 backgroundColor: shrinePink300,
                 foregroundColor: Colors.black,
@@ -200,6 +215,14 @@ class UniversityPanel extends StatelessWidget {
             ////////////////////////////// Student //////////////////////////////
 
             Scaffold(
+              // appBar: AppBar(
+              //   actions: [
+              //     IconButton(
+              //       onPressed: (){},
+              //       icon: Icon(Icons.search),
+              //     ),
+              //   ],
+              // ),
               floatingActionButton: FloatingActionButton(
                 backgroundColor: shrinePink300,
                 foregroundColor: Colors.black,
@@ -228,6 +251,14 @@ class UniversityPanel extends StatelessWidget {
             ////////////////////////////// Class //////////////////////////////
 
             Scaffold(
+              // appBar: AppBar(
+              //   actions: [
+              //     IconButton(
+              //       onPressed: (){},
+              //       icon: Icon(Icons.search),
+              //     ),
+              //   ],
+              // ),
               floatingActionButton: FloatingActionButton(
                 backgroundColor: shrinePink300,
                 foregroundColor: Colors.black,
