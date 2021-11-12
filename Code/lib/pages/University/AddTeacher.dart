@@ -1,32 +1,27 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:quiz/pages/LogInPage.dart';
+import 'package:quiz/pages/University/UniversityPanel.dart';
 
-class SignIn extends StatelessWidget {
+class AddTeacher extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: _buildShrineTheme(),
       title: 'Quiz Project',
-      home: SignIn_Page(),
+      home: AddTeacher_Page(),
     );
   }
 }
 
-class SignIn_Page extends StatefulWidget {
+class AddTeacher_Page extends StatefulWidget {
   @override
-  State<SignIn_Page> createState() => _SignIn_PageState();
+  State<AddTeacher_Page> createState() => _AddTeacher_State();
 }
 
-class _SignIn_PageState extends State<SignIn_Page> {
-  int _counterIndex = 0;
+class _AddTeacher_State extends State<AddTeacher_Page>{
 
   @override
   Widget build(BuildContext context) {
-
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
 
@@ -163,129 +158,144 @@ class _SignIn_PageState extends State<SignIn_Page> {
 
       body: SafeArea(
         child: SingleChildScrollView(
-            child: Stack(
-              children: <Widget>[
-                Container(
+          child: Stack(
+            children: <Widget>[
 
-                  height: MediaQuery.of(context).size.height,
-                  width: double.infinity,
+              Container(
 
-                  child: Column(
-                    //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                height: MediaQuery.of(context).size.height,
+                width: double.infinity,
+
+                child: Column(
+                  children: [
+
+                    // Title
+                    Column(
+                      children: [
+                        SizedBox(height: 40,),
+                        Text("ثبت نام استاد", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: shrineBlue600),),
+                        SizedBox(height: 30,)
+                      ],
+                    ),
+
+                    // Inputs
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
+                      child: Column(
                         children: [
 
-                          SizedBox(height: 10,),
-                          Text("ثبت نام", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: shrineBlue600),),
-                          SizedBox(height: 20,),
-                          //    Text("Create an university account", style: TextStyle(fontSize: 15, color: Colors.grey),),
-                          //    SizedBox(height: 30,)
+                          SimpleInput(label: "نام"),
+                          SizedBox(height: 15,),
+
+                          SimpleInput(label: "نام خانوادگی"),
+                          SizedBox(height: 15,),
+
+                          UsernameInput(label: "نام کاربری"),
+                          SizedBox(height: 15,),
+
+                          PasswordInput(label: "رمز عبور"),
+                          SizedBox(height: 15,),
+
+                          PasswordInput(label: "تایید رمز عبور"),
+                          SizedBox(height: 15,),
+
+                          EmailInput(label: "ایمیل"),
+                          SizedBox(height: 15,),
 
                         ],
                       ),
+                    ),
 
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
-                        child: Column(
+                    SizedBox(height: 40,),
 
-                          // Inputs
-                          children: [
-                            UniversityInput(label: "دانشگاه"),
-                            SizedBox(height: 15,),
-
-                            SimpleInput(label: "نام"),
-                            SizedBox(height: 15,),
-
-                            SimpleInput(label: "نام خانوادگی"),
-                            SizedBox(height: 15,),
-
-                            UsernameInput(label: "نام کاربری"),
-                            SizedBox(height: 15,),
-
-                            PasswordInput(label: "رمز"),
-                            SizedBox(height: 15,),
-
-                            PasswordInput(label: "تایید رمز"),
-                            SizedBox(height: 15,),
-
-                            EmailInput(label: "ایمیل"),
-                            SizedBox(height: 15,)
-                          ],
+                    // Save Button
+                    Padding(
+                      // padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
+                      padding: EdgeInsets.symmetric(horizontal: 40),
+                      child: ElevatedButton(
+                        onPressed: (){},
+                        style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.zero,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                        ),
+                        child: Ink(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                Color(0xFFEE537C),
+                                Color(0xFFEB927B)
+                              ],
+                            ),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Container(
+                            width: 180,
+                            height: 35,
+                            alignment: Alignment.center,
+                            child: Text('ثبت نام', style: TextStyle(fontSize: 13, color: Colors.white),),
+                          ),
                         ),
                       ),
+                      // child: MaterialButton(
+                      //   minWidth: double.infinity,
+                      //   height: 60,
+                      //   onPressed: (){},
+                      //
+                      // )
+                    ),
 
-                      SizedBox(height: 20,),
+                    SizedBox(height: 20,),
 
-                      // Sign In Button
-
-                      Padding(
-                        // padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
-                        padding: EdgeInsets.symmetric(horizontal: 40),
-                        child: ElevatedButton(
-                          onPressed: (){},
-                          style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.zero,
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                    // Cancel Button
+                    Padding(
+                      // padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
+                      padding: EdgeInsets.symmetric(horizontal: 40),
+                      child: ElevatedButton(
+                        onPressed: (){},
+                        style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.zero,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                        ),
+                        child: Ink(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                Color(0xFF555455),
+                                Color(0xFFA7A7A7),
+                              ],
+                            ),
+                            borderRadius: BorderRadius.circular(20),
                           ),
-                          child: Ink(
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [
-                                  Color(0xFFEE537C),
-                                  Color(0xFFEB927B)
-                                ],
-                              ),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Container(
-                              width: 180,
-                              height: 35,
-                              alignment: Alignment.center,
-                              child: Text('ثبت نام', style: TextStyle(fontSize: 13, color: Colors.white),),
-                            ),
+                          child: Container(
+                            width: 180,
+                            height: 35,
+                            alignment: Alignment.center,
+                            child: Text('لغو', style: TextStyle(fontSize: 13, color: Colors.white),),
                           ),
                         ),
-                        // child: MaterialButton(
-                        //   minWidth: double.infinity,
-                        //   height: 60,
-                        //   onPressed: (){},
-                        //
-                        // )
                       ),
+                      // child: MaterialButton(
+                      //   minWidth: double.infinity,
+                      //   height: 60,
+                      //   onPressed: (){},
+                      //
+                      // )
+                    ),
 
-                      // Have an account
-
-                      SizedBox(height: 15,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          TextButton(
-                            onPressed: (){
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => LogIn())
-                              );
-                            },
-                            child: Text('ورود', style: TextStyle(fontSize: 13, color: Color(0xFF3E5196), fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                          Text('از قبل دارای اکانت هستید؟', style: TextStyle(fontSize: 13, color: Color(0xFF3E5196)),),
-                        ],
-                      ),
-
-                    ],
-                  ),
-
+                  ],
                 ),
-              ],
-            )
+
+              ),
+
+            ],
+          ),
         ),
       ),
 
     );
+
   }
+
 }
 
 Widget SimpleInput({label}){
@@ -312,17 +322,17 @@ Widget UsernameInput({label}){
   );
 }
 
-Widget UniversityInput({label}){
-  return TextFormField(
-    style: TextStyle(color: Colors.black),
-    decoration: InputDecoration(
-        labelText: label,
-        border: OutlineInputBorder(),
-        labelStyle: TextStyle(color: Color(0xFF3E5196)),
-        prefixIcon: Icon(Icons.account_balance_sharp)
-    ),
-  );
-}
+// Widget UniversityInput({label}){
+//   return TextFormField(
+//     style: TextStyle(color: Colors.black),
+//     decoration: InputDecoration(
+//         labelText: label,
+//         border: OutlineInputBorder(),
+//         labelStyle: TextStyle(color: Color(0xFF3E5196)),
+//         prefixIcon: Icon(Icons.account_balance_sharp)
+//     ),
+//   );
+// }
 
 Widget EmailInput({label}){
   return TextFormField(
@@ -361,18 +371,6 @@ Widget PasswordInput({label}){
     ),
   );
 }
-
-// Widget ErrorInput({label}){
-//   return TextFormField(
-//     decoration: InputDecoration(
-//         labelText: label,
-//         border: OutlineInputBorder(),
-//         labelStyle: TextStyle(color: Color(0xFF3E5196)),
-//         suffixIcon: Icon(Icons.visibility),
-//         prefixIcon: Icon(Icons.password)
-//     ),
-//   );
-// }
 
 ThemeData _buildShrineTheme() {
   final ThemeData base = ThemeData.light();
@@ -415,4 +413,3 @@ const Color shrineSurfaceWhite = Color(0xFFFFFBFA);
 const Color shrineBackgroundWhite = Colors.white;
 
 const defaultLetterSpacing = 0.03;
-
