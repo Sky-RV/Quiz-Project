@@ -3,6 +3,7 @@ import 'package:quiz/pages/University/ChangePasswordPage.dart';
 import 'package:quiz/pages/University/UniversityProfilePage.dart';
 import 'package:quiz/main.dart';
 import 'package:quiz/pages/University/AddTeacher.dart';
+import 'package:quiz/pages/University/AddStudent.dart';
 
 class UniversityPanel extends StatelessWidget {
 
@@ -202,7 +203,10 @@ class UniversityPanel extends StatelessWidget {
                 backgroundColor: shrinePink300,
                 foregroundColor: Colors.black,
                 onPressed: () {
-                  // Respond to button press
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AddStudent())
+                  );
                 },
                 child: Icon(Icons.add),
               ),
