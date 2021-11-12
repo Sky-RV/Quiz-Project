@@ -62,7 +62,7 @@ class UniversityPanel extends StatelessWidget {
             tabs: [
               Tab(text: 'استاد',),
               Tab(text: 'دانشجو',),
-              Tab(text: 'کلاس',),
+              Tab(text: 'درس',),
             ],
           ),
 

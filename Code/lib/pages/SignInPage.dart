@@ -212,7 +212,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
                             PasswordInput(label: "تایید رمز"),
                             SizedBox(height: 15,),
 
-                            PhoneInput(label: "شماره تلفن"),
+                            PhoneInput(label: "ایمیل"),
                             SizedBox(height: 15,)
                           ],
                         ),
@@ -329,12 +329,12 @@ Widget UniversityInput({label}){
 Widget PhoneInput({label}){
   return TextFormField(
     style: TextStyle(color: Colors.black),
-    keyboardType: TextInputType.phone,
+    keyboardType: TextInputType.emailAddress,
     decoration: InputDecoration(
       labelText: label,
       border: OutlineInputBorder(),
       labelStyle: TextStyle(color: Color(0xFF3E5196)),
-      prefixIcon: Icon(Icons.phone),
+      prefixIcon: Icon(Icons.email),
     ),
   );
 }

@@ -31,6 +31,9 @@ class _LogIn_PageState extends State<LogIn_Page> {
 
     TextEditingController UserController = TextEditingController();
     TextEditingController PassController = TextEditingController();
+    TextEditingController StatusController = TextEditingController();
+
+    String _selectedValue = 'مدیر';
 
     return Scaffold(
 
@@ -194,8 +197,9 @@ class _LogIn_PageState extends State<LogIn_Page> {
                       padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
                       child: Column(
 
-                        // Inputs
                         children: [
+
+                          // Inputs
                           UsernameInput(label: 'نام کاربری', UserController: UserController),
                           SizedBox(height: 40,),
 
@@ -268,6 +272,13 @@ class _LogIn_PageState extends State<LogIn_Page> {
 
     );
   }
+}
+
+Widget DialogStatus({statusCont}){
+  return TextFormField(
+    controller: statusCont,
+    
+  );
 }
 
 Widget UsernameInput({label, UserController}){
