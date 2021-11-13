@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:quiz/pages/University/ChangePasswordPage.dart';
 import 'package:quiz/pages/University/UniversityProfilePage.dart';
 import 'package:quiz/main.dart';
-import 'package:quiz/pages/University/AddTeacher.dart';
-import 'package:quiz/pages/University/AddStudent.dart';
-import 'package:quiz/pages/University/AddLesson.dart';
+import 'package:quiz/Pages/University/LessonManagement/AddLesson.dart';
+import 'package:quiz/Pages/University/StudentManagement/AddStudent.dart';
+import 'package:quiz/Pages/University/StudentManagement/EditStudent.dart';
+import 'package:quiz/Pages/University/TeacherManagement/AddTeacher.dart';
+import 'package:quiz/Pages/University/TeacherManagement/EditTeacher.dart';
 
 class UniversityPanel extends StatelessWidget {
 
@@ -202,6 +204,13 @@ class UniversityPanel extends StatelessWidget {
                 children: [
                   for (int count in List.generate(9, (index) => index + 1))
                     ListTile(
+                      onTap: (){
+                        Navigator.push(
+                            context,
+                          MaterialPageRoute(builder: (context) => EditTeacher())
+                          
+                        );
+                      },
                       title: Text('List item 1'),
                       isThreeLine: true,
                       subtitle: Text('Secondary text\nTertiary text'),
