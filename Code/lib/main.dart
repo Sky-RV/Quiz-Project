@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quiz/Pages/LogInPage.dart';
 import 'package:quiz/Pages/SignInPage.dart';
-import 'package:quiz/app_icons.dart';
-import 'package:flutter/widgets.dart';
 
 void main() {
   runApp(MyApp());
@@ -235,7 +233,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
 
-                      Image.network('https://placeimg.com/640/480/any', fit: BoxFit.contain,),
+                      Image.asset('assets/test.png'),
 
                       ButtonBar(  // button
                         alignment: MainAxisAlignment.spaceAround,
@@ -306,7 +304,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
 
-                      Image.network('https://placeimg.com/640/480/any', fit: BoxFit.contain,),
+                      Image.asset('assets/test.png'),
+                     // Image.asset('assets/pic2.png'),
 
                       ButtonBar(  // button
                         alignment: MainAxisAlignment.spaceAround,
@@ -372,7 +371,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
 
-                      Image.network('https://placeimg.com/640/480/any', fit: BoxFit.contain,),
+                      //Image.asset('assets/pic3.png'),
+                      Image.asset('assets/test.png'),
 
                       ButtonBar(  // button
                         alignment: MainAxisAlignment.spaceAround,
@@ -438,7 +438,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
 
-                      Image.network('https://placeimg.com/640/480/any', fit: BoxFit.contain,),
+                      Image.asset('assets/test.png'),
 
                       ButtonBar(  // button
                         alignment: MainAxisAlignment.spaceAround,
@@ -488,8 +488,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     IconButton(
-                     // icon: Icon(Icons.apps_outlined), // Facebook
-                      icon: Icon(MyFlutterApp.facebook_squared),
+                      icon: Icon(Icons.apps_outlined), // Facebook
                       onPressed: (){},
                     ),
 

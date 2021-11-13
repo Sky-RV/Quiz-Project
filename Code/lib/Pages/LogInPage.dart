@@ -183,10 +183,6 @@ class _LogIn_PageState extends State<LogIn_Page> {
                     Column(
                       children: [
                         SizedBox(height: 20,),
-                        Padding(
-                          padding: EdgeInsets.all(5),
-                          //child: Image.asset('flutter_assets/images/pic3.png', height: 100, width: 100,),
-                        ),
                         SizedBox(height: 20,),
                         Text("ورود", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: shrineBlue600),),
                         SizedBox(height: 150,),

@@ -52,8 +52,8 @@ dev_dependencies:
 flutter:
   assets:
     - assets/computer.png
-    - assets/studenr.png
-    - assets/teacher.png
+    - assets/pic2.png
+    - assets/pic3.png
     - assets/test.png
 
   # The following line ensures that the Material Icons fonts is
