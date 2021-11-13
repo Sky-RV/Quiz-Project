@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:quiz/pages/University/UniversityPanel.dart';
+import 'package:quiz/Pages/University/UniversityPanel.dart';
 
 class LogIn extends StatelessWidget {
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quiz/pages/University/UniversityPanel.dart';
+import 'package:quiz/Pages/University/UniversityPanel.dart';
 
 class AddLesson extends StatelessWidget {
   @override

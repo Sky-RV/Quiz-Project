@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:quiz/pages/University/ChangePasswordPage.dart';
-import 'package:quiz/pages/University/UniversityProfilePage.dart';
-import 'package:quiz/pages/University/UniversityPanel.dart';
+import 'package:quiz/Pages/University/UniversityPanel.dart';
+import 'package:quiz/Pages/University/UniversityProfilePage.dart';
 import 'package:quiz/main.dart';
 
-class UniversityProfilePage extends StatelessWidget {
+class ChangePasswordPage extends StatelessWidget {
 
   String UsernameTXT, PasswordTXT;
-  UniversityProfilePage({Key? key,
+  ChangePasswordPage({Key? key,
     required this.UsernameTXT,
     required this.PasswordTXT}) : super(key: key);
 
@@ -24,7 +23,7 @@ class UniversityProfilePage extends StatelessWidget {
 //
 // class _UniversityPanelState extends State<UniversityPanelPage> {
 
- // int _counter = 0;
+  int _counter = 0;
 
   // void _incrementCounter() {
   //   setState(() {
@@ -153,43 +152,34 @@ class UniversityProfilePage extends StatelessWidget {
                 child: Column(
                   children: [
 
-                    // Image From User
-                    Center(
-                      child: Image.asset('name'),
+                    SizedBox(height: 40,),
+                    Padding(
+                      padding: EdgeInsets.all(5),
+                      child: Text('تغییر رمز عبور', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: shrineBlue600),),
                     ),
 
                     SizedBox(height: 50,),
-
-                    // Inputs
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
+                      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 25),
                       child: Column(
 
+                        // Inputs
                         children: [
-                          UsernameInput(label: "Username", str: UsernameTXT),
-                          SizedBox(height: 15,),
+                          PasswordInput(label: "رمز عبور فعلی"),
+                          SizedBox(height: 40,),
 
-                          UniversityInput(label: "University", str: 'چمران'),
-                          SizedBox(height: 15,),
+                          PasswordInput(label: "رمز عبور جدید"),
+                          SizedBox(height: 40,),
 
-                          SimpleInput(label: "FirstName", str: 'یگانه'),
-                          SizedBox(height: 15,),
-
-                          SimpleInput(label: 'Lastname', str: 'غنی'),
-                          SizedBox(height: 15,),
-
-                          EmailInput(label: "Email", str: PasswordTXT),
-                          SizedBox(height: 15,),
+                          PasswordInput(label: "تایید رمز عبور جدید"),
+                          SizedBox(height: 50,),
                         ],
 
                       ),
                     ),
 
-                    SizedBox(height: 20,),
-
-                    // Save Button
+                    // Change Password Button
                     Padding(
-                      // padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
                       padding: EdgeInsets.symmetric(horizontal: 40),
                       child: ElevatedButton(
                         onPressed: (){},
@@ -201,8 +191,8 @@ class UniversityProfilePage extends StatelessWidget {
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
                               colors: [
-                                Color(0xFFEE537C),
-                                Color(0xFFEB927B)
+                                shrinePink400,
+                                shrinePink300
                               ],
                             ),
                             borderRadius: BorderRadius.circular(20),
@@ -211,7 +201,7 @@ class UniversityProfilePage extends StatelessWidget {
                             width: 180,
                             height: 35,
                             alignment: Alignment.center,
-                            child: Text('Save', style: TextStyle(fontSize: 13, color: Colors.white),),
+                            child: Text('ذخیره', style: TextStyle(fontSize: 13, color: Colors.white),),
                           ),
                         ),
                       ),
@@ -230,53 +220,28 @@ class UniversityProfilePage extends StatelessWidget {
   }
 }
 
-Widget UsernameInput({label, str}){
+Widget PasswordInput({label, PassController}){
+  bool status = true;
   return TextFormField(
+    controller: PassController,
     style: TextStyle(color: Colors.black),
-    initialValue: str,
+    obscureText: status,
+    enableSuggestions: false,
+    autocorrect: false,
     decoration: InputDecoration(
         labelText: label,
         border: OutlineInputBorder(),
         labelStyle: TextStyle(color: Color(0xFF3E5196)),
-        prefixIcon: Icon(Icons.account_circle)
-    ),
-  );
-}
-
-Widget UniversityInput({label, str}){
-  return TextFormField(
-    initialValue: str,
-    style: TextStyle(color: Colors.black),
-    decoration: InputDecoration(
-        labelText: label,
-        border: OutlineInputBorder(),
-        labelStyle: TextStyle(color: Color(0xFF3E5196)),
-        prefixIcon: Icon(Icons.account_balance_sharp)
-    ),
-  );
-}
-
-Widget SimpleInput({label, str}){
-  return TextFormField(
-    initialValue: str,
-    style: TextStyle(color: Colors.black),
-    decoration: InputDecoration(
-      labelText: label,
-      border: OutlineInputBorder(),
-      labelStyle: TextStyle(color: Color(0xFF3E5196)),
-    ),
-  );
-}
-
-Widget EmailInput({label, str}){
-  return TextFormField(
-    initialValue: str,
-    style: TextStyle(color: Colors.black),
-    decoration: InputDecoration(
-      labelText: label,
-      border: OutlineInputBorder(),
-      labelStyle: TextStyle(color: Color(0xFF3E5196)),
-      prefixIcon: Icon(Icons.email)
+        prefixIcon: Icon(Icons.password),
+        suffixIcon: IconButton(
+          icon: Icon(status ? Icons.visibility : Icons.visibility_off),
+          // onPressed: (){
+          //   setState(() {
+          //     status = !status;
+          //   });
+          // },
+          onPressed: (){},
+        )
     ),
   );
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:quiz/pages/LogInPage.dart';
+import 'package:quiz/Pages/LogInPage.dart';
 
 class SignIn extends StatelessWidget {
   @override

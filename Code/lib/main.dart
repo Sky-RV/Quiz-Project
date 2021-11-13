@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:quiz/pages/LogInPage.dart';
-import 'package:quiz/pages/SignInPage.dart';
+import 'package:quiz/Pages/LogInPage.dart';
+import 'package:quiz/Pages/SignInPage.dart';
+import 'package:quiz/app_icons.dart';
+import 'package:flutter/widgets.dart';
 
 void main() {
   runApp(MyApp());
@@ -474,9 +476,41 @@ class _MyHomePageState extends State<MyHomePage> {
 
                 SizedBox(height: 10,),
                 // computer image
+                Image.asset('assets/computer.png'),
 
-                SizedBox(height: 10,),
                 // contact with us
+                Column(
+                  children: [
+                    Text("Follow us on", style: TextStyle(fontWeight: FontWeight.bold),)
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    IconButton(
+                     // icon: Icon(Icons.apps_outlined), // Facebook
+                      icon: Icon(MyFlutterApp.facebook_squared),
+                      onPressed: (){},
+                    ),
+
+                    IconButton(
+                      icon: Icon(Icons.apps_outlined), // Twitter
+                      onPressed: (){},
+                    ),
+
+                    IconButton(
+                      icon: Icon(Icons.apps_outlined), // Instagram
+                      onPressed: (){},
+                    ),
+
+                    IconButton(
+                      icon: Icon(Icons.apps_outlined), // YouTube
+                      onPressed: (){},
+                    ),
+                  ],
+                ),
+
+                SizedBox(height: 20,)
 
               ],
             ),

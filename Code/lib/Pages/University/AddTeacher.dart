@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:quiz/pages/University/UniversityPanel.dart';
+import 'package:quiz/Pages/University/UniversityPanel.dart';
 
-class AddStudent extends StatelessWidget {
+class AddTeacher extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: _buildShrineTheme(),
       title: 'Quiz Project',
-      home: AddStudent_Page(),
+      home: AddTeacher_Page(),
     );
   }
 }
 
-class AddStudent_Page extends StatefulWidget {
+class AddTeacher_Page extends StatefulWidget {
   @override
-  State<AddStudent_Page> createState() => _AddStudent_State();
+  State<AddTeacher_Page> createState() => _AddTeacher_State();
 }
 
-class _AddStudent_State extends State<AddStudent_Page>{
+class _AddTeacher_State extends State<AddTeacher_Page>{
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +63,7 @@ class _AddStudent_State extends State<AddStudent_Page>{
                     Column(
                       children: [
                         SizedBox(height: 35,),
-                        Text("ثبت نام دانشجو", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: shrineBlue600),),
+                        Text("ثبت نام استاد", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: shrineBlue600),),
                         SizedBox(height: 25,)
                       ],
                     ),
