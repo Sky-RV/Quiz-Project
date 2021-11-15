@@ -74,14 +74,14 @@ class _AddLesson_State extends State<AddLesson_Page>{
                       child: Column(
                         children: [
 
-                          SimpleInput(label: "نام درس"),
+                          SimpleInput(label: "نام درس", str: "lesson name"),
                           SizedBox(height: 15,),
 
 
-                          UsernameInput(label: "نام استاد"),
+                          UsernameInput(label: "نام استاد", str: "lesson's teacher"),
                           SizedBox(height: 15,),
 
-                          NumberInput(label: "واحد درس"),
+                          NumberInput(label: "واحد درس", str: "3"),
                           SizedBox(height: 15,),
 
                         ],
@@ -152,7 +152,7 @@ class _AddLesson_State extends State<AddLesson_Page>{
                             width: 180,
                             height: 35,
                             alignment: Alignment.center,
-                            child: Text('لغو', style: TextStyle(fontSize: 13, color: Colors.white),),
+                            child: Text('حذف', style: TextStyle(fontSize: 13, color: Colors.white),),
                           ),
                         ),
                       ),
@@ -180,8 +180,9 @@ class _AddLesson_State extends State<AddLesson_Page>{
 
 }
 
-Widget SimpleInput({label}){
+Widget SimpleInput({label, str}){
   return TextFormField(
+    initialValue: str,
     style: TextStyle(color: Colors.black),
     decoration: InputDecoration(
       prefixIcon: Icon(Icons.book),
@@ -193,8 +194,9 @@ Widget SimpleInput({label}){
   );
 
 
-}Widget NumberInput({label}){
+}Widget NumberInput({label, str}){
   return TextFormField(
+    initialValue: str,
     style: TextStyle(color: Colors.black),
     decoration: InputDecoration(
       focusColor: shrinePink400,
@@ -205,8 +207,9 @@ Widget SimpleInput({label}){
   );
 }
 
-Widget UsernameInput({label}){
+Widget UsernameInput({label, str}){
   return TextFormField(
+    initialValue: str,
     keyboardType: TextInputType.number,
     style: TextStyle(color: Colors.black),
     decoration: InputDecoration(
