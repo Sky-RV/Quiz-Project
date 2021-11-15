@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:quiz/Pages/University/UniversityPanel.dart';
 
-class AddLesson extends StatelessWidget {
+class EditLesson extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: _buildShrineTheme(),
       title: 'Quiz Project',
-      home: AddLesson_Page(),
+      home: EditLesson_Page(),
     );
   }
 }
 
-class AddLesson_Page extends StatefulWidget {
+class EditLesson_Page extends StatefulWidget {
   @override
-  State<AddLesson_Page> createState() => _AddLesson_State();
+  State<EditLesson_Page> createState() => _EditLesson_State();
 }
 
-class _AddLesson_State extends State<AddLesson_Page>{
+class _EditLesson_State extends State<EditLesson_Page>{
 
   @override
   Widget build(BuildContext context) {

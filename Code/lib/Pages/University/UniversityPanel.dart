@@ -7,6 +7,7 @@ import 'package:quiz/Pages/University/StudentManagement/AddStudent.dart';
 import 'package:quiz/Pages/University/StudentManagement/EditStudent.dart';
 import 'package:quiz/Pages/University/TeacherManagement/AddTeacher.dart';
 import 'package:quiz/Pages/University/TeacherManagement/EditTeacher.dart';
+import 'package:quiz/Pages/University/LessonManagement/EditLesson.dart';
 
 class UniversityPanel extends StatelessWidget {
 
@@ -283,6 +284,12 @@ class UniversityPanel extends StatelessWidget {
                 children: [
                   for (int count in List.generate(9, (index) => index + 1))
                     ListTile(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => EditLesson())
+                        );
+                      },
                       title: Text('List item 1'),
                       isThreeLine: true,
                       subtitle: Text('Secondary text\nTertiary text'),
