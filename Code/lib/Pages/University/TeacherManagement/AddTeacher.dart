@@ -63,7 +63,7 @@ class _AddTeacher_State extends State<AddTeacher_Page>{
                     Column(
                       children: [
                         SizedBox(height: 35,),
-                        Text("ثبت نام استاد", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: shrineBlue600),),
+                        Text("اضافه کردن استاد", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: shrineBlue600),),
                         SizedBox(height: 25,)
                       ],
                     ),

@@ -63,7 +63,7 @@ class _AddStudent_State extends State<AddStudent_Page>{
                     Column(
                       children: [
                         SizedBox(height: 35,),
-                        Text("ثبت نام دانشجو", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: shrineBlue600),),
+                        Text("اضافه کردن دانشجو", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: shrineBlue600),),
                         SizedBox(height: 25,)
                       ],
                     ),

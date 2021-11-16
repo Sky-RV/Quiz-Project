@@ -63,7 +63,7 @@ class _AddLesson_State extends State<AddLesson_Page>{
                     Column(
                       children: [
                         SizedBox(height: 35,),
-                        Text("درس", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: shrineBlue600),),
+                        Text("اضافه کردن درس", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: shrineBlue600),),
                         SizedBox(height: 25,)
                       ],
                     ),
