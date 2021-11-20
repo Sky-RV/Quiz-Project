@@ -1,7 +1,10 @@
+import 'dart:convert';
+import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:quiz/Classes/University/User.dart';
 import 'package:quiz/Pages/LogInPage.dart';
-
+import 'package:http/http.dart' as http;
 class SignIn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -21,6 +24,14 @@ class SignIn_Page extends StatefulWidget {
 
 class _SignIn_PageState extends State<SignIn_Page> {
   int _counterIndex = 0;
+
+  TextEditingController UniversityCNT = TextEditingController();
+  TextEditingController NameCNT = TextEditingController();
+  TextEditingController LastnameCNT = TextEditingController();
+  TextEditingController UsernameCNT = TextEditingController();
+  TextEditingController PasswordCNT = TextEditingController();
+  TextEditingController PasswordConfirmCNT = TextEditingController();
+  TextEditingController EmailCNT = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -224,7 +235,38 @@ class _SignIn_PageState extends State<SignIn_Page> {
                         // padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
                         padding: EdgeInsets.symmetric(horizontal: 40),
                         child: ElevatedButton(
-                          onPressed: (){},
+                          onPressed: (){
+                            String university = UniversityCNT.text;
+                            String name = NameCNT.text;
+                            String lastname = LastnameCNT.text;
+                            String username = UsernameCNT.text;
+                            String password = PasswordCNT.text;
+                            String passwordConfirm = PasswordConfirmCNT.text;
+                            String email = EmailCNT.text;
+
+                            String fullname = name + " " + lastname;
+                            String role = "Manager : " + university;
+
+                            // Empty Fields Conditions
+                            if(university.isEmpty || name.isEmpty || lastname.isEmpty ||
+                                username.isEmpty || password.isEmpty || passwordConfirm.isEmpty || email.isEmpty){
+                              // error masage
+                            }
+                            else{
+                              if(password != passwordConfirm){
+                                // error masage
+                              }
+                              else{
+                                // sign in
+                                User user = new User(fullname, username, password, email, role);
+                                var MyList = <User>[];
+                                MyList.add(user);
+                                setState(() {
+                                  createUser(user);
+                                });
+                              }
+                            }
+                          },
                           style: ElevatedButton.styleFrom(
                             padding: EdgeInsets.zero,
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -286,6 +328,22 @@ class _SignIn_PageState extends State<SignIn_Page> {
 
     );
   }
+}
+
+Future<http.Response> createUser (User user){
+  return http.post(
+    Uri.parse('http://localhost:3000/api/v1/university/create'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(<String, String>{
+      'fullName' : user.FirstName + " " + user.LastName,
+      'username' : user.Username,
+      'password' : user.Password,
+      'email' : user.Email,
+      'role' : "Manager: " + user.UniversityName
+    }),
+  );
 }
 
 Widget SimpleInput({label}){

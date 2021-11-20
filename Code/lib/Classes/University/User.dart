@@ -1,17 +1,23 @@
 class User {
 
-  late int ID;
-  late int resetPassCode;
+  late String UniversityName, FirstName, LastName, Username, Password, Email, FullName, Role;
 
-  late String UniID;
-  late String FullName;
-  late String Password;
-  late String Username;
-  late String Email;
-  late String Token;
-  late String Role;
+  User (
+     // this.UniversityName,
+      this.FullName,
+      this.Username,
+      this.Password,
+      this.Email,
+      this.Role
+      );
 
-  late DateTime lastLogin;
-
-
+  // factory User.fromJson(Map<String, dynamic> json) {
+  //   return User(
+  //       FullName: json['fullName'],
+  //       Username: json['username'],
+  //       Password: json['password'],
+  //       Email: json['email'],
+  //       Role: json['role'],
+  //   );
+  // }
 }

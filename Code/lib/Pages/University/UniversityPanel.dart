@@ -299,6 +299,7 @@ class UniversityPanel extends StatelessWidget {
                 },
                 child: Icon(Icons.add),
               ),
+
               body: ListView(
                 children: [
                   for (int count in List.generate(9, (index) => index + 1))
