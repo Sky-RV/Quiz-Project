@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quiz/Pages/University/UniversityPanel.dart';
+import 'package:quiz/Pages/University/LessonManagement/StudentList.dart';
 
 class AddLesson extends StatelessWidget {
   @override
@@ -95,7 +96,12 @@ class _AddLesson_State extends State<AddLesson_Page>{
                       // padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
                       padding: EdgeInsets.symmetric(horizontal: 40),
                       child: ElevatedButton(
-                        onPressed: (){},
+                        onPressed: (){
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => StudentList(LessonName: "Lesson Name", LessonID: "Lesson ID",))
+                          );
+                        },
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.zero,
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -133,7 +139,12 @@ class _AddLesson_State extends State<AddLesson_Page>{
                       // padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
                       padding: EdgeInsets.symmetric(horizontal: 40),
                       child: ElevatedButton(
-                        onPressed: (){},
+                        onPressed: (){
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => UniversityPanel(UsernameTXT: 'admin', PasswordTXT: 'admin'))
+                          );
+                        },
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.zero,
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
