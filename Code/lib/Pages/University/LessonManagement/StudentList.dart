@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
 
 class StudentList extends StatelessWidget {
 
@@ -29,6 +31,8 @@ class StudentList extends StatelessWidget {
   //     _counter++;
   //   });
   // }
+
+  TextEditingController NAME = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +75,9 @@ class StudentList extends StatelessWidget {
           floatingActionButton: FloatingActionButton(
             backgroundColor: shrinePink300,
             foregroundColor: Colors.black,
-            onPressed: (){},
+            onPressed: (){
+              displayDialofInput(context);
+            },
             child: Icon(Icons.add),
           ),
 
@@ -132,6 +138,95 @@ class StudentList extends StatelessWidget {
         )
       ),
 
+    );
+  }
+
+  void showAlertDialog(BuildContext context, String NAME) {
+    // Create Button
+    Widget ADD = FlatButton(
+      child: Text("بله", style: TextStyle(color: shrinePink400),),
+      // onPressed: (){
+      //   Fluttertoast.showToast(
+      //       msg: "دانشجو اضافه شد.",
+      //       toastLength: Toast.LENGTH_SHORT,
+      //       gravity: ToastGravity.CENTER,
+      //       fontSize: 16.0
+      //   );
+      // },
+      onPressed: (){
+        //Navigator.of(context).pop();
+        final scaffold = ScaffoldMessenger.of(context);
+        scaffold.showSnackBar(
+          SnackBar(
+            content: const Text('دانشجو اضافه شد.'),
+            action: SnackBarAction(label: 'بازگشت', onPressed: scaffold.hideCurrentSnackBar),
+          ),
+        );
+      },
+    );
+
+    Widget CANCEL = FlatButton(
+      child: Text("خیر", style: TextStyle(color: shrinePink300),),
+      onPressed: (){
+        Navigator.pop(context);
+      },
+    );
+
+    // Create Alert Dialog
+    String message = " آیا میخواهید " + NAME + " را اضافه کنید؟ ";
+    // NAME must be the name of student
+
+    AlertDialog alert = AlertDialog(
+      title: Text('اضافه کردن دانشجو', style: TextStyle(color: Colors.black),),
+      content: Text(message,  style: TextStyle(color: Colors.black),),
+      actions: [
+        ADD,
+        CANCEL
+      ],
+    );
+
+    // Show the Dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
+  displayDialofInput(BuildContext context) async {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("اضافه کردن دانشجو",  style: TextStyle(color: Colors.black),),
+          content: TextField(
+            style: TextStyle(color: Colors.black),
+            controller: NAME,
+            textInputAction: TextInputAction.go,
+            keyboardType: TextInputType.text,
+            decoration: InputDecoration(
+              hintText: "شماره دانشجویی",
+            ),
+          ),
+          actions: <Widget>[
+            new FlatButton(
+              child: Text("اضافه کردن", style: TextStyle(color: shrinePink400),),
+              onPressed: (){
+                //Navigator.of(context).pop();
+                showAlertDialog(context, NAME.text);
+              },
+            ),
+
+            new FlatButton(
+              child: Text("کنسل", style: TextStyle(color: shrinePink300),),
+              onPressed: (){
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+        );
+      }
     );
   }
 }
