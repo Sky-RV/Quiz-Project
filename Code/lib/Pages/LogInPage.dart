@@ -1,6 +1,14 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:quiz/Pages/ForgetPassword.dart';
+import 'package:quiz/Pages/SignInPage.dart';
 import 'package:quiz/Pages/University/UniversityPanel.dart';
+import 'package:quiz/Pages/AboutUs.dart';
+import 'package:quiz/Pages/ContactWithUs.dart';
+
+import '../main.dart';
 
 class LogIn extends StatelessWidget {
 
@@ -34,6 +42,15 @@ class _LogIn_PageState extends State<LogIn_Page> {
     TextEditingController StatusController = TextEditingController();
 
     String _selectedValue = 'مدیر';
+    bool _isObscure = true;
+    bool _validate = false;
+
+    @override
+    void dispose() {
+      UserController.dispose();
+      PassController.dispose();
+      super.dispose();
+    }
 
     return Scaffold(
 
@@ -67,7 +84,12 @@ class _LogIn_PageState extends State<LogIn_Page> {
                 title: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 40),
                   child: ElevatedButton(
-                    onPressed: (){},
+                    onPressed: (){
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => SignIn())
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.zero,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -98,7 +120,12 @@ class _LogIn_PageState extends State<LogIn_Page> {
                 title: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 40),
                   child: ElevatedButton(
-                    onPressed: (){},
+                    onPressed: (){
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => LogIn())
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.zero,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -128,7 +155,12 @@ class _LogIn_PageState extends State<LogIn_Page> {
               SizedBox(height: 20,),
               ListTile(
                 title: TextButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MyApp())
+                    );
+                  },
                   child: Text("خانه", style: TextStyle(color: Colors.white),),
                 ),
                 leading: Icon(Icons.home),
@@ -137,7 +169,12 @@ class _LogIn_PageState extends State<LogIn_Page> {
               SizedBox(height: 10,),
               ListTile(
                 title: TextButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LogIn())
+                    );
+                  },
                   child: Text("ورود کاربران", style: TextStyle(color: Colors.white),),
                 ),
                 leading: Icon(Icons.account_circle),
@@ -146,7 +183,12 @@ class _LogIn_PageState extends State<LogIn_Page> {
               SizedBox(height: 10,),
               ListTile(
                 title: TextButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => AboutUs())
+                    );
+                  },
                   child: Text("درباره ما", style: TextStyle(color: Colors.white),),
                 ),
                 leading: Icon(Icons.announcement),
@@ -155,7 +197,12 @@ class _LogIn_PageState extends State<LogIn_Page> {
               SizedBox(height: 10,),
               ListTile(
                 title: TextButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ContactWithUs())
+                    );
+                  },
                   child: Text("ارتباط با ما", style: TextStyle(color: Colors.white),),
                 ),
                 leading: Icon(Icons.share),
@@ -196,10 +243,34 @@ class _LogIn_PageState extends State<LogIn_Page> {
                         children: [
 
                           // Inputs
-                          UsernameInput(label: 'نام کاربری', UserController: UserController),
+                          UsernameInput(label: 'نام کاربری', UserController: UserController, valid: _validate),
+                         //  TextFormField(
+                         //    controller: UserController,
+                         //    style: TextStyle(color: Colors.black),
+                         //    decoration: InputDecoration(
+                         //        errorText: _validate ? 'نام کاربری اشتباه است.' : null,
+                         //        labelText: 'نام کاربردی',
+                         //        border: OutlineInputBorder(),
+                         //        labelStyle: TextStyle(color: Color(0xFF3E5196)),
+                         //        prefixIcon: Icon(Icons.account_circle)
+                         //    ),
+                         //  ),
                           SizedBox(height: 40,),
 
-                          PasswordInput(label: 'رمز', PassController: PassController),
+                          PasswordInput(label: 'رمز', PassController: PassController, valid: _validate),
+                         //  TextField(
+                         //    obscureText: _isObscure,
+                         //    decoration: InputDecoration(
+                         //        labelText: 'Password',
+                         //        suffixIcon: IconButton(
+                         //            icon: Icon(
+                         //                _isObscure ? Icons.visibility : Icons.visibility_off),
+                         //            onPressed: () {
+                         //              setState(() {
+                         //                _isObscure = !_isObscure;
+                         //              });
+                         //            })),
+                         //  ),
                           SizedBox(height: 5,),
                         ],
 
@@ -209,7 +280,12 @@ class _LogIn_PageState extends State<LogIn_Page> {
                     SizedBox(height: 5,),
 
                     TextButton(
-                      onPressed: (){},
+                      onPressed: (){
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ForgetPassword())
+                        );
+                      },
                       child: Text('فراموشی رمز ورود؟', style: TextStyle(fontSize: 13, color: Color(0xFFFF0000), fontWeight: FontWeight.bold),),
                     ),
 
@@ -229,6 +305,9 @@ class _LogIn_PageState extends State<LogIn_Page> {
                                 context,
                                 MaterialPageRoute(builder: (context) => UniversityPanel(UsernameTXT: Username, PasswordTXT: Password,))
                             );
+                          }
+                          else{
+                            // error message
                           }
 
                         },
@@ -270,14 +349,7 @@ class _LogIn_PageState extends State<LogIn_Page> {
   }
 }
 
-Widget DialogStatus({statusCont}){
-  return TextFormField(
-    controller: statusCont,
-    
-  );
-}
-
-Widget UsernameInput({label, UserController}){
+Widget UsernameInput({label, UserController, valid}){
   return TextFormField(
     controller: UserController,
     style: TextStyle(color: Colors.black),
@@ -290,7 +362,7 @@ Widget UsernameInput({label, UserController}){
   );
 }
 
-Widget PasswordInput({label, PassController}){
+Widget PasswordInput({label, PassController, valid}){
   bool status = true;
   return TextFormField(
     controller: PassController,
@@ -341,7 +413,7 @@ TextTheme _buildShrineTextTheme(TextTheme base) {
       .apply(
     fontFamily: 'Rubik',
     displayColor: Color(0xFF363671),
-    bodyColor: shrineBackgroundWhite,
+    //bodyColor: Colors.white,
   );
 }
 
@@ -352,9 +424,6 @@ const Color shrineBlue900 = Color(0xFF363671);
 const Color shrineBlue600 = Color(0xFF3E5196);
 
 const Color shrineErrorRed = Color(0xFFC5032B);
-
-const Color shrineSurfaceWhite = Color(0xFFFFFBFA);
-const Color shrineBackgroundWhite = Colors.white;
 
 const defaultLetterSpacing = 0.03;
 

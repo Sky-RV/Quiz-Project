@@ -4,7 +4,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:quiz/Classes/University/User.dart';
 import 'package:quiz/Pages/LogInPage.dart';
-import 'package:http/http.dart' as http;
+import 'package:quiz/Pages/SignInPage.dart';
+import 'package:quiz/Pages/LogInPage.dart';
+import 'package:quiz/main.dart';
+import 'package:quiz/Pages/AboutUs.dart';
+import 'package:quiz/Pages/ContactWithUs.dart';
+
 class SignIn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -71,7 +76,12 @@ class _SignIn_PageState extends State<SignIn_Page> {
                 title: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 40),
                   child: ElevatedButton(
-                    onPressed: (){},
+                    onPressed: (){
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => SignIn())
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.zero,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -102,7 +112,12 @@ class _SignIn_PageState extends State<SignIn_Page> {
                 title: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 40),
                   child: ElevatedButton(
-                    onPressed: (){},
+                    onPressed: (){
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => LogIn())
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.zero,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -132,7 +147,12 @@ class _SignIn_PageState extends State<SignIn_Page> {
               SizedBox(height: 20,),
               ListTile(
                 title: TextButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MyApp())
+                    );
+                  },
                   child: Text("خانه", style: TextStyle(color: Colors.white),),
                 ),
                 leading: Icon(Icons.home),
@@ -141,7 +161,12 @@ class _SignIn_PageState extends State<SignIn_Page> {
               SizedBox(height: 10,),
               ListTile(
                 title: TextButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LogIn())
+                    );
+                  },
                   child: Text("ورود کاربران", style: TextStyle(color: Colors.white),),
                 ),
                 leading: Icon(Icons.account_circle),
@@ -150,7 +175,12 @@ class _SignIn_PageState extends State<SignIn_Page> {
               SizedBox(height: 10,),
               ListTile(
                 title: TextButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => AboutUs())
+                    );
+                  },
                   child: Text("درباره ما", style: TextStyle(color: Colors.white),),
                 ),
                 leading: Icon(Icons.announcement),
@@ -159,7 +189,12 @@ class _SignIn_PageState extends State<SignIn_Page> {
               SizedBox(height: 10,),
               ListTile(
                 title: TextButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ContactWithUs())
+                    );
+                  },
                   child: Text("ارتباط با ما", style: TextStyle(color: Colors.white),),
                 ),
                 leading: Icon(Icons.share),
@@ -258,12 +293,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
                               }
                               else{
                                 // sign in
-                                User user = new User(fullname, username, password, email, role);
-                                var MyList = <User>[];
-                                MyList.add(user);
-                                setState(() {
-                                  createUser(user);
-                                });
+
                               }
                             }
                           },
@@ -328,22 +358,6 @@ class _SignIn_PageState extends State<SignIn_Page> {
 
     );
   }
-}
-
-Future<http.Response> createUser (User user){
-  return http.post(
-    Uri.parse('http://localhost:3000/api/v1/university/create'),
-    headers: <String, String>{
-      'Content-Type': 'application/json; charset=UTF-8',
-    },
-    body: jsonEncode(<String, String>{
-      'fullName' : user.FirstName + " " + user.LastName,
-      'username' : user.Username,
-      'password' : user.Password,
-      'email' : user.Email,
-      'role' : "Manager: " + user.UniversityName
-    }),
-  );
 }
 
 Widget SimpleInput({label}){
