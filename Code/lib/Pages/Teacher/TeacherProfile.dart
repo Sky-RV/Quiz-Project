@@ -4,10 +4,12 @@ import 'package:quiz/Pages/University/UniversityProfilePage.dart';
 import 'package:quiz/pages/University/UniversityPanel.dart';
 import 'package:quiz/main.dart';
 
-class UniversityProfilePage extends StatelessWidget {
+import 'TeacherPanel.dart';
+
+class TeacherProfilePage extends StatelessWidget {
 
   String UsernameTXT, PasswordTXT;
-  UniversityProfilePage({Key? key,
+  TeacherProfilePage({Key? key,
     required this.UsernameTXT,
     required this.PasswordTXT}) : super(key: key);
 
@@ -24,7 +26,7 @@ class UniversityProfilePage extends StatelessWidget {
 //
 // class _UniversityPanelState extends State<UniversityPanelPage> {
 
- // int _counter = 0;
+  // int _counter = 0;
 
   // void _incrementCounter() {
   //   setState(() {
@@ -69,39 +71,32 @@ class UniversityProfilePage extends StatelessWidget {
                 child: Text(UsernameTXT[0], style: TextStyle(fontSize: 30),),
               ),
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
+                  gradient: LinearGradient(colors: [
                     Color(0xFF363671),
                     Color(0xFF3E5196),
                     Color(0xFF4E65B8),
-                  ],
-                ),
-              ),
+                  ])),
             ),
-
             SizedBox(height: 20,),
             ListTile(
               title: TextButton(
-                onPressed: (){
+                onPressed: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => UniversityPanel(UsernameTXT: UsernameTXT, PasswordTXT: PasswordTXT,))
+                    context,
+                    MaterialPageRoute(builder: (context) => TeacherPanel(
+                      USERNAME: UsernameTXT,
+                      PASSWORD: PasswordTXT,
+                    )),
                   );
                 },
-                child: Text("داشبورد", style: TextStyle(color: Colors.black),),
+                child: Text("مدیریت آزمون ها", style: TextStyle(color: Colors.black),),
               ),
-              leading: Icon(Icons.dashboard),
+              leading: Icon(Icons.article),
             ),
-
             SizedBox(height: 10,),
             ListTile(
               title: TextButton(
-                onPressed: (){
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => UniversityProfilePage(UsernameTXT: UsernameTXT, PasswordTXT: PasswordTXT,))
-                  );
-                },
+                onPressed: (){},
                 child: Text("پروفایل", style: TextStyle(color: Colors.black),),
               ),
               leading: Icon(Icons.account_circle),
@@ -113,7 +108,7 @@ class UniversityProfilePage extends StatelessWidget {
                 onPressed: (){
                   Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ChangePasswordPage(UsernameTXT: UsernameTXT, PasswordTXT: PasswordTXT,))
+                      MaterialPageRoute(builder: (context) => ChangePasswordPage(UsernameTXT: UsernameTXT, PasswordTXT: PasswordTXT))
                   );
                 },
                 child: Text("تغییر رمز عبور", style: TextStyle(color: Colors.black),),
@@ -303,10 +298,10 @@ Widget EmailInput({label, str}){
     initialValue: str,
     style: TextStyle(color: Colors.black),
     decoration: InputDecoration(
-      labelText: label,
-      border: OutlineInputBorder(),
-      labelStyle: TextStyle(color: Color(0xFF3E5196)),
-      prefixIcon: Icon(Icons.email)
+        labelText: label,
+        border: OutlineInputBorder(),
+        labelStyle: TextStyle(color: Color(0xFF3E5196)),
+        prefixIcon: Icon(Icons.email)
     ),
   );
 }

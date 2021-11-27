@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quiz/Pages/Teacher/ChangePasswordPage.dart';
+import 'package:quiz/Pages/Teacher/TeacherProfile.dart';
 
 import '../../main.dart';
 
@@ -80,7 +81,10 @@ class TeacherPanel extends StatelessWidget {
               SizedBox(height: 10,),
               ListTile(
                 title: TextButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => TeacherProfilePage(UsernameTXT: UsernameTXT, PasswordTXT: PasswordTXT)));
+                  },
                   child: Text("پروفایل", style: TextStyle(color: Colors.black),),
                 ),
                 leading: Icon(Icons.account_circle),
