@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quiz/Pages/University/ChangePasswordPage.dart';
+import 'package:quiz/Pages/Teacher/ChangePasswordPage.dart';
 
 import '../../main.dart';
 
