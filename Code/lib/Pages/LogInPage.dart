@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:quiz/Pages/ForgetPassword.dart';
 import 'package:quiz/Pages/SignInPage.dart';
+import 'package:quiz/Pages/Teacher/TeacherPanel.dart';
 import 'package:quiz/Pages/University/UniversityPanel.dart';
 import 'package:quiz/Pages/AboutUs.dart';
 import 'package:quiz/Pages/ContactWithUs.dart';
@@ -304,6 +305,12 @@ class _LogIn_PageState extends State<LogIn_Page> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) => UniversityPanel(UsernameTXT: Username, PasswordTXT: Password,))
+                            );
+                          }
+                          else if(Username=='teacher' && Password=='teacher'){
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => TeacherPanel(USERNAME: Username, PASSWORD: Password))
                             );
                           }
                           else{
