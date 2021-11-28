@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quiz/Pages/Teacher/ChangePasswordPage.dart';
 import 'package:quiz/Pages/Teacher/TeacherProfile.dart';
+import 'package:quiz/Pages/Teacher/Tests/AddTest_Page_1.dart';
 
 import '../../main.dart';
 
@@ -134,7 +135,12 @@ class TeacherPanel extends StatelessWidget {
         // in case there is no test list
         body: Center(
           child: IconButton(
-            onPressed: (){},
+            onPressed: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => TestPage_1())
+              );
+            },
             icon: Icon(
               Icons.book,
               color: Colors.black12,
