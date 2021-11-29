@@ -155,7 +155,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
                   },
                   child: Text("خانه", style: TextStyle(color: Colors.white),),
                 ),
-                leading: Icon(Icons.home),
+                leading: Icon(Icons.home, color: Colors.white70,),
               ),
 
               SizedBox(height: 10,),
@@ -169,7 +169,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
                   },
                   child: Text("ورود کاربران", style: TextStyle(color: Colors.white),),
                 ),
-                leading: Icon(Icons.account_circle),
+                leading: Icon(Icons.account_circle, color: Colors.white70,),
               ),
 
               SizedBox(height: 10,),
@@ -183,7 +183,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
                   },
                   child: Text("درباره ما", style: TextStyle(color: Colors.white),),
                 ),
-                leading: Icon(Icons.announcement),
+                leading: Icon(Icons.announcement, color: Colors.white70,),
               ),
 
               SizedBox(height: 10,),
@@ -197,7 +197,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
                   },
                   child: Text("ارتباط با ما", style: TextStyle(color: Colors.white),),
                 ),
-                leading: Icon(Icons.share),
+                leading: Icon(Icons.share, color: Colors.white70,),
               ),
 
             ],

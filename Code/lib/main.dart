@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:quiz/Pages/AboutUs.dart';
 import 'package:quiz/Pages/LogInPage.dart';
 import 'package:quiz/Pages/SignInPage.dart';
+
+import 'Pages/ContactWithUs.dart';
 
 void main() {
   runApp(MyApp());
@@ -155,10 +158,15 @@ class _MyHomePageState extends State<MyHomePage> {
               SizedBox(height: 20,),
               ListTile(
                 title: TextButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MyApp())
+                    );
+                  },
                   child: Text("خانه", style: TextStyle(color: Colors.white),),
                 ),
-                leading: Icon(Icons.home),
+                leading: Icon(Icons.home, color: Colors.white70,),
               ),
 
               SizedBox(height: 10,),
@@ -172,25 +180,35 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                   child: Text("ورود کاربران", style: TextStyle(color: Colors.white),),
                 ),
-                leading: Icon(Icons.account_circle),
+                leading: Icon(Icons.account_circle, color: Colors.white70,),
               ),
 
               SizedBox(height: 10,),
               ListTile(
                 title: TextButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => AboutUs())
+                    );
+                  },
                   child: Text("درباره ما", style: TextStyle(color: Colors.white),),
                 ),
-                leading: Icon(Icons.announcement),
+                leading: Icon(Icons.announcement, color: Colors.white70,),
               ),
 
               SizedBox(height: 10,),
               ListTile(
                 title: TextButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ContactWithUs())
+                    );
+                  },
                   child: Text("ارتباط با ما", style: TextStyle(color: Colors.white),),
                 ),
-                leading: Icon(Icons.share),
+                leading: Icon(Icons.share, color: Colors.white70,),
               ),
 
             ],

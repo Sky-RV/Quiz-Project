@@ -32,6 +32,8 @@ class LogIn_Page extends StatefulWidget {
 class _LogIn_PageState extends State<LogIn_Page> {
   int _counterIndex = 0;
 
+  int _value = -1;
+
   @override
   Widget build(BuildContext context) {
 
@@ -164,7 +166,7 @@ class _LogIn_PageState extends State<LogIn_Page> {
                   },
                   child: Text("خانه", style: TextStyle(color: Colors.white),),
                 ),
-                leading: Icon(Icons.home),
+                leading: Icon(Icons.home, color: Colors.white70,),
               ),
 
               SizedBox(height: 10,),
@@ -178,7 +180,7 @@ class _LogIn_PageState extends State<LogIn_Page> {
                   },
                   child: Text("ورود کاربران", style: TextStyle(color: Colors.white),),
                 ),
-                leading: Icon(Icons.account_circle),
+                leading: Icon(Icons.account_circle, color: Colors.white70,),
               ),
 
               SizedBox(height: 10,),
@@ -192,7 +194,7 @@ class _LogIn_PageState extends State<LogIn_Page> {
                   },
                   child: Text("درباره ما", style: TextStyle(color: Colors.white),),
                 ),
-                leading: Icon(Icons.announcement),
+                leading: Icon(Icons.announcement, color: Colors.white70,),
               ),
 
               SizedBox(height: 10,),
@@ -206,7 +208,7 @@ class _LogIn_PageState extends State<LogIn_Page> {
                   },
                   child: Text("ارتباط با ما", style: TextStyle(color: Colors.white),),
                 ),
-                leading: Icon(Icons.share),
+                leading: Icon(Icons.share, color: Colors.white70,),
               ),
 
             ],
@@ -217,139 +219,354 @@ class _LogIn_PageState extends State<LogIn_Page> {
 
       /////////////////////////////////// BODY /////////////////////////////
 
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Stack(
-            children: <Widget>[
+      body: Padding(
+        padding: EdgeInsets.all(10),
+        child: Column(
+          children: [
+            Column(
+              children: [
+                SizedBox(height: 20,),
+                SizedBox(height: 20,),
+                Text("ورود", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: shrineBlue600),),
+                SizedBox(height: 150,),
+              ],
+            ),
 
-              Container(
-                height: MediaQuery.of(context).size.height,
-                width: double.infinity,
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
+              child: Column(
 
-                child: Column(
-                  children: [
-                    Column(
-                      children: [
-                        SizedBox(height: 20,),
-                        SizedBox(height: 20,),
-                        Text("ورود", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: shrineBlue600),),
-                        SizedBox(height: 150,),
+                children: [
+
+                  // Inputs
+                  UsernameInput(label: 'نام کاربری', UserController: UserController, valid: _validate),
+                  //  TextFormField(
+                  //    controller: UserController,
+                  //    style: TextStyle(color: Colors.black),
+                  //    decoration: InputDecoration(
+                  //        errorText: _validate ? 'نام کاربری اشتباه است.' : null,
+                  //        labelText: 'نام کاربردی',
+                  //        border: OutlineInputBorder(),
+                  //        labelStyle: TextStyle(color: Color(0xFF3E5196)),
+                  //        prefixIcon: Icon(Icons.account_circle)
+                  //    ),
+                  //  ),
+                  SizedBox(height: 40,),
+
+                  PasswordInput(label: 'رمز', PassController: PassController, valid: _validate),
+                  //  TextField(
+                  //    obscureText: _isObscure,
+                  //    decoration: InputDecoration(
+                  //        labelText: 'Password',
+                  //        suffixIcon: IconButton(
+                  //            icon: Icon(
+                  //                _isObscure ? Icons.visibility : Icons.visibility_off),
+                  //            onPressed: () {
+                  //              setState(() {
+                  //                _isObscure = !_isObscure;
+                  //              });
+                  //            })),
+                  //  ),
+                  SizedBox(height: 5,),
+                ],
+
+              ),
+            ),
+
+            SizedBox(height: 5,),
+
+            TextButton(
+              onPressed: (){
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ForgetPassword())
+                );
+              },
+              child: Text('فراموشی رمز ورود؟', style: TextStyle(fontSize: 13, color: Color(0xFFFF0000), fontWeight: FontWeight.bold),),
+            ),
+
+            SizedBox(height: 30,),
+
+            new Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                new Radio(
+                  activeColor: shrineBlue600,
+                  value: 1,
+                  groupValue: _value,
+                  onChanged: (value){
+                    setState(() {
+                      _value = int.parse(value.toString());
+                    });
+                  },
+                ),
+                new Text('مدیر', style: TextStyle(color: Colors.black),),
+
+                SizedBox(width: 10,),
+
+                new Radio(
+                  activeColor: shrineBlue600,
+                  value: 2,
+                  groupValue: _value,
+                  onChanged: (value){
+                    setState(() {
+                      _value = int.parse(value.toString());
+                    });
+                  },
+                ),
+                new Text('استاد', style: TextStyle(color: Colors.black),),
+
+                SizedBox(width: 10,),
+
+                new Radio(
+                  activeColor: shrineBlue600,
+                  value: 3,
+                  groupValue: _value,
+                  onChanged: (value){
+                    setState(() {
+                      _value = int.parse(value.toString());
+                    });
+                  },
+                ),
+                new Text('دانشجو', style: TextStyle(color: Colors.black),),
+
+              ],
+            ),
+
+            SizedBox(height: 35,),
+
+            //Log In button
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 40),
+              child: ElevatedButton(
+                onPressed: (){
+
+                  String Username = UserController.text;
+                  String Password = PassController.text;
+
+                  if(Username=='admin' && Password=='admin' && _value==1){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => UniversityPanel(UsernameTXT: Username, PasswordTXT: Password,))
+                    );
+                  }
+                  else if(Username=='t' && Password=='t' && _value==2){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => TeacherPanel(USERNAME: Username, PASSWORD: Password))
+                    );
+                  }
+                  else{
+                    // error message
+                  }
+
+                },
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.zero,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                ),
+                child: Ink(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Color(0xFF363671),
+                        Color(0xFFEE537C),
                       ],
                     ),
-
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
-                      child: Column(
-
-                        children: [
-
-                          // Inputs
-                          UsernameInput(label: 'نام کاربری', UserController: UserController, valid: _validate),
-                         //  TextFormField(
-                         //    controller: UserController,
-                         //    style: TextStyle(color: Colors.black),
-                         //    decoration: InputDecoration(
-                         //        errorText: _validate ? 'نام کاربری اشتباه است.' : null,
-                         //        labelText: 'نام کاربردی',
-                         //        border: OutlineInputBorder(),
-                         //        labelStyle: TextStyle(color: Color(0xFF3E5196)),
-                         //        prefixIcon: Icon(Icons.account_circle)
-                         //    ),
-                         //  ),
-                          SizedBox(height: 40,),
-
-                          PasswordInput(label: 'رمز', PassController: PassController, valid: _validate),
-                         //  TextField(
-                         //    obscureText: _isObscure,
-                         //    decoration: InputDecoration(
-                         //        labelText: 'Password',
-                         //        suffixIcon: IconButton(
-                         //            icon: Icon(
-                         //                _isObscure ? Icons.visibility : Icons.visibility_off),
-                         //            onPressed: () {
-                         //              setState(() {
-                         //                _isObscure = !_isObscure;
-                         //              });
-                         //            })),
-                         //  ),
-                          SizedBox(height: 5,),
-                        ],
-
-                      ),
-                    ),
-
-                    SizedBox(height: 5,),
-
-                    TextButton(
-                      onPressed: (){
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => ForgetPassword())
-                        );
-                      },
-                      child: Text('فراموشی رمز ورود؟', style: TextStyle(fontSize: 13, color: Color(0xFFFF0000), fontWeight: FontWeight.bold),),
-                    ),
-
-                    SizedBox(height: 100,),
-
-                    //Log In button
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 40),
-                      child: ElevatedButton(
-                        onPressed: (){
-
-                          String Username = UserController.text;
-                          String Password = PassController.text;
-
-                          if(Username=='admin' && Password=='admin'){
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => UniversityPanel(UsernameTXT: Username, PasswordTXT: Password,))
-                            );
-                          }
-                          else if(Username=='teacher' && Password=='teacher'){
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => TeacherPanel(USERNAME: Username, PASSWORD: Password))
-                            );
-                          }
-                          else{
-                            // error message
-                          }
-
-                        },
-                        style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.zero,
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                        ),
-                        child: Ink(
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                Color(0xFF363671),
-                                Color(0xFFEE537C),
-                              ],
-                            ),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Container(
-                            width: 180,
-                            height: 35,
-                            alignment: Alignment.center,
-                            child: Text('ورود', style: TextStyle(fontSize: 13, color: Colors.white),),
-                          ),
-                        ),
-                      ),
-                    ),
-
-                  ],
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Container(
+                    width: 180,
+                    height: 35,
+                    alignment: Alignment.center,
+                    child: Text('ورود', style: TextStyle(fontSize: 13, color: Colors.white),),
+                  ),
                 ),
               ),
+            ),
 
-            ],
-          ),
+          ],
         ),
       ),
+
+      // body: SafeArea(
+      //   child: SingleChildScrollView(
+      //     child: Stack(
+      //       children: <Widget>[
+      //
+      //         Container(
+      //           height: MediaQuery.of(context).size.height,
+      //           width: double.infinity,
+      //
+      //           child: Column(
+      //             children: [
+      //               Column(
+      //                 children: [
+      //                   SizedBox(height: 20,),
+      //                   SizedBox(height: 20,),
+      //                   Text("ورود", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: shrineBlue600),),
+      //                   SizedBox(height: 150,),
+      //                 ],
+      //               ),
+      //
+      //               Padding(
+      //                 padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
+      //                 child: Column(
+      //
+      //                   children: [
+      //
+      //                     // Inputs
+      //                     UsernameInput(label: 'نام کاربری', UserController: UserController, valid: _validate),
+      //                    //  TextFormField(
+      //                    //    controller: UserController,
+      //                    //    style: TextStyle(color: Colors.black),
+      //                    //    decoration: InputDecoration(
+      //                    //        errorText: _validate ? 'نام کاربری اشتباه است.' : null,
+      //                    //        labelText: 'نام کاربردی',
+      //                    //        border: OutlineInputBorder(),
+      //                    //        labelStyle: TextStyle(color: Color(0xFF3E5196)),
+      //                    //        prefixIcon: Icon(Icons.account_circle)
+      //                    //    ),
+      //                    //  ),
+      //                     SizedBox(height: 40,),
+      //
+      //                     PasswordInput(label: 'رمز', PassController: PassController, valid: _validate),
+      //                    //  TextField(
+      //                    //    obscureText: _isObscure,
+      //                    //    decoration: InputDecoration(
+      //                    //        labelText: 'Password',
+      //                    //        suffixIcon: IconButton(
+      //                    //            icon: Icon(
+      //                    //                _isObscure ? Icons.visibility : Icons.visibility_off),
+      //                    //            onPressed: () {
+      //                    //              setState(() {
+      //                    //                _isObscure = !_isObscure;
+      //                    //              });
+      //                    //            })),
+      //                    //  ),
+      //                     SizedBox(height: 5,),
+      //                   ],
+      //
+      //                 ),
+      //               ),
+      //
+      //               SizedBox(height: 5,),
+      //
+      //               TextButton(
+      //                 onPressed: (){
+      //                   Navigator.push(
+      //                       context,
+      //                       MaterialPageRoute(builder: (context) => ForgetPassword())
+      //                   );
+      //                 },
+      //                 child: Text('فراموشی رمز ورود؟', style: TextStyle(fontSize: 13, color: Color(0xFFFF0000), fontWeight: FontWeight.bold),),
+      //               ),
+      //
+      //               SizedBox(height: 30,),
+      //
+      //               ListTile(
+      //                 title: Text("مدیر",
+      //                   style: TextStyle(color: Colors.black, fontSize: 14),),
+      //                 leading: Radio(
+      //                   value: 1,
+      //                   groupValue: _value,
+      //                   activeColor: shrineBlue600,
+      //                   onChanged: (value){
+      //                     setState(() {
+      //                       _value = int.parse(value.toString());
+      //                     });
+      //                   },
+      //                 ),
+      //               ),
+      //               ListTile(
+      //                 title: Text('استاد',
+      //                   style: TextStyle(color: Colors.black, fontSize: 14),),
+      //                 leading: Radio(
+      //                   value: 2,
+      //                   groupValue: _value,
+      //                   activeColor: shrineBlue600,
+      //                   onChanged: (value){
+      //                     setState(() {
+      //                       _value = int.parse(value.toString());
+      //                     });
+      //                   },
+      //                 ),
+      //               ),
+      //               ListTile(
+      //                 title: Text('دانشجو',
+      //                   style: TextStyle(color: Colors.black, fontSize: 14),),
+      //                 leading: Radio(
+      //                   value: 3,
+      //                   groupValue: _value,
+      //                   activeColor: shrineBlue600,
+      //                   onChanged: (value){
+      //                     setState(() {
+      //                       _value = int.parse(value.toString());
+      //                     });
+      //                   },
+      //                 ),
+      //               ),
+      //
+      //               SizedBox(height: 35,),
+      //
+      //               //Log In button
+      //               Padding(
+      //                 padding: EdgeInsets.symmetric(horizontal: 40),
+      //                 child: ElevatedButton(
+      //                   onPressed: (){
+      //
+      //                     String Username = UserController.text;
+      //                     String Password = PassController.text;
+      //
+      //                     if(Username=='admin' && Password=='admin'){
+      //                       Navigator.push(
+      //                           context,
+      //                           MaterialPageRoute(builder: (context) => UniversityPanel(UsernameTXT: Username, PasswordTXT: Password,))
+      //                       );
+      //                     }
+      //                     else if(Username=='t' && Password=='t'){
+      //                       Navigator.push(
+      //                         context,
+      //                         MaterialPageRoute(builder: (context) => TeacherPanel(USERNAME: Username, PASSWORD: Password))
+      //                       );
+      //                     }
+      //                     else{
+      //                       // error message
+      //                     }
+      //
+      //                   },
+      //                   style: ElevatedButton.styleFrom(
+      //                     padding: EdgeInsets.zero,
+      //                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      //                   ),
+      //                   child: Ink(
+      //                     decoration: BoxDecoration(
+      //                       gradient: LinearGradient(
+      //                         colors: [
+      //                           Color(0xFF363671),
+      //                           Color(0xFFEE537C),
+      //                         ],
+      //                       ),
+      //                       borderRadius: BorderRadius.circular(20),
+      //                     ),
+      //                     child: Container(
+      //                       width: 180,
+      //                       height: 35,
+      //                       alignment: Alignment.center,
+      //                       child: Text('ورود', style: TextStyle(fontSize: 13, color: Colors.white),),
+      //                     ),
+      //                   ),
+      //                 ),
+      //               ),
+      //
+      //             ],
+      //           ),
+      //         ),
+      //
+      //       ],
+      //     ),
+      //   ),
+      // ),
 
 
     );

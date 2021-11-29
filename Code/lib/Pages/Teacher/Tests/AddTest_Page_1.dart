@@ -45,10 +45,12 @@ class _TestPage_1 extends State<TestPage>{
   String C3_Op1 = 'Held in the scheduled date and time', C3_Op2 = 'Holding floating',
           C3_Op3 = 'Show question by question and set a time for questions',
           C3_Op4 = 'Show question by question and set a total time for the test';
+  int C3_value = -1;
 
   // CARD 4
   String C4_title = 'Workbook Settings', C4_subtitle = 'Holding Test Type';
   String C4_Op1 = 'Held on the scheduled date and time';
+  int C4_value = -1;
 
   String UsernameTXT = 'teacher', PasswordTXT = 'teacher';
 
@@ -164,15 +166,15 @@ class _TestPage_1 extends State<TestPage>{
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                
+
                 SizedBox(height: 30,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    
+
                     Icon(Icons.class_, color: shrineBlue600,), // replace with specific icon (number 1)
                     Text('Define new test', style: TextStyle(fontSize: 16, color: Colors.black),)
-                    
+
                   ],
                 ),
 
@@ -187,7 +189,7 @@ class _TestPage_1 extends State<TestPage>{
 
                   child: Column(
                     children: [
-                      
+
                       Padding( // title
                         padding: EdgeInsets.all(16),
                         child: Text(C1_title,
@@ -240,7 +242,9 @@ class _TestPage_1 extends State<TestPage>{
                           },
                         ),
                       ),
-                      
+
+                      SizedBox(height: 15,)
+
                     ],
                   ),
                 ),
@@ -333,10 +337,269 @@ class _TestPage_1 extends State<TestPage>{
                           },
                         ),
                       ),
+
+                      SizedBox(height: 15,)
                     ],
                   ),
                 ),
-                
+
+                SizedBox(height: 15,), // card 3
+                Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)
+                  ),
+                  elevation: 5,
+                  semanticContainer: true,
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+
+                  child: Column(
+                    children: [
+
+                      Padding(
+                        padding: EdgeInsets.all(16),
+                        child: Text(C3_title,
+                        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),),
+                      ),
+
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 25),
+                        child: Column(
+                          children: [
+                            SizedBox(height: 10,),
+                            preIconInput(label: 'Start Date and Time', icon: Icon(Icons.calendar_today_rounded)),
+                            SizedBox(height: 15,),
+                            preIconInput(label: 'End Date and Time', icon: Icon(Icons.calendar_today_rounded)),
+                            SizedBox(height: 10,),
+                          ],
+                        ),
+                      ),
+
+                      Padding(
+                        padding: EdgeInsets.all(16),
+                        child: Text(C3_subtitle,
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),),
+                      ),
+
+                      SizedBox(height: 10,),
+                      ListTile( // radio 1/4
+                        title: Text(C3_Op1,
+                        style: TextStyle(color: Colors.black, fontSize: 14),),
+                        leading: Radio(
+                          value: 1,
+                          groupValue: C3_value,
+                          activeColor: shrineBlue600,
+                          onChanged: (value){
+                            setState(() {
+                              C3_value = int.parse(value.toString());
+                            });
+                          },
+                        ),
+                      ),
+                      ListTile( // radio 2/4
+                        title: Text(C3_Op2,
+                          style: TextStyle(color: Colors.black, fontSize: 14),),
+                        leading: Radio(
+                          value: 2,
+                          groupValue: C3_value,
+                          activeColor: shrineBlue600,
+                          onChanged: (value){
+                            setState(() {
+                              C3_value = int.parse(value.toString());
+                            });
+                          },
+                        ),
+                      ),
+                      ListTile( // radio 3/4
+                        title: Text(C3_Op3,
+                          style: TextStyle(color: Colors.black, fontSize: 14),),
+                        leading: Radio(
+                          value: 3,
+                          groupValue: C3_value,
+                          activeColor: shrineBlue600,
+                          onChanged: (value){
+                            setState(() {
+                              C3_value = int.parse(value.toString());
+                            });
+                          },
+                        ),
+                      ),
+                      ListTile( // radio 4/4
+                        title: Text(C3_Op4,
+                          style: TextStyle(color: Colors.black, fontSize: 14),),
+                        leading: Radio(
+                          value: 4,
+                          groupValue: C3_value,
+                          activeColor: shrineBlue600,
+                          onChanged: (value){
+                            setState(() {
+                              C3_value = int.parse(value.toString());
+                            });
+                          },
+                        ),
+                      ),
+
+                      SizedBox(height: 15,)
+
+                    ],
+                  ),
+                ),
+
+                SizedBox(height: 15,), // card 4
+                Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)
+                  ),
+                  elevation: 5,
+                  semanticContainer: true,
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+
+                  child: Column(
+                    children: [
+
+                      Padding( // title
+                        padding: EdgeInsets.all(16),
+                        child: Text(C4_title,
+                          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),),
+                      ),
+
+                      SizedBox(height: 10,),
+                      Padding( // title
+                        padding: EdgeInsets.all(16),
+                        child: Text(C4_subtitle,
+                          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),),
+                      ),
+
+                      SizedBox(height: 5,),
+                      ListTile(
+                        title: Text(C4_Op1,
+                          style: TextStyle(color: Colors.black, fontSize: 14),),
+                        leading: Radio(
+                          value: 1,
+                          groupValue: C4_value,
+                          activeColor: shrineBlue600,
+                          onChanged: (value){
+                            setState(() {
+                              C4_value = int.parse(value.toString());
+                            });
+                          },
+                        ),
+                      ),
+
+                      ListTile(
+                        title: Text(C4_Op1,
+                          style: TextStyle(color: Colors.black, fontSize: 14),),
+                        leading: Radio(
+                          value: 2,
+                          groupValue: C4_value,
+                          activeColor: shrineBlue600,
+                          onChanged: (value){
+                            setState(() {
+                              C4_value = int.parse(value.toString());
+                            });
+                          },
+                        ),
+                      ),
+
+                      SizedBox(height: 10,),
+                      Padding( // title
+                        padding: EdgeInsets.all(16),
+                        child: Text(C4_subtitle,
+                          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),),
+                      ),
+
+                      SizedBox(height: 5,),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 25),
+                        child: Column(
+                          children: [
+
+                            preIconInput(label: 'Start Date and Time', icon: Icon(Icons.calendar_today_rounded)),
+
+                          ],
+                        ),
+                      ),
+
+                      SizedBox(height: 15,)
+
+                    ],
+                  ),
+                ),
+
+                // Buttons
+                SizedBox(height: 35,),
+                Card(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)
+                  ),
+                  semanticContainer: true,
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                     // myButton(label: 'Cancel', color: shrinePink300, act: actCancel()),
+                      ElevatedButton(
+                        onPressed: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => TeacherPanel(USERNAME: UsernameTXT, PASSWORD: PasswordTXT))
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.zero,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                        ),
+                        child: Ink(
+                          decoration: BoxDecoration(
+                              color: shrinePink300,
+                              borderRadius: BorderRadius.circular(15)
+                          ),
+                          child: Container(
+                            width: 180,
+                            height: 35,
+                            alignment: Alignment.center,
+                            child: Text('Cancel', style:
+                            TextStyle(fontSize: 16, color: Colors.white),),
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 90,),
+                    //  myButton(label: 'Save', color: shrinePink400, act: actCancel()),
+                      ElevatedButton(
+                        onPressed: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => TeacherPanel(USERNAME: UsernameTXT, PASSWORD: PasswordTXT))
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.zero,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                        ),
+                        child: Ink(
+                          decoration: BoxDecoration(
+                              color: shrinePink400,
+                              borderRadius: BorderRadius.circular(15)
+                          ),
+                          child: Container(
+                            width: 180,
+                            height: 35,
+                            alignment: Alignment.center,
+                            child: Text('Save', style:
+                            TextStyle(fontSize: 16, color: Colors.white),),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+
+                SizedBox(height: 10,),
+
               ],
             ),
           ),
@@ -346,7 +609,39 @@ class _TestPage_1 extends State<TestPage>{
     );
   }
 
+  // actCancel() {
+  //   Navigator.push(
+  //     context,
+  //     MaterialPageRoute(builder: (context) => TeacherPanel(USERNAME: UsernameTXT, PASSWORD: PasswordTXT))
+  //   );
+  // }
+
 }
+
+// Widget myButton({label, color, act}){
+//   return ElevatedButton(
+//     onPressed: act,
+//     style: ElevatedButton.styleFrom(
+//       padding: EdgeInsets.zero,
+//       shape: RoundedRectangleBorder(
+//         borderRadius: BorderRadius.circular(15),
+//       ),
+//     ),
+//     child: Ink(
+//       decoration: BoxDecoration(
+//         color: color,
+//         borderRadius: BorderRadius.circular(15)
+//       ),
+//       child: Container(
+//         width: 180,
+//         height: 35,
+//         alignment: Alignment.center,
+//         child: Text(label, style:
+//           TextStyle(fontSize: 16, color: Colors.white),),
+//       ),
+//     ),
+//   );
+// }
 
 Widget SimpleInput({label, cnt}) {
   return TextFormField(
