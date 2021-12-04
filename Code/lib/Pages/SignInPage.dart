@@ -307,22 +307,18 @@ class _SignIn_PageState extends State<SignIn_Page> {
                             // Empty Fields Conditions
 
                             setState(() {
-                              university.isEmpty ? _uniValid = true : _uniValid = false;
-                              name.isEmpty ? _nameValid = true : _nameValid = false;
-                              lastname.isEmpty ? _lastnameValid = true : _lastnameValid = false;
-                              username.isEmpty ? _usernameValid = true : _usernameValid = false;
-                              password.isEmpty ? _passValid = true : _passValid = false;
-                              passwordConfirm.isEmpty ? _conPassValid = true : _conPassValid = false;
-                              email.isEmpty ? _emailValid = true : _emailValid = false;
+                              UniversityCNT.text.isEmpty ? _uniValid = true : _uniValid = false;
+                              NameCNT.text.isEmpty ? _nameValid = true : _nameValid = false;
+                              LastnameCNT.text.isEmpty ? _lastnameValid = true : _lastnameValid = false;
+                              UsernameCNT.text.isEmpty ? _usernameValid = true : _usernameValid = false;
+                              PasswordCNT.text.isEmpty ? _passValid = true : _passValid = false;
+                              PasswordConfirmCNT.text.isEmpty ? _conPassValid = true : _conPassValid = false;
+                              EmailCNT.text.isEmpty ? _emailValid = true : _emailValid = false;
+
+                              PasswordCNT.text != PasswordConfirmCNT.text ? _passValid = true : _passValid = false;
                             });
 
-                              if(password != passwordConfirm){
-                                // error masage
-                              }
-                              else{
-                                // sign in
-                                postData(university, fullname, username, password, email);
-                              }
+                            postData(university, fullname, username, password, email);
                           },
                           style: ElevatedButton.styleFrom(
                             padding: EdgeInsets.zero,
