@@ -318,7 +318,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
                               PasswordCNT.text != PasswordConfirmCNT.text ? _passValid = true : _passValid = false;
                             });
 
-                            postUniversityData(university, "address")
+                            postUniversityData(university, "address");
                             postManagerData(fullname, username, password, email);
                           },
                           style: ElevatedButton.styleFrom(

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:quiz/Pages/Teacher/ChangePasswordPage.dart';
 import 'package:quiz/Pages/Teacher/TeacherProfile.dart';
+import 'package:quiz/Pages/Teacher/Tests/AddTest_Page_2.dart';
 import '../../../main.dart';
 import '../TeacherPanel.dart';
 
@@ -46,6 +47,13 @@ class _TestPage_1 extends State<TestPage>{
           C3_Op3 = 'Show question by question and set a time for questions',
           C3_Op4 = 'Show question by question and set a total time for the test';
   int C3_value = -1;
+
+  // CARD 3 SLIMY 1
+  String checknox_3_1 = "Possibility to retake the test if the test is not completed (floating only)";
+  String radio1_3_1 = "Do not stop the timer if you leave the test panel";
+  String radio2_3_1 = "Stop the timer if it exits the test panel";
+  bool check_1 = false;
+  int gpValue_3_1 = -1;
 
   // CARD 4
   String C4_title = 'Workbook Settings', C4_subtitle = 'Holding Test Type';
@@ -391,6 +399,69 @@ class _TestPage_1 extends State<TestPage>{
                           onChanged: (value){
                             setState(() {
                               C3_value = int.parse(value.toString());
+                              // SlimyCard(
+                              //  // topCardWidget: topCardWidget(),
+                              //   bottomCardWidget: Card(
+                              //     shape: RoundedRectangleBorder(
+                              //         borderRadius: BorderRadius.circular(10)
+                              //     ),
+                              //     elevation: 5,
+                              //     semanticContainer: true,
+                              //     clipBehavior: Clip.antiAliasWithSaveLayer,
+                              //
+                              //     child: Column(
+                              //       children: [
+                              //
+                              //         SimpleInput(label: 'Test time (minute)'),
+                              //
+                              //         ListTile(
+                              //           title: Text(checknox_3_1,
+                              //             style: TextStyle(color: Colors.black, fontSize: 14),),
+                              //           leading: Checkbox(
+                              //             activeColor: shrineBlue600,
+                              //             value: check_1,
+                              //             onChanged: (value){
+                              //               setState(() {
+                              //                 check_1 = value!;
+                              //               });
+                              //             },
+                              //           ),
+                              //         ),
+                              //
+                              //         ListTile(
+                              //           title: Text(radio1_3_1,
+                              //           style: TextStyle(color: Colors.black, fontSize: 14),),
+                              //           leading: Radio(
+                              //             value: 1,
+                              //             groupValue: gpValue_3_1,
+                              //             activeColor: shrineBlue600,
+                              //             onChanged: (value){
+                              //               setState(() {
+                              //                 gpValue_3_1 = int.parse(value.toString());
+                              //               });
+                              //             },
+                              //           ),
+                              //         ),
+                              //
+                              //         ListTile(
+                              //           title: Text(radio2_3_1,
+                              //             style: TextStyle(color: Colors.black, fontSize: 14),),
+                              //           leading: Radio(
+                              //             value: 1,
+                              //             groupValue: gpValue_3_1,
+                              //             activeColor: shrineBlue600,
+                              //             onChanged: (value){
+                              //               setState(() {
+                              //                 gpValue_3_1 = int.parse(value.toString());
+                              //               });
+                              //             },
+                              //           ),
+                              //         ),
+                              //
+                              //       ],
+                              //     ),
+                              //   ),
+                              // );
                             });
                           },
                         ),
@@ -571,7 +642,7 @@ class _TestPage_1 extends State<TestPage>{
                         onPressed: (){
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => TeacherPanel(USERNAME: UsernameTXT, PASSWORD: PasswordTXT))
+                            MaterialPageRoute(builder: (context) => TestPage_2())
                           );
                         },
                         style: ElevatedButton.styleFrom(
@@ -609,39 +680,8 @@ class _TestPage_1 extends State<TestPage>{
     );
   }
 
-  // actCancel() {
-  //   Navigator.push(
-  //     context,
-  //     MaterialPageRoute(builder: (context) => TeacherPanel(USERNAME: UsernameTXT, PASSWORD: PasswordTXT))
-  //   );
-  // }
-
 }
 
-// Widget myButton({label, color, act}){
-//   return ElevatedButton(
-//     onPressed: act,
-//     style: ElevatedButton.styleFrom(
-//       padding: EdgeInsets.zero,
-//       shape: RoundedRectangleBorder(
-//         borderRadius: BorderRadius.circular(15),
-//       ),
-//     ),
-//     child: Ink(
-//       decoration: BoxDecoration(
-//         color: color,
-//         borderRadius: BorderRadius.circular(15)
-//       ),
-//       child: Container(
-//         width: 180,
-//         height: 35,
-//         alignment: Alignment.center,
-//         child: Text(label, style:
-//           TextStyle(fontSize: 16, color: Colors.white),),
-//       ),
-//     ),
-//   );
-// }
 
 Widget SimpleInput({label, cnt}) {
   return TextFormField(
