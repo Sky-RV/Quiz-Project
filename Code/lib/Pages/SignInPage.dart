@@ -318,7 +318,8 @@ class _SignIn_PageState extends State<SignIn_Page> {
                               PasswordCNT.text != PasswordConfirmCNT.text ? _passValid = true : _passValid = false;
                             });
 
-                            postData(university, fullname, username, password, email);
+                            postUniversityData(university, "address")
+                            postManagerData(fullname, username, password, email);
                           },
                           style: ElevatedButton.styleFrom(
                             padding: EdgeInsets.zero,
@@ -382,7 +383,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
     );
   }
 
-  void postData(String uni, String fullname, String username, String password, String email) async{
+  void postManagerData(String fullname, String username, String password, String email) async{
     try{
       final response = await post(Uri.parse(URL), body:{
         "fullName": fullname,
@@ -390,6 +391,18 @@ class _SignIn_PageState extends State<SignIn_Page> {
         "email": email,
         "username": username,
         "role": "Manager"
+      });
+      print(response.body);
+    }
+    catch(err){
+    }
+  }
+
+  void postUniversityData(String uni, String address) async{
+    try{
+      final response = await post(Uri.parse(URL), body:{
+        "name": uni,
+        "address": address
       });
       print(response.body);
     }
