@@ -42,7 +42,8 @@ class _LogIn_PageState extends State<LogIn_Page> {
 
     TextEditingController UserController = TextEditingController();
     TextEditingController PassController = TextEditingController();
-    TextEditingController StatusController = TextEditingController();
+
+    bool _userValid = false, _passValid = false;
 
     String _selectedValue = 'مدیر';
     bool _isObscure = true;
@@ -239,7 +240,7 @@ class _LogIn_PageState extends State<LogIn_Page> {
                 children: [
 
                   // Inputs
-                  UsernameInput(label: 'نام کاربری', UserController: UserController, valid: _validate),
+                  UsernameInput(label: 'نام کاربری', UserController: UserController, valid: _userValid),
                   //  TextFormField(
                   //    controller: UserController,
                   //    style: TextStyle(color: Colors.black),
@@ -253,7 +254,7 @@ class _LogIn_PageState extends State<LogIn_Page> {
                   //  ),
                   SizedBox(height: 40,),
 
-                  PasswordInput(label: 'رمز', PassController: PassController, valid: _validate),
+                  PasswordInput(label: 'رمز', PassController: PassController, valid: _passValid),
                   //  TextField(
                   //    obscureText: _isObscure,
                   //    decoration: InputDecoration(
@@ -344,6 +345,11 @@ class _LogIn_PageState extends State<LogIn_Page> {
                   String Username = UserController.text;
                   String Password = PassController.text;
 
+                  setState(() {
+                    Username.isEmpty ? _userValid = true : _userValid = false;
+                    Password.isEmpty ? _passValid = true : _passValid = false;
+                  });
+
                   if(Username=='admin' && Password=='admin' && _value==1){
                     Navigator.push(
                         context,
@@ -356,10 +362,6 @@ class _LogIn_PageState extends State<LogIn_Page> {
                         MaterialPageRoute(builder: (context) => TeacherPanel(USERNAME: Username, PASSWORD: Password))
                     );
                   }
-                  else{
-                    // error message
-                  }
-
                 },
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.zero,
@@ -581,6 +583,7 @@ Widget UsernameInput({label, UserController, valid}){
         labelText: label,
         border: OutlineInputBorder(),
         labelStyle: TextStyle(color: Color(0xFF3E5196)),
+        errorText: valid ? label + "can not be empty" : null,
         prefixIcon: Icon(Icons.account_circle)
     ),
   );
@@ -595,6 +598,7 @@ Widget PasswordInput({label, PassController, valid}){
     enableSuggestions: false,
     autocorrect: false,
     decoration: InputDecoration(
+        errorText: valid ? label + "can not be empty" : null,
         labelText: label,
         border: OutlineInputBorder(),
         labelStyle: TextStyle(color: Color(0xFF3E5196)),
