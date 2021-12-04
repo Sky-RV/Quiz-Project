@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:quiz/Classes/University/User.dart';
 import 'package:quiz/Pages/LogInPage.dart';
 import 'package:quiz/Pages/SignInPage.dart';
@@ -28,7 +29,14 @@ class SignIn_Page extends StatefulWidget {
 }
 
 class _SignIn_PageState extends State<SignIn_Page> {
-  int _counterIndex = 0;
+
+  bool _uniValid = false;
+  bool _nameValid = false;
+  bool _lastnameValid = false;
+  bool _usernameValid = false;
+  bool _passValid = false;
+  bool _conPassValid = false;
+  bool _emailValid = false;
 
   TextEditingController UniversityCNT = TextEditingController();
   TextEditingController NameCNT = TextEditingController();
@@ -37,6 +45,20 @@ class _SignIn_PageState extends State<SignIn_Page> {
   TextEditingController PasswordCNT = TextEditingController();
   TextEditingController PasswordConfirmCNT = TextEditingController();
   TextEditingController EmailCNT = TextEditingController();
+
+  final URL = "http://localhost:3000/api/v1/user/create";
+
+  @override
+  void dispose() {
+    UniversityCNT.dispose();
+    NameCNT.dispose();
+    LastnameCNT.dispose();
+    UsernameCNT.dispose();
+    PasswordCNT.dispose();
+    PasswordConfirmCNT.dispose();
+    EmailCNT.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -238,25 +260,25 @@ class _SignIn_PageState extends State<SignIn_Page> {
 
                           // Inputs
                           children: [
-                            UniversityInput(label: "دانشگاه"),
+                            UniversityInput(label: "دانشگاه", validation: _uniValid),
                             SizedBox(height: 15,),
 
-                            SimpleInput(label: "نام"),
+                            SimpleInput(label: "نام", validation: _nameValid),
                             SizedBox(height: 15,),
 
-                            SimpleInput(label: "نام خانوادگی"),
+                            SimpleInput(label: "نام خانوادگی", validation: _lastnameValid),
                             SizedBox(height: 15,),
 
-                            UsernameInput(label: "نام کاربری"),
+                            UsernameInput(label: "نام کاربری", validation: _usernameValid),
                             SizedBox(height: 15,),
 
-                            PasswordInput(label: "رمز"),
+                            PasswordInput(label: "رمز", validation: _passValid),
                             SizedBox(height: 15,),
 
-                            PasswordInput(label: "تایید رمز"),
+                            PasswordInput(label: "تایید رمز", validation: _conPassValid),
                             SizedBox(height: 15,),
 
-                            EmailInput(label: "ایمیل"),
+                            EmailInput(label: "ایمیل", validation: _emailValid),
                             SizedBox(height: 15,)
                           ],
                         ),
@@ -283,19 +305,24 @@ class _SignIn_PageState extends State<SignIn_Page> {
                             String role = "Manager : " + university;
 
                             // Empty Fields Conditions
-                            if(university.isEmpty || name.isEmpty || lastname.isEmpty ||
-                                username.isEmpty || password.isEmpty || passwordConfirm.isEmpty || email.isEmpty){
-                              // error masage
-                            }
-                            else{
+
+                            setState(() {
+                              university.isEmpty ? _uniValid = true : _uniValid = false;
+                              name.isEmpty ? _nameValid = true : _nameValid = false;
+                              lastname.isEmpty ? _lastnameValid = true : _lastnameValid = false;
+                              username.isEmpty ? _usernameValid = true : _usernameValid = false;
+                              password.isEmpty ? _passValid = true : _passValid = false;
+                              passwordConfirm.isEmpty ? _conPassValid = true : _conPassValid = false;
+                              email.isEmpty ? _emailValid = true : _emailValid = false;
+                            });
+
                               if(password != passwordConfirm){
                                 // error masage
                               }
                               else{
                                 // sign in
-
+                                postData(university, fullname, username, password, email);
                               }
-                            }
                           },
                           style: ElevatedButton.styleFrom(
                             padding: EdgeInsets.zero,
@@ -358,9 +385,24 @@ class _SignIn_PageState extends State<SignIn_Page> {
 
     );
   }
+
+  void postData(String uni, String fullname, String username, String password, String email) async{
+    try{
+      final response = await post(Uri.parse(URL), body:{
+        "fullName": fullname,
+        "password": password,
+        "email": email,
+        "username": username,
+        "role": "Manager"
+      });
+      print(response.body);
+    }
+    catch(err){
+    }
+  }
 }
 
-Widget SimpleInput({label}){
+Widget SimpleInput({label, validation}){
   return TextFormField(
     style: TextStyle(color: Colors.black),
     decoration: InputDecoration(
@@ -368,35 +410,38 @@ Widget SimpleInput({label}){
       labelText: label,
       border: OutlineInputBorder(),
       labelStyle: TextStyle(color: Color(0xFF3E5196)),
+      errorText: validation ? label + "can not be empty" : null,
     ),
   );
 }
 
-Widget UsernameInput({label}){
+Widget UsernameInput({label, validation}){
   return TextFormField(
     style: TextStyle(color: Colors.black),
     decoration: InputDecoration(
         labelText: label,
         border: OutlineInputBorder(),
         labelStyle: TextStyle(color: Color(0xFF3E5196)),
-        prefixIcon: Icon(Icons.account_circle)
+        prefixIcon: Icon(Icons.account_circle),
+      errorText: validation ? label + "can not be empty" : null,
     ),
   );
 }
 
-Widget UniversityInput({label}){
+Widget UniversityInput({label, validation}){
   return TextFormField(
     style: TextStyle(color: Colors.black),
     decoration: InputDecoration(
         labelText: label,
         border: OutlineInputBorder(),
         labelStyle: TextStyle(color: Color(0xFF3E5196)),
+        errorText: validation ? label + "can not be empty" : null,
         prefixIcon: Icon(Icons.account_balance_sharp)
     ),
   );
 }
 
-Widget EmailInput({label}){
+Widget EmailInput({label, validation}){
   return TextFormField(
     style: TextStyle(color: Colors.black),
     keyboardType: TextInputType.emailAddress,
@@ -404,12 +449,13 @@ Widget EmailInput({label}){
       labelText: label,
       border: OutlineInputBorder(),
       labelStyle: TextStyle(color: Color(0xFF3E5196)),
+      errorText: validation ? label + "can not be empty" : null,
       prefixIcon: Icon(Icons.email),
     ),
   );
 }
 
-Widget PasswordInput({label}){
+Widget PasswordInput({label, validation}){
   bool status = true;
   return TextFormField(
     style: TextStyle(color: Colors.black),
@@ -417,6 +463,7 @@ Widget PasswordInput({label}){
     enableSuggestions: false,
     autocorrect: false,
     decoration: InputDecoration(
+        errorText: validation ? label + "can not be empty" : null,
         labelText: label,
         border: OutlineInputBorder(),
         labelStyle: TextStyle(color: Color(0xFF3E5196)),
