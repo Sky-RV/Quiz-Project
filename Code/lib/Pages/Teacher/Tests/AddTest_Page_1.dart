@@ -52,8 +52,9 @@ class _TestPage_1 extends State<TestPage>{
   String checknox_3_1 = "Possibility to retake the test if the test is not completed (floating only)";
   String radio1_3_1 = "Do not stop the timer if you leave the test panel";
   String radio2_3_1 = "Stop the timer if it exits the test panel";
-  bool check_1 = false;
+  List<bool> check_1 = [false];
   int gpValue_3_1 = -1;
+
 
   // CARD 4
   String C4_title = 'Workbook Settings', C4_subtitle = 'Holding Test Type';
@@ -64,6 +65,68 @@ class _TestPage_1 extends State<TestPage>{
 
   @override
   Widget build(BuildContext context) {
+
+    // CARD 3 DIALOG 1
+    final AlertDialog dialog3_1 = AlertDialog(
+      title: Text(C3_Op1),
+      content: Column(
+        children: [
+
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 30),
+            child: SimpleInput(label: 'Test time (minute)'),
+          ),
+
+          SizedBox(height: 25,),
+
+          ListTile(
+            title: Text(checknox_3_1,
+              style: TextStyle(color: Colors.black, fontSize: 14),),
+            leading: Checkbox(
+              activeColor: shrineBlue600,
+              value: check_1[0],
+              onChanged: (value){
+                setState(() {
+                  check_1[0] = value!;
+                });
+              },
+            ),
+          ),
+
+          ListTile(
+            title: Text(radio1_3_1,
+              style: TextStyle(color: Colors.black, fontSize: 14),),
+            leading: Radio(
+              value: 1,
+              groupValue: gpValue_3_1,
+              activeColor: shrineBlue600,
+              onChanged: (value){
+                setState(() {
+                  gpValue_3_1 = int.parse(value.toString());
+                });
+              },
+            ),
+          ),
+
+          ListTile(
+            title: Text(radio2_3_1,
+              style: TextStyle(color: Colors.black, fontSize: 14),),
+            leading: Radio(
+              value: 2,
+              groupValue: gpValue_3_1,
+              activeColor: shrineBlue600,
+              onChanged: (value){
+                setState(() {
+                  gpValue_3_1 = int.parse(value.toString());
+                });
+              },
+            ),
+          ),
+
+        ],
+      ),
+    );
+
     return Scaffold(
 
       ////////////////////////////// APP BAR //////////////////////////////
@@ -392,6 +455,12 @@ class _TestPage_1 extends State<TestPage>{
                       ListTile( // radio 1/4
                         title: Text(C3_Op1,
                         style: TextStyle(color: Colors.black, fontSize: 14),),
+                        trailing: IconButton(
+                          icon: Icon(Icons.menu),
+                          onPressed: (){
+                            showDialog(context: context, builder: (context) => dialog3_1);
+                          },
+                        ),
                         leading: Radio(
                           value: 1,
                           groupValue: C3_value,
@@ -399,69 +468,6 @@ class _TestPage_1 extends State<TestPage>{
                           onChanged: (value){
                             setState(() {
                               C3_value = int.parse(value.toString());
-                              // SlimyCard(
-                              //  // topCardWidget: topCardWidget(),
-                              //   bottomCardWidget: Card(
-                              //     shape: RoundedRectangleBorder(
-                              //         borderRadius: BorderRadius.circular(10)
-                              //     ),
-                              //     elevation: 5,
-                              //     semanticContainer: true,
-                              //     clipBehavior: Clip.antiAliasWithSaveLayer,
-                              //
-                              //     child: Column(
-                              //       children: [
-                              //
-                              //         SimpleInput(label: 'Test time (minute)'),
-                              //
-                              //         ListTile(
-                              //           title: Text(checknox_3_1,
-                              //             style: TextStyle(color: Colors.black, fontSize: 14),),
-                              //           leading: Checkbox(
-                              //             activeColor: shrineBlue600,
-                              //             value: check_1,
-                              //             onChanged: (value){
-                              //               setState(() {
-                              //                 check_1 = value!;
-                              //               });
-                              //             },
-                              //           ),
-                              //         ),
-                              //
-                              //         ListTile(
-                              //           title: Text(radio1_3_1,
-                              //           style: TextStyle(color: Colors.black, fontSize: 14),),
-                              //           leading: Radio(
-                              //             value: 1,
-                              //             groupValue: gpValue_3_1,
-                              //             activeColor: shrineBlue600,
-                              //             onChanged: (value){
-                              //               setState(() {
-                              //                 gpValue_3_1 = int.parse(value.toString());
-                              //               });
-                              //             },
-                              //           ),
-                              //         ),
-                              //
-                              //         ListTile(
-                              //           title: Text(radio2_3_1,
-                              //             style: TextStyle(color: Colors.black, fontSize: 14),),
-                              //           leading: Radio(
-                              //             value: 1,
-                              //             groupValue: gpValue_3_1,
-                              //             activeColor: shrineBlue600,
-                              //             onChanged: (value){
-                              //               setState(() {
-                              //                 gpValue_3_1 = int.parse(value.toString());
-                              //               });
-                              //             },
-                              //           ),
-                              //         ),
-                              //
-                              //       ],
-                              //     ),
-                              //   ),
-                              // );
                             });
                           },
                         ),

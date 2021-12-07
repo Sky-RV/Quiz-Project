@@ -2,11 +2,12 @@ import 'dart:convert';
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
-import 'package:quiz/Classes/University/User.dart';
+import 'package:http/http.dart' as http;
+import 'package:quiz/Classes/University/University.dart';
 import 'package:quiz/Pages/LogInPage.dart';
 import 'package:quiz/Pages/SignInPage.dart';
 import 'package:quiz/Pages/LogInPage.dart';
+import 'package:quiz/Pages/University/UniversityPanel.dart';
 import 'package:quiz/main.dart';
 import 'package:quiz/Pages/AboutUs.dart';
 import 'package:quiz/Pages/ContactWithUs.dart';
@@ -46,19 +47,10 @@ class _SignIn_PageState extends State<SignIn_Page> {
   TextEditingController PasswordConfirmCNT = TextEditingController();
   TextEditingController EmailCNT = TextEditingController();
 
-  final URL = "http://localhost:3000/api/v1/user/create";
+  final URL_UNI = "http://localhost:3000/api/v1/university/create";
+  final URL_USER = "http://localhost:3000/api/v1/user/create";
 
-  @override
-  void dispose() {
-    UniversityCNT.dispose();
-    NameCNT.dispose();
-    LastnameCNT.dispose();
-    UsernameCNT.dispose();
-    PasswordCNT.dispose();
-    PasswordConfirmCNT.dispose();
-    EmailCNT.dispose();
-    super.dispose();
-  }
+  Future<University>? _futureUniversity;
 
   @override
   Widget build(BuildContext context) {
@@ -260,25 +252,25 @@ class _SignIn_PageState extends State<SignIn_Page> {
 
                           // Inputs
                           children: [
-                            UniversityInput(label: "دانشگاه", validation: _uniValid),
+                            UniversityInput(label: "دانشگاه", validation: _uniValid, cnt: UniversityCNT),
                             SizedBox(height: 15,),
 
-                            SimpleInput(label: "نام", validation: _nameValid),
+                            SimpleInput(label: "نام", validation: _nameValid, cnt: NameCNT),
                             SizedBox(height: 15,),
 
-                            SimpleInput(label: "نام خانوادگی", validation: _lastnameValid),
+                            SimpleInput(label: "نام خانوادگی", validation: _lastnameValid, cnt: LastnameCNT),
                             SizedBox(height: 15,),
 
-                            UsernameInput(label: "نام کاربری", validation: _usernameValid),
+                            UsernameInput(label: "نام کاربری", validation: _usernameValid, cnt: UsernameCNT),
                             SizedBox(height: 15,),
 
-                            PasswordInput(label: "رمز", validation: _passValid),
+                            PasswordInput(label: "رمز", validation: _passValid, cnt: PasswordCNT),
                             SizedBox(height: 15,),
 
-                            PasswordInput(label: "تایید رمز", validation: _conPassValid),
+                            PasswordInput(label: "تایید رمز", validation: _conPassValid, cnt: PasswordConfirmCNT),
                             SizedBox(height: 15,),
 
-                            EmailInput(label: "ایمیل", validation: _emailValid),
+                            EmailInput(label: "ایمیل", validation: _emailValid, cnt: EmailCNT),
                             SizedBox(height: 15,)
                           ],
                         ),
@@ -302,24 +294,29 @@ class _SignIn_PageState extends State<SignIn_Page> {
                             String email = EmailCNT.text;
 
                             String fullname = name + " " + lastname;
-                            String role = "Manager : " + university;
+                            String role = "Administor : " + university;
 
                             // Empty Fields Conditions
 
+                            University uni = University(Name: username, Address: "Address");
                             setState(() {
-                              UniversityCNT.text.isEmpty ? _uniValid = true : _uniValid = false;
-                              NameCNT.text.isEmpty ? _nameValid = true : _nameValid = false;
-                              LastnameCNT.text.isEmpty ? _lastnameValid = true : _lastnameValid = false;
-                              UsernameCNT.text.isEmpty ? _usernameValid = true : _usernameValid = false;
-                              PasswordCNT.text.isEmpty ? _passValid = true : _passValid = false;
-                              PasswordConfirmCNT.text.isEmpty ? _conPassValid = true : _conPassValid = false;
-                              EmailCNT.text.isEmpty ? _emailValid = true : _emailValid = false;
-
-                              PasswordCNT.text != PasswordConfirmCNT.text ? _passValid = true : _passValid = false;
+                              _futureUniversity = uni.createUniversity(uni);
                             });
+                           // postUniversityData(university, "address");
+                            // postManagerData(fullname, username, password, email, role);
 
-                            postUniversityData(university, "address");
-                            postManagerData(fullname, username, password, email);
+                            // if(username.isEmpty || password.isEmpty){
+                            //   Navigator.push(context,
+                            //       MaterialPageRoute(builder: (context) => SignIn())
+                            //   );
+                            // }
+                            // else{
+                            //   postUniversityData(university, "address");
+                            //   // postManagerData(fullname, username, password, email, role);
+                            //   Navigator.push(context,
+                            //       MaterialPageRoute(builder: (context) => UniversityPanel(UsernameTXT: UniversityCNT.text, PasswordTXT: PasswordCNT.text))
+                            //   );
+                            // }
                           },
                           style: ElevatedButton.styleFrom(
                             padding: EdgeInsets.zero,
@@ -383,36 +380,38 @@ class _SignIn_PageState extends State<SignIn_Page> {
     );
   }
 
-  void postManagerData(String fullname, String username, String password, String email) async{
-    try{
-      final response = await post(Uri.parse(URL), body:{
-        "fullName": fullname,
-        "password": password,
-        "email": email,
-        "username": username,
-        "role": "Manager"
-      });
-      print(response.body);
-    }
-    catch(err){
-    }
-  }
-
-  void postUniversityData(String uni, String address) async{
-    try{
-      final response = await post(Uri.parse(URL), body:{
-        "name": uni,
-        "address": address
-      });
-      print(response.body);
-    }
-    catch(err){
-    }
-  }
+  // void postManagerData(String fullname, String username, String password, String email, String role) async{
+  //   try{
+  //     final response = await post(Uri.parse(URL_USER), body:{
+  //       //"uniId": "",
+  //       "fullName": fullname,
+  //       "password": password,
+  //       "email": email,
+  //       "username": username,
+  //       "role": role
+  //     });
+  //     print(response.body);
+  //   }
+  //   catch(err){
+  //   }
+  // }
+  //
+  // void postUniversityData(String uni, String address) async{
+  //   try{
+  //     final response = await post(Uri.parse(URL_UNI), body:{
+  //       "name": uni,
+  //       "address": address
+  //     });
+  //     print(response.body);
+  //   }
+  //   catch(err){
+  //   }
+  // }
 }
 
-Widget SimpleInput({label, validation}){
+Widget SimpleInput({label, validation, cnt}){
   return TextFormField(
+    controller: cnt,
     style: TextStyle(color: Colors.black),
     decoration: InputDecoration(
       focusColor: shrinePink400,
@@ -424,8 +423,9 @@ Widget SimpleInput({label, validation}){
   );
 }
 
-Widget UsernameInput({label, validation}){
+Widget UsernameInput({label, validation, cnt}){
   return TextFormField(
+    controller: cnt,
     style: TextStyle(color: Colors.black),
     decoration: InputDecoration(
         labelText: label,
@@ -437,8 +437,9 @@ Widget UsernameInput({label, validation}){
   );
 }
 
-Widget UniversityInput({label, validation}){
+Widget UniversityInput({label, validation, cnt}){
   return TextFormField(
+    controller: cnt,
     style: TextStyle(color: Colors.black),
     decoration: InputDecoration(
         labelText: label,
@@ -450,8 +451,9 @@ Widget UniversityInput({label, validation}){
   );
 }
 
-Widget EmailInput({label, validation}){
+Widget EmailInput({label, validation, cnt}){
   return TextFormField(
+    controller: cnt,
     style: TextStyle(color: Colors.black),
     keyboardType: TextInputType.emailAddress,
     decoration: InputDecoration(
@@ -464,9 +466,10 @@ Widget EmailInput({label, validation}){
   );
 }
 
-Widget PasswordInput({label, validation}){
+Widget PasswordInput({label, validation, cnt}){
   bool status = true;
   return TextFormField(
+    controller: cnt,
     style: TextStyle(color: Colors.black),
     obscureText: status,
     enableSuggestions: false,

@@ -8,7 +8,7 @@ import 'package:quiz/Pages/Teacher/TeacherPanel.dart';
 import 'package:quiz/Pages/University/UniversityPanel.dart';
 import 'package:quiz/Pages/AboutUs.dart';
 import 'package:quiz/Pages/ContactWithUs.dart';
-
+import 'package:http/http.dart';
 import '../main.dart';
 
 class LogIn extends StatelessWidget {
@@ -30,7 +30,8 @@ class LogIn_Page extends StatefulWidget {
 }
 
 class _LogIn_PageState extends State<LogIn_Page> {
-  int _counterIndex = 0;
+
+  final URL = "http://localhost:3000/api/v1/auth/login";
 
   int _value = -1;
 
@@ -345,11 +346,6 @@ class _LogIn_PageState extends State<LogIn_Page> {
                   String Username = UserController.text;
                   String Password = PassController.text;
 
-                  setState(() {
-                    Username.isEmpty ? _userValid = true : _userValid = false;
-                    Password.isEmpty ? _passValid = true : _passValid = false;
-                  });
-
                   if(Username=='admin' && Password=='admin' && _value==1){
                     Navigator.push(
                         context,
@@ -568,10 +564,19 @@ class _LogIn_PageState extends State<LogIn_Page> {
       //       ],
       //     ),
       //   ),
-      // ),
-
-
+      // )
     );
+  }
+
+  void getUser(String username, String password) async{
+    try{
+      final response = await post(Uri.parse(URL), body:{
+
+      });
+      print(response.body);
+    }
+    catch(err){
+    }
   }
 }
 
