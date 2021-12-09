@@ -128,7 +128,12 @@ class TeacherPanel extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
           backgroundColor: shrinePink300,
           foregroundColor: Colors.black,
-          onPressed: (){},
+          onPressed: (){
+            Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => TestPage_1())
+            );
+          },
           child: Icon(Icons.add),
         ),
 

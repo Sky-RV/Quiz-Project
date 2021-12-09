@@ -110,7 +110,7 @@ class _LogIn_PageState extends State<LogIn_Page> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Container(
-                        width: 180,
+                        width: 200,
                         height: 35,
                         alignment: Alignment.center,
                         child: Text('ثبت نام', style: TextStyle(fontSize: 13, color: Colors.white),),
@@ -146,7 +146,7 @@ class _LogIn_PageState extends State<LogIn_Page> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Container(
-                        width: 180,
+                        width: 200,
                         height: 35,
                         alignment: Alignment.center,
                         child: Text('ورود', style: TextStyle(fontSize: 13, color: Colors.white),),

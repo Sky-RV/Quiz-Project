@@ -17,17 +17,17 @@ class TestPage_1 extends StatelessWidget{
       debugShowCheckedModeBanner: false,
       theme: _buildShrineTheme(),
       title: 'Quiz Project',
-      home: TestPage(),
+      home: TestPage1(),
     );
   }
 }
 
-class TestPage extends StatefulWidget {
+class TestPage1 extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _TestPage_1();
 }
 
-class _TestPage_1 extends State<TestPage>{
+class _TestPage_1 extends State<TestPage1>{
 
   // CARD 1
   String C1_title = 'Base Information', C1_subtitle = 'Question Type';
@@ -605,12 +605,6 @@ class _TestPage_1 extends State<TestPage>{
                 // Buttons
                 SizedBox(height: 35,),
                 Card(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)
-                  ),
-                  semanticContainer: true,
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -666,7 +660,7 @@ class _TestPage_1 extends State<TestPage>{
                             width: 180,
                             height: 35,
                             alignment: Alignment.center,
-                            child: Text('Save', style:
+                            child: Text('Next', style:
                             TextStyle(fontSize: 16, color: Colors.white),),
                           ),
                         ),

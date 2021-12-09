@@ -11,6 +11,7 @@ import 'package:quiz/Pages/University/UniversityPanel.dart';
 import 'package:quiz/main.dart';
 import 'package:quiz/Pages/AboutUs.dart';
 import 'package:quiz/Pages/ContactWithUs.dart';
+import 'package:get/get.dart';
 
 class SignIn extends StatelessWidget {
   @override
@@ -111,7 +112,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Container(
-                        width: 180,
+                        width: 200,
                         height: 35,
                         alignment: Alignment.center,
                         child: Text('ثبت نام', style: TextStyle(fontSize: 13, color: Colors.white),),
@@ -147,7 +148,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Container(
-                        width: 180,
+                        width: 200,
                         height: 35,
                         alignment: Alignment.center,
                         child: Text('ورود', style: TextStyle(fontSize: 13, color: Colors.white),),
