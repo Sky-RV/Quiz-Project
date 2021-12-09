@@ -50,7 +50,7 @@ class Admin{
       }),
     );
 
-    if (response.statusCode == 201) {
+    if (response.statusCode == "success") {
       // If the server did return a 201 CREATED response,
       // then parse the JSON.
       return Admin.fromJson(jsonDecode(response.body));

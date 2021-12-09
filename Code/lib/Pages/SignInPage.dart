@@ -299,7 +299,8 @@ class _SignIn_PageState extends State<SignIn_Page> {
 
                             // Empty Fields Conditions
 
-                            University uni = University(Name: username, Address: "Address");
+                            University uni = University(Name: username, Address: fullname);
+
                             setState(() {
                               _futureUniversity = uni.createUniversity(uni);
                             });
