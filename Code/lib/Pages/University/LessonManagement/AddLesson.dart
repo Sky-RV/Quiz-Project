@@ -144,10 +144,10 @@ class _AddLesson_State extends State<AddLesson_Page>{
                       padding: EdgeInsets.symmetric(horizontal: 40),
                       child: ElevatedButton(
                         onPressed: (){
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => UniversityPanel(UsernameTXT: 'admin', PasswordTXT: 'admin'))
-                          );
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(builder: (context) => UniversityPanel(UsernameTXT: UsernameTXT, PasswordTXT: PasswordTXT, UniversityIDTXT: UniversityIDTXT))
+                          // );
                         },
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.zero,

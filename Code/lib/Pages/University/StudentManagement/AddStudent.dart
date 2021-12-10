@@ -20,6 +20,13 @@ class AddStudent_Page extends StatefulWidget {
 
 class _AddStudent_State extends State<AddStudent_Page>{
 
+  TextEditingController SNameCNT = TextEditingController();
+  TextEditingController SLastnameCNT = TextEditingController();
+  TextEditingController SUsernameCNT = TextEditingController();
+  TextEditingController SPasswordCNT = TextEditingController();
+  TextEditingController SPassConfirmCNT = TextEditingController();
+  TextEditingController SEmailCNT = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
 

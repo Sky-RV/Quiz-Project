@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:quiz/Pages/Teacher/ChangePasswordPage.dart';
+import 'package:quiz/Pages/University/UniversityProfilePage.dart';
 import 'package:quiz/pages/University/ChangePasswordPage.dart';
 import 'package:quiz/pages/University/UniversityProfilePage.dart';
 import 'package:quiz/main.dart';
@@ -11,31 +13,11 @@ import 'package:quiz/Pages/University/LessonManagement/StudentList.dart';
 
 class UniversityPanel extends StatelessWidget {
 
-  String UsernameTXT, PasswordTXT;
+  String UsernameTXT, PasswordTXT, UniversityIDTXT;
   UniversityPanel({Key? key,
     required this.UsernameTXT,
-    required this.PasswordTXT}) : super(key: key);
-
-  // @override
-  // Widget build(BuildContext context) {
-  //   return MaterialApp(
-  //     debugShowCheckedModeBanner: false,
-  //     theme: _buildShrineTheme(),
-  //     title: 'Quiz Project',
-  //     home: UniversityPanelPage(),
-  //   );
-  //}
-// }
-//
-// class _UniversityPanelState extends State<UniversityPanelPage> {
-
-  //int _counter = 0;
-
-  // void _incrementCounter() {
-  //   setState(() {
-  //     _counter++;
-  //   });
-  // }
+    required this.PasswordTXT,
+    required this.UniversityIDTXT}) : super(key: key);
 
   Map<int, bool> countToValue = <int, bool>{};
 
@@ -100,7 +82,7 @@ class UniversityPanel extends StatelessWidget {
 
               UserAccountsDrawerHeader(
                 accountName: Text(UsernameTXT, style: TextStyle(fontSize: 20),),
-                accountEmail: Text(PasswordTXT, style: TextStyle(fontSize: 14),),
+                accountEmail: Text("Admin Email", style: TextStyle(fontSize: 14),),
                 currentAccountPicture: CircleAvatar(
                   backgroundColor: Colors.white,
                   child: Text(UsernameTXT[0], style: TextStyle(fontSize: 30),),
@@ -122,7 +104,7 @@ class UniversityPanel extends StatelessWidget {
                   onPressed: (){
                     Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => UniversityPanel(UsernameTXT: UsernameTXT, PasswordTXT: PasswordTXT,))
+                        MaterialPageRoute(builder: (context) => UniversityPanel(UsernameTXT: UsernameTXT, UniversityIDTXT: UniversityIDTXT, PasswordTXT: PasswordTXT,))
                     );
                   },
                   child: Text("داشبورد", style: TextStyle(color: Colors.black),),
@@ -136,7 +118,7 @@ class UniversityPanel extends StatelessWidget {
                   onPressed: (){
                     Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => UniversityProfilePage(UsernameTXT: UsernameTXT, PasswordTXT: PasswordTXT,))
+                        MaterialPageRoute(builder: (context) => UniversityProfilePage(UsernameTXT: UsernameTXT, PasswordTXT: PasswordTXT))
                     );
                   },
                   child: Text("پروفایل", style: TextStyle(color: Colors.black),),
@@ -148,10 +130,10 @@ class UniversityPanel extends StatelessWidget {
               ListTile(
                 title: TextButton(
                   onPressed: (){
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => ChangePasswordPage(UsernameTXT: UsernameTXT, PasswordTXT: PasswordTXT,))
-                    );
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(builder: (context) => ChangePasswordPage(UsernameTXT: UsernameTXT, PasswordTXT: 'PasswordTXT'))
+                    // );
                   },
                   child: Text("تغییر رمز عبور", style: TextStyle(color: Colors.black),),
                 ),
@@ -198,7 +180,7 @@ class UniversityPanel extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => AddTeacher())
+                      MaterialPageRoute(builder: (context) => AddTeacher(UsernameTXT: UsernameTXT, PasswordTXT: PasswordTXT, UniversityIDTXT: UniversityIDTXT))
                   );
                 },
                 child: Icon(Icons.add),

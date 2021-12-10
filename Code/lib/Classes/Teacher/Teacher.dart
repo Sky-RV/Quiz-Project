@@ -34,19 +34,19 @@ class Teacher{
 
   // Sending data to server
 
-  Future<Teacher> createAdmin(Teacher admin) async {
+  Future<Teacher> createAdmin(Teacher teacher) async {
     final response = await http.post(
       Uri.parse('http://localhost:3000/api/v1/user/create'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, String>{
-        'uniId': admin.UniId,
-        'fullName': admin.FullName,
-        'password': admin.Password,
-        'username': admin.Username,
-        'email': admin.Email,
-        'role': admin.Role
+        'uniId': teacher.UniId,
+        'fullName': teacher.FullName,
+        'password': teacher.Password,
+        'username': teacher.Username,
+        'email': teacher.Email,
+        'role': teacher.Role
       }),
     );
 

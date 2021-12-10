@@ -1,24 +1,25 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:quiz/Pages/University/UniversityPanel.dart';
+import 'package:http/http.dart' as http;
+import 'package:quiz/Classes/Teacher/Teacher.dart';
 
 class AddTeacher extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: _buildShrineTheme(),
-      title: 'Quiz Project',
-      home: AddTeacher_Page(),
-    );
-  }
-}
 
-class AddTeacher_Page extends StatefulWidget {
-  @override
-  State<AddTeacher_Page> createState() => _AddTeacher_State();
-}
+  String UsernameTXT, PasswordTXT, UniversityIDTXT;
 
-class _AddTeacher_State extends State<AddTeacher_Page>{
+  AddTeacher({Key? key,
+    required this.UsernameTXT,
+    required this.PasswordTXT,
+    required this.UniversityIDTXT}) : super(key: key);
+
+  TextEditingController TNameCNT = TextEditingController();
+  TextEditingController TLastnameCNT = TextEditingController();
+  TextEditingController TUsernameCNT = TextEditingController();
+  TextEditingController TPasswordCNT = TextEditingController();
+  TextEditingController TPassConfirmCNT = TextEditingController();
+  TextEditingController TEmailCNT = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,13 @@ class _AddTeacher_State extends State<AddTeacher_Page>{
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.white,),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: (){
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => UniversityPanel(UsernameTXT: UsernameTXT, PasswordTXT: PasswordTXT, UniversityIDTXT: "UniversityIDTXT"))
+            );
+          },
         ),
         backgroundColor: shrineBlue900,
         title: Center(
@@ -103,7 +110,77 @@ class _AddTeacher_State extends State<AddTeacher_Page>{
                       // padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
                       padding: EdgeInsets.symmetric(horizontal: 40),
                       child: ElevatedButton(
-                        onPressed: (){},
+                        onPressed: () async{
+
+                          String Name = TNameCNT.text;
+                          String Lastname = TLastnameCNT.text;
+                          String Username = TUsernameCNT.text;
+                          String Password = TPasswordCNT.text;
+                          String PassConf = TPassConfirmCNT.text;
+                          String Email = TEmailCNT.text;
+
+                          if(TNameCNT.text.isEmpty || TLastnameCNT.text.isEmpty ||
+                              TPassConfirmCNT.text.isEmpty || TPasswordCNT.text.isEmpty ||
+                              TEmailCNT.text.isEmpty){
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                // return object of type Dialog
+                                return AlertDialog(
+                                  title: new Text("Error", style: TextStyle(color: Colors.red),),
+                                  content: new Text("Please try again", style: TextStyle(color: Colors.black),),
+                                  actions: <Widget>[
+                                    // usually buttons at the bottom of the dialog
+                                    new FlatButton(
+                                      child: new Text("Close", style: TextStyle(color: shrinePink300),),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          }
+                          else{
+                            Teacher teacher = Teacher(
+                              UniId: UniversityIDTXT,
+                              FullName: Name + " " + Lastname,
+                              Password: Password,
+                              Username: Username,
+                              Email: Email,
+                              Role: "Teacher",
+                            );
+
+                            final teacher_response = await http.post(
+                              Uri.parse('http://localhost:3000/api/v1/user/create'),
+                              headers: <String, String>{
+                                'Content-Type': 'application/json; charset=UTF-8',
+                              },
+                              body: jsonEncode(<String, String>{
+                                'uniId': teacher.UniId,
+                                'fullName': teacher.FullName,
+                                'password': teacher.Password,
+                                'username': teacher.Username,
+                                'email': teacher.Email,
+                                'role': teacher.Role
+                              }),
+                            );
+
+                            String teacherId = getID(teacher_response.body);
+
+                            if(teacher_response.body.isEmpty){
+
+                            }
+                            else{
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => UniversityPanel(UsernameTXT: UsernameTXT, PasswordTXT: PasswordTXT, UniversityIDTXT: UniversityIDTXT))
+                              );
+                            }
+                          }
+
+                        },
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.zero,
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -141,7 +218,14 @@ class _AddTeacher_State extends State<AddTeacher_Page>{
                       // padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
                       padding: EdgeInsets.symmetric(horizontal: 40),
                       child: ElevatedButton(
-                        onPressed: (){},
+                        onPressed: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => UniversityPanel(UsernameTXT: UsernameTXT, PasswordTXT: PasswordTXT, UniversityIDTXT: '',)
+                            )
+                          );
+                        },
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.zero,
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -187,6 +271,7 @@ class _AddTeacher_State extends State<AddTeacher_Page>{
   }
 
 }
+
 
 Widget SimpleInput({label}){
   return TextFormField(
@@ -289,6 +374,26 @@ TextTheme _buildShrineTextTheme(TextTheme base) {
     displayColor: Color(0xFF363671),
     bodyColor: shrineBackgroundWhite,
   );
+}
+
+String getID(String str) {
+  String id1 = "", id2 = "";
+  String id = id1 + id2;
+
+  for(int i=0; i<str.length; i++){
+    if(str[i]=='i' && str[i+1]=='d'){
+      // return str[i+4]; // رقم اول دو رقمی
+      //return str[i+4] + str[i+5];
+      if (str[i+5] != ','){
+        id2 = str[i+5];
+        return str[i+4] + str[i+5];
+      }
+      else{
+        return str[i+4];
+      }
+    }
+  }
+  return id;
 }
 
 const Color shrinePink300 = Color(0xFFEB927B);

@@ -349,7 +349,7 @@ class _LogIn_PageState extends State<LogIn_Page> {
                   if(Username=='admin' && Password=='admin' && _value==1){
                     Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => UniversityPanel(UsernameTXT: Username, PasswordTXT: Password,))
+                        MaterialPageRoute(builder: (context) => UniversityPanel(UsernameTXT: Username, PasswordTXT: Password, UniversityIDTXT: "UniversityIDTXT"))
                     );
                   }
                   else if(Username=='t' && Password=='t' && _value==2){

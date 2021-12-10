@@ -106,10 +106,10 @@ class TeacherProfilePage extends StatelessWidget {
             ListTile(
               title: TextButton(
                 onPressed: (){
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ChangePasswordPage(UsernameTXT: UsernameTXT, PasswordTXT: PasswordTXT))
-                  );
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(builder: (context) => ChangePasswordPage(UsernameTXT: UsernameTXT, PasswordTXT: PasswordTXT))
+                  // );
                 },
                 child: Text("تغییر رمز عبور", style: TextStyle(color: Colors.black),),
               ),
