@@ -33,18 +33,34 @@ class University {
       }),
     );
 
-    return University.fromJson(jsonDecode(response.body));
-
-    //   if (response.statusCode == "success") {
-    //     // If the server did return a 201 CREATED response,
-    //     // then parse the JSON.
-    //     return University.fromJson(jsonDecode(response.body));
-    //   } else {
-    //     // If the server did not return a 201 CREATED response,
-    //     // then throw an exception.
-    //     throw Exception('Failed to create university.' + response.body);
-    //   }
-    // }
+      if (response.statusCode == "success") {
+        // If the server did return a 201 CREATED response,
+        // then parse the JSON.
+        return University.fromJson(jsonDecode(response.body));
+      } else {
+        // If the server did not return a 201 CREATED response,
+        // then throw an exception.
+        throw Exception('Failed to create university.' + response.body + "id : " + getID(response.body));
+      }
   }
 
+  String getID(String str) {
+    String id1 = "", id2 = "";
+    String id = id1 + id2;
+
+    for(int i=0; i<str.length; i++){
+      if(str[i]=='i' && str[i+1]=='d'){
+       // return str[i+4]; // رقم اول دو رقمی
+        //return str[i+4] + str[i+5];
+        if (str[i+5] != ','){
+          id2 = str[i+5];
+          return str[i+4] + str[i+5];
+        }
+        else{
+          return str[i+4];
+        }
+      }
+    }
+    return id;
+  }
 }

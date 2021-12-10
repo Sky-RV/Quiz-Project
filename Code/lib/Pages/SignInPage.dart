@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:quiz/Classes/University/Admin.dart';
 import 'package:quiz/Classes/University/University.dart';
 import 'package:quiz/Pages/LogInPage.dart';
 import 'package:quiz/Pages/SignInPage.dart';
@@ -51,7 +52,8 @@ class _SignIn_PageState extends State<SignIn_Page> {
   final URL_UNI = "http://localhost:3000/api/v1/university/create";
   final URL_USER = "http://localhost:3000/api/v1/user/create";
 
-  Future<University>? _futureUniversity;
+  Future<University>? university_future = null;
+  Future<Admin>? admin_future = null;
 
   @override
   Widget build(BuildContext context) {
@@ -285,7 +287,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
                         // padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
                         padding: EdgeInsets.symmetric(horizontal: 40),
                         child: ElevatedButton(
-                          onPressed: (){
+                          onPressed: () async{
                             String university = UniversityCNT.text;
                             String name = NameCNT.text;
                             String lastname = LastnameCNT.text;
@@ -295,30 +297,86 @@ class _SignIn_PageState extends State<SignIn_Page> {
                             String email = EmailCNT.text;
 
                             String fullname = name + " " + lastname;
-                            String role = "Administor : " + university;
+                            String role = "Administor";
 
                             // Empty Fields Conditions
 
+                            // CREATE UNIVERSITY
+
                             University uni = University(Name: username, Address: fullname);
 
-                            setState(() {
-                              _futureUniversity = uni.createUniversity(uni);
-                            });
-                           // postUniversityData(university, "address");
-                            // postManagerData(fullname, username, password, email, role);
+                            final uni_response = await http.post(
+                              Uri.parse('http://localhost:3000/api/v1/university/create'),
+                              headers: <String, String>{
+                                'Content-Type': 'application/json; charset=UTF-8',
+                              },
+                              body: jsonEncode(<String, String>{
+                                'name': uni.Name,
+                                'address': uni.Address
+                              }),
+                            );
 
-                            // if(username.isEmpty || password.isEmpty){
-                            //   Navigator.push(context,
-                            //       MaterialPageRoute(builder: (context) => SignIn())
-                            //   );
-                            // }
-                            // else{
-                            //   postUniversityData(university, "address");
-                            //   // postManagerData(fullname, username, password, email, role);
-                            //   Navigator.push(context,
-                            //       MaterialPageRoute(builder: (context) => UniversityPanel(UsernameTXT: UniversityCNT.text, PasswordTXT: PasswordCNT.text))
-                            //   );
-                            // }
+                            String UniId = getID(uni_response.body);
+
+                            // CREATE ADMINISTER
+
+                            Admin admin = Admin(
+                              UniId: UniId,
+                              FullName: fullname,
+                              Password: password,
+                              Username: username,
+                              Email: email,
+                              Role: role
+                            );
+
+                            final admin_response = await http.post(
+                              Uri.parse('http://localhost:3000/api/v1/user/create'),
+                              headers: <String, String>{
+                                'Content-Type': 'application/json; charset=UTF-8',
+                              },
+                              body: jsonEncode(<String, String>{
+                                'uniId': admin.UniId,
+                                'fullName': admin.FullName,
+                                'password': admin.Password,
+                                'username': admin.Username,
+                                'email': admin.Email,
+                                'role': admin.Role
+                              }),
+                            );
+
+                            String adminId = getID(admin_response.body);
+
+                            // Errors check
+                            if(admin_response==null || uni_response==null
+                              || UniversityCNT.text.isEmpty || NameCNT.text.isEmpty || LastnameCNT.text.isEmpty
+                              || UniversityCNT.text.isEmpty || PasswordCNT.text.isEmpty || PasswordConfirmCNT.text.isEmpty
+                              || EmailCNT.text.isEmpty){
+                              // error message
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  // return object of type Dialog
+                                  return AlertDialog(
+                                    title: new Text("Error", style: TextStyle(color: Colors.red),),
+                                    content: new Text("Please try again", style: TextStyle(color: Colors.black),),
+                                    actions: <Widget>[
+                                      // usually buttons at the bottom of the dialog
+                                      new FlatButton(
+                                        child: new Text("Close", style: TextStyle(color: shrinePink300),),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            }
+                            else{
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) => UniversityPanel(UsernameTXT: fullname, PasswordTXT: adminId))
+                              );
+                            }
                           },
                           style: ElevatedButton.styleFrom(
                             padding: EdgeInsets.zero,
@@ -409,6 +467,26 @@ class _SignIn_PageState extends State<SignIn_Page> {
   //   catch(err){
   //   }
   // }
+}
+
+String getID(String str) {
+  String id1 = "", id2 = "";
+  String id = id1 + id2;
+
+  for(int i=0; i<str.length; i++){
+    if(str[i]=='i' && str[i+1]=='d'){
+      // return str[i+4]; // رقم اول دو رقمی
+      //return str[i+4] + str[i+5];
+      if (str[i+5] != ','){
+        id2 = str[i+5];
+        return str[i+4] + str[i+5];
+      }
+      else{
+        return str[i+4];
+      }
+    }
+  }
+  return id;
 }
 
 Widget SimpleInput({label, validation, cnt}){
