@@ -13,12 +13,12 @@ class Teacher{
   late String Role;
 
   Teacher({
-    required this.UniId,
-    required this.FullName,
+    UniId,
+    FullName,
     required this.Password,
     required this.Username,
-    required this.Email,
-    required this.Role
+    Email,
+    Role
   });
 
   factory Teacher.fromJson(Map<String, dynamic> json){

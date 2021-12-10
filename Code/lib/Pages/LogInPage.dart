@@ -1,15 +1,21 @@
+import 'dart:convert';
 import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:quiz/Classes/Students/Student.dart';
+import 'package:quiz/Classes/Teacher/Teacher.dart';
+import 'package:quiz/Classes/University/Admin.dart';
+import 'package:quiz/Classes/User/User.dart';
 import 'package:quiz/Pages/ForgetPassword.dart';
 import 'package:quiz/Pages/SignInPage.dart';
 import 'package:quiz/Pages/Teacher/TeacherPanel.dart';
 import 'package:quiz/Pages/University/UniversityPanel.dart';
 import 'package:quiz/Pages/AboutUs.dart';
 import 'package:quiz/Pages/ContactWithUs.dart';
-import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 import '../main.dart';
+import 'package:quiz/Classes/User/User.dart';
 
 class LogIn extends StatelessWidget {
 
@@ -37,14 +43,18 @@ class _LogIn_PageState extends State<LogIn_Page> {
 
   @override
   Widget build(BuildContext context) {
-
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme
+        .of(context)
+        .colorScheme;
+    final textTheme = Theme
+        .of(context)
+        .textTheme;
 
     TextEditingController UserController = TextEditingController();
     TextEditingController PassController = TextEditingController();
 
-    bool _userValid = false, _passValid = false;
+    bool _userValid = false,
+        _passValid = false;
 
     String _selectedValue = 'مدیر';
     bool _isObscure = true;
@@ -89,7 +99,7 @@ class _LogIn_PageState extends State<LogIn_Page> {
                 title: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 40),
                   child: ElevatedButton(
-                    onPressed: (){
+                    onPressed: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => SignIn())
@@ -97,7 +107,8 @@ class _LogIn_PageState extends State<LogIn_Page> {
                     },
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.zero,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
                     ),
                     child: Ink(
                       decoration: BoxDecoration(
@@ -113,7 +124,8 @@ class _LogIn_PageState extends State<LogIn_Page> {
                         width: 200,
                         height: 35,
                         alignment: Alignment.center,
-                        child: Text('ثبت نام', style: TextStyle(fontSize: 13, color: Colors.white),),
+                        child: Text('ثبت نام', style: TextStyle(
+                            fontSize: 13, color: Colors.white),),
                       ),
                     ),
                   ),
@@ -125,7 +137,7 @@ class _LogIn_PageState extends State<LogIn_Page> {
                 title: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 40),
                   child: ElevatedButton(
-                    onPressed: (){
+                    onPressed: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => LogIn())
@@ -133,7 +145,8 @@ class _LogIn_PageState extends State<LogIn_Page> {
                     },
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.zero,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
                     ),
                     child: Ink(
                       decoration: BoxDecoration(
@@ -149,7 +162,8 @@ class _LogIn_PageState extends State<LogIn_Page> {
                         width: 200,
                         height: 35,
                         alignment: Alignment.center,
-                        child: Text('ورود', style: TextStyle(fontSize: 13, color: Colors.white),),
+                        child: Text('ورود', style: TextStyle(
+                            fontSize: 13, color: Colors.white),),
                       ),
                     ),
                   ),
@@ -160,7 +174,7 @@ class _LogIn_PageState extends State<LogIn_Page> {
               SizedBox(height: 20,),
               ListTile(
                 title: TextButton(
-                  onPressed: (){
+                  onPressed: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => MyApp())
@@ -174,13 +188,14 @@ class _LogIn_PageState extends State<LogIn_Page> {
               SizedBox(height: 10,),
               ListTile(
                 title: TextButton(
-                  onPressed: (){
+                  onPressed: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => LogIn())
                     );
                   },
-                  child: Text("ورود کاربران", style: TextStyle(color: Colors.white),),
+                  child: Text(
+                    "ورود کاربران", style: TextStyle(color: Colors.white),),
                 ),
                 leading: Icon(Icons.account_circle, color: Colors.white70,),
               ),
@@ -188,13 +203,14 @@ class _LogIn_PageState extends State<LogIn_Page> {
               SizedBox(height: 10,),
               ListTile(
                 title: TextButton(
-                  onPressed: (){
+                  onPressed: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => AboutUs())
                     );
                   },
-                  child: Text("درباره ما", style: TextStyle(color: Colors.white),),
+                  child: Text(
+                    "درباره ما", style: TextStyle(color: Colors.white),),
                 ),
                 leading: Icon(Icons.announcement, color: Colors.white70,),
               ),
@@ -202,13 +218,14 @@ class _LogIn_PageState extends State<LogIn_Page> {
               SizedBox(height: 10,),
               ListTile(
                 title: TextButton(
-                  onPressed: (){
+                  onPressed: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => ContactWithUs())
                     );
                   },
-                  child: Text("ارتباط با ما", style: TextStyle(color: Colors.white),),
+                  child: Text(
+                    "ارتباط با ما", style: TextStyle(color: Colors.white),),
                 ),
                 leading: Icon(Icons.share, color: Colors.white70,),
               ),
@@ -229,7 +246,9 @@ class _LogIn_PageState extends State<LogIn_Page> {
               children: [
                 SizedBox(height: 20,),
                 SizedBox(height: 20,),
-                Text("ورود", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: shrineBlue600),),
+                Text("ورود", style: TextStyle(fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: shrineBlue600),),
                 SizedBox(height: 150,),
               ],
             ),
@@ -241,7 +260,9 @@ class _LogIn_PageState extends State<LogIn_Page> {
                 children: [
 
                   // Inputs
-                  UsernameInput(label: 'نام کاربری', UserController: UserController, valid: _userValid),
+                  UsernameInput(label: 'نام کاربری',
+                      UserController: UserController,
+                      valid: _userValid),
                   //  TextFormField(
                   //    controller: UserController,
                   //    style: TextStyle(color: Colors.black),
@@ -255,7 +276,9 @@ class _LogIn_PageState extends State<LogIn_Page> {
                   //  ),
                   SizedBox(height: 40,),
 
-                  PasswordInput(label: 'رمز', PassController: PassController, valid: _passValid),
+                  PasswordInput(label: 'رمز',
+                      PassController: PassController,
+                      valid: _passValid),
                   //  TextField(
                   //    obscureText: _isObscure,
                   //    decoration: InputDecoration(
@@ -278,13 +301,15 @@ class _LogIn_PageState extends State<LogIn_Page> {
             SizedBox(height: 5,),
 
             TextButton(
-              onPressed: (){
+              onPressed: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => ForgetPassword())
                 );
               },
-              child: Text('فراموشی رمز ورود؟', style: TextStyle(fontSize: 13, color: Color(0xFFFF0000), fontWeight: FontWeight.bold),),
+              child: Text('فراموشی رمز ورود؟', style: TextStyle(fontSize: 13,
+                  color: Color(0xFFFF0000),
+                  fontWeight: FontWeight.bold),),
             ),
 
             SizedBox(height: 30,),
@@ -296,7 +321,7 @@ class _LogIn_PageState extends State<LogIn_Page> {
                   activeColor: shrineBlue600,
                   value: 1,
                   groupValue: _value,
-                  onChanged: (value){
+                  onChanged: (value) {
                     setState(() {
                       _value = int.parse(value.toString());
                     });
@@ -310,7 +335,7 @@ class _LogIn_PageState extends State<LogIn_Page> {
                   activeColor: shrineBlue600,
                   value: 2,
                   groupValue: _value,
-                  onChanged: (value){
+                  onChanged: (value) {
                     setState(() {
                       _value = int.parse(value.toString());
                     });
@@ -324,7 +349,7 @@ class _LogIn_PageState extends State<LogIn_Page> {
                   activeColor: shrineBlue600,
                   value: 3,
                   groupValue: _value,
-                  onChanged: (value){
+                  onChanged: (value) {
                     setState(() {
                       _value = int.parse(value.toString());
                     });
@@ -341,27 +366,93 @@ class _LogIn_PageState extends State<LogIn_Page> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 40),
               child: ElevatedButton(
-                onPressed: (){
-
+                onPressed: () async {
                   String Username = UserController.text;
                   String Password = PassController.text;
 
-                  if(Username=='admin' && Password=='admin' && _value==1){
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(builder: (context) => UniversityPanel(FullName: FullName, ID: ID, UniversityID: UniversityID))
-                    // );
+                  if(UserController.text.isEmpty || PassController.text.isEmpty){
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        // return object of type Dialog
+                        return AlertDialog(
+                          title: new Text("Error", style: TextStyle(color: Colors.red),),
+                          content: new Text("Please try again", style: TextStyle(color: Colors.black),),
+                          actions: <Widget>[
+                            // usually buttons at the bottom of the dialog
+                            new FlatButton(
+                              child: new Text("Close", style: TextStyle(color: shrinePink300),),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
                   }
-                  else if(Username=='t' && Password=='t' && _value==2){
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(builder: (context) => TeacherPanel(USERNAME: Username, PASSWORD: Password))
-                    // );
+                  else{
+                    // Log in
+                    Map data = {
+                      'username': Username,
+                      'password': Password
+                    };
+                    String url = "http://localhost:3000/api/v1/auth/login";
+                    var jsonData;
+                    var response = await http.post(Uri.parse(url), body: data);
+                    if(response.statusCode == 200){
+                      jsonData = jsonDecode(response.body);
+                      print(getRole(response.body));
+                    }
+                    else{
+                      print(response.body);
+                    }
+                    String role = getRole(response.body);
+                    String ID = getId(response.body);
+                   // String FullName = getName(response.body);
+                    String UniversityID = getUniId(response.body);
+
+                    print(response.body + "\n" + role);
+
+                    if(role == "administor" || role == "Administor"){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => UniversityPanel(FullName: Username, ID: ID, UniversityID: UniversityID))
+                      );
+                    }
+                    else if(role == "professor" || role == "Professor"){
+
+                    }
+                    else if(role == "student" || role == "Student"){
+
+                    }
+                    else{
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          // return object of type Dialog
+                          return AlertDialog(
+                            title: new Text("Error", style: TextStyle(color: Colors.red),),
+                            content: new Text("Please try again", style: TextStyle(color: Colors.black),),
+                            actions: <Widget>[
+                              // usually buttons at the bottom of the dialog
+                              new FlatButton(
+                                child: new Text("Close", style: TextStyle(color: shrinePink300),),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    }
                   }
                 },
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.zero,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
                 ),
                 child: Ink(
                   decoration: BoxDecoration(
@@ -377,7 +468,8 @@ class _LogIn_PageState extends State<LogIn_Page> {
                     width: 180,
                     height: 35,
                     alignment: Alignment.center,
-                    child: Text('ورود', style: TextStyle(fontSize: 13, color: Colors.white),),
+                    child: Text('ورود',
+                      style: TextStyle(fontSize: 13, color: Colors.white),),
                   ),
                 ),
               ),
@@ -568,16 +660,84 @@ class _LogIn_PageState extends State<LogIn_Page> {
     );
   }
 
-  void getUser(String username, String password) async{
-    try{
-      final response = await post(Uri.parse(URL), body:{
-
-      });
+  logIn(String username, String password) async {
+    Map data = {
+      'username': username,
+      'password': password
+    };
+    String url = "http://localhost:3000/api/v1/auth/login";
+    var jsonData = null;
+    var response = await http.post(Uri.parse(url), body: data);
+    if(response.statusCode == 200){
+      jsonData = jsonDecode(response.body);
+      getRole(response.body);
+    }
+    else{
       print(response.body);
     }
-    catch(err){
+  }
+}
+
+String getUniId(String body) {
+  String id1="", id2="";
+  String id = id1 + id2;
+
+  for(int i=0; i<body.length; i++){
+    if(body[i]=='u' && body[i+1]=='n' && body[i+2]=='i' && body[i+3]=='I' && body[i+4]=='d'){
+      if (body[i+9] != ','){
+        id2 = body[i+9];
+        return body[i+8] + body[i+9];
+      }
+      else{
+        return body[i+8];
+      }
     }
   }
+
+  return id;
+}
+
+String getId(String str) {
+  String id1 = "", id2 = "";
+  String id = id1 + id2;
+
+  for(int i=0; i<str.length; i++){
+    if(str[i]=='i' && str[i+1]=='d'){
+      // return str[i+4]; // رقم اول دو رقمی
+      //return str[i+4] + str[i+5];
+      if (str[i+5] != ','){
+        id2 = str[i+5];
+        return str[i+4] + str[i+5];
+      }
+      else{
+        return str[i+4];
+      }
+    }
+  }
+  return id;
+}
+
+
+
+// {"status":"success","message":"با موفقیت ایجاد شد",
+// "data":{"id":2,"uniId":"15","fullName":"qwer qwer","password":"$2b$10$7bADppGduRoLb7x0rzATEeGzFrRJSo2G6BXw3HhOc4t9guUbcm5bC",
+// "username":"qwer","email":"qwer@gmail.com","role":"Administor","_id":"61b3d9fa9533da1682f692de"}}
+
+String getRole (String str){
+  String role = '';
+
+  for(int i=0; i<str.length; i++){
+    if(str[i]=='r' && str[i+1]=='o' && str[i+2]=='l' && str[i+3]=='e'){
+      if(str[i+7]=='A') return "Administor";
+      else if(str[i+7]=='S') return "Student";
+      else if(str[i+7]=='P') return "Professor";
+      else if(str[i+7]=='a') return "administor";
+      else if(str[i+7]=='s') return "student";
+      else if(str[i+7]=='p') return "professor";
+    }
+  }
+
+  return role;
 }
 
 Widget UsernameInput({label, UserController, valid}){
@@ -659,4 +819,3 @@ const Color shrineBlue600 = Color(0xFF3E5196);
 const Color shrineErrorRed = Color(0xFFC5032B);
 
 const defaultLetterSpacing = 0.03;
-

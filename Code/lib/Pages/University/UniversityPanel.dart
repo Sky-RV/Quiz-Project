@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:quiz/Pages/University/ChangePasswordPage.dart';
 import 'package:quiz/Pages/University/UniversityProfilePage.dart';
-import 'package:quiz/pages/University/ChangePasswordPage.dart';
-import 'package:quiz/pages/University/UniversityProfilePage.dart';
 import 'package:quiz/main.dart';
 import 'package:quiz/Pages/University/LessonManagement/AddLesson.dart';
 import 'package:quiz/Pages/University/StudentManagement/AddStudent.dart';
-import 'package:quiz/Pages/University/TeacherManagement/AddTeacher.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:quiz/Pages/University/LessonManagement/StudentList.dart';

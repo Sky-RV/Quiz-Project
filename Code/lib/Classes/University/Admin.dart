@@ -13,12 +13,12 @@ class Admin{
   late String Role;
 
   Admin({
-   required this.UniId,
-   required this.FullName,
+    UniId,
+   FullName,
    required this.Password,
    required this.Username,
-   required this.Email,
-   required this.Role
+   Email,
+   Role
 });
 
   factory Admin.fromJson(Map<String, dynamic> json){

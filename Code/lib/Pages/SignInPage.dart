@@ -301,10 +301,47 @@ class _SignIn_PageState extends State<SignIn_Page> {
 
                             // Empty Fields Conditions
 
+                            // CREATE UNIVERSITY
+
+                            University uni = University(Name: username, Address: fullname);
+
+                            final uni_response = await http.post(
+                              Uri.parse('http://localhost:3000/api/v1/university/create'),
+                              headers: <String, String>{
+                                'Content-Type': 'application/json; charset=UTF-8',
+                              },
+                              body: jsonEncode(<String, String>{
+                                'name': uni.Name,
+                                'address': uni.Address
+                              }),
+                            );
+
+                            String UniId = getID(uni_response.body);
+
+                            // CREATE ADMINISTER
+
+                            final admin_response = await http.post(
+                              Uri.parse('http://localhost:3000/api/v1/user/create'),
+                              headers: <String, String>{
+                                'Content-Type': 'application/json; charset=UTF-8',
+                              },
+                              body: jsonEncode(<String, String>{
+                                'uniId': UniId,
+                                'fullName': fullname,
+                                'password': password,
+                                'username': username,
+                                'email': email,
+                                'role': role
+                              }),
+                            );
+
+                            String adminId = getID(admin_response.body);
+
                             // Errors check
-                            if(UniversityCNT.text.isEmpty || NameCNT.text.isEmpty || LastnameCNT.text.isEmpty
-                              || UniversityCNT.text.isEmpty || PasswordCNT.text.isEmpty || PasswordConfirmCNT.text.isEmpty
-                              || EmailCNT.text.isEmpty){
+                            if(admin_response==null || uni_response==null
+                                || UniversityCNT.text.isEmpty || NameCNT.text.isEmpty || LastnameCNT.text.isEmpty
+                                || UniversityCNT.text.isEmpty || PasswordCNT.text.isEmpty || PasswordConfirmCNT.text.isEmpty
+                                || EmailCNT.text.isEmpty){
                               // error message
                               showDialog(
                                 context: context,
@@ -327,59 +364,10 @@ class _SignIn_PageState extends State<SignIn_Page> {
                               );
                             }
                             else{
-                              // CREATE UNIVERSITY
-
-                              University uni = University(Name: username, Address: fullname);
-
-                              final uni_response = await http.post(
-                                Uri.parse('http://localhost:3000/api/v1/university/create'),
-                                headers: <String, String>{
-                                  'Content-Type': 'application/json; charset=UTF-8',
-                                },
-                                body: jsonEncode(<String, String>{
-                                  'name': uni.Name,
-                                  'address': uni.Address
-                                }),
+                              print(admin_response.body);
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) => UniversityPanel(FullName: fullname, ID: adminId, UniversityID: UniId))
                               );
-
-                              String UniId = getID(uni_response.body);
-
-                              // CREATE ADMINISTER
-
-                              Admin admin = Admin(
-                                  UniId: UniId,
-                                  FullName: fullname,
-                                  Password: password,
-                                  Username: username,
-                                  Email: email,
-                                  Role: role
-                              );
-
-                              final admin_response = await http.post(
-                                Uri.parse('http://localhost:3000/api/v1/user/create'),
-                                headers: <String, String>{
-                                  'Content-Type': 'application/json; charset=UTF-8',
-                                },
-                                body: jsonEncode(<String, String>{
-                                  'uniId': admin.UniId,
-                                  'fullName': admin.FullName,
-                                  'password': admin.Password,
-                                  'username': admin.Username,
-                                  'email': admin.Email,
-                                  'role': admin.Role
-                                }),
-                              );
-
-                              String adminId = getID(admin_response.body);
-
-                              if(admin_response.body.isEmpty || uni_response.body.isEmpty){
-
-                              }
-                              else{
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) => UniversityPanel(FullName: admin.FullName, ID: adminId, UniversityID: UniId))
-                                );
-                              }
                             }
                           },
                           style: ElevatedButton.styleFrom(
@@ -444,33 +432,33 @@ class _SignIn_PageState extends State<SignIn_Page> {
     );
   }
 
-  // void postManagerData(String fullname, String username, String password, String email, String role) async{
-  //   try{
-  //     final response = await post(Uri.parse(URL_USER), body:{
-  //       //"uniId": "",
-  //       "fullName": fullname,
-  //       "password": password,
-  //       "email": email,
-  //       "username": username,
-  //       "role": role
-  //     });
-  //     print(response.body);
-  //   }
-  //   catch(err){
-  //   }
-  // }
-  //
-  // void postUniversityData(String uni, String address) async{
-  //   try{
-  //     final response = await post(Uri.parse(URL_UNI), body:{
-  //       "name": uni,
-  //       "address": address
-  //     });
-  //     print(response.body);
-  //   }
-  //   catch(err){
-  //   }
-  // }
+// void postManagerData(String fullname, String username, String password, String email, String role) async{
+//   try{
+//     final response = await post(Uri.parse(URL_USER), body:{
+//       //"uniId": "",
+//       "fullName": fullname,
+//       "password": password,
+//       "email": email,
+//       "username": username,
+//       "role": role
+//     });
+//     print(response.body);
+//   }
+//   catch(err){
+//   }
+// }
+//
+// void postUniversityData(String uni, String address) async{
+//   try{
+//     final response = await post(Uri.parse(URL_UNI), body:{
+//       "name": uni,
+//       "address": address
+//     });
+//     print(response.body);
+//   }
+//   catch(err){
+//   }
+// }
 }
 
 String getID(String str) {
@@ -512,10 +500,10 @@ Widget UsernameInput({label, validation, cnt}){
     controller: cnt,
     style: TextStyle(color: Colors.black),
     decoration: InputDecoration(
-        labelText: label,
-        border: OutlineInputBorder(),
-        labelStyle: TextStyle(color: Color(0xFF3E5196)),
-        prefixIcon: Icon(Icons.account_circle),
+      labelText: label,
+      border: OutlineInputBorder(),
+      labelStyle: TextStyle(color: Color(0xFF3E5196)),
+      prefixIcon: Icon(Icons.account_circle),
       errorText: validation ? label + "can not be empty" : null,
     ),
   );
@@ -630,4 +618,3 @@ const Color shrineSurfaceWhite = Color(0xFFFFFBFA);
 const Color shrineBackgroundWhite = Colors.white;
 
 const defaultLetterSpacing = 0.03;
-
