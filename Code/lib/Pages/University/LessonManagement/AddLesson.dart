@@ -24,6 +24,10 @@ class _AddLesson_State extends State<AddLesson_Page>{
   @override
   Widget build(BuildContext context) {
 
+    TextEditingController LessonName = TextEditingController();
+    TextEditingController LessonTeacher = TextEditingController();
+    TextEditingController LessonUnit = TextEditingController();
+
     return Scaffold(
 
       ////////////////////////////// APP BAR //////////////////////////////

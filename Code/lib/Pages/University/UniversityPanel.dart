@@ -375,7 +375,7 @@ class UniversityPanel extends StatelessWidget {
                   physics: BouncingScrollPhysics(
                     parent: AlwaysScrollableScrollPhysics(),
                   ),
-                  itemCount: 20,
+                  //itemCount: 20,
                   itemBuilder: (BuildContext context, int index){
                     return AnimationConfiguration.staggeredList(
 
