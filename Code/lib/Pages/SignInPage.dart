@@ -377,7 +377,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
                               }
                               else{
                                 Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) => UniversityPanel(UsernameTXT: fullname, PasswordTXT: adminId, UniversityIDTXT: UniId))
+                                    MaterialPageRoute(builder: (context) => UniversityPanel(FullName: admin.FullName, ID: adminId, UniversityID: UniId))
                                 );
                               }
                             }

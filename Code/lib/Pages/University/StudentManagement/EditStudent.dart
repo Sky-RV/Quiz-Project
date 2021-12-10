@@ -2,23 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:quiz/Pages/University/UniversityPanel.dart';
 
 class EditStudent extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: _buildShrineTheme(),
-      title: 'Quiz Project',
-      home: EditStudent_Page(),
-    );
-  }
-}
 
-class EditStudent_Page extends StatefulWidget {
-  @override
-  State<EditStudent_Page> createState() => _EditStudent_State();
-}
-
-class _EditStudent_State extends State<EditStudent_Page>{
+  String FullName, ID, UniversityID;
+  EditStudent({Key? key,
+    required this.FullName,
+    required this.ID,
+    required this.UniversityID
+  }) : super(key: key);
 
   String Name = "Name", Lastname = "Lastname", Username = "Username", Password = "Password", ConfirmPass = "Password", Email = "Email@gmail.com";
 

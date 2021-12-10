@@ -7,12 +7,12 @@ import 'package:quiz/Classes/Teacher/Teacher.dart';
 
 class AddTeacher extends StatelessWidget {
 
-  String UsernameTXT, PasswordTXT, UniversityIDTXT;
-
-  AddTeacher({Key? key,
-    required this.UsernameTXT,
-    required this.PasswordTXT,
-    required this.UniversityIDTXT}) : super(key: key);
+  String FullName, ID, UniversityID;
+  AddTeacher({
+    Key? key,
+    required this.FullName,
+    required this.ID,
+    required this.UniversityID}) : super(key: key);
 
   TextEditingController TNameCNT = TextEditingController();
   TextEditingController TLastnameCNT = TextEditingController();
@@ -35,7 +35,7 @@ class AddTeacher extends StatelessWidget {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => UniversityPanel(UsernameTXT: UsernameTXT, PasswordTXT: PasswordTXT, UniversityIDTXT: "UniversityIDTXT"))
+                    builder: (context) => UniversityPanel(FullName: FullName, ID: ID, UniversityID: UniversityID))
             );
           },
         ),
@@ -144,7 +144,7 @@ class AddTeacher extends StatelessWidget {
                           }
                           else{
                             Teacher teacher = Teacher(
-                              UniId: UniversityIDTXT,
+                              UniId: UniversityID,
                               FullName: Name + " " + Lastname,
                               Password: Password,
                               Username: Username,
@@ -169,13 +169,33 @@ class AddTeacher extends StatelessWidget {
 
                             String teacherId = getID(teacher_response.body);
 
-                            if(teacher_response.body.isEmpty){
-
+                            if(teacher_response.body.isEmpty ||
+                              TNameCNT.text.isEmpty || TLastnameCNT.text.isEmpty || TUsernameCNT.text.isEmpty ||
+                              TPasswordCNT.text.isEmpty || TPassConfirmCNT.text.isEmpty || TEmailCNT.text.isEmpty){
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  // return object of type Dialog
+                                  return AlertDialog(
+                                    title: new Text("Error", style: TextStyle(color: Colors.red),),
+                                    content: new Text("Please try again", style: TextStyle(color: Colors.black),),
+                                    actions: <Widget>[
+                                      // usually buttons at the bottom of the dialog
+                                      new FlatButton(
+                                        child: new Text("Close", style: TextStyle(color: shrinePink300),),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
                             }
                             else{
                               Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => UniversityPanel(UsernameTXT: UsernameTXT, PasswordTXT: PasswordTXT, UniversityIDTXT: UniversityIDTXT))
+                                  MaterialPageRoute(builder: (context) => UniversityPanel(FullName: FullName, ID: ID, UniversityID: UniversityID))
                               );
                             }
                           }
@@ -222,8 +242,7 @@ class AddTeacher extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => UniversityPanel(UsernameTXT: UsernameTXT, PasswordTXT: PasswordTXT, UniversityIDTXT: '',)
-                            )
+                              builder: (context) => UniversityPanel(FullName: FullName, ID: ID, UniversityID: UniversityID))
                           );
                         },
                         style: ElevatedButton.styleFrom(

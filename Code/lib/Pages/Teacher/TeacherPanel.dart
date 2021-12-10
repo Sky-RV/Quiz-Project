@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:quiz/Pages/Teacher/ChangePasswordPage.dart';
 import 'package:quiz/Pages/Teacher/TeacherProfile.dart';
 import 'package:quiz/Pages/Teacher/Tests/AddTest_Page_1.dart';
 
@@ -10,12 +9,13 @@ import '../../main.dart';
 // }
 
 class TeacherPanel extends StatelessWidget {
-  String USERNAME, PASSWORD;
 
-  TeacherPanel({Key? key, required this.USERNAME, required this.PASSWORD})
-      : super(key: key);
-
-  String UsernameTXT = 'teacher', PasswordTXT = 'teacher';
+  String FullName, ID, UniversityID;
+  TeacherPanel({Key? key,
+    required this.FullName,
+    required this.ID,
+    required this.UniversityID
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -50,11 +50,11 @@ class TeacherPanel extends StatelessWidget {
             children: <Widget>[
 
               UserAccountsDrawerHeader(
-                accountName: Text(UsernameTXT, style: TextStyle(fontSize: 20),),
-                accountEmail: Text(PasswordTXT, style: TextStyle(fontSize: 14),),
+                accountName: Text(FullName, style: TextStyle(fontSize: 20),),
+                accountEmail: Text("Teacher Email", style: TextStyle(fontSize: 14),),
                 currentAccountPicture: CircleAvatar(
                   backgroundColor: Colors.white,
-                  child: Text(UsernameTXT[0], style: TextStyle(fontSize: 30),),
+                  child: Text(FullName[0], style: TextStyle(fontSize: 30),),
                 ),
                 decoration: BoxDecoration(
                     gradient: LinearGradient(colors: [
@@ -69,10 +69,7 @@ class TeacherPanel extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => TeacherPanel(
-                                USERNAME: UsernameTXT,
-                                PASSWORD: PasswordTXT,
-                              )),
+                      MaterialPageRoute(builder: (context) => TeacherPanel(FullName: FullName, ID: ID, UniversityID: UniversityID)),
                     );
                   },
                   child: Text("مدیریت آزمون ها", style: TextStyle(color: Colors.black),),
@@ -84,7 +81,7 @@ class TeacherPanel extends StatelessWidget {
                 title: TextButton(
                   onPressed: (){
                     Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => TeacherProfilePage(UsernameTXT: UsernameTXT, PasswordTXT: PasswordTXT)));
+                    MaterialPageRoute(builder: (context) => TeacherProfilePage(FullName: FullName, ID: ID, UniversityID: UniversityID)));
                   },
                   child: Text("پروفایل", style: TextStyle(color: Colors.black),),
                 ),
@@ -95,10 +92,10 @@ class TeacherPanel extends StatelessWidget {
               ListTile(
                 title: TextButton(
                   onPressed: (){
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ChangePasswordPage(UsernameTXT: UsernameTXT, PasswordTXT: PasswordTXT))
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(builder: (context) => )
+                    // );
                   },
                   child: Text("تغییر رمز عبور", style: TextStyle(color: Colors.black),),
                 ),

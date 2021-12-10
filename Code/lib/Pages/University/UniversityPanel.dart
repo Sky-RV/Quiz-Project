@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quiz/Pages/Teacher/ChangePasswordPage.dart';
+import 'package:quiz/Pages/University/ChangePasswordPage.dart';
 import 'package:quiz/Pages/University/UniversityProfilePage.dart';
 import 'package:quiz/pages/University/ChangePasswordPage.dart';
 import 'package:quiz/pages/University/UniversityProfilePage.dart';
@@ -13,11 +13,12 @@ import 'package:quiz/Pages/University/LessonManagement/StudentList.dart';
 
 class UniversityPanel extends StatelessWidget {
 
-  String UsernameTXT, PasswordTXT, UniversityIDTXT;
-  UniversityPanel({Key? key,
-    required this.UsernameTXT,
-    required this.PasswordTXT,
-    required this.UniversityIDTXT}) : super(key: key);
+  String FullName, ID, UniversityID;
+  UniversityPanel({
+    Key? key,
+    required this.FullName,
+    required this.ID,
+    required this.UniversityID}) : super(key: key);
 
   Map<int, bool> countToValue = <int, bool>{};
 
@@ -81,11 +82,11 @@ class UniversityPanel extends StatelessWidget {
             children: <Widget>[
 
               UserAccountsDrawerHeader(
-                accountName: Text(UsernameTXT, style: TextStyle(fontSize: 20),),
+                accountName: Text(FullName, style: TextStyle(fontSize: 20),),
                 accountEmail: Text("Admin Email", style: TextStyle(fontSize: 14),),
                 currentAccountPicture: CircleAvatar(
                   backgroundColor: Colors.white,
-                  child: Text(UsernameTXT[0], style: TextStyle(fontSize: 30),),
+                  child: Text(FullName[0], style: TextStyle(fontSize: 30),),
                 ),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -104,7 +105,7 @@ class UniversityPanel extends StatelessWidget {
                   onPressed: (){
                     Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => UniversityPanel(UsernameTXT: UsernameTXT, UniversityIDTXT: UniversityIDTXT, PasswordTXT: PasswordTXT,))
+                        MaterialPageRoute(builder: (context) => UniversityPanel(FullName: FullName, ID: ID, UniversityID: UniversityID))
                     );
                   },
                   child: Text("داشبورد", style: TextStyle(color: Colors.black),),
@@ -118,7 +119,7 @@ class UniversityPanel extends StatelessWidget {
                   onPressed: (){
                     Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => UniversityProfilePage(UsernameTXT: UsernameTXT, PasswordTXT: PasswordTXT))
+                        MaterialPageRoute(builder: (context) => UniversityProfilePage(FullName: FullName, ID: ID, UniversityID: UniversityID))
                     );
                   },
                   child: Text("پروفایل", style: TextStyle(color: Colors.black),),
@@ -130,10 +131,10 @@ class UniversityPanel extends StatelessWidget {
               ListTile(
                 title: TextButton(
                   onPressed: (){
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(builder: (context) => ChangePasswordPage(UsernameTXT: UsernameTXT, PasswordTXT: 'PasswordTXT'))
-                    // );
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ChangePasswordPage(FullName: FullName, ID: ID, UniversityID: UniversityID))
+                    );
                   },
                   child: Text("تغییر رمز عبور", style: TextStyle(color: Colors.black),),
                 ),
@@ -178,10 +179,10 @@ class UniversityPanel extends StatelessWidget {
                 backgroundColor: shrinePink300,
                 foregroundColor: Colors.black,
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => AddTeacher(UsernameTXT: UsernameTXT, PasswordTXT: PasswordTXT, UniversityIDTXT: UniversityIDTXT))
-                  );
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(builder: (context) => AddTeacher(UsernameTXT: UsernameTXT, PasswordTXT: PasswordTXT, UniversityIDTXT: UniversityIDTXT))
+                  // );
                 },
                 child: Icon(Icons.add),
               ),
@@ -273,7 +274,7 @@ class UniversityPanel extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => AddStudent())
+                    MaterialPageRoute(builder: (context) => AddStudent(FullName: FullName, ID: ID, UniversityID: UniversityID))
                   );
                 },
                 child: Icon(Icons.add),

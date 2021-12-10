@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:quiz/Pages/Teacher/ChangePasswordPage.dart';
 import 'package:quiz/Pages/Teacher/TeacherProfile.dart';
 import 'package:quiz/Pages/Teacher/Tests/AddTest_Page_2.dart';
 import '../../../main.dart';
@@ -145,86 +144,6 @@ class _TestPage_1 extends State<TestPage1>{
             style: TextStyle(color: Colors.white),
             textAlign: TextAlign.center,
           ),
-        ),
-      ),
-
-      ////////////////////////////// DRAWER //////////////////////////////
-
-      drawer: Drawer(
-        child: ListView(
-          children: <Widget>[
-
-            UserAccountsDrawerHeader(
-              accountName: Text(UsernameTXT, style: TextStyle(fontSize: 20),),
-              accountEmail: Text(PasswordTXT, style: TextStyle(fontSize: 14),),
-              currentAccountPicture: CircleAvatar(
-                backgroundColor: Colors.white,
-                child: Text(UsernameTXT[0], style: TextStyle(fontSize: 30),),
-              ),
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(colors: [
-                    Color(0xFF363671),
-                    Color(0xFF3E5196),
-                    Color(0xFF4E65B8),
-                  ])),
-            ),
-            SizedBox(height: 20,),
-            ListTile(
-              title: TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => TeacherPanel(
-                      USERNAME: UsernameTXT,
-                      PASSWORD: PasswordTXT,
-                    )),
-                  );
-                },
-                child: Text("مدیریت آزمون ها", style: TextStyle(color: Colors.black),),
-              ),
-              leading: Icon(Icons.article),
-            ),
-            SizedBox(height: 10,),
-            ListTile(
-              title: TextButton(
-                onPressed: (){
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => TeacherProfilePage(UsernameTXT: UsernameTXT, PasswordTXT: PasswordTXT)));
-                },
-                child: Text("پروفایل", style: TextStyle(color: Colors.black),),
-              ),
-              leading: Icon(Icons.account_circle),
-            ),
-
-            SizedBox(height: 10,),
-            ListTile(
-              title: TextButton(
-                onPressed: (){
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ChangePasswordPage(UsernameTXT: UsernameTXT, PasswordTXT: PasswordTXT))
-                  );
-                },
-                child: Text("تغییر رمز عبور", style: TextStyle(color: Colors.black),),
-              ),
-              leading: Icon(Icons.vpn_key),
-            ),
-
-            SizedBox(height: 10,),
-            ListTile(
-              title: TextButton(
-                onPressed: (){
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => MyApp())
-                  );
-                },
-                child: Text("خروج", style: TextStyle(color: Colors.black),),
-              ),
-              leading: Icon(Icons.exit_to_app),
-            ),
-
-          ],
         ),
       ),
 
@@ -611,10 +530,10 @@ class _TestPage_1 extends State<TestPage1>{
                      // myButton(label: 'Cancel', color: shrinePink300, act: actCancel()),
                       ElevatedButton(
                         onPressed: (){
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => TeacherPanel(USERNAME: UsernameTXT, PASSWORD: PasswordTXT))
-                          );
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(builder: (context) => TeacherPanel(USERNAME: UsernameTXT, PASSWORD: PasswordTXT))
+                          // );
                         },
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.zero,

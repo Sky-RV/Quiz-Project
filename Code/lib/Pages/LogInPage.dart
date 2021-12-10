@@ -347,16 +347,16 @@ class _LogIn_PageState extends State<LogIn_Page> {
                   String Password = PassController.text;
 
                   if(Username=='admin' && Password=='admin' && _value==1){
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => UniversityPanel(UsernameTXT: Username, PasswordTXT: Password, UniversityIDTXT: "UniversityIDTXT"))
-                    );
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(builder: (context) => UniversityPanel(FullName: FullName, ID: ID, UniversityID: UniversityID))
+                    // );
                   }
                   else if(Username=='t' && Password=='t' && _value==2){
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => TeacherPanel(USERNAME: Username, PASSWORD: Password))
-                    );
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(builder: (context) => TeacherPanel(USERNAME: Username, PASSWORD: Password))
+                    // );
                   }
                 },
                 style: ElevatedButton.styleFrom(
