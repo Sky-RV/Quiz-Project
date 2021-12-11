@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:quiz/Classes/User/User.dart';
 import 'package:quiz/Pages/University/ChangePasswordPage.dart';
@@ -9,6 +11,7 @@ import 'package:quiz/Pages/University/StudentManagement/AddStudent.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:quiz/Pages/University/LessonManagement/StudentList.dart';
+import 'package:http/http.dart' as http;
 
 class UniversityPanel extends StatelessWidget {
 
@@ -19,13 +22,68 @@ class UniversityPanel extends StatelessWidget {
     required this.ID,
     required this.UniversityID}) : super(key: key);
 
+
+
+  // Future<List<User>> getUsers(String STR, String str) async{
+  //   String url = "http://localhost:3000/api/v1/user/list";
+  //   final response = await http.get(Uri.parse(url));
+  //
+  //   var responseData = json.decode(response.body);
+  //
+  //   // create list
+  //   List<User> usersList = [];
+  //   List<User> teachersList = [];
+  //   List<User> studentsList = [];
+  //
+  //   for(var singleUser in responseData){
+  //     User user = User(
+  //       UniId: singleUser['UniId'],
+  //       FullName: singleUser['name'] + " " + singleUser['lastname'],
+  //       Username: singleUser['username'],
+  //       Password: singleUser['password'],
+  //       Email: singleUser['email'],
+  //       Role: singleUser['role']
+  //     );
+  //
+  //     if(user.Role == STR || user.Role == str) {
+  //       usersList.add(user);
+  //     }
+  //
+  //   }
+  //   return usersList;
+  // }
+
+  Future<List<User>> getUsers() async{
+    String url = "http://localhost:3000/api/v1/user/list";
+    final response = await http.get(Uri.parse(url));
+
+    var responseData = json.decode(response.body);
+
+    // create list
+    List<User> usersList = [];
+
+    for(var singleUser in responseData){
+      User user = User(
+          UniId: singleUser['uniId'],
+          FullName: singleUser['fullName'],
+          Username: singleUser['username'],
+          Password: singleUser['password'],
+          Email: singleUser['email'],
+          Role: singleUser['role']
+      );
+
+      usersList.add(user);
+    }
+    return usersList;
+  }
+
   Map<int, bool> countToValue = <int, bool>{};
 
   @override
   Widget build(BuildContext context) {
 
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
+    late Future<List<User>> teacherList;
+    late Future<List<User>> studentList;
 
     final double _w = MediaQuery.of(context).size.width;
 
@@ -186,13 +244,38 @@ class UniversityPanel extends StatelessWidget {
                 child: Icon(Icons.add),
               ),
 
+              // body: Container(
+              //   padding: EdgeInsets.all(16),
+              //   child: FutureBuilder(
+              //     future: getUsers(),
+              //     builder: (BuildContext ctx, AsyncSnapshot snapshot) {
+              //       if (snapshot.data == null) {
+              //         return Container(
+              //           child: Center(
+              //             child: Icon(Icons.class__sharp),
+              //           ),
+              //         );
+              //       } else {
+              //         return ListView.builder(
+              //           itemCount: snapshot.data.length,
+              //           itemBuilder: (ctx, index) => ListTile(
+              //             title: Text(snapshot.data[index].FullName),
+              //             subtitle: Text(snapshot.data[index].Email),
+              //             contentPadding: EdgeInsets.only(bottom: 20.0),
+              //           ),
+              //         );
+              //       }
+              //     },
+              //   ),
+              // ),
+
               body: AnimationLimiter(
                 child: ListView.builder(
                   padding: EdgeInsets.all(_w / 30),
                   physics: BouncingScrollPhysics(
                     parent: AlwaysScrollableScrollPhysics(),
                   ),
-                  itemCount: 20,
+                  //itemCount: ,
                   itemBuilder: (BuildContext context, int index){
                     return AnimationConfiguration.staggeredList(
 
@@ -216,6 +299,7 @@ class UniversityPanel extends StatelessWidget {
                               //  leading: Icon(Icons.label),
                               //  trailing: ,
                             ),
+
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.all(Radius.circular(15)),
