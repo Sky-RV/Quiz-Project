@@ -421,7 +421,10 @@ class _LogIn_PageState extends State<LogIn_Page> {
                       );
                     }
                     else if(role == "professor" || role == "Professor"){
-
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => TeacherPanel(FullName: Username, ID: ID, UniversityID: UniversityID))
+                      );
                     }
                     else if(role == "student" || role == "Student"){
 
@@ -717,7 +720,11 @@ String getId(String str) {
   return id;
 }
 
+String getName(String str){
+  String name = "";
 
+  return name;
+}
 
 // {"status":"success","message":"با موفقیت ایجاد شد",
 // "data":{"id":2,"uniId":"15","fullName":"qwer qwer","password":"$2b$10$7bADppGduRoLb7x0rzATEeGzFrRJSo2G6BXw3HhOc4t9guUbcm5bC",

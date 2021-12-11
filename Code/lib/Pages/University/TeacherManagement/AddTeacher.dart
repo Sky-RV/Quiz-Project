@@ -81,22 +81,22 @@ class AddTeacher extends StatelessWidget {
                       child: Column(
                         children: [
 
-                          SimpleInput(label: "نام"),
+                          SimpleInput(label: "نام", cnt: TNameCNT),
                           SizedBox(height: 15,),
 
-                          SimpleInput(label: "نام خانوادگی"),
+                          SimpleInput(label: "نام خانوادگی", cnt: TLastnameCNT),
                           SizedBox(height: 15,),
 
-                          UsernameInput(label: "نام کاربری"),
+                          UsernameInput(label: "نام کاربری", cnt: TUsernameCNT),
                           SizedBox(height: 15,),
 
-                          PasswordInput(label: "رمز عبور"),
+                          PasswordInput(label: "رمز عبور", cnt: TPasswordCNT),
                           SizedBox(height: 15,),
 
-                          PasswordInput(label: "تایید رمز عبور"),
+                          PasswordInput(label: "تایید رمز عبور", cnt: TPassConfirmCNT),
                           SizedBox(height: 15,),
 
-                          EmailInput(label: "ایمیل"),
+                          EmailInput(label: "ایمیل", cnt: TEmailCNT),
                           SizedBox(height: 15,),
 
                         ],
@@ -118,39 +118,12 @@ class AddTeacher extends StatelessWidget {
                           String Password = TPasswordCNT.text;
                           String PassConf = TPassConfirmCNT.text;
                           String Email = TEmailCNT.text;
+                          String Role = "Professor";
+                          String fullname = Name + " " + Lastname;
 
-                          if(TNameCNT.text.isEmpty || TLastnameCNT.text.isEmpty ||
-                              TPassConfirmCNT.text.isEmpty || TPasswordCNT.text.isEmpty ||
-                              TEmailCNT.text.isEmpty){
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                // return object of type Dialog
-                                return AlertDialog(
-                                  title: new Text("Error", style: TextStyle(color: Colors.red),),
-                                  content: new Text("Please try again", style: TextStyle(color: Colors.black),),
-                                  actions: <Widget>[
-                                    // usually buttons at the bottom of the dialog
-                                    new FlatButton(
-                                      child: new Text("Close", style: TextStyle(color: shrinePink300),),
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-                          }
-                          else{
-                            Teacher teacher = Teacher(
-                              UniId: UniversityID,
-                              FullName: Name + " " + Lastname,
-                              Password: Password,
-                              Username: Username,
-                              Email: Email,
-                              Role: "Teacher",
-                            );
+                          // Empty conditions
+
+                          // CREATE TEACHER
 
                             final teacher_response = await http.post(
                               Uri.parse('http://localhost:3000/api/v1/user/create'),
@@ -158,12 +131,12 @@ class AddTeacher extends StatelessWidget {
                                 'Content-Type': 'application/json; charset=UTF-8',
                               },
                               body: jsonEncode(<String, String>{
-                                'uniId': teacher.UniId,
-                                'fullName': teacher.FullName,
-                                'password': teacher.Password,
-                                'username': teacher.Username,
-                                'email': teacher.Email,
-                                'role': teacher.Role
+                                'uniId': UniversityID,
+                                'fullName': Name + " " + Lastname,
+                                'password': Password,
+                                'username': Username,
+                                'email': Email,
+                                'role': Role
                               }),
                             );
 
@@ -191,15 +164,17 @@ class AddTeacher extends StatelessWidget {
                                   );
                                 },
                               );
+                              print(teacher_response.body + "\nUniID : " + UniversityID
+                              + "\n name " + fullname + "\n user and pass : " + Username + " " + Password
+                              + "\nemail : " + Email + " " + Role + "\n" + PassConf);
                             }
                             else{
+                              print(teacher_response.body);
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(builder: (context) => UniversityPanel(FullName: FullName, ID: ID, UniversityID: UniversityID))
                               );
                             }
-                          }
-
                         },
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.zero,
@@ -292,8 +267,9 @@ class AddTeacher extends StatelessWidget {
 }
 
 
-Widget SimpleInput({label}){
+Widget SimpleInput({label, cnt}){
   return TextFormField(
+    controller: cnt,
     style: TextStyle(color: Colors.black),
     decoration: InputDecoration(
       focusColor: shrinePink400,
@@ -304,8 +280,9 @@ Widget SimpleInput({label}){
   );
 }
 
-Widget UsernameInput({label}){
+Widget UsernameInput({label, cnt}){
   return TextFormField(
+    controller: cnt,
     style: TextStyle(color: Colors.black),
     decoration: InputDecoration(
         labelText: label,
@@ -328,8 +305,9 @@ Widget UsernameInput({label}){
 //   );
 // }
 
-Widget EmailInput({label}){
+Widget EmailInput({label, cnt}){
   return TextFormField(
+    controller: cnt,
     style: TextStyle(color: Colors.black),
     keyboardType: TextInputType.emailAddress,
     decoration: InputDecoration(
@@ -341,9 +319,10 @@ Widget EmailInput({label}){
   );
 }
 
-Widget PasswordInput({label}){
+Widget PasswordInput({label, cnt}){
   bool status = true;
   return TextFormField(
+    controller: cnt,
     style: TextStyle(color: Colors.black),
     obscureText: status,
     enableSuggestions: false,

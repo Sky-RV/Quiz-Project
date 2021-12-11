@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:quiz/Classes/User/User.dart';
 import 'package:quiz/Pages/University/ChangePasswordPage.dart';
+import 'package:quiz/Pages/University/TeacherManagement/AddTeacher.dart';
 import 'package:quiz/Pages/University/UniversityProfilePage.dart';
 import 'package:quiz/main.dart';
 import 'package:quiz/Pages/University/LessonManagement/AddLesson.dart';
@@ -176,10 +178,10 @@ class UniversityPanel extends StatelessWidget {
                 backgroundColor: shrinePink300,
                 foregroundColor: Colors.black,
                 onPressed: () {
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(builder: (context) => AddTeacher(UsernameTXT: UsernameTXT, PasswordTXT: PasswordTXT, UniversityIDTXT: UniversityIDTXT))
-                  // );
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AddTeacher(FullName: FullName, ID: ID, UniversityID: UniversityID))
+                  );
                 },
                 child: Icon(Icons.add),
               ),

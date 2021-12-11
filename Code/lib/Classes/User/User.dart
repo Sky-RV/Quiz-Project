@@ -82,6 +82,38 @@ class User{
 
   }
 
+  // Get user by id
+  Future<User> getUserbyID(String id) async{
+
+    String url = "http://localhost:3000/api/v1/auth/login";
+
+    final response = await http.post(Uri.parse(url), body: {
+      'id': id
+    });
+
+    if (response.statusCode == "success") {
+      // If the server did return a 201 CREATED response,
+      // then parse the JSON.
+      return User.fromJson(jsonDecode(response.body));
+    } else {
+      // If the server did not return a 201 CREATED response,
+      // then throw an exception.
+      throw Exception('Failed to create admin.');
+    }
+  }
+
+  List<User> postFromJson(String str) =>
+      List<User>.from(json.decode(str).map((x) => User.fromMap(x)));
+
+  factory User.fromMap(Map<String, dynamic> json) => User(
+      UniId: json['uniId'],
+      FullName: json['fullName'],
+      Password: json['password'],
+      Username: json['username'],
+      Email: json['email'],
+      Role: json['role']
+  );
+
   // Getting user details
   // Future<ApiResponse> getUser(String userID) async {
   //
