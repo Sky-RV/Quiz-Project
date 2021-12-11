@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:quiz/Pages/University/UniversityPanel.dart';
+import 'package:http/http.dart' as http;
 
 class AddStudent extends StatelessWidget {
 
@@ -71,22 +74,22 @@ class AddStudent extends StatelessWidget {
                       child: Column(
                         children: [
 
-                          SimpleInput(label: "نام"),
+                          SimpleInput(label: "نام", cnt: SNameCNT),
                           SizedBox(height: 15,),
 
-                          SimpleInput(label: "نام خانوادگی"),
+                          SimpleInput(label: "نام خانوادگی", cnt: SLastnameCNT),
                           SizedBox(height: 15,),
 
-                          UsernameInput(label: "نام کاربری"),
+                          UsernameInput(label: "نام کاربری", cnt: SUsernameCNT),
                           SizedBox(height: 15,),
 
-                          PasswordInput(label: "رمز عبور"),
+                          PasswordInput(label: "رمز عبور", cnt: SPasswordCNT),
                           SizedBox(height: 15,),
 
-                          PasswordInput(label: "تایید رمز عبور"),
+                          PasswordInput(label: "تایید رمز عبور", cnt: SPassConfirmCNT),
                           SizedBox(height: 15,),
 
-                          EmailInput(label: "ایمیل"),
+                          EmailInput(label: "ایمیل", cnt: SEmailCNT),
                           SizedBox(height: 15,),
 
                         ],
@@ -100,7 +103,72 @@ class AddStudent extends StatelessWidget {
                       // padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
                       padding: EdgeInsets.symmetric(horizontal: 40),
                       child: ElevatedButton(
-                        onPressed: (){},
+                        onPressed: () async {
+
+                          String Name = SNameCNT.text;
+                          String Lastname = SLastnameCNT.text;
+                          String Username = SUsernameCNT.text;
+                          String Password = SPasswordCNT.text;
+                          String PassConf = SPassConfirmCNT.text;
+                          String Email = SEmailCNT.text;
+                          String Role = "Student";
+                          String FullName = Name + " " + Lastname;
+
+                          // Empty Conditions
+
+                          // Create Student
+                          final student_response = await http.post(
+                            Uri.parse('http://localhost:3000/api/v1/user/create'),
+                            headers: <String, String>{
+                              'Content-Type': 'application/json; charset=UTF-8',
+                            },
+                            body: jsonEncode(<String, String>{
+                              'uniId': UniversityID,
+                              'fullName': Name + " " + Lastname,
+                              'password': Password,
+                              'username': Username,
+                              'email': Email,
+                              'role': Role
+                            }),
+                          );
+
+                          String studentID = getID(student_response.body);
+
+                          if(student_response.body.isEmpty ||
+                              SNameCNT.text.isEmpty || SLastnameCNT.text.isEmpty || SUsernameCNT.text.isEmpty ||
+                              SPasswordCNT.text.isEmpty || SPassConfirmCNT.text.isEmpty || SEmailCNT.text.isEmpty){
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                // return object of type Dialog
+                                return AlertDialog(
+                                  title: new Text("Error", style: TextStyle(color: Colors.red),),
+                                  content: new Text("Please try again", style: TextStyle(color: Colors.black),),
+                                  actions: <Widget>[
+                                    // usually buttons at the bottom of the dialog
+                                    new FlatButton(
+                                      child: new Text("Close", style: TextStyle(color: shrinePink300),),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                            print(student_response.body + "\nUniID : " + UniversityID
+                                + "\n name " + FullName + "\n user and pass : " + Username + " " + Password
+                                + "\nemail : " + Email + " " + Role + "\n" + PassConf);
+                          }
+                          else{
+                            print(student_response.body);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => UniversityPanel(FullName: FullName, ID: ID, UniversityID: UniversityID))
+                            );
+                          }
+
+                        },
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.zero,
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -138,7 +206,12 @@ class AddStudent extends StatelessWidget {
                       // padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
                       padding: EdgeInsets.symmetric(horizontal: 40),
                       child: ElevatedButton(
-                        onPressed: (){},
+                        onPressed: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => UniversityPanel(FullName: FullName, ID: ID, UniversityID: UniversityID))
+                          );
+                        },
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.zero,
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -185,8 +258,29 @@ class AddStudent extends StatelessWidget {
 
 }
 
-Widget SimpleInput({label}){
+String getID(String str) {
+  String id1 = "", id2 = "";
+  String id = id1 + id2;
+
+  for(int i=0; i<str.length; i++){
+    if(str[i]=='i' && str[i+1]=='d'){
+      // return str[i+4]; // رقم اول دو رقمی
+      //return str[i+4] + str[i+5];
+      if (str[i+5] != ','){
+        id2 = str[i+5];
+        return str[i+4] + str[i+5];
+      }
+      else{
+        return str[i+4];
+      }
+    }
+  }
+  return id;
+}
+
+Widget SimpleInput({label, cnt}){
   return TextFormField(
+    controller: cnt,
     style: TextStyle(color: Colors.black),
     decoration: InputDecoration(
       focusColor: shrinePink400,
@@ -197,8 +291,9 @@ Widget SimpleInput({label}){
   );
 }
 
-Widget UsernameInput({label}){
+Widget UsernameInput({label, cnt}){
   return TextFormField(
+    controller: cnt,
     style: TextStyle(color: Colors.black),
     decoration: InputDecoration(
         labelText: label,
@@ -221,8 +316,9 @@ Widget UsernameInput({label}){
 //   );
 // }
 
-Widget EmailInput({label}){
+Widget EmailInput({label, cnt}){
   return TextFormField(
+    controller: cnt,
     style: TextStyle(color: Colors.black),
     keyboardType: TextInputType.emailAddress,
     decoration: InputDecoration(
@@ -234,9 +330,10 @@ Widget EmailInput({label}){
   );
 }
 
-Widget PasswordInput({label}){
+Widget PasswordInput({label, cnt}){
   bool status = true;
   return TextFormField(
+    controller: cnt,
     style: TextStyle(color: Colors.black),
     obscureText: status,
     enableSuggestions: false,
