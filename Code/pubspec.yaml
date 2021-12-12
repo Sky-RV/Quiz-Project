@@ -36,6 +36,7 @@ dependencies:
   flutter_staggered_animations: ^1.0.0
   http: ^0.13.4
   get: ^4.5.1
+  persian_datetime_picker: ^2.4.0
 
 dev_dependencies:
   flutter_test:

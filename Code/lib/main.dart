@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:quiz/Pages/AboutUs.dart';
 import 'package:quiz/Pages/LogInPage.dart';
 import 'package:quiz/Pages/SignInPage.dart';
+import 'package:quiz/Pages/Teacher/Tests/AddTest_Page_1.dart';
+import 'package:quiz/Pages/Teacher/Tests/AddTest_Page_2.dart';
 
 import 'Pages/ContactWithUs.dart';
 
@@ -193,9 +195,13 @@ class _MyHomePageState extends State<MyHomePage> {
               ListTile(
                 title: TextButton(
                   onPressed: (){
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(builder: (context) => ContactWithUs())
+                    // );
                     Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => ContactWithUs())
+                        MaterialPageRoute(builder: (context) => AddTest_Page_2())
                     );
                   },
                   child: Text("ارتباط با ما", style: TextStyle(color: Colors.white),),

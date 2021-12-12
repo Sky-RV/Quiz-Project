@@ -561,7 +561,7 @@ class _TestPage_1 extends State<TestPage1>{
                         onPressed: (){
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => TestPage_2())
+                            MaterialPageRoute(builder: (context) => AddTest_Page_2())
                           );
                         },
                         style: ElevatedButton.styleFrom(
@@ -588,7 +588,7 @@ class _TestPage_1 extends State<TestPage1>{
                   ),
                 ),
 
-                SizedBox(height: 10,),
+                SizedBox(height: 20,),
 
               ],
             ),

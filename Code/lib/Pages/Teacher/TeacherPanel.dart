@@ -4,10 +4,6 @@ import 'package:quiz/Pages/Teacher/Tests/AddTest_Page_1.dart';
 
 import '../../main.dart';
 
-// void main(){
-//   runApp(TeacherPanel(USERNAME: '',));
-// }
-
 class TeacherPanel extends StatelessWidget {
 
   String FullName, ID, UniversityID;
