@@ -146,10 +146,10 @@ class _AddNewFileState extends State<AddNewFile_Page> {
                         // myButton(label: 'Cancel', color: shrinePink300, act: actCancel()),
                         ElevatedButton(
                           onPressed: (){
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(builder: (context) => TeacherPanel(USERNAME: UsernameTXT, PASSWORD: PasswordTXT))
-                            // );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => AddTest_Page_2())
+                            );
                           },
                           style: ElevatedButton.styleFrom(
                             padding: EdgeInsets.zero,

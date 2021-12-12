@@ -6,6 +6,8 @@ import '../../../main.dart';
 import '../TeacherPanel.dart';
 import 'package:quiz/Pages/Teacher/Tests/Add_NewFile.dart';
 
+import 'ManageQuestions.dart';
+
 class AddTest_Page_2 extends StatelessWidget{
 
   // CARD 1
@@ -26,10 +28,15 @@ class AddTest_Page_2 extends StatelessWidget{
       appBar: AppBar(
         backgroundColor: shrineBlue900,
         actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.search),
-          ),
+          TextButton(
+            onPressed: (){
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ManageQuestions())
+              );
+            },
+            child: Text("Next", style: TextStyle(color: Color(0xFFD4CCCA)),),
+          )
         ],
         title: Center(
           child: Text(
