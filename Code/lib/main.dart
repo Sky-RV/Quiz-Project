@@ -195,14 +195,14 @@ class _MyHomePageState extends State<MyHomePage> {
               ListTile(
                 title: TextButton(
                   onPressed: (){
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(builder: (context) => ContactWithUs())
-                    // );
                     Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => AddTest_Page_2())
+                        MaterialPageRoute(builder: (context) => ContactWithUs())
                     );
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(builder: (context) => AddTest_Page_2())
+                    // );
                   },
                   child: Text("ارتباط با ما", style: TextStyle(color: Colors.white),),
                 ),

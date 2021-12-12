@@ -122,6 +122,8 @@ class _AddNewFileState extends State<AddNewFile_Page> {
                     ),
                   ),
 
+                  SizedBox(height: 20,),
+
                   // description
                   TextFormField(
                     //controller: ,
