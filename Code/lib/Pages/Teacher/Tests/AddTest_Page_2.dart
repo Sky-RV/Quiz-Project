@@ -4,7 +4,7 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:quiz/Pages/Teacher/TeacherProfile.dart';
 import '../../../main.dart';
 import '../TeacherPanel.dart';
-import 'package:quiz/Pages/Teacher/Tests/Add_NewFile_Q.dart';
+import 'package:quiz/Pages/Teacher/Tests/Add_NewFile.dart';
 
 class AddTest_Page_2 extends StatelessWidget{
 
@@ -46,7 +46,7 @@ class AddTest_Page_2 extends StatelessWidget{
         onPressed: (){
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => AddNewFile_Q())
+            MaterialPageRoute(builder: (context) => AddNewFile())
           );
         },
         backgroundColor: shrinePink300,

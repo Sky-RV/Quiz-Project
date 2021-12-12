@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import  'package:persian_datetime_picker/persian_datetime_picker.dart';
 import 'package:quiz/Pages/Teacher/TeacherProfile.dart';
 import 'package:quiz/Pages/Teacher/Tests/AddTest_Page_2.dart';
+import 'package:quiz/Pages/Teacher/Tests/Add_NewFile.dart';
 import '../../../main.dart';
 import '../TeacherPanel.dart';
 
-class AddNewFile_A extends StatelessWidget{
+class AddNewFile extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
@@ -15,17 +15,17 @@ class AddNewFile_A extends StatelessWidget{
       debugShowCheckedModeBanner: false,
       theme: _buildShrineTheme(),
       title: 'Quiz Project',
-      home: LogIn_Page(),
+      home: AddNewFile_Page(),
     );
   }
 }
 
-class LogIn_Page extends StatefulWidget {
+class AddNewFile_Page extends StatefulWidget {
   @override
-  State<LogIn_Page> createState() => _LogIn_PageState();
+  State<AddNewFile_Page> createState() => _AddNewFileState();
 }
 
-class _LogIn_PageState extends State<LogIn_Page> {
+class _AddNewFileState extends State<AddNewFile_Page> {
 
   String? selectedValue = null;
   final _dropdownFormKey = GlobalKey<FormState>();
@@ -71,8 +71,8 @@ class _LogIn_PageState extends State<LogIn_Page> {
             Column(
               children: [
                 SizedBox(height: 10,),
-                Text("Record / Edit Test File Answers", style: TextStyle(fontSize: 26,
-                    fontWeight: FontWeight.bold, color: shrineBlue600),),
+                Text("Record / Edit Test File Question", style: TextStyle(fontSize: 26,
+                fontWeight: FontWeight.bold, color: shrineBlue600),),
                 SizedBox(height: 50,)
               ],
             ),
@@ -85,7 +85,7 @@ class _LogIn_PageState extends State<LogIn_Page> {
 
                   // file title
                   TextFormField(
-                    //controller: ,
+                  //controller: ,
                     style: TextStyle(color: Colors.black),
                     decoration: InputDecoration(
                       labelText: 'File Title',
@@ -110,33 +110,17 @@ class _LogIn_PageState extends State<LogIn_Page> {
 
                   SizedBox(height: 30,),
 
-                  // date picker
+                  // show time (minute)
                   TextFormField(
                     //controller: ,
                     style: TextStyle(color: Colors.black),
                     decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.calendar_today_rounded),
-                      labelText: 'Access Time',
+                      prefixIcon: Icon(Icons.timer),
+                      labelText: 'Show Time (Minute)',
                       border: OutlineInputBorder(),
                       labelStyle: TextStyle(color: Color(0xFF3E5196)),
                     ),
                   ),
-
-                  SizedBox(height: 30,),
-
-                  // time picker
-                  TextFormField(
-                    //controller: ,
-                    style: TextStyle(color: Colors.black),
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.alarm_on),
-                      labelText: 'Access Data',
-                      border: OutlineInputBorder(),
-                      labelStyle: TextStyle(color: Color(0xFF3E5196)),
-                    ),
-                  ),
-
-                  SizedBox(height: 30,),
 
                   // description
                   TextFormField(
@@ -193,7 +177,7 @@ class _LogIn_PageState extends State<LogIn_Page> {
                           onPressed: (){
                             Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => AddTest_Page_2())
+                                MaterialPageRoute(builder: (context) => AddNewFile())
                             );
                           },
                           style: ElevatedButton.styleFrom(
