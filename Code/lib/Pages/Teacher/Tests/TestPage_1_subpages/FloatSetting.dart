@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../AddTest_Page_1.dart';
 
-class AddNewFile extends StatelessWidget{
+class FloatSettingclass extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
