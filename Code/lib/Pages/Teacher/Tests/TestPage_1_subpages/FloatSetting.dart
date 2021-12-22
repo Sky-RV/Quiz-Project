@@ -70,6 +70,8 @@ class _FloatSettingState extends State<FloatSetting> {
                 child: Column(
                   children: [
 
+                    SizedBox(height: 20,),
+
                     // exam time
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 25),
@@ -112,35 +114,6 @@ class _FloatSettingState extends State<FloatSetting> {
                     SizedBox(height: 50,),
 
                     // buttons
-                    ElevatedButton(
-                      onPressed: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => TestPage_1())
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.zero,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                      ),
-                      child: Ink(
-                        decoration: BoxDecoration(
-                            color: shrinePink300,
-                            borderRadius: BorderRadius.circular(15)
-                        ),
-                        child: Container(
-                          width: 180,
-                          height: 35,
-                          alignment: Alignment.center,
-                          child: Text('Cancel', style:
-                          TextStyle(fontSize: 16, color: Colors.white),),
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 90,),
-                    //  myButton(label: 'Save', color: shrinePink400, act: actCancel()),
                     ElevatedButton(
                       onPressed: (){
 
@@ -194,7 +167,38 @@ class _FloatSettingState extends State<FloatSetting> {
                           TextStyle(fontSize: 16, color: Colors.white),),
                         ),
                       ),
-                    )
+                    ),
+                    SizedBox(height: 25,),
+                    ElevatedButton(
+                      onPressed: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => TestPage_1())
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.zero,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                      ),
+                      child: Ink(
+                        decoration: BoxDecoration(
+                            color: shrinePink300,
+                            borderRadius: BorderRadius.circular(15)
+                        ),
+                        child: Container(
+                          width: 180,
+                          height: 35,
+                          alignment: Alignment.center,
+                          child: Text('Cancel', style:
+                          TextStyle(fontSize: 16, color: Colors.white),),
+                        ),
+                      ),
+                    ),
+
+
+                    SizedBox(height: 20,)
 
                   ],
                 ),

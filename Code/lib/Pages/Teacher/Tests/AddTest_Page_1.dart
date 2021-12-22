@@ -31,6 +31,18 @@ class TestPage1 extends StatefulWidget {
 
 class _TestPage_1 extends State<TestPage1>{
 
+  TextEditingController testTimeCNT = TextEditingController();
+  int _value = -1;
+
+  TextEditingController testTimeCNTA = TextEditingController();
+  TextEditingController allowedEnterCNT = TextEditingController();
+  List<bool> _valueA = [false, false];
+  int _valA = -1;
+
+  TextEditingController testTimeCNTE = TextEditingController();
+  TextEditingController allowedEnterCNTE = TextEditingController();
+  List<bool> _valueE = [false, false];
+
   TextEditingController TestTitleCNT = TextEditingController();
   TextEditingController CourseNameCNT = TextEditingController();
   TextEditingController StartTimeCNT = TextEditingController();
@@ -67,64 +79,488 @@ class _TestPage_1 extends State<TestPage1>{
   Widget build(BuildContext context) {
 
     // CARD 3 DIALOG 1
-    final AlertDialog dialog3_1 = AlertDialog(
+    final AlertDialog dialog3_2 = AlertDialog(
       title: Text(C3_Op1),
-      content: Column(
-        children: [
+      content: Card(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15)
+        ),
+        elevation: 5,
+        semanticContainer: true,
+        clipBehavior: Clip.antiAliasWithSaveLayer,
 
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30),
-            child: SimpleInput(label: 'Test time (minute)'),
-          ),
+        child: Column(
+          children: [
 
-          SizedBox(height: 25,),
+            SizedBox(height: 20,),
 
-          ListTile(
-            title: Text(checknox_3_1,
-              style: TextStyle(color: Colors.black, fontSize: 14),),
-            leading: Checkbox(
-              activeColor: shrineBlue600,
-              value: check_1[0],
-              onChanged: (value){
-                setState(() {
-                  check_1[0] = value!;
-                });
-              },
+            // exam time
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 25),
+              child: SimpleInput(label: "Test time (minute)", cnt: testTimeCNT),
             ),
-          ),
 
-          ListTile(
-            title: Text(radio1_3_1,
-              style: TextStyle(color: Colors.black, fontSize: 14),),
-            leading: Radio(
-              value: 1,
-              groupValue: gpValue_3_1,
-              activeColor: shrineBlue600,
-              onChanged: (value){
-                setState(() {
-                  gpValue_3_1 = int.parse(value.toString());
-                });
-              },
+            SizedBox(height: 15,),
+
+            // options
+            ListTile(
+              title: Text("Do NOT stop the timer in case of exit the exam panel.",
+                style: TextStyle(color: Colors.black, fontSize: 14),),
+              leading: Radio(
+                value: 1,
+                groupValue: _value,
+                activeColor: shrineBlue600,
+                onChanged: (value){
+                  setState(() {
+                    _value = int.parse(value.toString());
+                  });
+                },
+              ),
             ),
-          ),
 
-          ListTile(
-            title: Text(radio2_3_1,
-              style: TextStyle(color: Colors.black, fontSize: 14),),
-            leading: Radio(
-              value: 2,
-              groupValue: gpValue_3_1,
-              activeColor: shrineBlue600,
-              onChanged: (value){
-                setState(() {
-                  gpValue_3_1 = int.parse(value.toString());
-                });
-              },
+            ListTile(
+              title: Text("STOP the timer in case of exit the exam panel.",
+                style: TextStyle(color: Colors.black, fontSize: 14),),
+              leading: Radio(
+                value: 2,
+                groupValue: _value,
+                activeColor: shrineBlue600,
+                onChanged: (value){
+                  setState(() {
+                    _value = int.parse(value.toString());
+                  });
+                },
+              ),
             ),
-          ),
 
-        ],
-      ),
+            SizedBox(height: 50,),
+
+            // buttons
+            ElevatedButton(
+              onPressed: (){
+
+              },
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.zero,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+              ),
+              child: Ink(
+                decoration: BoxDecoration(
+                    color: shrinePink400,
+                    borderRadius: BorderRadius.circular(15)
+                ),
+                child: Container(
+                  width: 180,
+                  height: 35,
+                  alignment: Alignment.center,
+                  child: Text('Save', style:
+                  TextStyle(fontSize: 16, color: Colors.white),),
+                ),
+              ),
+            ),
+            SizedBox(height: 25,),
+            ElevatedButton(
+              onPressed: (){
+                String time = testTimeCNT.text;
+                if(!time.isEmpty && _value != -1){
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => TestPage_1())
+                  );
+                }
+                else{
+                  // error
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      // return object of type Dialog
+                      return AlertDialog(
+                        title: new Text("Error", style: TextStyle(color: Colors.red),),
+                        content: new Text("Please try again", style: TextStyle(color: Colors.black),),
+                        actions: <Widget>[
+                          // usually buttons at the bottom of the dialog
+                          new FlatButton(
+                            child: new Text("Close", style: TextStyle(color: shrinePink300),),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }
+              },
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.zero,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+              ),
+              child: Ink(
+                decoration: BoxDecoration(
+                    color: shrinePink300,
+                    borderRadius: BorderRadius.circular(15)
+                ),
+                child: Container(
+                  width: 180,
+                  height: 35,
+                  alignment: Alignment.center,
+                  child: Text('Cancel', style:
+                  TextStyle(fontSize: 16, color: Colors.white),),
+                ),
+              ),
+            ),
+
+
+            SizedBox(height: 20,)
+
+          ],
+        ),
+      )
+    );
+
+    final AlertDialog dialog3_3 = AlertDialog(
+        title: Text(C3_Op1),
+        content: Card(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15)
+          ),
+          elevation: 5,
+          semanticContainer: true,
+          clipBehavior: Clip.antiAliasWithSaveLayer,
+
+          child: Column(
+            children: [
+
+              SizedBox(height: 20,),
+
+              // exam time
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 25),
+                child: SimpleInput(label: "Test time (minute)", cnt: testTimeCNTA),
+              ),
+
+              SizedBox(height: 10,),
+
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                child: SimpleInput(label: 'Allowed Enter (1-10)', cnt: allowedEnterCNT),
+              ),
+
+              SizedBox(height: 15,),
+
+              // options
+              ListTile(
+                  title: Text("Access to questions randomly",
+                    style: TextStyle(color: Colors.black, fontSize: 14),),
+                  leading: Checkbox(
+                    activeColor: shrineBlue600,
+                    value: _valueA[0],
+                    onChanged: (value){
+                      setState(() {
+                        _valueA[0] = value!;
+                      });
+                    },
+                  )
+              ),
+
+              ListTile(
+                  title: Text("Access to to last questions",
+                    style: TextStyle(color: Colors.black, fontSize: 14),),
+                  leading: Checkbox(
+                    activeColor: shrineBlue600,
+                    value: _valueA[1],
+                    onChanged: (value){
+                      setState(() {
+                        _valueA[1] = value!;
+                      });
+                    },
+                  )
+              ),
+
+              SizedBox(height: 15,),
+
+              ListTile(
+                title: Text("Do NOT stop the timer in case of exit the exam panel.",
+                  style: TextStyle(color: Colors.black, fontSize: 14),),
+                leading: Radio(
+                  value: 1,
+                  groupValue: _valA,
+                  activeColor: shrineBlue600,
+                  onChanged: (value){
+                    setState(() {
+                      _valA = int.parse(value.toString());
+                    });
+                  },
+                ),
+              ),
+
+              ListTile(
+                title: Text("STOP the timer in case of exit the exam panel.",
+                  style: TextStyle(color: Colors.black, fontSize: 14),),
+                leading: Radio(
+                  value: 2,
+                  groupValue: _valA,
+                  activeColor: shrineBlue600,
+                  onChanged: (value){
+                    setState(() {
+                      _valA = int.parse(value.toString());
+                    });
+                  },
+                ),
+              ),
+
+              SizedBox(height: 50,),
+
+              // buttons
+              ElevatedButton(
+                onPressed: (){
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => TestPage_1())
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.zero,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                ),
+                child: Ink(
+                  decoration: BoxDecoration(
+                      color: shrinePink300,
+                      borderRadius: BorderRadius.circular(15)
+                  ),
+                  child: Container(
+                    width: 180,
+                    height: 35,
+                    alignment: Alignment.center,
+                    child: Text('Cancel', style:
+                    TextStyle(fontSize: 16, color: Colors.white),),
+                  ),
+                ),
+              ),
+              SizedBox(height: 25,),
+              //  myButton(label: 'Save', color: shrinePink400, act: actCancel()),
+              ElevatedButton(
+                onPressed: (){
+
+                  String time = testTimeCNTA.text;
+                  String enter = allowedEnterCNT.text;
+
+                  if(!time.isEmpty && _valA != -1 && !enter.isEmpty && _valueA == false){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => TestPage_1())
+                    );
+                  }
+                  else{
+                    // error
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        // return object of type Dialog
+                        return AlertDialog(
+                          title: new Text("Error", style: TextStyle(color: Colors.red),),
+                          content: new Text("Please try again", style: TextStyle(color: Colors.black),),
+                          actions: <Widget>[
+                            // usually buttons at the bottom of the dialog
+                            new FlatButton(
+                              child: new Text("Close", style: TextStyle(color: shrinePink300),),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
+
+                },
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.zero,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                ),
+                child: Ink(
+                  decoration: BoxDecoration(
+                      color: shrinePink400,
+                      borderRadius: BorderRadius.circular(15)
+                  ),
+                  child: Container(
+                    width: 180,
+                    height: 35,
+                    alignment: Alignment.center,
+                    child: Text('Next', style:
+                    TextStyle(fontSize: 16, color: Colors.white),),
+                  ),
+                ),
+              ),
+
+              SizedBox(height: 20,)
+
+            ],
+          ),
+        )
+    );
+
+    final AlertDialog dialog3_4 = AlertDialog(
+        title: Text(C3_Op1),
+        content: Card(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15)
+          ),
+          elevation: 5,
+          semanticContainer: true,
+          clipBehavior: Clip.antiAliasWithSaveLayer,
+
+          child: Column(
+            children: [
+
+              SizedBox(height: 20,),
+
+              // exam time
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 25),
+                child: SimpleInput(label: "Test time (minute)", cnt: testTimeCNTE),
+              ),
+
+              SizedBox(height: 15,),
+
+              // options
+              ListTile(
+                  title: Text("Set time for each question",
+                    style: TextStyle(color: Colors.black, fontSize: 14),),
+                  leading: Checkbox(
+                    activeColor: shrineBlue600,
+                    value: _valueE[0],
+                    onChanged: (value){
+                      setState(() {
+                        _valueE[0] = value!;
+                      });
+                    },
+                  )
+              ),
+
+              ListTile(
+                  title: Text("Access to questions randomly",
+                    style: TextStyle(color: Colors.black, fontSize: 14),),
+                  leading: Checkbox(
+                    activeColor: shrineBlue600,
+                    value: _valueE[1],
+                    onChanged: (value){
+                      setState(() {
+                        _valueE[1] = value!;
+                      });
+                    },
+                  )
+              ),
+
+              SizedBox(height: 5,),
+
+              // allowed enter
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                child: SimpleInput(label: 'Allowed Enter (1-10)', cnt: allowedEnterCNTE),
+              ),
+
+              SizedBox(height: 50,),
+
+              // buttons
+              ElevatedButton(
+                onPressed: (){
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => TestPage_1())
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.zero,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                ),
+                child: Ink(
+                  decoration: BoxDecoration(
+                      color: shrinePink300,
+                      borderRadius: BorderRadius.circular(15)
+                  ),
+                  child: Container(
+                    width: 180,
+                    height: 35,
+                    alignment: Alignment.center,
+                    child: Text('Cancel', style:
+                    TextStyle(fontSize: 16, color: Colors.white),),
+                  ),
+                ),
+              ),
+              SizedBox(height: 25,),
+              //  myButton(label: 'Save', color: shrinePink400, act: actCancel()),
+              ElevatedButton(
+                onPressed: (){
+
+                  String time = testTimeCNTE.text;
+                  if(!time.isEmpty && _valueE != -1){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => TestPage_1())
+                    );
+                  }
+                  else{
+                    // error
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        // return object of type Dialog
+                        return AlertDialog(
+                          title: new Text("Error", style: TextStyle(color: Colors.red),),
+                          content: new Text("Please try again", style: TextStyle(color: Colors.black),),
+                          actions: <Widget>[
+                            // usually buttons at the bottom of the dialog
+                            new FlatButton(
+                              child: new Text("Close", style: TextStyle(color: shrinePink300),),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
+
+                },
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.zero,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                ),
+                child: Ink(
+                  decoration: BoxDecoration(
+                      color: shrinePink400,
+                      borderRadius: BorderRadius.circular(15)
+                  ),
+                  child: Container(
+                    width: 180,
+                    height: 35,
+                    alignment: Alignment.center,
+                    child: Text('Next', style:
+                    TextStyle(fontSize: 16, color: Colors.white),),
+                  ),
+                ),
+              ),
+
+              SizedBox(height: 20,)
+
+            ],
+          ),
+        )
     );
 
     return Scaffold(
@@ -336,17 +772,15 @@ class _TestPage_1 extends State<TestPage1>{
                       ListTile( // radio 1/4
                         title: Text(C3_Op1,
                         style: TextStyle(color: Colors.black, fontSize: 14),),
-                        trailing: IconButton(
-                          icon: Icon(Icons.menu),
-                          onPressed: (){
-                            showDialog(context: context, builder: (context) => dialog3_1);
-                          },
-                        ),
                         leading: Radio(
                           value: 1,
                           groupValue: C3_value,
                           activeColor: shrineBlue600,
                           onChanged: (value){
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => FloatSetting())
+                            );
                             setState(() {
                               C3_value = int.parse(value.toString());
                             });
@@ -356,6 +790,12 @@ class _TestPage_1 extends State<TestPage1>{
                       ListTile( // radio 2/4
                         title: Text(C3_Op2,
                           style: TextStyle(color: Colors.black, fontSize: 14),),
+                        trailing: IconButton(
+                          icon: Icon(Icons.menu),
+                          onPressed: (){
+                            showDialog(context: context, builder: (context) => dialog3_2);
+                          },
+                        ),
                         leading: Radio(
                           value: 2,
                           groupValue: C3_value,
@@ -370,6 +810,12 @@ class _TestPage_1 extends State<TestPage1>{
                       ListTile( // radio 3/4
                         title: Text(C3_Op3,
                           style: TextStyle(color: Colors.black, fontSize: 14),),
+                        trailing: IconButton(
+                          icon: Icon(Icons.menu),
+                          onPressed: (){
+                            showDialog(context: context, builder: (context) => dialog3_3);
+                          },
+                        ),
                         leading: Radio(
                           value: 3,
                           groupValue: C3_value,
@@ -384,6 +830,12 @@ class _TestPage_1 extends State<TestPage1>{
                       ListTile( // radio 4/4
                         title: Text(C3_Op4,
                           style: TextStyle(color: Colors.black, fontSize: 14),),
+                        trailing: IconButton(
+                          icon: Icon(Icons.menu),
+                          onPressed: (){
+                            showDialog(context: context, builder: (context) => dialog3_4);
+                          },
+                        ),
                         leading: Radio(
                           value: 4,
                           groupValue: C3_value,
@@ -446,25 +898,28 @@ class _TestPage_1 extends State<TestPage1>{
                           String startTime = StartTimeCNT.text;
                           String endTime = EndTimeCNT.text;
 
-                          setState(() {
-                            if(C3_value == 2)
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => FloatSetting())
-                              );
-                            if(C3_value == 3)
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => QtoQEachTime())
-                              );
-                            if(C3_value == 4)
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => QtoQAllTime())
-                              );
-                          });
+                          // setState(() {
+                          //   if(C3_value == 2)
+                          //     Navigator.push(
+                          //         context,
+                          //         MaterialPageRoute(builder: (context) => FloatSetting())
+                          //     );
+                          //   if(C3_value == 3)
+                          //     Navigator.push(
+                          //         context,
+                          //         MaterialPageRoute(builder: (context) => QtoQEachTime())
+                          //     );
+                          //   if(C3_value == 4)
+                          //     Navigator.push(
+                          //         context,
+                          //         MaterialPageRoute(builder: (context) => QtoQAllTime())
+                          //     );
+                          // });
 
                           if(!testTitle.isEmpty && !courseName.isEmpty && !startTime.isEmpty && !endTime.isEmpty){
+
+                            // بعدا برای اینک کدوم اپشن کارت 3 انتخاب شده ورودی رو بگیره
+
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) => AddTest_Page_2())

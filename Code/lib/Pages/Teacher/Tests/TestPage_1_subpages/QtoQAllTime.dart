@@ -25,11 +25,11 @@ class _QtoQAllTimeState extends State<QtoQAllTime> {
   @override
   Widget build(BuildContext context) {
 
-    TextEditingController testTimeCNT = TextEditingController();
+    TextEditingController testTimeCNTA = TextEditingController();
     TextEditingController allowedEnterCNT = TextEditingController();
 
-    List<bool> _value = [false, false];
-    int _val = -1;
+    List<bool> _valueA = [false, false];
+    int _valA = -1;
 
     return Scaffold(
 
@@ -75,7 +75,7 @@ class _QtoQAllTimeState extends State<QtoQAllTime> {
                     // exam time
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 25),
-                      child: SimpleInput(label: "Test time (minute)", cnt: testTimeCNT),
+                      child: SimpleInput(label: "Test time (minute)", cnt: testTimeCNTA),
                     ),
 
                     SizedBox(height: 10,),
@@ -93,10 +93,10 @@ class _QtoQAllTimeState extends State<QtoQAllTime> {
                           style: TextStyle(color: Colors.black, fontSize: 14),),
                         leading: Checkbox(
                           activeColor: shrineBlue600,
-                          value: _value[0],
+                          value: _valueA[0],
                           onChanged: (value){
                             setState(() {
-                              _value[0] = value!;
+                              _valueA[0] = value!;
                             });
                           },
                         )
@@ -107,10 +107,10 @@ class _QtoQAllTimeState extends State<QtoQAllTime> {
                           style: TextStyle(color: Colors.black, fontSize: 14),),
                         leading: Checkbox(
                           activeColor: shrineBlue600,
-                          value: _value[1],
+                          value: _valueA[1],
                           onChanged: (value){
                             setState(() {
-                              _value[1] = value!;
+                              _valueA[1] = value!;
                             });
                           },
                         )
@@ -123,11 +123,11 @@ class _QtoQAllTimeState extends State<QtoQAllTime> {
                         style: TextStyle(color: Colors.black, fontSize: 14),),
                       leading: Radio(
                         value: 1,
-                        groupValue: _val,
+                        groupValue: _valA,
                         activeColor: shrineBlue600,
                         onChanged: (value){
                           setState(() {
-                            _val = int.parse(value.toString());
+                            _valA = int.parse(value.toString());
                           });
                         },
                       ),
@@ -138,11 +138,11 @@ class _QtoQAllTimeState extends State<QtoQAllTime> {
                         style: TextStyle(color: Colors.black, fontSize: 14),),
                       leading: Radio(
                         value: 2,
-                        groupValue: _val,
+                        groupValue: _valA,
                         activeColor: shrineBlue600,
                         onChanged: (value){
                           setState(() {
-                            _val = int.parse(value.toString());
+                            _valA = int.parse(value.toString());
                           });
                         },
                       ),
@@ -183,8 +183,10 @@ class _QtoQAllTimeState extends State<QtoQAllTime> {
                     ElevatedButton(
                       onPressed: (){
 
-                        String time = testTimeCNT.text;
-                        if(!time.isEmpty && _value != -1){
+                        String time = testTimeCNTA.text;
+                        String enter = allowedEnterCNT.text;
+
+                        if(!time.isEmpty && _valA != -1 && !enter.isEmpty && _valueA == false){
                           Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) => TestPage_1())

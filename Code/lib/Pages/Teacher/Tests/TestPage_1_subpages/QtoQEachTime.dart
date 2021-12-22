@@ -25,10 +25,10 @@ class _QtoQEachTimeState extends State<QtoQEachTime> {
   @override
   Widget build(BuildContext context) {
 
-    TextEditingController testTimeCNT = TextEditingController();
-    TextEditingController allowedEnterCNT = TextEditingController();
+    TextEditingController testTimeCNTE = TextEditingController();
+    TextEditingController allowedEnterCNTE = TextEditingController();
 
-    List<bool> _value = [false, false];
+    List<bool> _valueE = [false, false];
 
     return Scaffold(
 
@@ -71,10 +71,12 @@ class _QtoQEachTimeState extends State<QtoQEachTime> {
                 child: Column(
                   children: [
 
+                    SizedBox(height: 20,),
+
                     // exam time
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 25),
-                      child: SimpleInput(label: "Test time (minute)", cnt: testTimeCNT),
+                      child: SimpleInput(label: "Test time (minute)", cnt: testTimeCNTE),
                     ),
 
                     SizedBox(height: 15,),
@@ -85,10 +87,10 @@ class _QtoQEachTimeState extends State<QtoQEachTime> {
                         style: TextStyle(color: Colors.black, fontSize: 14),),
                       leading: Checkbox(
                         activeColor: shrineBlue600,
-                        value: _value[0],
+                        value: _valueE[0],
                         onChanged: (value){
                           setState(() {
-                            _value[0] = value!;
+                            _valueE[0] = value!;
                           });
                         },
                       )
@@ -99,10 +101,10 @@ class _QtoQEachTimeState extends State<QtoQEachTime> {
                           style: TextStyle(color: Colors.black, fontSize: 14),),
                         leading: Checkbox(
                           activeColor: shrineBlue600,
-                          value: _value[1],
+                          value: _valueE[1],
                           onChanged: (value){
                             setState(() {
-                              _value[1] = value!;
+                              _valueE[1] = value!;
                             });
                           },
                         )
@@ -113,7 +115,7 @@ class _QtoQEachTimeState extends State<QtoQEachTime> {
                     // allowed enter
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 15),
-                      child: SimpleInput(label: 'Allowed Enter (1-10)', cnt: allowedEnterCNT),
+                      child: SimpleInput(label: 'Allowed Enter (1-10)', cnt: allowedEnterCNTE),
                     ),
 
                     SizedBox(height: 50,),
@@ -146,13 +148,13 @@ class _QtoQEachTimeState extends State<QtoQEachTime> {
                         ),
                       ),
                     ),
-                    SizedBox(width: 90,),
+                    SizedBox(height: 25,),
                     //  myButton(label: 'Save', color: shrinePink400, act: actCancel()),
                     ElevatedButton(
                       onPressed: (){
 
-                        String time = testTimeCNT.text;
-                        if(!time.isEmpty && _value != -1){
+                        String time = testTimeCNTE.text;
+                        if(!time.isEmpty && _valueE != -1){
                           Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) => TestPage_1())
@@ -201,7 +203,9 @@ class _QtoQEachTimeState extends State<QtoQEachTime> {
                           TextStyle(fontSize: 16, color: Colors.white),),
                         ),
                       ),
-                    )
+                    ),
+
+                    SizedBox(height: 20,)
 
                   ],
                 ),
