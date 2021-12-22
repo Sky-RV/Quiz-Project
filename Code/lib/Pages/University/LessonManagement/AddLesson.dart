@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:quiz/Pages/University/UniversityPanel.dart';
 import 'package:quiz/Pages/University/LessonManagement/StudentList.dart';
+import 'package:http/http.dart' as http;
 
 class AddLesson extends StatelessWidget {
   @override
@@ -20,6 +23,33 @@ class AddLesson_Page extends StatefulWidget {
 }
 
 class _AddLesson_State extends State<AddLesson_Page>{
+
+  String? mySelection = null;
+  final String url = "http://localhost:3000/api/v1/user/list";
+  List data = [];
+  Map admin = {
+    'uniId': 1,
+    'id': 1
+  };
+
+  Future<String> getData() async{
+    var res = await http.get(Uri.parse(url));
+    var resBody = json.decode(res.body);
+
+    setState(() {
+      data = resBody;
+    });
+
+    print(resBody);
+
+    return "Success";
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    this.getData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,15 +110,24 @@ class _AddLesson_State extends State<AddLesson_Page>{
                         children: [
 
                           SimpleInput(label: "نام درس"),
-                          SizedBox(height: 15,),
+                          SizedBox(height: 10,),
 
-
-                          UsernameInput(label: "نام استاد"),
-                          SizedBox(height: 15,),
-
-                          NumberInput(label: "واحد درس"),
-                          SizedBox(height: 15,),
-
+                          // teacher's list input
+                          DropdownButtonFormField(
+                              value: mySelection,
+                              style: TextStyle(color: Colors.black),
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  mySelection = newValue!;
+                                });
+                              },
+                            items: data.map((item) {
+                              return new DropdownMenuItem(
+                                child: new Text(item['fullName']),
+                                value: item['id'].toString(),
+                              );
+                            }).toList(),
+                          ),
                         ],
                       ),
                     ),
@@ -195,23 +234,12 @@ class _AddLesson_State extends State<AddLesson_Page>{
 
 }
 
-Widget SimpleInput({label}){
+Widget SimpleInput({label, cnt}) {
   return TextFormField(
+    controller: cnt,
     style: TextStyle(color: Colors.black),
     decoration: InputDecoration(
       prefixIcon: Icon(Icons.book),
-      focusColor: shrinePink400,
-      labelText: label,
-      border: OutlineInputBorder(),
-      labelStyle: TextStyle(color: Color(0xFF3E5196)),
-    ),
-  );
-
-
-}Widget NumberInput({label}){
-  return TextFormField(
-    style: TextStyle(color: Colors.black),
-    decoration: InputDecoration(
       focusColor: shrinePink400,
       labelText: label,
       border: OutlineInputBorder(),

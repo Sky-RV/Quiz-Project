@@ -1,43 +1,51 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:quiz/Classes/User/User.dart';
 import 'package:quiz/Pages/University/ChangePasswordPage.dart';
 import 'package:quiz/Pages/University/UniversityPanel.dart';
 import 'package:quiz/main.dart';
+import 'package:http/http.dart' as http;
 
-class UniversityProfilePage extends StatelessWidget {
+class UniversityProfilePage extends StatelessWidget{
 
-  String FullName, ID, UniversityID;
+  String FullName, ID, UniversityID, Token;
   UniversityProfilePage({Key? key,
     required this.FullName,
     required this.ID,
-    required this.UniversityID
+    required this.UniversityID,
+    required this.Token
   }) : super(key: key);
 
-  // @override
-  // Widget build(BuildContext context) {
-  //   return MaterialApp(
-  //     debugShowCheckedModeBanner: false,
-  //     theme: _buildShrineTheme(),
-  //     title: 'Quiz Project',
-  //     home: UniversityPanelPage(),
-  //   );
-  //}
-// }
-//
-// class _UniversityPanelState extends State<UniversityPanelPage> {
+  Future<List<User>> getUser() async{
+    String url = "http://localhost:3000/api/v1/user/list";
+    final response = await http.get(Uri.parse(url));
 
- // int _counter = 0;
+    var responseData = json.decode(response.body);
 
-  // void _incrementCounter() {
-  //   setState(() {
-  //     _counter++;
-  //   });
-  // }
+    // create list
+    List<User> usersList = [];
+
+    for(var singleUser in responseData){
+      User user = User(
+          UniId: singleUser['data']['uniId'],
+          FullName: singleUser['data']['fullName'],
+          Username: singleUser['data']['username'],
+          Password: singleUser['data']['password'],
+          Email: singleUser['data']['email'],
+          Role: singleUser['data']['role']
+      );
+
+      if(responseData['data']['uniId'] == UniversityID && responseData['data']['id'] == ID){
+        usersList.add(user);
+      }
+    }
+    return usersList;
+  }
+
 
   @override
   Widget build(BuildContext context) {
-
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
 
@@ -64,7 +72,7 @@ class UniversityProfilePage extends StatelessWidget {
 
             UserAccountsDrawerHeader(
               accountName: Text(FullName, style: TextStyle(fontSize: 20),),
-              accountEmail: Text("Admin Email", style: TextStyle(fontSize: 14),),
+              accountEmail: Text(getUser().toString(), style: TextStyle(fontSize: 14),),
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Colors.white,
                 child: Text(FullName[0], style: TextStyle(fontSize: 30),),
@@ -86,7 +94,7 @@ class UniversityProfilePage extends StatelessWidget {
                 onPressed: (){
                   Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => UniversityPanel(FullName: FullName, ID: ID, UniversityID: UniversityID))
+                      MaterialPageRoute(builder: (context) => UniversityPanel(FullName: FullName, ID: ID, UniversityID: UniversityID, Token: Token,))
                   );
                 },
                 child: Text("داشبورد", style: TextStyle(color: Colors.black),),
@@ -100,7 +108,7 @@ class UniversityProfilePage extends StatelessWidget {
                 onPressed: (){
                   Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => UniversityProfilePage(FullName: FullName, ID: ID, UniversityID: UniversityID))
+                      MaterialPageRoute(builder: (context) => UniversityProfilePage(FullName: FullName, ID: ID, UniversityID: UniversityID, Token: Token,))
                   );
                 },
                 child: Text("پروفایل", style: TextStyle(color: Colors.black),),
@@ -114,7 +122,7 @@ class UniversityProfilePage extends StatelessWidget {
                 onPressed: (){
                   Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ChangePasswordPage(FullName: FullName, ID: ID, UniversityID: UniversityID))
+                      MaterialPageRoute(builder: (context) => ChangePasswordPage(FullName: FullName, ID: ID, UniversityID: UniversityID, Token: Token,))
                   );
                 },
                 child: Text("تغییر رمز عبور", style: TextStyle(color: Colors.black),),
@@ -156,7 +164,7 @@ class UniversityProfilePage extends StatelessWidget {
 
                     // Image From User
                     Center(
-                      child: Image.asset('name'),
+                  //    child: Image.asset('name'),
                     ),
 
                     SizedBox(height: 50,),

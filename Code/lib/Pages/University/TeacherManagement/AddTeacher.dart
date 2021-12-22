@@ -7,12 +7,13 @@ import 'package:quiz/Classes/Teacher/Teacher.dart';
 
 class AddTeacher extends StatelessWidget {
 
-  String FullName, ID, UniversityID;
+  String FullName, ID, UniversityID, Token;
   AddTeacher({
     Key? key,
     required this.FullName,
     required this.ID,
-    required this.UniversityID}) : super(key: key);
+    required this.UniversityID,
+    required this.Token}) : super(key: key);
 
   TextEditingController TNameCNT = TextEditingController();
   TextEditingController TLastnameCNT = TextEditingController();
@@ -35,7 +36,7 @@ class AddTeacher extends StatelessWidget {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => UniversityPanel(FullName: FullName, ID: ID, UniversityID: UniversityID))
+                    builder: (context) => UniversityPanel(FullName: FullName, ID: ID, UniversityID: UniversityID, Token: Token,))
             );
           },
         ),
@@ -172,7 +173,7 @@ class AddTeacher extends StatelessWidget {
                               print(teacher_response.body);
                               Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => UniversityPanel(FullName: FullName, ID: ID, UniversityID: UniversityID))
+                                  MaterialPageRoute(builder: (context) => UniversityPanel(FullName: FullName, ID: ID, UniversityID: UniversityID, Token: Token,))
                               );
                             }
                         },
@@ -217,7 +218,7 @@ class AddTeacher extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => UniversityPanel(FullName: FullName, ID: ID, UniversityID: UniversityID))
+                              builder: (context) => UniversityPanel(FullName: FullName, ID: ID, UniversityID: UniversityID, Token: Token,))
                           );
                         },
                         style: ElevatedButton.styleFrom(

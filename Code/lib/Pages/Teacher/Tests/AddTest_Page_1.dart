@@ -30,7 +30,7 @@ class _TestPage_1 extends State<TestPage1>{
 
   // CARD 1
   String C1_title = 'Base Information', C1_subtitle = 'Question Type';
-  String C1_question1 = 'Pdf', C1_question2 = 'Zip picture Questions';
+  String C1_question1 = 'Pdf', C1_question2 = 'Write by Teacher';
   int C1_value = -1;
 
   // CARD 2

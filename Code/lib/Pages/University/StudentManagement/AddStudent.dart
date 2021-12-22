@@ -6,11 +6,12 @@ import 'package:http/http.dart' as http;
 
 class AddStudent extends StatelessWidget {
 
-  String FullName, ID, UniversityID;
+  String FullName, ID, UniversityID, Token;
   AddStudent({Key? key,
     required this.FullName,
     required this.ID,
-    required this.UniversityID
+    required this.UniversityID,
+    required this.Token
   }) : super(key: key);
 
   TextEditingController SNameCNT = TextEditingController();
@@ -164,7 +165,7 @@ class AddStudent extends StatelessWidget {
                             print(student_response.body);
                             Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => UniversityPanel(FullName: FullName, ID: ID, UniversityID: UniversityID))
+                                MaterialPageRoute(builder: (context) => UniversityPanel(FullName: FullName, ID: ID, UniversityID: UniversityID, Token: Token,))
                             );
                           }
 
@@ -209,7 +210,7 @@ class AddStudent extends StatelessWidget {
                         onPressed: (){
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => UniversityPanel(FullName: FullName, ID: ID, UniversityID: UniversityID))
+                            MaterialPageRoute(builder: (context) => UniversityPanel(FullName: FullName, ID: ID, UniversityID: UniversityID, Token: Token,))
                           );
                         },
                         style: ElevatedButton.styleFrom(

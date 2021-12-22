@@ -405,7 +405,8 @@ class _LogIn_PageState extends State<LogIn_Page> {
                       print(getRole(response.body));
                     }
                     else{
-                      print(response.body);
+                      var stringJson = json.decode(response.body);
+                      print('${stringJson.runtimeType} : $stringJson');
                     }
                     String role = getRole(response.body);
                     String ID = getId(response.body);
@@ -413,11 +414,15 @@ class _LogIn_PageState extends State<LogIn_Page> {
                     String UniversityID = getUniId(response.body);
 
                     print(response.body + "\n" + role);
+                    var stringJson = json.decode(response.body);
+                    //print('${stringJson.runtimeType} : $stringJson');
+                    var token = stringJson['data']['token'];
+                    print(token);
 
                     if(role == "administor" || role == "Administor"){
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => UniversityPanel(FullName: Username, ID: ID, UniversityID: UniversityID))
+                        MaterialPageRoute(builder: (context) => UniversityPanel(FullName: Username, ID: ID, UniversityID: UniversityID, Token: token,))
                       );
                     }
                     else if(role == "professor" || role == "Professor"){

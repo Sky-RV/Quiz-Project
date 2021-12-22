@@ -15,12 +15,13 @@ import 'package:http/http.dart' as http;
 
 class UniversityPanel extends StatelessWidget {
 
-  String FullName, ID, UniversityID;
+  String FullName, ID, UniversityID, Token;
   UniversityPanel({
     Key? key,
     required this.FullName,
     required this.ID,
-    required this.UniversityID}) : super(key: key);
+    required this.UniversityID,
+    required this.Token}) : super(key: key);
 
 
 
@@ -72,10 +73,24 @@ class UniversityPanel extends StatelessWidget {
           Role: singleUser['role']
       );
 
-      usersList.add(user);
+      if(responseData['data']['uniId'] == UniversityID){
+        usersList.add(user);
+      }
     }
     return usersList;
   }
+
+  // Future<List<User>> teacherLists() async{
+  //   var url = "http://localhost:3000/api/v1/user/list";
+  //   final response = await http.get(Uri.parse(url));
+  //
+  //   if (response.statusCode == 200) {
+  //     List jsonResponse = json.decode(response.body);
+  //     return jsonResponse.map((data) => new User.fromJson(data)).toList();
+  //   } else {
+  //     throw Exception('Unexpected error occured!');
+  //   }
+  // }
 
   Map<int, bool> countToValue = <int, bool>{};
 
@@ -162,7 +177,7 @@ class UniversityPanel extends StatelessWidget {
                   onPressed: (){
                     Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => UniversityPanel(FullName: FullName, ID: ID, UniversityID: UniversityID))
+                        MaterialPageRoute(builder: (context) => UniversityPanel(FullName: FullName, ID: ID, UniversityID: UniversityID, Token: Token,))
                     );
                   },
                   child: Text("داشبورد", style: TextStyle(color: Colors.black),),
@@ -176,7 +191,7 @@ class UniversityPanel extends StatelessWidget {
                   onPressed: (){
                     Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => UniversityProfilePage(FullName: FullName, ID: ID, UniversityID: UniversityID))
+                        MaterialPageRoute(builder: (context) => UniversityProfilePage(FullName: FullName, ID: ID, UniversityID: UniversityID, Token: Token,))
                     );
                   },
                   child: Text("پروفایل", style: TextStyle(color: Colors.black),),
@@ -190,7 +205,7 @@ class UniversityPanel extends StatelessWidget {
                   onPressed: (){
                     Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => ChangePasswordPage(FullName: FullName, ID: ID, UniversityID: UniversityID))
+                        MaterialPageRoute(builder: (context) => ChangePasswordPage(FullName: FullName, ID: ID, UniversityID: UniversityID, Token: Token,))
                     );
                   },
                   child: Text("تغییر رمز عبور", style: TextStyle(color: Colors.black),),
@@ -238,7 +253,7 @@ class UniversityPanel extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => AddTeacher(FullName: FullName, ID: ID, UniversityID: UniversityID))
+                      MaterialPageRoute(builder: (context) => AddTeacher(FullName: FullName, ID: ID, UniversityID: UniversityID, Token: Token,))
                   );
                 },
                 child: Icon(Icons.add),
@@ -247,25 +262,7 @@ class UniversityPanel extends StatelessWidget {
               // body: Container(
               //   padding: EdgeInsets.all(16),
               //   child: FutureBuilder(
-              //     future: getUsers(),
-              //     builder: (BuildContext ctx, AsyncSnapshot snapshot) {
-              //       if (snapshot.data == null) {
-              //         return Container(
-              //           child: Center(
-              //             child: Icon(Icons.class__sharp),
-              //           ),
-              //         );
-              //       } else {
-              //         return ListView.builder(
-              //           itemCount: snapshot.data.length,
-              //           itemBuilder: (ctx, index) => ListTile(
-              //             title: Text(snapshot.data[index].FullName),
-              //             subtitle: Text(snapshot.data[index].Email),
-              //             contentPadding: EdgeInsets.only(bottom: 20.0),
-              //           ),
-              //         );
-              //       }
-              //     },
+              //
               //   ),
               // ),
 
@@ -357,7 +354,7 @@ class UniversityPanel extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => AddStudent(FullName: FullName, ID: ID, UniversityID: UniversityID))
+                    MaterialPageRoute(builder: (context) => AddStudent(FullName: FullName, ID: ID, UniversityID: UniversityID, Token: Token,))
                   );
                 },
                 child: Icon(Icons.add),

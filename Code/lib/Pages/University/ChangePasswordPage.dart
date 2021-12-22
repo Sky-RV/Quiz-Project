@@ -5,11 +5,12 @@ import 'package:quiz/main.dart';
 
 class ChangePasswordPage extends StatelessWidget {
 
-  String FullName, ID, UniversityID;
+  String FullName, ID, UniversityID, Token;
   ChangePasswordPage({Key? key,
     required this.FullName,
     required this.ID,
-    required this.UniversityID
+    required this.UniversityID,
+    required this.Token
   }) : super(key: key);
 
   @override
@@ -65,7 +66,7 @@ class ChangePasswordPage extends StatelessWidget {
                 onPressed: (){
                   Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => UniversityPanel(FullName: FullName, ID: ID, UniversityID: UniversityID))
+                      MaterialPageRoute(builder: (context) => UniversityPanel(FullName: FullName, ID: ID, UniversityID: UniversityID, Token: Token,))
                   );
                 },
                 child: Text("داشبورد", style: TextStyle(color: Colors.black),),
@@ -79,7 +80,7 @@ class ChangePasswordPage extends StatelessWidget {
                 onPressed: (){
                   Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => UniversityProfilePage(FullName: FullName, ID: ID, UniversityID: UniversityID))
+                      MaterialPageRoute(builder: (context) => UniversityProfilePage(FullName: FullName, ID: ID, UniversityID: UniversityID, Token: Token,))
                   );
                 },
                 child: Text("پروفایل", style: TextStyle(color: Colors.black),),
@@ -93,7 +94,7 @@ class ChangePasswordPage extends StatelessWidget {
                 onPressed: (){
                   Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ChangePasswordPage(FullName: FullName, ID: ID, UniversityID: UniversityID))
+                      MaterialPageRoute(builder: (context) => ChangePasswordPage(FullName: FullName, ID: ID, UniversityID: UniversityID, Token: Token,))
                   );
                 },
                 child: Text("تغییر رمز عبور", style: TextStyle(color: Colors.black),),
