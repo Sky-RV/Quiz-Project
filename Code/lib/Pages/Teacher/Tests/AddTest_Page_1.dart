@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:quiz/Pages/Teacher/TeacherProfile.dart';
 import 'package:quiz/Pages/Teacher/Tests/AddTest_Page_2.dart';
+import 'package:quiz/Pages/Teacher/Tests/TestPage_1_subpages/FloatSetting.dart';
+import 'package:quiz/Pages/Teacher/Tests/TestPage_1_subpages/QtoQAllTime.dart';
+import 'package:quiz/Pages/Teacher/Tests/TestPage_1_subpages/QtoQEachTime.dart';
 import '../../../main.dart';
 import '../TeacherPanel.dart';
 
@@ -27,6 +30,11 @@ class TestPage1 extends StatefulWidget {
 }
 
 class _TestPage_1 extends State<TestPage1>{
+
+  TextEditingController TestTitleCNT = TextEditingController();
+  TextEditingController CourseNameCNT = TextEditingController();
+  TextEditingController StartTimeCNT = TextEditingController();
+  TextEditingController EndTimeCNT = TextEditingController();
 
   // CARD 1
   String C1_title = 'Base Information', C1_subtitle = 'Question Type';
@@ -183,10 +191,10 @@ class _TestPage_1 extends State<TestPage1>{
                         padding: EdgeInsets.symmetric(horizontal: 25),
                         child: Column(
                           children: [
-                            SimpleInput(label: 'Test title'),
+                            SimpleInput(label: 'Test title', cnt: TestTitleCNT),
                             SizedBox(height: 15,),
 
-                            trailingIconInput(label: 'Course Name', icon: Icon(Icons.arrow_downward),),
+                            trailingIconInput(label: 'Course Name', icon: Icon(Icons.arrow_downward), cnt: CourseNameCNT),
                             SizedBox(height: 15,),
                           ],
                         ),
@@ -310,9 +318,9 @@ class _TestPage_1 extends State<TestPage1>{
                         child: Column(
                           children: [
                             SizedBox(height: 10,),
-                            preIconInput(label: 'Start Date and Time', icon: Icon(Icons.calendar_today_rounded)),
+                            preIconInput(label: 'Start Date and Time', icon: Icon(Icons.calendar_today_rounded), cnt: StartTimeCNT),
                             SizedBox(height: 15,),
-                            preIconInput(label: 'End Date and Time', icon: Icon(Icons.calendar_today_rounded)),
+                            preIconInput(label: 'End Date and Time', icon: Icon(Icons.calendar_today_rounded), cnt: EndTimeCNT),
                             SizedBox(height: 10,),
                           ],
                         ),
@@ -433,10 +441,56 @@ class _TestPage_1 extends State<TestPage1>{
                     //  myButton(label: 'Save', color: shrinePink400, act: actCancel()),
                       ElevatedButton(
                         onPressed: (){
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => AddTest_Page_2())
-                          );
+                          String testTitle = TestTitleCNT.text;
+                          String courseName = CourseNameCNT.text;
+                          String startTime = StartTimeCNT.text;
+                          String endTime = EndTimeCNT.text;
+
+                          setState(() {
+                            if(C3_value == 2)
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => FloatSetting())
+                              );
+                            if(C3_value == 3)
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => QtoQEachTime())
+                              );
+                            if(C3_value == 4)
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => QtoQAllTime())
+                              );
+                          });
+
+                          if(!testTitle.isEmpty && !courseName.isEmpty && !startTime.isEmpty && !endTime.isEmpty){
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => AddTest_Page_2())
+                            );
+                          }
+                          else{
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                // return object of type Dialog
+                                return AlertDialog(
+                                  title: new Text("Error", style: TextStyle(color: Colors.red),),
+                                  content: new Text("Please try again", style: TextStyle(color: Colors.black),),
+                                  actions: <Widget>[
+                                    // usually buttons at the bottom of the dialog
+                                    new FlatButton(
+                                      child: new Text("Close", style: TextStyle(color: shrinePink300),),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          }
                         },
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.zero,
