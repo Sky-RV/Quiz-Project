@@ -35,9 +35,8 @@ class _TestPage_1 extends State<TestPage1>{
 
   // CARD 2
   String C2_title = 'Test Settings';
-  String C2_Op1 = 'Tests have negative score', C2_Op2 = 'The test shows just for this grade student', C2_Op3 = 'Acceccable for not present student',
-          C2_Op4 = "Edit answers from before and results", C2_Op5 = 'Student can see questions and answer after the test done';
-  List<bool> C2_list = [false, false, false, false, false];
+  String C2_Op1 = 'Tests have negative score',C2_Op5 = 'Student can see questions and answer after the test done';
+  List<bool> C2_list = [false, false];
 
   // CARD 3
   String C3_title = 'Holding Settings';
@@ -53,12 +52,6 @@ class _TestPage_1 extends State<TestPage1>{
   String radio2_3_1 = "Stop the timer if it exits the test panel";
   List<bool> check_1 = [false];
   int gpValue_3_1 = -1;
-
-
-  // CARD 4
-  String C4_title = 'Workbook Settings', C4_subtitle = 'Holding Test Type';
-  String C4_Op1 = 'Held on the scheduled date and time';
-  int C4_value = -1;
 
   String UsernameTXT = 'teacher', PasswordTXT = 'teacher';
 
@@ -275,54 +268,15 @@ class _TestPage_1 extends State<TestPage1>{
                           },
                         ),
                       ),
-                      ListTile( // check list 2/5
-                        title: Text(C2_Op2,
-                        style: TextStyle(color: Colors.black, fontSize: 14),),
+                      ListTile( // check list 5/5
+                        title: Text(C2_Op5,
+                          style: TextStyle(color: Colors.black, fontSize: 14),),
                         leading: Checkbox(
                           activeColor: shrineBlue600,
                           value: C2_list[1],
                           onChanged: (value){
                             setState(() {
                               C2_list[1] = value!;
-                            });
-                          },
-                        ),
-                      ),
-                      ListTile( // check list 3/5
-                        title: Text(C2_Op3,
-                          style: TextStyle(color: Colors.black, fontSize: 14),),
-                          leading: Checkbox(
-                            activeColor: shrineBlue600,
-                            value: C2_list[2],
-                            onChanged: (value){
-                              setState(() {
-                                C2_list[2] = value!;
-                              });
-                            },
-                          ),
-                      ),
-                      ListTile( // check list 4/5
-                        title: Text(C2_Op4,
-                          style: TextStyle(color: Colors.black, fontSize: 14),),
-                        leading: Checkbox(
-                          activeColor: shrineBlue600,
-                          value: C2_list[3],
-                          onChanged: (value){
-                            setState(() {
-                              C2_list[3] = value!;
-                            });
-                          },
-                        ),
-                      ),
-                      ListTile( // check list 5/5
-                        title: Text(C2_Op5,
-                          style: TextStyle(color: Colors.black, fontSize: 14),),
-                        leading: Checkbox(
-                          activeColor: shrineBlue600,
-                          value: C2_list[4],
-                          onChanged: (value){
-                            setState(() {
-                              C2_list[4] = value!;
                             });
                           },
                         ),
@@ -440,86 +394,6 @@ class _TestPage_1 extends State<TestPage1>{
                   ),
                 ),
 
-                SizedBox(height: 15,), // card 4
-                Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)
-                  ),
-                  elevation: 5,
-                  semanticContainer: true,
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-
-                  child: Column(
-                    children: [
-
-                      Padding( // title
-                        padding: EdgeInsets.all(16),
-                        child: Text(C4_title,
-                          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),),
-                      ),
-
-                      SizedBox(height: 10,),
-                      Padding( // title
-                        padding: EdgeInsets.all(16),
-                        child: Text(C4_subtitle,
-                          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),),
-                      ),
-
-                      SizedBox(height: 5,),
-                      ListTile(
-                        title: Text(C4_Op1,
-                          style: TextStyle(color: Colors.black, fontSize: 14),),
-                        leading: Radio(
-                          value: 1,
-                          groupValue: C4_value,
-                          activeColor: shrineBlue600,
-                          onChanged: (value){
-                            setState(() {
-                              C4_value = int.parse(value.toString());
-                            });
-                          },
-                        ),
-                      ),
-
-                      ListTile(
-                        title: Text(C4_Op1,
-                          style: TextStyle(color: Colors.black, fontSize: 14),),
-                        leading: Radio(
-                          value: 2,
-                          groupValue: C4_value,
-                          activeColor: shrineBlue600,
-                          onChanged: (value){
-                            setState(() {
-                              C4_value = int.parse(value.toString());
-                            });
-                          },
-                        ),
-                      ),
-
-                      SizedBox(height: 10,),
-                      Padding( // title
-                        padding: EdgeInsets.all(16),
-                        child: Text(C4_subtitle,
-                          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),),
-                      ),
-
-                      SizedBox(height: 5,),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 25),
-                        child: Column(
-                          children: [
-
-                            preIconInput(label: 'Start Date and Time', icon: Icon(Icons.calendar_today_rounded)),
-
-                          ],
-                        ),
-                      ),
-
-                      SizedBox(height: 15,)
-
-                    ],
-                  ),
-                ),
 
                 // Buttons
                 SizedBox(height: 35,),
