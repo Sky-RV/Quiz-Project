@@ -108,8 +108,13 @@ class _QtoQEachTimeState extends State<QtoQEachTime> {
                         )
                     ),
 
+                    SizedBox(height: 5,),
+
                     // allowed enter
-                    SimpleInput(label: 'Allowed Enter (1-10)', cnt: allowedEnterCNT),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 15),
+                      child: SimpleInput(label: 'Allowed Enter (1-10)', cnt: allowedEnterCNT),
+                    ),
 
                     SizedBox(height: 50,),
 
