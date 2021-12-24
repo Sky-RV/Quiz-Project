@@ -44,172 +44,180 @@ class _AddNewFileState extends State<AddNewFile_Page> {
     return Scaffold(
 
       ////////////////////////////// APP BAR //////////////////////////////
-      //
-      // appBar: AppBar(
-      //   backgroundColor: shrineBlue900,
-      //   actions: [
-      //     IconButton(
-      //       onPressed: () {},
-      //       icon: Icon(Icons.search),
-      //     ),
-      //   ],
-      //   title: Center(
-      //     child: Text(
-      //       "Add New File",
-      //       style: TextStyle(color: Colors.white),
-      //       textAlign: TextAlign.center,
-      //     ),
-      //   ),
-      // ),
+
+      appBar: AppBar(
+        backgroundColor: shrineBlue900,
+        title: Center(
+          child: Text(
+            "Quiz Project",
+            style: TextStyle(color: Colors.white),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ),
 
       ////////////////////////////// BODY //////////////////////////////
 
       body: Padding(
         padding: EdgeInsets.all(10),
-        child: Column(
-          children: [
-            Column(
-              children: [
-                SizedBox(height: 10,),
-                Text("Record / Edit Test File Question", style: TextStyle(fontSize: 26,
-                fontWeight: FontWeight.bold, color: shrineBlue600),),
-                SizedBox(height: 50,)
-              ],
-            ),
+        child: Card(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15)
+          ),
+          elevation: 5,
+          semanticContainer: true,
+          clipBehavior: Clip.antiAliasWithSaveLayer,
 
-            // Inputs
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-              child: Column(
+          child: Column(
+            children: [
+              Column(
                 children: [
-
-                  // file title
-                  TextFormField(
-                  //controller: ,
-                    style: TextStyle(color: Colors.black),
-                    decoration: InputDecoration(
-                      labelText: 'File Title',
-                      border: OutlineInputBorder(),
-                      labelStyle: TextStyle(color: Color(0xFF3E5196)),
-                    ),
-                  ),
-
-                  SizedBox(height: 30,),
-
-                  // file type
-                  DropdownButtonFormField(
-                      value: selectedValue,
-                      style: TextStyle(color: Colors.black),
-                      onChanged: (String? newValue){
-                        setState(() {
-                          selectedValue = newValue!;
-                        });
-                      },
-                      items: dropdownItems
-                  ),
-
-                  SizedBox(height: 30,),
-
-                  // show time (minute)
-                  TextFormField(
-                    //controller: ,
-                    style: TextStyle(color: Colors.black),
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.timer),
-                      labelText: 'Show Time (Minute)',
-                      border: OutlineInputBorder(),
-                      labelStyle: TextStyle(color: Color(0xFF3E5196)),
-                    ),
-                  ),
-
-                  SizedBox(height: 20,),
-
-                  // description
-                  TextFormField(
-                    //controller: ,
-                    style: TextStyle(color: Colors.black),
-                    decoration: InputDecoration(
-                      labelText: 'Description',
-                      border: OutlineInputBorder(),
-                      labelStyle: TextStyle(color: Color(0xFF3E5196)),
-                    ),
-                  ),
-
-                  // upload file
-
-                  SizedBox(height: 15,),
-
-                  // Buttons
-                  SizedBox(height: 35,),
-                  Card(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        // myButton(label: 'Cancel', color: shrinePink300, act: actCancel()),
-                        ElevatedButton(
-                          onPressed: (){
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => AddTest_Page_2())
-                            );
-                          },
-                          style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.zero,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                          ),
-                          child: Ink(
-                            decoration: BoxDecoration(
-                                color: shrinePink300,
-                                borderRadius: BorderRadius.circular(15)
-                            ),
-                            child: Container(
-                              width: 180,
-                              height: 35,
-                              alignment: Alignment.center,
-                              child: Text('Cancel', style:
-                              TextStyle(fontSize: 16, color: Colors.white),),
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 90,),
-                        //  myButton(label: 'Save', color: shrinePink400, act: actCancel()),
-                        ElevatedButton(
-                          onPressed: (){
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => AddNewFile())
-                            );
-                          },
-                          style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.zero,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                          ),
-                          child: Ink(
-                            decoration: BoxDecoration(
-                                color: shrinePink400,
-                                borderRadius: BorderRadius.circular(15)
-                            ),
-                            child: Container(
-                              width: 180,
-                              height: 35,
-                              alignment: Alignment.center,
-                              child: Text('Next', style:
-                              TextStyle(fontSize: 16, color: Colors.white),),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-
+                  SizedBox(height: 50,),
+                  Text("Record / Edit Test File Question", style: TextStyle(fontSize: 26,
+                      fontWeight: FontWeight.bold, color: shrineBlue600),),
+                  SizedBox(height: 50,)
                 ],
               ),
-            ),
-          ],
+
+              SizedBox(height: 20,),
+
+              // Inputs
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                child: Column(
+                  children: [
+
+                    // file title
+                    TextFormField(
+                      //controller: ,
+                      style: TextStyle(color: Colors.black),
+                      decoration: InputDecoration(
+                        labelText: 'File Title',
+                        border: OutlineInputBorder(),
+                        labelStyle: TextStyle(color: Color(0xFF3E5196)),
+                      ),
+                    ),
+
+                    SizedBox(height: 15,),
+
+                    // file type
+                    DropdownButtonFormField(
+                        value: selectedValue,
+                        style: TextStyle(color: Colors.black),
+                        onChanged: (String? newValue){
+                          setState(() {
+                            selectedValue = newValue!;
+                          });
+                        },
+                        items: dropdownItems
+                    ),
+
+                    SizedBox(height: 30,),
+
+                    // show time (minute)
+                    TextFormField(
+                      //controller: ,
+                      style: TextStyle(color: Colors.black),
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.timer),
+                        labelText: 'Show Time (Minute)',
+                        border: OutlineInputBorder(),
+                        labelStyle: TextStyle(color: Color(0xFF3E5196)),
+                      ),
+                    ),
+
+                    SizedBox(height: 20,),
+
+                    // description
+                    TextFormField(
+                      //controller: ,
+                      keyboardType: TextInputType.multiline,
+                      style: TextStyle(color: Colors.black),
+                      decoration: InputDecoration(
+                        labelText: 'Description',
+                        border: OutlineInputBorder(),
+                        labelStyle: TextStyle(color: Color(0xFF3E5196)),
+                      ),
+                    ),
+
+                    SizedBox(height: 20,),
+
+                    // upload file
+
+                    SizedBox(height: 15,),
+
+                    // Buttons
+                    SizedBox(height: 35,),
+                    Card(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          // myButton(label: 'Cancel', color: shrinePink300, act: actCancel()),
+                          ElevatedButton(
+                            onPressed: (){
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => AddTest_Page_2())
+                              );
+                            },
+                            style: ElevatedButton.styleFrom(
+                              padding: EdgeInsets.zero,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                            ),
+                            child: Ink(
+                              decoration: BoxDecoration(
+                                  color: shrinePink300,
+                                  borderRadius: BorderRadius.circular(15)
+                              ),
+                              child: Container(
+                                width: 150,
+                                height: 35,
+                                alignment: Alignment.center,
+                                child: Text('Cancel', style:
+                                TextStyle(fontSize: 16, color: Colors.white),),
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 70,),
+                          //  myButton(label: 'Save', color: shrinePink400, act: actCancel()),
+                          ElevatedButton(
+                            onPressed: (){
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => AddNewFile())
+                              );
+                            },
+                            style: ElevatedButton.styleFrom(
+                              padding: EdgeInsets.zero,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                            ),
+                            child: Ink(
+                              decoration: BoxDecoration(
+                                  color: shrinePink400,
+                                  borderRadius: BorderRadius.circular(15)
+                              ),
+                              child: Container(
+                                width: 150,
+                                height: 35,
+                                alignment: Alignment.center,
+                                child: Text('Save', style:
+                                TextStyle(fontSize: 16, color: Colors.white),),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
 
