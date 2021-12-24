@@ -35,7 +35,7 @@ class _TestPage_1 extends State<TestPage1>{
   int _value = -1;
 
   TextEditingController testTimeCNTA = TextEditingController();
-  TextEditingController allowedEnterCNT = TextEditingController();
+  TextEditingController allowedEnterCNTA = TextEditingController();
   List<bool> _valueA = [false, false];
   int _valA = -1;
 
@@ -66,14 +66,20 @@ class _TestPage_1 extends State<TestPage1>{
           C3_Op4 = 'Show question by question and set a total time for the test';
   int C3_value = -1;
 
-  // CARD 3 SLIMY 1
-  String checknox_3_1 = "Possibility to retake the test if the test is not completed (floating only)";
-  String radio1_3_1 = "Do not stop the timer if you leave the test panel";
-  String radio2_3_1 = "Stop the timer if it exits the test panel";
-  List<bool> check_1 = [false];
-  int gpValue_3_1 = -1;
-
   String UsernameTXT = 'teacher', PasswordTXT = 'teacher';
+
+  // Card 3 Dialogs values
+  late String C3_D2_testTime;
+  late int C3_D2_option;
+
+  late String C3_D3_testTime;
+  late String C3_D3_allowedEnter;
+  late int C3_D3_option;
+  List<bool> C3_D3_ckeckBox = [];
+
+  late String C3_D4_testTime;
+  late String C3_D4_allowedEnter;
+  List<bool> C3_D4_checkBox = [];
 
   @override
   Widget build(BuildContext context) {
@@ -138,7 +144,9 @@ class _TestPage_1 extends State<TestPage1>{
             // buttons
             ElevatedButton(
               onPressed: (){
-
+                String testTime = testTimeCNT.text;
+                C3_D2_testTime = testTime;
+                C3_D2_option = _value;
               },
               style: ElevatedButton.styleFrom(
                 padding: EdgeInsets.zero,
@@ -161,59 +169,6 @@ class _TestPage_1 extends State<TestPage1>{
               ),
             ),
             SizedBox(height: 25,),
-            ElevatedButton(
-              onPressed: (){
-                String time = testTimeCNT.text;
-                if(!time.isEmpty && _value != -1){
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => TestPage_1())
-                  );
-                }
-                else{
-                  // error
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      // return object of type Dialog
-                      return AlertDialog(
-                        title: new Text("Error", style: TextStyle(color: Colors.red),),
-                        content: new Text("Please try again", style: TextStyle(color: Colors.black),),
-                        actions: <Widget>[
-                          // usually buttons at the bottom of the dialog
-                          new FlatButton(
-                            child: new Text("Close", style: TextStyle(color: shrinePink300),),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                }
-              },
-              style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.zero,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-              ),
-              child: Ink(
-                decoration: BoxDecoration(
-                    color: shrinePink300,
-                    borderRadius: BorderRadius.circular(15)
-                ),
-                child: Container(
-                  width: 180,
-                  height: 35,
-                  alignment: Alignment.center,
-                  child: Text('Cancel', style:
-                  TextStyle(fontSize: 16, color: Colors.white),),
-                ),
-              ),
-            ),
-
 
             SizedBox(height: 20,)
 
@@ -247,7 +202,7 @@ class _TestPage_1 extends State<TestPage1>{
 
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15),
-                child: SimpleInput(label: 'Allowed Enter (1-10)', cnt: allowedEnterCNT),
+                child: SimpleInput(label: 'Allowed Enter (1-10)', cnt: allowedEnterCNTA),
               ),
 
               SizedBox(height: 15,),
@@ -318,68 +273,13 @@ class _TestPage_1 extends State<TestPage1>{
               // buttons
               ElevatedButton(
                 onPressed: (){
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => TestPage_1())
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.zero,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                ),
-                child: Ink(
-                  decoration: BoxDecoration(
-                      color: shrinePink300,
-                      borderRadius: BorderRadius.circular(15)
-                  ),
-                  child: Container(
-                    width: 180,
-                    height: 35,
-                    alignment: Alignment.center,
-                    child: Text('Cancel', style:
-                    TextStyle(fontSize: 16, color: Colors.white),),
-                  ),
-                ),
-              ),
-              SizedBox(height: 25,),
-              //  myButton(label: 'Save', color: shrinePink400, act: actCancel()),
-              ElevatedButton(
-                onPressed: (){
-
                   String time = testTimeCNTA.text;
-                  String enter = allowedEnterCNT.text;
+                  String enter = allowedEnterCNTA.text;
 
-                  if(!time.isEmpty && _valA != -1 && !enter.isEmpty && _valueA == false){
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => TestPage_1())
-                    );
-                  }
-                  else{
-                    // error
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        // return object of type Dialog
-                        return AlertDialog(
-                          title: new Text("Error", style: TextStyle(color: Colors.red),),
-                          content: new Text("Please try again", style: TextStyle(color: Colors.black),),
-                          actions: <Widget>[
-                            // usually buttons at the bottom of the dialog
-                            new FlatButton(
-                              child: new Text("Close", style: TextStyle(color: shrinePink300),),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  }
-
+                  C3_D3_testTime = time;
+                  C3_D3_allowedEnter = enter;
+                  C3_D3_option = _valA;
+                  C3_D3_ckeckBox = [_valueA[0], _valueA[1]];
                 },
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.zero,
@@ -396,7 +296,7 @@ class _TestPage_1 extends State<TestPage1>{
                     width: 180,
                     height: 35,
                     alignment: Alignment.center,
-                    child: Text('Next', style:
+                    child: Text('Save', style:
                     TextStyle(fontSize: 16, color: Colors.white),),
                   ),
                 ),
@@ -473,67 +373,13 @@ class _TestPage_1 extends State<TestPage1>{
 
               // buttons
               ElevatedButton(
-                onPressed: (){
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => TestPage_1())
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.zero,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                ),
-                child: Ink(
-                  decoration: BoxDecoration(
-                      color: shrinePink300,
-                      borderRadius: BorderRadius.circular(15)
-                  ),
-                  child: Container(
-                    width: 180,
-                    height: 35,
-                    alignment: Alignment.center,
-                    child: Text('Cancel', style:
-                    TextStyle(fontSize: 16, color: Colors.white),),
-                  ),
-                ),
-              ),
-              SizedBox(height: 25,),
-              //  myButton(label: 'Save', color: shrinePink400, act: actCancel()),
-              ElevatedButton(
-                onPressed: (){
-
+                onPressed: () {
                   String time = testTimeCNTE.text;
-                  if(!time.isEmpty && _valueE != -1){
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => TestPage_1())
-                    );
-                  }
-                  else{
-                    // error
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        // return object of type Dialog
-                        return AlertDialog(
-                          title: new Text("Error", style: TextStyle(color: Colors.red),),
-                          content: new Text("Please try again", style: TextStyle(color: Colors.black),),
-                          actions: <Widget>[
-                            // usually buttons at the bottom of the dialog
-                            new FlatButton(
-                              child: new Text("Close", style: TextStyle(color: shrinePink300),),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  }
+                  String alowTime = allowedEnterCNTE.text;
 
+                  C3_D4_testTime = time;
+                  C3_D4_allowedEnter = alowTime;
+                  C3_D4_checkBox = [_valueE[0], _valueE[1]];
                 },
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.zero,
@@ -570,10 +416,107 @@ class _TestPage_1 extends State<TestPage1>{
       appBar: AppBar(
         backgroundColor: shrineBlue900,
         actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.search),
-          ),
+          TextButton(
+            onPressed: (){
+              // main text inputs
+              String testTitle = TestTitleCNT.text;
+              String courseName = CourseNameCNT.text;
+              String startTime = StartTimeCNT.text;
+              String endTime = EndTimeCNT.text;
+
+              // main options input
+              int c1_option = C1_value;
+              int c3_option = C3_value;
+
+              // main checkbox inputs
+              List<bool> c2_checkBox = C2_list;
+
+              // dialogs input
+              // dialog 2
+              String d2_time = C3_D2_testTime;
+              int d2_option = C3_D2_option;
+
+              // dialog 3
+              String d3_time = C3_D3_testTime;
+              String d3_alw = C3_D3_allowedEnter;
+              int d3_option = C3_D3_option;
+              List<bool> d3_chbox = C3_D3_ckeckBox;
+
+              // dialog 4
+              String d4_time = C3_D4_testTime;
+              String d4_alw = C3_D4_allowedEnter;
+              List<bool> d4_chbox = C3_D4_checkBox;
+
+              if (!testTitle.isEmpty && !courseName.isEmpty && !startTime.isEmpty && !endTime.isEmpty
+                  && c1_option!=-1 && c2_checkBox!=false){
+                // card 3 option 1
+                if(C3_value == 1){
+                  // Exam Server
+                  // Pass to Next Page
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AddTest_Page_2())
+                  );
+                }
+                // card 3 option 2
+                if(C3_value == 2){
+                  if(!d2_time.isEmpty && d2_option!=-1){
+                    // Exam Server
+                    // Pass to Next Page
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => AddTest_Page_2())
+                    );
+                  }
+                }
+                // card 3 option 3
+                if(C3_value == 3){
+                  if(!d3_time.isEmpty && !d3_alw.isEmpty && d3_option!=-1 && d3_chbox!=false){
+                    // Exam Server
+                    // Pass to Next Page
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => AddTest_Page_2())
+                    );
+                  }
+                }
+                // card 3 option 4
+                if(C3_value == 4){
+                  if(!d4_time.isEmpty && !d4_alw.isEmpty && d4_chbox!=false){
+                    // Exam Server
+                    // Pass to Next Page
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => AddTest_Page_2())
+                    );
+                  }
+                }
+
+              }
+              else{
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    // return object of type Dialog
+                    return AlertDialog(
+                      title: new Text("Error", style: TextStyle(color: Colors.red),),
+                      content: new Text("Please try again", style: TextStyle(color: Colors.black),),
+                      actions: <Widget>[
+                        // usually buttons at the bottom of the dialog
+                        new FlatButton(
+                          child: new Text("Close", style: TextStyle(color: shrinePink300),),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              }
+            },
+            child: Text("Next", style: TextStyle(color: Color(0xFFD4CCCA)),),
+          )
         ],
         title: Center(
           child: Text(
@@ -777,10 +720,6 @@ class _TestPage_1 extends State<TestPage1>{
                           groupValue: C3_value,
                           activeColor: shrineBlue600,
                           onChanged: (value){
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => FloatSetting())
-                            );
                             setState(() {
                               C3_value = int.parse(value.toString());
                             });
@@ -861,7 +800,6 @@ class _TestPage_1 extends State<TestPage1>{
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                     // myButton(label: 'Cancel', color: shrinePink300, act: actCancel()),
                       ElevatedButton(
                         onPressed: (){
                           // Navigator.push(
@@ -890,40 +828,82 @@ class _TestPage_1 extends State<TestPage1>{
                         ),
                       ),
                       SizedBox(width: 90,),
-                    //  myButton(label: 'Save', color: shrinePink400, act: actCancel()),
                       ElevatedButton(
                         onPressed: (){
+                          // main text inputs
                           String testTitle = TestTitleCNT.text;
                           String courseName = CourseNameCNT.text;
                           String startTime = StartTimeCNT.text;
                           String endTime = EndTimeCNT.text;
 
-                          // setState(() {
-                          //   if(C3_value == 2)
-                          //     Navigator.push(
-                          //         context,
-                          //         MaterialPageRoute(builder: (context) => FloatSetting())
-                          //     );
-                          //   if(C3_value == 3)
-                          //     Navigator.push(
-                          //         context,
-                          //         MaterialPageRoute(builder: (context) => QtoQEachTime())
-                          //     );
-                          //   if(C3_value == 4)
-                          //     Navigator.push(
-                          //         context,
-                          //         MaterialPageRoute(builder: (context) => QtoQAllTime())
-                          //     );
-                          // });
+                          // main options input
+                          int c1_option = C1_value;
+                          int c3_option = C3_value;
 
-                          if(!testTitle.isEmpty && !courseName.isEmpty && !startTime.isEmpty && !endTime.isEmpty){
+                          // main checkbox inputs
+                          List<bool> c2_checkBox = C2_list;
 
-                            // بعدا برای اینک کدوم اپشن کارت 3 انتخاب شده ورودی رو بگیره
+                          // dialogs input
+                          // dialog 2
+                          String d2_time = C3_D2_testTime;
+                          int d2_option = C3_D2_option;
 
-                            Navigator.push(
+                          // dialog 3
+                          String d3_time = C3_D3_testTime;
+                          String d3_alw = C3_D3_allowedEnter;
+                          int d3_option = C3_D3_option;
+                          List<bool> d3_chbox = C3_D3_ckeckBox;
+
+                          // dialog 4
+                          String d4_time = C3_D4_testTime;
+                          String d4_alw = C3_D4_allowedEnter;
+                          List<bool> d4_chbox = C3_D4_checkBox;
+
+                          if (!testTitle.isEmpty && !courseName.isEmpty && !startTime.isEmpty && !endTime.isEmpty
+                              && c1_option!=-1 && c2_checkBox!=false){
+                            // card 3 option 1
+                            if(C3_value == 1){
+                              // Exam Server
+                              // Pass to Next Page
+                              Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) => AddTest_Page_2())
-                            );
+                              );
+                            }
+                            // card 3 option 2
+                            if(C3_value == 2){
+                              if(!d2_time.isEmpty && d2_option!=-1){
+                                // Exam Server
+                                // Pass to Next Page
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => AddTest_Page_2())
+                                );
+                              }
+                            }
+                            // card 3 option 3
+                            if(C3_value == 3){
+                              if(!d3_time.isEmpty && !d3_alw.isEmpty && d3_option!=-1 && d3_chbox!=false){
+                                // Exam Server
+                                // Pass to Next Page
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => AddTest_Page_2())
+                                );
+                              }
+                            }
+                            // card 3 option 4
+                            if(C3_value == 4){
+                              if(!d4_time.isEmpty && !d4_alw.isEmpty && d4_chbox!=false){
+                                // Exam Server
+                                // Pass to Next Page
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => AddTest_Page_2())
+                                );
+                              }
+                            }
+
                           }
                           else{
                             showDialog(

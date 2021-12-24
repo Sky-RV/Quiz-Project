@@ -181,9 +181,13 @@ class _MyHomePageState extends State<MyHomePage> {
               ListTile(
                 title: TextButton(
                   onPressed: (){
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(builder: (context) => AboutUs())
+                    // );
                     Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => AboutUs())
+                        MaterialPageRoute(builder: (context) => TestPage_1())
                     );
                   },
                   child: Text("درباره ما", style: TextStyle(color: Colors.white),),

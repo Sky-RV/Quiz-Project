@@ -366,10 +366,10 @@ class _SignIn_PageState extends State<SignIn_Page> {
                             else{
                               print(admin_response.body);
                               var stringJson = json.decode(admin_response.body);
-                              var token = stringJson['data']['token'];
+                              var token = stringJson['data']['_id'];
                               print(token);
                               Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) => UniversityPanel(FullName: fullname, ID: adminId, UniversityID: UniId, Token: token,))
+                                  MaterialPageRoute(builder: (context) => UniversityPanel(FullName: fullname, ID: adminId, UniversityID: UniId, Token: token.toString(),))
                               );
                             }
                           },
