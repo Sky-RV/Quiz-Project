@@ -31,17 +31,17 @@ class AddTest_Page_2 extends StatelessWidget{
           TextButton(
             onPressed: (){
               Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ManageQuestions())
+                context,
+                MaterialPageRoute(builder: (context) => AddNewFile())
               );
             },
-            child: Text("Next", style: TextStyle(color: Color(0xFFD4CCCA)),),
+            child: Text("New File", style: TextStyle(color: Colors.white),),
           )
         ],
         title: Center(
           child: Text(
             title_1,
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Color(0xFFD4CCCA)),
             textAlign: TextAlign.center,
           ),
         ),
@@ -49,66 +49,114 @@ class AddTest_Page_2 extends StatelessWidget{
 
       ////////////////////////////// BODY //////////////////////////////
 
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => AddNewFile())
-          );
-        },
-        backgroundColor: shrinePink300,
-        child: Icon(Icons.add),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: Stack(
+        fit: StackFit.expand,
+        children: [
+          // Back
+          Positioned(
+            left: 30,
+            bottom: 10,
+            child: FloatingActionButton(
+              backgroundColor: shrinePink300,
+              heroTag: 'Back',
+              onPressed: (){
+
+              },
+              child: Icon(Icons.arrow_back, size: 30,),
+            ),
+          ),
+          // Next
+          Positioned(
+            right: 30,
+            bottom: 10,
+            child: FloatingActionButton(
+              backgroundColor: shrinePink400,
+              heroTag: 'Next',
+              onPressed: (){
+
+              },
+              child: Icon(Icons.arrow_forward_rounded, size: 40,)
+            ),
+          )
+        ],
       ),
 
-        body: AnimationLimiter(
-          child: ListView.builder(
-            padding: EdgeInsets.all(_w / 30),
-            physics: BouncingScrollPhysics(
-              parent: AlwaysScrollableScrollPhysics(),
-            ),
-            itemCount: 20,
-            itemBuilder: (BuildContext context, int index){
-              return AnimationConfiguration.staggeredList(
+      body: AnimationLimiter(
+        child: ListView.builder(
+          padding: EdgeInsets.all(_w / 30),
+          physics: BouncingScrollPhysics(
+            parent: AlwaysScrollableScrollPhysics(),
+          ),
+          itemCount: 5,
+          itemBuilder: (BuildContext context, int index){
+            return AnimationConfiguration.staggeredList(
 
-                position: index,
-                delay: Duration(milliseconds: 100),
+              position: index,
+              delay: Duration(milliseconds: 100),
 
-                child: SlideAnimation(
-                  duration: Duration(milliseconds: 2500),
+              child: SlideAnimation(
+                duration: Duration(milliseconds: 2500),
+                curve: Curves.fastLinearToSlowEaseIn,
+
+                child: FadeInAnimation(
                   curve: Curves.fastLinearToSlowEaseIn,
+                  duration: Duration(milliseconds: 2500),
 
-                  child: FadeInAnimation(
-                    curve: Curves.fastLinearToSlowEaseIn,
-                    duration: Duration(milliseconds: 2500),
+                  child: Container(
+                    margin: EdgeInsets.only(bottom: 10),
 
-                    child: Container(
-                      margin: EdgeInsets.only(bottom: 15),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                       child: ListTile(
-                        title: Text('List item 1', style: TextStyle(color: Colors.black),),
-                        isThreeLine: true,
-                        subtitle: Text('Secondary text\nTertiary text'),
-                        //  leading: Icon(Icons.label),
-                        //  trailing: ,
-                      ),
-
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(15)),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            blurRadius: 20,
-                            spreadRadius: 5,
+                          title: Text("Math Questions", style: TextStyle(color: Colors.black),),
+                          isThreeLine: true,
+                          subtitle: Text(
+                            "Question\n"
+                                "60 Minutes\n"
+                                "Access time",
+                            style: TextStyle(color: Colors.black54),
                           ),
-                        ],
+                          trailing: PopupMenuButton(
+                            icon: Icon(Icons.menu),
+                            itemBuilder: (BuildContext context) => <PopupMenuEntry>[
+                              PopupMenuItem(
+                                child: ListTile(
+                                  leading: Icon(Icons.edit),
+                                  title: Text("Edit", style: TextStyle(color: Colors.black),),
+                                ),
+                              ),
+
+                              PopupMenuItem(
+                                child: ListTile(
+                                  leading: Icon(Icons.delete, color: Colors.red,),
+                                  title: Text("Delete", style: TextStyle(color: Colors.red),),
+                                ),
+                              )
+                            ],
+
+                          )
                       ),
+                    ),
+
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(15)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          blurRadius: 20,
+                          spreadRadius: 5,
+                        ),
+                      ],
                     ),
                   ),
                 ),
-              );
-            },
-          ),
+              ),
+            );
+          },
         ),
+      ),
 
       // body: SafeArea(
       //   child: SingleChildScrollView(
@@ -215,13 +263,6 @@ class AddTest_Page_2 extends StatelessWidget{
 
     );
   }
-
-// actCancel() {
-//   Navigator.push(
-//     context,
-//     MaterialPageRoute(builder: (context) => TeacherPanel(USERNAME: UsernameTXT, PASSWORD: PasswordTXT))
-//   );
-// }
 
 }
 

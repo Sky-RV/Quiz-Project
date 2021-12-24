@@ -69,16 +69,16 @@ class _TestPage_1 extends State<TestPage1>{
   String UsernameTXT = 'teacher', PasswordTXT = 'teacher';
 
   // Card 3 Dialogs values
-  late String C3_D2_testTime;
-  late int C3_D2_option;
+  late String C3_D2_testTime = "";
+  late int C3_D2_option = -1;
 
-  late String C3_D3_testTime;
-  late String C3_D3_allowedEnter;
-  late int C3_D3_option;
+  late String C3_D3_testTime = "";
+  late String C3_D3_allowedEnter = "";
+  late int C3_D3_option = -1;
   List<bool> C3_D3_ckeckBox = [];
 
-  late String C3_D4_testTime;
-  late String C3_D4_allowedEnter;
+  late String C3_D4_testTime = "";
+  late String C3_D4_allowedEnter = "";
   List<bool> C3_D4_checkBox = [];
 
   @override
@@ -871,37 +871,31 @@ class _TestPage_1 extends State<TestPage1>{
                               );
                             }
                             // card 3 option 2
-                            if(C3_value == 2){
-                              if(!d2_time.isEmpty && d2_option!=-1){
+                            else if(C3_value == 2 && (!d2_time.isEmpty && d2_option!=-1)){
                                 // Exam Server
                                 // Pass to Next Page
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(builder: (context) => AddTest_Page_2())
                                 );
-                              }
                             }
                             // card 3 option 3
-                            if(C3_value == 3){
-                              if(!d3_time.isEmpty && !d3_alw.isEmpty && d3_option!=-1 && d3_chbox!=false){
+                            else if(C3_value == 3 && (!d3_time.isEmpty && !d3_alw.isEmpty && d3_option!=-1 && d3_chbox!=false)){
                                 // Exam Server
                                 // Pass to Next Page
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(builder: (context) => AddTest_Page_2())
                                 );
-                              }
                             }
                             // card 3 option 4
-                            if(C3_value == 4){
-                              if(!d4_time.isEmpty && !d4_alw.isEmpty && d4_chbox!=false){
+                            else if(C3_value == 4 && (!d4_time.isEmpty && !d4_alw.isEmpty && d4_chbox!=false)){
                                 // Exam Server
                                 // Pass to Next Page
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(builder: (context) => AddTest_Page_2())
                                 );
-                              }
                             }
 
                           }
