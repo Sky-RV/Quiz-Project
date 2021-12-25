@@ -110,6 +110,12 @@ class AddTest_Page_2 extends StatelessWidget{
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                       child: ListTile(
+                        onTap: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => EditNewFile_Page(FileTitle: "FileTitle", FileType: "FileType", FileTime: "FileTime", FileDescription: "FileDescription", File: "File"))
+                          );
+                        },
                           title: Text("Math Questions", style: TextStyle(color: Colors.black),),
                           isThreeLine: true,
                           subtitle: Text(
