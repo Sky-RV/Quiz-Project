@@ -75,7 +75,10 @@ class AddTest_Page_2 extends StatelessWidget{
               backgroundColor: shrinePink400,
               heroTag: 'Next',
               onPressed: (){
-
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ManageQuestions())
+                );
               },
               child: Icon(Icons.arrow_forward_rounded, size: 40,)
             ),

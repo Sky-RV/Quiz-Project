@@ -13,6 +13,8 @@ class ManageQuestions extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
 
+    final double _w = MediaQuery.of(context).size.width;
+
     return Scaffold(
 
       ////////////////////////////// APP BAR //////////////////////////////
@@ -27,7 +29,7 @@ class ManageQuestions extends StatelessWidget{
         ],
         title: Center(
           child: Text(
-            "Quiz Project",
+            "Manage Questions",
             style: TextStyle(color: Colors.white),
             textAlign: TextAlign.center,
           ),
@@ -44,7 +46,59 @@ class ManageQuestions extends StatelessWidget{
           );
         },
         backgroundColor: shrinePink300,
-        child: Text("Add Question", style: TextStyle(color: Colors.white),),
+        heroTag: 'Add Question',
+        child: Icon(Icons.add),
+      ),
+
+      body: AnimationLimiter(
+        child: ListView.builder(
+          padding: EdgeInsets.all(_w / 30),
+          physics: BouncingScrollPhysics(
+            parent: AlwaysScrollableScrollPhysics(),
+          ),
+          itemCount: 5,
+          itemBuilder: (BuildContext context, int index){
+            return AnimationConfiguration.staggeredList(
+
+              position: index,
+              delay: Duration(milliseconds: 100),
+
+              child: SlideAnimation(
+                duration: Duration(milliseconds: 2500),
+                curve: Curves.fastLinearToSlowEaseIn,
+
+                child: FadeInAnimation(
+                  curve: Curves.fastLinearToSlowEaseIn,
+                  duration: Duration(milliseconds: 2500),
+
+                  child: Container(
+                    margin: EdgeInsets.only(bottom: 10),
+
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                      child: ListTile(
+                          title: Text("Questions", style: TextStyle(color: Colors.black),),
+                          subtitle: Text("Answers", style: TextStyle(color: Colors.black),),
+                      ),
+                    ),
+
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(15)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          blurRadius: 20,
+                          spreadRadius: 5,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
       ),
 
     );
