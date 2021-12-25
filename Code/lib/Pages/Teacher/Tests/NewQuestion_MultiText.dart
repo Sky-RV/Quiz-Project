@@ -165,6 +165,7 @@ class NewQuestionPage extends StatelessWidget{
 
 Widget SimpleInput({label, cnt}) {
   return TextFormField(
+    keyboardType: TextInputType.multiline,
     controller: cnt,
     style: TextStyle(color: Colors.black),
     decoration: InputDecoration(
