@@ -4,7 +4,7 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:quiz/Pages/Teacher/TeacherProfile.dart';
 import 'package:quiz/Pages/Teacher/Tests/AddTest_Page_2.dart';
 import 'package:quiz/Pages/Teacher/Tests/Add_NewFile.dart';
-import 'package:quiz/Pages/Teacher/Tests/Add_NewQuestions.dart';
+import 'package:quiz/Pages/Teacher/Tests/NewQuestion_MultiText.dart';
 import '../../../main.dart';
 import '../TeacherPanel.dart';
 
@@ -42,7 +42,7 @@ class ManageQuestions extends StatelessWidget{
         onPressed: (){
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Add_NewQuestions())
+            MaterialPageRoute(builder: (context) => NewQuestionPage())
           );
         },
         backgroundColor: shrinePink300,
