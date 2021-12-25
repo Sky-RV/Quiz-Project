@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:quiz/Pages/Teacher/TeacherProfile.dart';
+import 'package:quiz/Pages/Teacher/Tests/Edit_addNewFile.dart';
 import '../../../main.dart';
 import '../TeacherPanel.dart';
 import 'package:quiz/Pages/Teacher/Tests/Add_NewFile.dart';
@@ -122,6 +123,12 @@ class AddTest_Page_2 extends StatelessWidget{
                             itemBuilder: (BuildContext context) => <PopupMenuEntry>[
                               PopupMenuItem(
                                 child: ListTile(
+                                  onTap: (){
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => EditNewFile_Page(FileTitle: "FileTitle", FileType: "Question", FileTime: "FileTime", FileDescription: "FileDescription", File: "File"))
+                                    );
+                                  },
                                   leading: Icon(Icons.edit),
                                   title: Text("Edit", style: TextStyle(color: Colors.black),),
                                 ),
