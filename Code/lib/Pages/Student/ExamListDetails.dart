@@ -101,59 +101,56 @@ class ExamListDetails extends StatelessWidget {
         ////////////////////////////// BODY //////////////////////////////
         body: Center(
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 25, horizontal: 15),
+            padding: EdgeInsets.symmetric(vertical: 50, horizontal: 15),
             child: Column(
               children: [
 
                 // title
-                Text('Exam Title:\tMath', style: TextStyle(
+                Text('Exam Title:    Math', style: TextStyle( // 4 spaces
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                   color: Colors.black
                 ),),
-                SizedBox(height: 5,),
+                SizedBox(height: 15,),
 
                 // type
-                Text('Exam Type:\tTyping', style: TextStyle(
+                Text('Exam Type:    Typing', style: TextStyle(
                     fontSize: 20,
-                    color: Colors.black38
+                    color: Colors.black54
                 ),),
-                SizedBox(height: 5,),
+                SizedBox(height: 15,),
 
                 // number of questions
-                Text('Question Numbers:\t10', style: TextStyle(
+                Text('Question Numbers:    10', style: TextStyle(
                     fontSize: 20,
-                    color: Colors.black38
+                    color: Colors.black54
                 ),),
-                SizedBox(height: 5,),
+                SizedBox(height: 15,),
 
                 // start time
-                Text('Start Time:\t1400-10-22   16:00', style: TextStyle(
+                Text('Start Time:    1400-10-22   16:00', style: TextStyle(
                     fontSize: 20,
-                    color: Colors.black38
+                    color: Colors.black54
                 ),),
-                SizedBox(height: 5,),
+                SizedBox(height: 15,),
 
                 // end time
-                Text('End Time:\t1400-10-22   18:00', style: TextStyle(
+                Text('End Time:    1400-10-22   18:00', style: TextStyle(
                     fontSize: 20,
-                    color: Colors.black38
+                    color: Colors.black54
                 ),),
-                SizedBox(height: 5,),
+                SizedBox(height: 15,),
 
-                SizedBox(height: 35,),
-                // start button
+                SizedBox(height: 100,),
+               // start button
                 ElevatedButton(
                   onPressed: (){},
-                  child: Ink(
-                    decoration: BoxDecoration(
-                      color: shrinePink400,
-                    ),
-                    child: Text("Start", style: TextStyle(color: Colors.white),),
-                  ),
+                  child: Text("Start", style: TextStyle(color: Colors.white, fontSize: 24),),
                   style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.all(65),
                     shape: CircleBorder(),
                     shadowColor: Color(0xFF909090),
+                    primary: shrinePink400
                   ),
                 ),
 

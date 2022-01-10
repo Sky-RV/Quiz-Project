@@ -31,9 +31,15 @@ class _StudentPanelPage extends State<StudentPanelPage>{
 
   int _counterIndex = 0;
   static const List<Widget> _options = <Widget> [
-    Text('Dashboard', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
-    Text('Online Exams', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
+    Text('Dashboard', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold, color: Colors.black)),
+    Text('Online Exams', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold, color: Colors.black)),
   ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _counterIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -134,15 +140,7 @@ class _StudentPanelPage extends State<StudentPanelPage>{
           unselectedItemColor: colorScheme.onSurface.withOpacity(.60),
           selectedLabelStyle: textTheme.caption,
           unselectedLabelStyle: textTheme.caption,
-          onTap: (value) {
-            // Respond to item press.
-            setState((){
-              _counterIndex = value;
-            });
-            if (_counterIndex == 1){
-              DashboardPage(context);
-            }
-          },
+          onTap: _onItemTapped,
           items: const [
             BottomNavigationBarItem(
               label: 'Dashboard',
@@ -156,7 +154,10 @@ class _StudentPanelPage extends State<StudentPanelPage>{
         ),
 
         ////////////////////////////// BODY //////////////////////////////
-
+        body: Center(
+         // child: _options.elementAt(_counterIndex),
+          child: DashboardPage(context, _options.elementAt(_counterIndex)),
+        ),
       ),
 
     );
@@ -164,68 +165,72 @@ class _StudentPanelPage extends State<StudentPanelPage>{
   }
 }
 
-Widget DashboardPage(BuildContext context){
+Widget DashboardPage(BuildContext context, Widget type){
 
   final double _w = MediaQuery.of(context).size.width;
+  Widget widget = Text('Dashboard', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold, color: Colors.black));
 
-  return AnimationLimiter(
-    child: ListView.builder(
-      padding: EdgeInsets.all(_w / 30),
-      physics: BouncingScrollPhysics(
-        parent: AlwaysScrollableScrollPhysics(),
-      ),
-      itemCount: 5,
-      itemBuilder: (BuildContext context, int index){
-        return AnimationConfiguration.staggeredList(
+  if (type.toString() == widget.toString()){
+    return AnimationLimiter(
+      child: ListView.builder(
+        padding: EdgeInsets.all(_w / 30),
+        physics: BouncingScrollPhysics(
+          parent: AlwaysScrollableScrollPhysics(),
+        ),
+        itemCount: 5,
+        itemBuilder: (BuildContext context, int index){
+          return AnimationConfiguration.staggeredList(
 
-          position: index,
-          delay: Duration(milliseconds: 100),
+            position: index,
+            delay: Duration(milliseconds: 100),
 
-          child: SlideAnimation(
-            duration: Duration(milliseconds: 2500),
-            curve: Curves.fastLinearToSlowEaseIn,
-
-            child: FadeInAnimation(
-              curve: Curves.fastLinearToSlowEaseIn,
+            child: SlideAnimation(
               duration: Duration(milliseconds: 2500),
+              curve: Curves.fastLinearToSlowEaseIn,
 
-              child: Container(
-                margin: EdgeInsets.only(bottom: 15),
+              child: FadeInAnimation(
+                curve: Curves.fastLinearToSlowEaseIn,
+                duration: Duration(milliseconds: 2500),
 
-                child: ListTile(
-                  title: Text('List item 1', style: TextStyle(color: Colors.black),),
-                  subtitle: Text('Start Time : 1400-10-22  16:00'),
-                  // test or text
-                  leading: Icon(Icons.article_sharp),
-                  // test numbers
-                  trailing: Text("10"),
-                  onTap: (){
-                    // Go for details and start
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ExamListDetails(StudentID: "1", TestID: "1", UniversityID: "1",))
-                    );
-                  },
-                ),
+                child: Container(
+                  margin: EdgeInsets.only(bottom: 15),
 
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      blurRadius: 20,
-                      spreadRadius: 5,
-                    ),
-                  ],
+                  child: ListTile(
+                    title: Text('List item 1', style: TextStyle(color: Colors.black),),
+                    subtitle: Text('Start Time : 1400-10-22  16:00'),
+                    // test or text
+                    leading: Icon(Icons.article_sharp),
+                    // test numbers
+                    trailing: Text("10", style: TextStyle(color: Colors.black38),),
+                    onTap: (){
+                      // Go for details and start
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => ExamListDetails(StudentID: "1", TestID: "1", UniversityID: "1",))
+                      );
+                    },
+                  ),
+
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(15)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        blurRadius: 20,
+                        spreadRadius: 5,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        );
-      },
-    ),
-  );
+          );
+        },
+      ),
+    );
+  }
+  return Text("Error");
 }
 
 ThemeData _buildShrineTheme() {
