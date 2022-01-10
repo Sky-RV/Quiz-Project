@@ -2,6 +2,7 @@ import 'dart:js';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:quiz/Pages/Student/ExamListDetails.dart';
 import 'package:quiz/main.dart';
 
 class StudentPanel extends StatelessWidget{
@@ -197,7 +198,10 @@ Widget DashboardPage(BuildContext context){
                   trailing: Text("10"),
                   onTap: (){
                     // Go for details and start
-
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ExamListDetails(StudentID: "1", TestID: "1", UniversityID: "1",))
+                    );
                   },
                 ),
 
