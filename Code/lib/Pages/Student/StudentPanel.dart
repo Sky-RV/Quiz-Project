@@ -168,9 +168,10 @@ class _StudentPanelPage extends State<StudentPanelPage>{
 Widget DashboardPage(BuildContext context, Widget type){
 
   final double _w = MediaQuery.of(context).size.width;
-  Widget widget = Text('Dashboard', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold, color: Colors.black));
+  Widget dashboard = Text('Dashboard', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold, color: Colors.black));
+  Widget onlineExams = Text('Online Exams', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold, color: Colors.black));
 
-  if (type.toString() == widget.toString()){
+  if (type.toString() == dashboard.toString()){
     return AnimationLimiter(
       child: ListView.builder(
         padding: EdgeInsets.all(_w / 30),
@@ -227,6 +228,73 @@ Widget DashboardPage(BuildContext context, Widget type){
             ),
           );
         },
+      ),
+    );
+  }
+  else if (type.toString() == onlineExams.toString()){
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.search),
+        onPressed: (){},
+        backgroundColor: shrinePink300,
+      ),
+      body: AnimationLimiter(
+        child: ListView.builder(
+          padding: EdgeInsets.all(_w / 30),
+          physics: BouncingScrollPhysics(
+            parent: AlwaysScrollableScrollPhysics(),
+          ),
+          itemCount: 5,
+          itemBuilder: (BuildContext context, int index){
+            return AnimationConfiguration.staggeredList(
+
+              position: index,
+              delay: Duration(milliseconds: 100),
+
+              child: SlideAnimation(
+                duration: Duration(milliseconds: 2500),
+                curve: Curves.fastLinearToSlowEaseIn,
+
+                child: FadeInAnimation(
+                  curve: Curves.fastLinearToSlowEaseIn,
+                  duration: Duration(milliseconds: 2500),
+
+                  child: Container(
+                    margin: EdgeInsets.only(bottom: 15),
+
+                    child: ListTile(
+                      title: Text('List item 1', style: TextStyle(color: shrinePink400),),
+                      subtitle: Text('Start Time : 1400-10-22  16:00'),
+                      // test or text
+                      leading: Icon(Icons.article_sharp),
+                      // test numbers
+                      trailing: Text("10", style: TextStyle(color: Colors.black38),),
+                      onTap: (){
+                        // Go for details and start
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ExamListDetails(StudentID: "1", TestID: "1", UniversityID: "1",))
+                        );
+                      },
+                    ),
+
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(15)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          blurRadius: 20,
+                          spreadRadius: 5,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
       ),
     );
   }
