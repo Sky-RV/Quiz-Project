@@ -18,7 +18,7 @@ class TeacherPanel extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: _buildShrineTheme(),
-      title: 'Quip Project',
+      title: 'Quiz Project',
       home: Scaffold(
         ////////////////////////////// APP BAR //////////////////////////////
 
