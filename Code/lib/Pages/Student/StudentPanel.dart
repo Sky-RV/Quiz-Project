@@ -29,17 +29,17 @@ class _StudentPanelPage extends State<StudentPanelPage>{
   //   required this.UniversityID
   // }) : super(key: key);
 
+  int _counterIndex = 0;
+  static const List<Widget> _options = <Widget> [
+    Text('Dashboard', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
+    Text('Online Exams', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
+  ];
+
   @override
   Widget build(BuildContext context) {
 
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
-
-    int _counterIndex = 0;
-    const List<Widget> _options = <Widget> [
-      Text('Dashboard', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
-      Text('Online Exams', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
-    ];
 
     return MaterialApp(
 
@@ -58,35 +58,6 @@ class _StudentPanelPage extends State<StudentPanelPage>{
               textAlign: TextAlign.center,
             ),
           ),
-        ),
-
-        ////////////////////////////// BOTTOM NAVIGATION //////////////////////////////
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          currentIndex: _counterIndex,
-          backgroundColor: colorScheme.surface,
-          selectedItemColor: shrinePink400,
-          unselectedItemColor: colorScheme.onSurface.withOpacity(.60),
-          selectedLabelStyle: textTheme.caption,
-          items: const [
-            BottomNavigationBarItem(
-              label: 'Dashboard',
-              icon: Icon(Icons.dashboard)
-            ),
-
-            BottomNavigationBarItem(
-              label: 'Online Exams',
-              icon: Icon(Icons.class_)
-            ),
-          ],
-          onTap: (value){
-            setState((){
-              _counterIndex = value;
-              if (_counterIndex == 1){
-                DashboardPage(context);
-              }
-            });
-          },
         ),
 
         ////////////////////////////// DRAWER //////////////////////////////
@@ -153,6 +124,38 @@ class _StudentPanelPage extends State<StudentPanelPage>{
             ],
           ),
         ),
+
+        ////////////////////////////// BOTTOM NAVIGATION //////////////////////////////
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          currentIndex: _counterIndex,
+          backgroundColor: colorScheme.surface,
+          selectedItemColor: shrinePink400,
+          unselectedItemColor: colorScheme.onSurface.withOpacity(.60),
+          selectedLabelStyle: textTheme.caption,
+          unselectedLabelStyle: textTheme.caption,
+          onTap: (value) {
+            // Respond to item press.
+            setState((){
+              _counterIndex = value;
+            });
+            if (_counterIndex == 1){
+              DashboardPage(context);
+            }
+          },
+          items: const [
+            BottomNavigationBarItem(
+              label: 'Dashboard',
+              icon: Icon(Icons.dashboard),
+            ),
+            BottomNavigationBarItem(
+              label: 'Online Exams',
+              icon: Icon(Icons.article),
+            ),
+          ],
+        ),
+
+        ////////////////////////////// BODY //////////////////////////////
 
       ),
 

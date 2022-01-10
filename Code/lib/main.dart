@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quiz/Pages/AboutUs.dart';
 import 'package:quiz/Pages/LogInPage.dart';
 import 'package:quiz/Pages/SignInPage.dart';
+import 'package:quiz/Pages/Student/StudentPanel.dart';
 import 'package:quiz/Pages/Teacher/Tests/AddTest_Page_1.dart';
 import 'package:quiz/Pages/Teacher/Tests/AddTest_Page_2.dart';
 
@@ -155,7 +156,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   onPressed: (){
                     Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => MyApp())
+                        MaterialPageRoute(builder: (context) => StudentPanelPage())
                     );
                   },
                   child: Text("خانه", style: TextStyle(color: Colors.white),),
