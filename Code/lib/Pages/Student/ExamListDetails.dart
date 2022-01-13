@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz/Pages/Student/Exams/StartExam.dart';
 import 'package:quiz/main.dart';
 
 class ExamListDetails extends StatelessWidget {
@@ -182,11 +183,11 @@ class ExamListDetails extends StatelessWidget {
                             // type
                             TableRow( // title
                                 children: [
-                                  Column(children:[Text('type', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black))]),
+                                  Column(children:[Text('Type', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black))]),
                                   Column(
                                       children:[
                                         Padding(padding: EdgeInsets.symmetric(vertical: 10),
-                                          child: Text('Test', style: TextStyle(fontSize: 16, color: Colors.black)),)
+                                          child: Text('Descriptive', style: TextStyle(fontSize: 16, color: Colors.black)),)
                                       ]
                                   ),
                                 ]
@@ -240,7 +241,12 @@ class ExamListDetails extends StatelessWidget {
                 SizedBox(height: 100,),
                // start button
                 ElevatedButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => StartExam())
+                    );
+                  },
                   child: Text("Start", style: TextStyle(color: Colors.white, fontSize: 24),),
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.all(65),
