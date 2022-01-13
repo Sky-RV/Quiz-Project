@@ -105,41 +105,137 @@ class ExamListDetails extends StatelessWidget {
             child: Column(
               children: [
 
-                // title
-                Text('Exam Title:    Math', style: TextStyle( // 4 spaces
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black
-                ),),
-                SizedBox(height: 15,),
+                // card
+                Padding(
+                  padding: EdgeInsets.zero,
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5)
+                    ),
+                    elevation: 5,
+                    semanticContainer: true,
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    child: Padding(
+                      padding: EdgeInsets.all(30),
+                      // child: Column(
+                      //   children: [
+                      //     // title
+                      //     Text('Exam Title:    Math', style: TextStyle( // 4 spaces
+                      //         fontSize: 24,
+                      //         fontWeight: FontWeight.bold,
+                      //         color: Colors.black
+                      //     ),),
+                      //     SizedBox(height: 15,),
+                      //
+                      //     // type
+                      //     Text('Exam Type:    Typing', style: TextStyle(
+                      //         fontSize: 20,
+                      //         color: Colors.black54
+                      //     ),),
+                      //     SizedBox(height: 15,),
+                      //
+                      //     // number of questions
+                      //     Text('Question Numbers:    10', style: TextStyle(
+                      //         fontSize: 20,
+                      //         color: Colors.black54
+                      //     ),),
+                      //     SizedBox(height: 15,),
+                      //
+                      //     // start time
+                      //     Text('Start Time:    1400-10-22   16:00', style: TextStyle(
+                      //         fontSize: 20,
+                      //         color: Colors.black54
+                      //     ),),
+                      //     SizedBox(height: 15,),
+                      //
+                      //     // end time
+                      //     Text('End Time:    1400-10-22   18:00', style: TextStyle(
+                      //         fontSize: 20,
+                      //         color: Colors.black54
+                      //     ),),
+                      //     SizedBox(height: 15,),
+                      //   ],
+                      // ),
+                      child: Container(
+                        margin: EdgeInsets.all(20),
+                        child: Table(
+                          defaultColumnWidth: FixedColumnWidth(180.0),
+                          defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+                          border: TableBorder.all(
+                            color: Colors.black54,
+                          ),
+                          children: [
 
-                // type
-                Text('Exam Type:    Typing', style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.black54
-                ),),
-                SizedBox(height: 15,),
+                            // title
+                            TableRow(
+                                children: [
+                                  Column(children:[Text('Title', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black))]),
+                                  Column(
+                                      children:[
+                                        Padding(padding: EdgeInsets.symmetric(vertical: 10),
+                                        child: Text('Math Exam', style: TextStyle(fontSize: 16, color: Colors.black)),)
+                                      ]
+                                  ),
+                                ]
+                            ),
 
-                // number of questions
-                Text('Question Numbers:    10', style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.black54
-                ),),
-                SizedBox(height: 15,),
+                            // type
+                            TableRow( // title
+                                children: [
+                                  Column(children:[Text('type', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black))]),
+                                  Column(
+                                      children:[
+                                        Padding(padding: EdgeInsets.symmetric(vertical: 10),
+                                          child: Text('Test', style: TextStyle(fontSize: 16, color: Colors.black)),)
+                                      ]
+                                  ),
+                                ]
+                            ),
 
-                // start time
-                Text('Start Time:    1400-10-22   16:00', style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.black54
-                ),),
-                SizedBox(height: 15,),
+                            // number of question
+                            TableRow( // title
+                                children: [
+                                  Column(children:[Text('Question Number', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black))]),
+                                  Column(
+                                      children:[
+                                        Padding(padding: EdgeInsets.symmetric(vertical: 10),
+                                          child: Text('10', style: TextStyle(fontSize: 16, color: Colors.black)),)
+                                      ]
+                                  ),
+                                ]
+                            ),
 
-                // end time
-                Text('End Time:    1400-10-22   18:00', style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.black54
-                ),),
-                SizedBox(height: 15,),
+                            // start time
+                            TableRow( // title
+                                children: [
+                                  Column(children:[Text('Start time', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black))]),
+                                  Column(
+                                      children:[
+                                        Padding(padding: EdgeInsets.symmetric(vertical: 10),
+                                          child: Text('1400-10-22    16:00', style: TextStyle(fontSize: 16, color: Colors.black)),)
+                                      ]
+                                  ),
+                                ]
+                            ),
+
+                            // end time
+                            TableRow( // title
+                                children: [
+                                  Column(children:[Text('End time', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black))]),
+                                  Column(
+                                      children:[
+                                        Padding(padding: EdgeInsets.symmetric(vertical: 10),
+                                          child: Text('1400-10-22    18:00', style: TextStyle(fontSize: 16, color: Colors.black)),)
+                                      ]
+                                  ),
+                                ]
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
 
                 SizedBox(height: 100,),
                // start button

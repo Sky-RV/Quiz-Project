@@ -171,6 +171,9 @@ Widget DashboardPage(BuildContext context, Widget type){
   Widget dashboard = Text('Dashboard', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold, color: Colors.black));
   Widget onlineExams = Text('Online Exams', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold, color: Colors.black));
 
+  // Dashboard -> close exams and exams in process
+  // Online Exams -> all of the exams
+
   if (type.toString() == dashboard.toString()){
     return AnimationLimiter(
       child: ListView.builder(
