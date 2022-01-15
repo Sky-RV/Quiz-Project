@@ -26,9 +26,41 @@ class _StartExamPage extends State<StartExamPage>{
   final CountDownTimerState TimerState = Get.put(CountDownTimerState());
 
   TextEditingController AnswerCNT = TextEditingController();
-  
+
+  List<String> Q = ['Q1', 'Q2', 'Q3', 'Q4', 'Q5'];
+  List<String> A = ["AnswerCNT", 'A2', 'A3', 'A4', 'A5'];
+  int i = 0;
+  // int j = 0;
+  String question = "Q1"; // the first question
+  String answer = "answer"; // the first answer
+
+  changeQuestion(){
+    setState(() {
+      question = Q[i+1];
+      AnswerCNT.text = A[i+1];
+      i++;
+    });
+  }
+
+  changeQuestionBack(){
+    setState(() {
+      question = Q[i-1];
+      AnswerCNT.text = A[i-1];
+      i--;
+    });
+  }
+
+  // changeAnswer(){
+  //   setState(() {
+  //     AnswerCNT.text = A[j+1];
+  //     j++;
+  //   });
+  // }
+
   @override
   Widget build(BuildContext context) {
+
+    TimerState.StateTimerStart();
 
     return Scaffold(
 
@@ -75,7 +107,7 @@ class _StartExamPage extends State<StartExamPage>{
                     padding: EdgeInsets.all(10),
                     child: Center(
                       child: Text(
-                        'Explain the Alpha Testing.',
+                        '$question',
                         style: TextStyle(
                             fontSize: 18,
                             color: Colors.black
@@ -104,16 +136,97 @@ class _StartExamPage extends State<StartExamPage>{
                       padding: EdgeInsets.all(10),
                       child: Center(
                         child: TextFormField(
+                          textAlign: TextAlign.center,
                           keyboardType: TextInputType.multiline,
                           controller: AnswerCNT,
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
+                            contentPadding: EdgeInsets.symmetric(vertical: 200),
                             labelText: 'Answer',
+                            alignLabelWithHint: true,
                             border: OutlineInputBorder(),
                             labelStyle: TextStyle(color: Color(0xFF3E5196)),
                           ),
                         ),
                       ),
+                  ),
+                ),
+              ),
+
+              SizedBox(height: 50,),
+
+              // Buttons
+              Container(
+                width: double.infinity,
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  elevation: 5,
+                  semanticContainer: true,
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+
+                  child: Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                          onPressed: (){
+                            setState(() {
+                              changeQuestionBack();
+                            });
+                          },
+                          style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.zero,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                          ),
+                          child: Ink(
+                            decoration: BoxDecoration(
+                                color: shrinePink300,
+                                borderRadius: BorderRadius.circular(15)
+                            ),
+                            child: Container(
+                              width: 180,
+                              height: 35,
+                              alignment: Alignment.center,
+                              child: Text('Back', style:
+                              TextStyle(fontSize: 16, color: Colors.white),),
+                            ),
+                          ),
+                        ),
+
+                        SizedBox(width: 75,),
+
+                        ElevatedButton(
+                          onPressed: (){
+                            changeQuestion();
+                            //changeAnswer();
+                          },
+                          style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.zero,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                          ),
+                          child: Ink(
+                            decoration: BoxDecoration(
+                                color: shrinePink400,
+                                borderRadius: BorderRadius.circular(15)
+                            ),
+                            child: Container(
+                              width: 180,
+                              height: 35,
+                              alignment: Alignment.center,
+                              child: Text('Next', style:
+                              TextStyle(fontSize: 16, color: Colors.white),),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
