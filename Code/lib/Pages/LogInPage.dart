@@ -9,6 +9,7 @@ import 'package:quiz/Classes/University/Admin.dart';
 import 'package:quiz/Classes/User/User.dart';
 import 'package:quiz/Pages/ForgetPassword.dart';
 import 'package:quiz/Pages/SignInPage.dart';
+import 'package:quiz/Pages/Student/StudentPanel.dart';
 import 'package:quiz/Pages/Teacher/TeacherPanel.dart';
 import 'package:quiz/Pages/University/UniversityPanel.dart';
 import 'package:quiz/Pages/AboutUs.dart';
@@ -432,7 +433,10 @@ class _LogIn_PageState extends State<LogIn_Page> {
                       );
                     }
                     else if(role == "student" || role == "Student"){
-
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => StudentPanel(FullName: Username, ID: ID, UniversityID: UniversityID,))
+                      );
                     }
                     else{
                       showDialog(

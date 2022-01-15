@@ -6,6 +6,15 @@ import 'package:quiz/Pages/Student/ExamListDetails.dart';
 import 'package:quiz/main.dart';
 
 class StudentPanel extends StatelessWidget{
+
+  String FullName, ID, UniversityID;
+  StudentPanel({
+    Key? key,
+    required this.FullName,
+    required this.ID,
+    required this.UniversityID,
+}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
