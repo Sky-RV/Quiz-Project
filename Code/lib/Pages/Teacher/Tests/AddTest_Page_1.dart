@@ -1,12 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:quiz/Pages/Teacher/TeacherProfile.dart';
 import 'package:quiz/Pages/Teacher/Tests/AddTest_Page_2.dart';
-import 'package:quiz/Pages/Teacher/Tests/TestPage_1_subpages/FloatSetting.dart';
-import 'package:quiz/Pages/Teacher/Tests/TestPage_1_subpages/QtoQAllTime.dart';
-import 'package:quiz/Pages/Teacher/Tests/TestPage_1_subpages/QtoQEachTime.dart';
-import '../../../main.dart';
-import '../TeacherPanel.dart';
 
 void main() {
   runApp(TestPage_1());

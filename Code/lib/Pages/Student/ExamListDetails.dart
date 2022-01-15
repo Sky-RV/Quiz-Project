@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quiz/Pages/Student/Exams/StartExam.dart';
+import 'package:quiz/Pages/Student/Exams/StartExamDescriptive.dart';
 import 'package:quiz/main.dart';
 
 class ExamListDetails extends StatelessWidget {
