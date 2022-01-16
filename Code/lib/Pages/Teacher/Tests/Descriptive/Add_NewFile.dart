@@ -29,7 +29,6 @@ class AddNewFile_Page extends StatefulWidget {
 class _AddNewFileState extends State<AddNewFile_Page> {
 
   String? selectedValue = null;
-  final _dropdownFormKey = GlobalKey<FormState>();
 
   List<DropdownMenuItem<String>> get dropdownItems{
     List<DropdownMenuItem<String>> menuItems = [

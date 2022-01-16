@@ -85,13 +85,13 @@ class NewQuestionPage_Optional extends StatelessWidget{
                       padding: EdgeInsets.all(20),
                       child: Column(
                         children: [
-                          SimpleInput(label: 'Option 1', cnt: Answer_1_CNT),
+                          preIconInput(label: 'Option 1', cnt: Answer_1_CNT, icon: Icon(Icons.adjust)),
                           SizedBox(height: 10,),
-                          SimpleInput(label: 'Option 2', cnt: Answer_2_CNT),
+                          preIconInput(label: 'Option 2', cnt: Answer_2_CNT, icon: Icon(Icons.adjust)),
                           SizedBox(height: 10,),
-                          SimpleInput(label: 'Option 3', cnt: Answer_3_CNT),
+                          preIconInput(label: 'Option 3', cnt: Answer_3_CNT, icon: Icon(Icons.adjust)),
                           SizedBox(height: 10,),
-                          SimpleInput(label: 'Option 4', cnt: Answer_4_CNT),
+                          preIconInput(label: 'Option 4', cnt: Answer_4_CNT, icon: Icon(Icons.adjust)),
                           SizedBox(height: 10,),
                         ],
                       ),
