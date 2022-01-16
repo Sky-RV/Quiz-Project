@@ -41,7 +41,7 @@ class NewQuestionPage extends StatelessWidget{
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.class_, color: shrineBlue600,),
-                    Text('Manage Questions/Answers', style: TextStyle(fontSize: 16, color: Colors.black),)
+                    Text('Manage Descriptive Questions/Answers', style: TextStyle(fontSize: 16, color: Colors.black),)
                   ],
                 ),
 

@@ -5,6 +5,7 @@ import 'package:quiz/Pages/SignInPage.dart';
 import 'package:quiz/Pages/Student/StudentPanel.dart';
 import 'package:quiz/Pages/Teacher/Tests/Descriptive/AddTest_Page_1.dart';
 import 'package:quiz/Pages/Teacher/Tests/Descriptive/AddTest_Page_2.dart';
+import 'package:quiz/Pages/Teacher/Tests/Optional/ManageTestQuestions.dart';
 
 import 'Pages/ContactWithUs.dart';
 
@@ -188,7 +189,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     // );
                     Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => TestPage_1())
+                        MaterialPageRoute(builder: (context) => ManageTestQuestions())
                     );
                   },
                   child: Text("درباره ما", style: TextStyle(color: Colors.white),),
