@@ -78,7 +78,11 @@ class ManageQuestions extends StatelessWidget{
                       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                       child: ListTile(
                           title: Text("Questions", style: TextStyle(color: Colors.black),),
-                          subtitle: Text("Answers", style: TextStyle(color: Colors.black),),
+                          subtitle: Text("Answers\n5", style: TextStyle(color: Colors.black),),
+                        trailing: IconButton(
+                          onPressed: (){},
+                          icon: Icon(Icons.delete, color: Colors.red,),
+                        ),
                       ),
                     ),
 
