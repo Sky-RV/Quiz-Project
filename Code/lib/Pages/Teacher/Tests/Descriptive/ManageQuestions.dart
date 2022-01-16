@@ -1,12 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:quiz/Pages/Teacher/TeacherProfile.dart';
-import 'package:quiz/Pages/Teacher/Tests/AddTest_Page_2.dart';
-import 'package:quiz/Pages/Teacher/Tests/Add_NewFile.dart';
-import 'package:quiz/Pages/Teacher/Tests/NewQuestion_MultiText.dart';
-import '../../../main.dart';
-import '../TeacherPanel.dart';
+import 'package:quiz/Pages/Teacher/Tests/Descriptive/NewQuestion_MultiText.dart';
 
 class ManageQuestions extends StatelessWidget{
 

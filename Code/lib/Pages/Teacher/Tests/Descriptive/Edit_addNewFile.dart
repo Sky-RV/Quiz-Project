@@ -2,31 +2,27 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:quiz/Pages/Teacher/TeacherProfile.dart';
-import 'package:quiz/Pages/Teacher/Tests/AddTest_Page_2.dart';
-import 'package:quiz/Pages/Teacher/Tests/Add_NewFile.dart';
-import '../../../main.dart';
-import '../TeacherPanel.dart';
+import 'package:quiz/Pages/Teacher/Tests/Descriptive/AddTest_Page_2.dart';
+import 'package:quiz/Pages/Teacher/Tests/Descriptive/Add_NewFile.dart';
+import '../../../../main.dart';
+import '../../TeacherPanel.dart';
 
-class AddNewFile extends StatelessWidget{
+class EditNewFile_Page extends StatefulWidget {
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: _buildShrineTheme(),
-      title: 'Quiz Project',
-      home: AddNewFile_Page(),
-    );
-  }
-}
-
-class AddNewFile_Page extends StatefulWidget {
+  late String FileTitle, FileType, FileTime, FileDescription, File;
+  EditNewFile_Page ({Key? key,
+    required this.FileTitle,
+    required this.FileType,
+    required this.FileTime,
+    required this.FileDescription,
+    required this.File
+  }) : super(key: key);
 
   @override
-  State<AddNewFile_Page> createState() => _AddNewFileState();
+  _EditNewFileState createState() => _EditNewFileState();
 }
 
-class _AddNewFileState extends State<AddNewFile_Page> {
+class _EditNewFileState extends State<EditNewFile_Page> {
 
   String? selectedValue = null;
   final _dropdownFormKey = GlobalKey<FormState>();
@@ -40,7 +36,7 @@ class _AddNewFileState extends State<AddNewFile_Page> {
   }
 
   TextEditingController FileTitleCNT = TextEditingController();
-//  TextEditingController FileTypeCNT = TextEditingController();
+  TextEditingController FileTypeCNT = TextEditingController();
   TextEditingController FileTimeCNT = TextEditingController();
   TextEditingController FileDescriptionCNT = TextEditingController();
   TextEditingController FileCNT = TextEditingController();
@@ -96,6 +92,7 @@ class _AddNewFileState extends State<AddNewFile_Page> {
 
                     // file title
                     TextFormField(
+                      initialValue: widget.FileTitle.toString(),
                       controller: FileTitleCNT,
                       style: TextStyle(color: Colors.black),
                       decoration: InputDecoration(
@@ -110,6 +107,7 @@ class _AddNewFileState extends State<AddNewFile_Page> {
                     // file type
                     DropdownButtonFormField(
                         value: selectedValue,
+                        hint: Text(widget.FileType.toString(), style: TextStyle(color: Colors.black),),
                         style: TextStyle(color: Colors.black),
                         onChanged: (String? newValue){
                           setState(() {
@@ -123,6 +121,7 @@ class _AddNewFileState extends State<AddNewFile_Page> {
 
                     // show time (minute)
                     TextFormField(
+                      initialValue: widget.FileTime.toString(),
                       controller: FileTimeCNT,
                       style: TextStyle(color: Colors.black),
                       decoration: InputDecoration(
@@ -137,6 +136,7 @@ class _AddNewFileState extends State<AddNewFile_Page> {
 
                     // description
                     TextFormField(
+                      initialValue: widget.FileDescription.toString(),
                       controller: FileDescriptionCNT,
                       keyboardType: TextInputType.multiline,
                       style: TextStyle(color: Colors.black),
@@ -150,6 +150,17 @@ class _AddNewFileState extends State<AddNewFile_Page> {
                     SizedBox(height: 20,),
 
                     // upload file
+                    TextFormField(
+                      initialValue: widget.File.toString(),
+                      controller: FileCNT,
+                      keyboardType: TextInputType.multiline,
+                      style: TextStyle(color: Colors.black),
+                      decoration: InputDecoration(
+                        labelText: 'Upload File',
+                        border: OutlineInputBorder(),
+                        labelStyle: TextStyle(color: Color(0xFF3E5196)),
+                      ),
+                    ),
 
                     SizedBox(height: 15,),
 
@@ -223,8 +234,8 @@ class _AddNewFileState extends State<AddNewFile_Page> {
                         else{
                           // server
                           Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => AddTest_Page_2())
+                              context,
+                              MaterialPageRoute(builder: (context) => AddTest_Page_2())
                           );
                         }
                       },

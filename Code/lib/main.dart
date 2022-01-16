@@ -3,8 +3,8 @@ import 'package:quiz/Pages/AboutUs.dart';
 import 'package:quiz/Pages/LogInPage.dart';
 import 'package:quiz/Pages/SignInPage.dart';
 import 'package:quiz/Pages/Student/StudentPanel.dart';
-import 'package:quiz/Pages/Teacher/Tests/AddTest_Page_1.dart';
-import 'package:quiz/Pages/Teacher/Tests/AddTest_Page_2.dart';
+import 'package:quiz/Pages/Teacher/Tests/Descriptive/AddTest_Page_1.dart';
+import 'package:quiz/Pages/Teacher/Tests/Descriptive/AddTest_Page_2.dart';
 
 import 'Pages/ContactWithUs.dart';
 

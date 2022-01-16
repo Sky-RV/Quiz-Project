@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:quiz/Pages/Teacher/TeacherProfile.dart';
-import 'package:quiz/Pages/Teacher/Tests/Edit_addNewFile.dart';
-import '../../../main.dart';
-import '../TeacherPanel.dart';
-import 'package:quiz/Pages/Teacher/Tests/Add_NewFile.dart';
+import 'package:quiz/Pages/Teacher/Tests/Descriptive/Edit_addNewFile.dart';
+import '../../../../main.dart';
+import '../../TeacherPanel.dart';
+import 'package:quiz/Pages/Teacher/Tests/Descriptive/Add_NewFile.dart';
 
 import 'ManageQuestions.dart';
 

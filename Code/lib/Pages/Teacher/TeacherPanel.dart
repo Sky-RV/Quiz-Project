@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quiz/Pages/Teacher/TeacherProfile.dart';
-import 'package:quiz/Pages/Teacher/Tests/AddTest_Page_1.dart';
+import 'package:quiz/Pages/Teacher/Tests/Descriptive/AddTest_Page_1.dart';
 
 import '../../main.dart';
 
