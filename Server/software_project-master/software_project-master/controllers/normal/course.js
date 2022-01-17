@@ -2,7 +2,6 @@ const joi = require('joi')
 const {courseModel} = require('../../models/course')
 // const response = require('../../middleware/responseHandler')
 // const { Helper } = require("../../components/helper")
-const {userModel} = require('../../models/user')
 
 
 class CourseController {
@@ -66,29 +65,7 @@ class CourseController {
         }
 
     }
-
-
-
-    static async List(req, res) {
-        try {
-           
-                courseModel.find({
-                    uniId:req.user.uniId
-                },async (err,courses)=>{
-                    
-                    return res.send({status:"success",message:"با موفقیت انجام شد",data:courses})
-
-
-                })
-
-            
-
-        } catch (error) {
-            return response.catchError(res, error)
-        }
-    }
-
-   
+    
 }
 
 module.exports = CourseController;

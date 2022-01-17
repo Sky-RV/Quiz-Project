@@ -303,7 +303,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
 
                             // CREATE UNIVERSITY
 
-                            University uni = University(Name: username, Address: fullname);
+                            University uni = University(Name: university, Address: fullname);
 
                             final uni_response = await http.post(
                               Uri.parse('http://localhost:3000/api/v1/university/create'),

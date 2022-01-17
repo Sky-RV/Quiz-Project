@@ -7,12 +7,13 @@ import 'package:quiz/main.dart';
 
 class StudentPanel extends StatelessWidget{
 
-  String FullName, ID, UniversityID;
+  String FullName, ID, UniversityID, Token;
   StudentPanel({
     Key? key,
     required this.FullName,
     required this.ID,
     required this.UniversityID,
+    required this.Token
 }) : super(key: key);
 
   @override

@@ -7,11 +7,12 @@ import '../../main.dart';
 
 class TeacherPanel extends StatelessWidget {
 
-  String FullName, ID, UniversityID;
+  String FullName, ID, UniversityID, Token;
   TeacherPanel({Key? key,
     required this.FullName,
     required this.ID,
-    required this.UniversityID
+    required this.UniversityID,
+    required this.Token
   }) : super(key: key);
 
   @override
@@ -66,7 +67,7 @@ class TeacherPanel extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => TeacherPanel(FullName: FullName, ID: ID, UniversityID: UniversityID)),
+                      MaterialPageRoute(builder: (context) => TeacherPanel(FullName: FullName, ID: ID, UniversityID: UniversityID, Token: Token,)),
                     );
                   },
                   child: Text("مدیریت آزمون ها", style: TextStyle(color: Colors.black),),
@@ -78,7 +79,7 @@ class TeacherPanel extends StatelessWidget {
                 title: TextButton(
                   onPressed: (){
                     Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => TeacherProfilePage(FullName: FullName, ID: ID, UniversityID: UniversityID)));
+                    MaterialPageRoute(builder: (context) => TeacherProfilePage(FullName: FullName, ID: ID, UniversityID: UniversityID, Token: Token,)));
                   },
                   child: Text("پروفایل", style: TextStyle(color: Colors.black),),
                 ),
