@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quiz/Pages/Teacher/TeacherProfile.dart';
 import 'package:quiz/Pages/Teacher/Tests/Descriptive/AddTest_Page_1.dart';
+import 'package:quiz/Pages/Teacher/Tests/Optional/AddTest_Page_1_Optional.dart';
 
 import '../../main.dart';
 
@@ -118,17 +119,57 @@ class TeacherPanel extends StatelessWidget {
 
         ////////////////////////////// BODY //////////////////////////////
 
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: shrinePink300,
-          foregroundColor: Colors.black,
-          onPressed: (){
-            Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => TestPage_1())
-            );
-          },
-          child: Icon(Icons.add),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: Stack(
+          fit: StackFit.expand,
+          children: [
+
+            // Descriptive Exam
+            Positioned(
+              right: 30,
+              bottom: 10,
+              child: FloatingActionButton(
+                backgroundColor: shrinePink400,
+                heroTag: 'Descriptive Exam',
+                onPressed: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => TestPage_1())
+                  );
+                },
+              ),
+            ),
+
+            // Optional Exam
+            Positioned(
+              right: 30,
+              bottom: 40,
+              child: FloatingActionButton(
+                backgroundColor: shrinePink400,
+                heroTag: 'Optional Exam',
+                onPressed: (){
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => TestPage_1_Optional())
+                  );
+                },
+              ),
+            )
+
+          ],
         ),
+
+        // floatingActionButton: FloatingActionButton(
+        //   backgroundColor: shrinePink300,
+        //   foregroundColor: Colors.black,
+        //   onPressed: (){
+        //     Navigator.push(
+        //         context,
+        //         MaterialPageRoute(builder: (context) => TestPage_1())
+        //     );
+        //   },
+        //   child: Icon(Icons.add),
+        // ),
 
         // in case there is no test list
         body: Center(
