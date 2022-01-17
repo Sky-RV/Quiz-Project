@@ -14,7 +14,6 @@ import 'package:quiz/Pages/University/LessonManagement/StudentList.dart';
 import 'package:http/http.dart' as http;
 
 class UniversityPanel extends StatelessWidget {
-
   String FullName, ID, UniversityID, Token;
   UniversityPanel({
     Key? key,
@@ -22,8 +21,6 @@ class UniversityPanel extends StatelessWidget {
     required this.ID,
     required this.UniversityID,
     required this.Token}) : super(key: key);
-
-
 
   // Future<List<User>> getUsers(String STR, String str) async{
   //   String url = "http://localhost:3000/api/v1/user/list";
@@ -54,30 +51,43 @@ class UniversityPanel extends StatelessWidget {
   //   return usersList;
   // }
 
-  Future<List<User>> getUsers() async{
-    String url = "http://localhost:3000/api/v1/user/list";
-    final response = await http.get(Uri.parse(url));
+  // Future<List<dynamic>> getUsers() async{
+  //   String url = "http://localhost:3000/api/v1/user/list";
+  //   final response = await http.get(Uri.parse(url));
+  //
+  //   var responseData = json.decode(response.body);
+  //
+  //   // create list
+  //   List<User> usersList = [];
+  //
+  //   for(var singleUser in responseData){
+  //     User user = User(
+  //         UniId: singleUser['uniId'],
+  //         FullName: singleUser['fullName'],
+  //         Username: singleUser['username'],
+  //         Password: singleUser['password'],
+  //         Email: singleUser['email'],
+  //         Role: singleUser['role'],
+  //         Token: singleUser['token']
+  //     );
+  //
+  //     if(responseData['data']['uniId'] == UniversityID){
+  //       usersList.add(user);
+  //     }
+  //   }
+  //   return usersList;
+  // }
 
-    var responseData = json.decode(response.body);
+  Future<List<User>> getUsers() async {
+    String uri = "http://localhost:3000/api/v1/user/list";
+    var response = await http.get(Uri.parse(uri));
 
-    // create list
-    List<User> usersList = [];
-
-    for(var singleUser in responseData){
-      User user = User(
-          UniId: singleUser['uniId'],
-          FullName: singleUser['fullName'],
-          Username: singleUser['username'],
-          Password: singleUser['password'],
-          Email: singleUser['email'],
-          Role: singleUser['role']
-      );
-
-      if(responseData['data']['uniId'] == UniversityID){
-        usersList.add(user);
-      }
+    if (response.statusCode == 200) {
+      List jsonResponse = json.decode(response.body);
+      return jsonResponse.map((user) => new User.fromJson(user)).toList();
+    } else {
+      throw Exception('Failed to load album');
     }
-    return usersList;
   }
 
   // Future<List<User>> teacherLists() async{
@@ -94,10 +104,16 @@ class UniversityPanel extends StatelessWidget {
 
   Map<int, bool> countToValue = <int, bool>{};
 
+  late Future<List<User>> teacherList;
+
+  // @override
+  // initState(){
+  //   teacherList = getUsers();
+  // }
+
   @override
   Widget build(BuildContext context) {
 
-    late Future<List<User>> teacherList;
     late Future<List<User>> studentList;
 
     final double _w = MediaQuery.of(context).size.width;
@@ -114,7 +130,7 @@ class UniversityPanel extends StatelessWidget {
 
           actions: [
             IconButton(
-              onPressed: (){},
+              onPressed: () {},
               icon: Icon(Icons.search),
             ),
           ],
@@ -155,7 +171,8 @@ class UniversityPanel extends StatelessWidget {
 
               UserAccountsDrawerHeader(
                 accountName: Text(FullName, style: TextStyle(fontSize: 20),),
-                accountEmail: Text("Admin Email", style: TextStyle(fontSize: 14),),
+                accountEmail: Text(
+                  "Admin Email", style: TextStyle(fontSize: 14),),
                 currentAccountPicture: CircleAvatar(
                   backgroundColor: Colors.white,
                   child: Text(FullName[0], style: TextStyle(fontSize: 30),),
@@ -174,13 +191,18 @@ class UniversityPanel extends StatelessWidget {
               SizedBox(height: 20,),
               ListTile(
                 title: TextButton(
-                  onPressed: (){
+                  onPressed: () {
                     Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => UniversityPanel(FullName: FullName, ID: ID, UniversityID: UniversityID, Token: Token,))
+                        MaterialPageRoute(builder: (context) =>
+                            UniversityPanel(FullName: FullName,
+                              ID: ID,
+                              UniversityID: UniversityID,
+                              Token: Token,))
                     );
                   },
-                  child: Text("داشبورد", style: TextStyle(color: Colors.black),),
+                  child: Text(
+                    "داشبورد", style: TextStyle(color: Colors.black),),
                 ),
                 leading: Icon(Icons.dashboard),
               ),
@@ -188,13 +210,18 @@ class UniversityPanel extends StatelessWidget {
               SizedBox(height: 10,),
               ListTile(
                 title: TextButton(
-                  onPressed: (){
+                  onPressed: () {
                     Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => UniversityProfilePage(FullName: FullName, ID: ID, UniversityID: UniversityID, Token: Token,))
+                        MaterialPageRoute(builder: (context) =>
+                            UniversityProfilePage(FullName: FullName,
+                              ID: ID,
+                              UniversityID: UniversityID,
+                              Token: Token,))
                     );
                   },
-                  child: Text("پروفایل", style: TextStyle(color: Colors.black),),
+                  child: Text(
+                    "پروفایل", style: TextStyle(color: Colors.black),),
                 ),
                 leading: Icon(Icons.account_circle),
               ),
@@ -202,13 +229,18 @@ class UniversityPanel extends StatelessWidget {
               SizedBox(height: 10,),
               ListTile(
                 title: TextButton(
-                  onPressed: (){
+                  onPressed: () {
                     Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => ChangePasswordPage(FullName: FullName, ID: ID, UniversityID: UniversityID, Token: Token,))
+                        MaterialPageRoute(builder: (context) =>
+                            ChangePasswordPage(FullName: FullName,
+                              ID: ID,
+                              UniversityID: UniversityID,
+                              Token: Token,))
                     );
                   },
-                  child: Text("تغییر رمز عبور", style: TextStyle(color: Colors.black),),
+                  child: Text(
+                    "تغییر رمز عبور", style: TextStyle(color: Colors.black),),
                 ),
                 leading: Icon(Icons.vpn_key),
               ),
@@ -216,7 +248,7 @@ class UniversityPanel extends StatelessWidget {
               SizedBox(height: 10,),
               ListTile(
                 title: TextButton(
-                  onPressed: (){
+                  onPressed: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => MyApp())
@@ -253,88 +285,94 @@ class UniversityPanel extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => AddTeacher(FullName: FullName, ID: ID, UniversityID: UniversityID, Token: Token,))
+                      MaterialPageRoute(builder: (context) =>
+                          AddTeacher(FullName: FullName,
+                            ID: ID,
+                            UniversityID: UniversityID,
+                            Token: Token,))
                   );
                 },
                 child: Icon(Icons.add),
               ),
 
-              // body: Container(
-              //   padding: EdgeInsets.all(16),
-              //   child: FutureBuilder(
+              body: Center(
+                child: FutureBuilder <List<User>>(
+                  future: teacherList,
+                  builder: (context, snapshop){
+                    if(snapshop.hasData){
+                      List<User>? user = snapshop.data;
+                      return ListView.builder(
+                        itemCount: user!.length,
+                        itemBuilder: (BuildContext context, int index){
+                          return Container(
+                            height: 75,
+                            child: Center(
+                              child: Text(user[index].FullName),
+                            ),
+                          );
+                        },
+                      );
+                    }
+                    else if (snapshop.hasError){
+                      return Text("${snapshop.error}");
+                    }
+                    return CircularProgressIndicator();
+                  },
+                )
+              ),
+
+              // body: AnimationLimiter(
+              //   child: ListView.builder(
+              //     padding: EdgeInsets.all(_w / 30),
+              //     physics: BouncingScrollPhysics(
+              //       parent: AlwaysScrollableScrollPhysics(),
+              //     ),
+              //     //itemCount: ,
+              //     itemBuilder: (BuildContext context, int index) {
+              //       return AnimationConfiguration.staggeredList(
               //
+              //         position: index,
+              //         delay: Duration(milliseconds: 100),
+              //
+              //         child: SlideAnimation(
+              //           duration: Duration(milliseconds: 2500),
+              //           curve: Curves.fastLinearToSlowEaseIn,
+              //
+              //           child: FadeInAnimation(
+              //             curve: Curves.fastLinearToSlowEaseIn,
+              //             duration: Duration(milliseconds: 2500),
+              //
+              //             child: Container(
+              //               margin: EdgeInsets.only(bottom: 15),
+              //               child: ListTile(
+              //                 title: Text('List item 1',
+              //                   style: TextStyle(color: Colors.black),),
+              //                 isThreeLine: true,
+              //                 subtitle: Text('Secondary text\nTertiary text'),
+              //                 //  leading: Icon(Icons.label),
+              //                 //  trailing: ,
+              //               ),
+              //
+              //               decoration: BoxDecoration(
+              //                 color: Colors.white,
+              //                 borderRadius: BorderRadius.all(
+              //                     Radius.circular(15)),
+              //                 boxShadow: [
+              //                   BoxShadow(
+              //                     color: Colors.black.withOpacity(0.1),
+              //                     blurRadius: 20,
+              //                     spreadRadius: 5,
+              //                   ),
+              //                 ],
+              //               ),
+              //             ),
+              //           ),
+              //         ),
+              //       );
+              //     },
               //   ),
               // ),
 
-              body: AnimationLimiter(
-                child: ListView.builder(
-                  padding: EdgeInsets.all(_w / 30),
-                  physics: BouncingScrollPhysics(
-                    parent: AlwaysScrollableScrollPhysics(),
-                  ),
-                  //itemCount: ,
-                  itemBuilder: (BuildContext context, int index){
-                    return AnimationConfiguration.staggeredList(
-
-                      position: index,
-                      delay: Duration(milliseconds: 100),
-
-                      child: SlideAnimation(
-                        duration: Duration(milliseconds: 2500),
-                        curve: Curves.fastLinearToSlowEaseIn,
-
-                        child: FadeInAnimation(
-                          curve: Curves.fastLinearToSlowEaseIn,
-                          duration: Duration(milliseconds: 2500),
-
-                          child: Container(
-                            margin: EdgeInsets.only(bottom: 15),
-                            child: ListTile(
-                              title: Text('List item 1', style: TextStyle(color: Colors.black),),
-                              isThreeLine: true,
-                              subtitle: Text('Secondary text\nTertiary text'),
-                              //  leading: Icon(Icons.label),
-                              //  trailing: ,
-                            ),
-
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.all(Radius.circular(15)),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.1),
-                                  blurRadius: 20,
-                                  spreadRadius: 5,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-
-              // body: ListView(
-              //   children: [
-              //     for (int count in List.generate(9, (index) => index + 1))
-              //       ListTile(
-              //         onTap: (){
-              //           Navigator.push(
-              //               context,
-              //             MaterialPageRoute(builder: (context) => EditTeacher())
-              //
-              //           );
-              //         },
-              //         title: Text('List item 1'),
-              //         isThreeLine: true,
-              //         subtitle: Text('Secondary text\nTertiary text'),
-              //       //  leading: Icon(Icons.label),
-              //       //  trailing: ,
-              //       ),
-              //   ],
-              // )
             ),
 
             ////////////////////////////// Student //////////////////////////////
@@ -353,8 +391,12 @@ class UniversityPanel extends StatelessWidget {
                 foregroundColor: Colors.black,
                 onPressed: () {
                   Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => AddStudent(FullName: FullName, ID: ID, UniversityID: UniversityID, Token: Token,))
+                      context,
+                      MaterialPageRoute(builder: (context) =>
+                          AddStudent(FullName: FullName,
+                            ID: ID,
+                            UniversityID: UniversityID,
+                            Token: Token,))
                   );
                 },
                 child: Icon(Icons.add),
@@ -367,7 +409,7 @@ class UniversityPanel extends StatelessWidget {
                     parent: AlwaysScrollableScrollPhysics(),
                   ),
                   itemCount: 20,
-                  itemBuilder: (BuildContext context, int index){
+                  itemBuilder: (BuildContext context, int index) {
                     return AnimationConfiguration.staggeredList(
 
                       position: index,
@@ -384,7 +426,8 @@ class UniversityPanel extends StatelessWidget {
                           child: Container(
                             margin: EdgeInsets.only(bottom: 15),
                             child: ListTile(
-                              title: Text('List item 1', style: TextStyle(color: Colors.black),),
+                              title: Text('List item 1',
+                                style: TextStyle(color: Colors.black),),
                               isThreeLine: true,
                               subtitle: Text('Secondary text\nTertiary text'),
                               //  leading: Icon(Icons.label),
@@ -392,7 +435,8 @@ class UniversityPanel extends StatelessWidget {
                             ),
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.all(Radius.circular(15)),
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(15)),
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.black.withOpacity(0.1),
@@ -439,7 +483,7 @@ class UniversityPanel extends StatelessWidget {
                     parent: AlwaysScrollableScrollPhysics(),
                   ),
                   //itemCount: 20,
-                  itemBuilder: (BuildContext context, int index){
+                  itemBuilder: (BuildContext context, int index) {
                     return AnimationConfiguration.staggeredList(
 
                       position: index,
@@ -457,22 +501,26 @@ class UniversityPanel extends StatelessWidget {
                           child: Container(
                             margin: EdgeInsets.only(bottom: 15),
                             child: ListTile(
-                              title: Text('Course title', style: TextStyle(color: Colors.black),),
+                              title: Text('Course title',
+                                style: TextStyle(color: Colors.black),),
                               isThreeLine: true,
                               subtitle: Text('Teacher name'),
                               trailing: IconButton(
                                 icon: Icon(Icons.account_circle_rounded),
-                                onPressed: (){
+                                onPressed: () {
                                   Navigator.push(
                                       context,
-                                      MaterialPageRoute(builder: (context) => StudentList(LessonName: "Lesson Name", LessonID: "Lesson ID",))
+                                      MaterialPageRoute(builder: (context) =>
+                                          StudentList(LessonName: "Lesson Name",
+                                            LessonID: "Lesson ID",))
                                   );
                                 }, // to show the list of its students
                               ),
                             ),
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.all(Radius.circular(15)),
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(15)),
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.black.withOpacity(0.1),
@@ -491,9 +539,7 @@ class UniversityPanel extends StatelessWidget {
             ),
           ],
         ),
-
       ),
-
     );
   }
 }

@@ -11,6 +11,7 @@ class User{
   late String Username;
   late String Email;
   late String Role;
+  late String Token;
 
   User({
     UniId,
@@ -18,7 +19,8 @@ class User{
     Password,
     Username,
     Email,
-    Role
+    Role,
+    Token,
   });
 
   factory User.fromJson(Map<String, dynamic> json){
