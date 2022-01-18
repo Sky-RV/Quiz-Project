@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:quiz/Pages/Teacher/TeacherProfile.dart';
 import 'package:quiz/Pages/Teacher/Tests/Descriptive/AddTest_Page_1.dart';
+import 'package:quiz/Pages/Teacher/Tests/Descriptive/DescriptiveDetails.dart';
 import 'package:quiz/Pages/Teacher/Tests/Optional/AddTest_Page_1_Optional.dart';
 
 import '../../main.dart';
 
-class TeacherPanel extends StatelessWidget {
+class TeacherPanel extends StatefulWidget {
 
   String FullName, ID, UniversityID, Token;
   TeacherPanel({Key? key,
@@ -16,7 +18,31 @@ class TeacherPanel extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  TeacherPanelPage createState() => TeacherPanelPage();
+
+}
+
+class TeacherPanelPage extends State<TeacherPanel> {
+
+  String EName = "Database";
+  String ETime = "1400-10-28 10:00 to 1400-10-28 10:10";
+
+  final List<String> ExamNames = [];
+  final List<String> ExamTimes = [];
+
+  @override
+  void initState() {
+    if(widget.Token == "ManageFinish"){
+      ExamNames.insert(0, EName);
+      ExamTimes.insert(0, ETime);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+
+    final double _w = MediaQuery.of(context).size.width;
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: _buildShrineTheme(),
@@ -48,18 +74,18 @@ class TeacherPanel extends StatelessWidget {
             children: <Widget>[
 
               UserAccountsDrawerHeader(
-                accountName: Text(FullName, style: TextStyle(fontSize: 20),),
+                accountName: Text(widget.FullName, style: TextStyle(fontSize: 20),),
                 accountEmail: Text("Teacher Email", style: TextStyle(fontSize: 14),),
                 currentAccountPicture: CircleAvatar(
                   backgroundColor: Colors.white,
-                  child: Text(FullName[0], style: TextStyle(fontSize: 30),),
+                  child: Text(widget.FullName[0], style: TextStyle(fontSize: 30),),
                 ),
                 decoration: BoxDecoration(
                     gradient: LinearGradient(colors: [
-                  Color(0xFF363671),
-                  Color(0xFF3E5196),
-                  Color(0xFF4E65B8),
-                ])),
+                      Color(0xFF363671),
+                      Color(0xFF3E5196),
+                      Color(0xFF4E65B8),
+                    ])),
               ),
               SizedBox(height: 20,),
               ListTile(
@@ -67,7 +93,7 @@ class TeacherPanel extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => TeacherPanel(FullName: FullName, ID: ID, UniversityID: UniversityID, Token: Token,)),
+                      MaterialPageRoute(builder: (context) => TeacherPanel(FullName: widget.FullName, ID: widget.ID, UniversityID: widget.UniversityID, Token: widget.Token,)),
                     );
                   },
                   child: Text("مدیریت آزمون ها", style: TextStyle(color: Colors.black),),
@@ -79,7 +105,7 @@ class TeacherPanel extends StatelessWidget {
                 title: TextButton(
                   onPressed: (){
                     Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => TeacherProfilePage(FullName: FullName, ID: ID, UniversityID: UniversityID, Token: Token,)));
+                        MaterialPageRoute(builder: (context) => TeacherProfilePage(FullName: widget.FullName, ID: widget.ID, UniversityID: widget.UniversityID, Token: widget.Token,)));
                   },
                   child: Text("پروفایل", style: TextStyle(color: Colors.black),),
                 ),
@@ -105,8 +131,8 @@ class TeacherPanel extends StatelessWidget {
                 title: TextButton(
                   onPressed: (){
                     Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => MyApp())
+                        context,
+                        MaterialPageRoute(builder: (context) => MyApp())
                     );
                   },
                   child: Text("خروج", style: TextStyle(color: Colors.black),),
@@ -134,8 +160,8 @@ class TeacherPanel extends StatelessWidget {
                 heroTag: 'Descriptive Exam',
                 onPressed: (){
                   Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => TestPage_1())
+                      context,
+                      MaterialPageRoute(builder: (context) => TestPage_1())
                   );
                 },
               ),
@@ -144,9 +170,9 @@ class TeacherPanel extends StatelessWidget {
             // Optional Exam
             Positioned(
               right: 30,
-              bottom: 40,
+              bottom: 80,
               child: FloatingActionButton(
-                backgroundColor: shrinePink400,
+                backgroundColor: shrinePink300,
                 heroTag: 'Optional Exam',
                 onPressed: (){
                   Navigator.push(
@@ -173,19 +199,59 @@ class TeacherPanel extends StatelessWidget {
         // ),
 
         // in case there is no test list
-        body: Center(
-          child: IconButton(
-            onPressed: (){
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => TestPage_1())
+        body: AnimationLimiter(
+          child: ListView.builder(
+            padding: EdgeInsets.all(_w / 30),
+            physics: BouncingScrollPhysics(
+              parent: AlwaysScrollableScrollPhysics(),
+            ),
+            itemCount: ExamNames.length,
+            itemBuilder: (BuildContext context, int index) {
+              return AnimationConfiguration.staggeredList(
+
+                position: index,
+                delay: Duration(milliseconds: 100),
+
+                child: SlideAnimation(
+                  duration: Duration(milliseconds: 2500),
+                  curve: Curves.fastLinearToSlowEaseIn,
+
+                  child: FadeInAnimation(
+                    curve: Curves.fastLinearToSlowEaseIn,
+                    duration: Duration(milliseconds: 2500),
+
+                    child: Container(
+                      margin: EdgeInsets.only(bottom: 15),
+                      child: ListTile(
+                        onTap: (){
+                          Navigator.push(context, 
+                          MaterialPageRoute(builder: (context) => DescriptiveDetails()));
+                        },
+                        title: Text('${ExamNames[index]}',
+                          style: TextStyle(color: Colors.black),),
+                        //isThreeLine: true,
+                        subtitle: Text('${ExamTimes[index]}'),
+                        //  leading: Icon(Icons.label),
+                        //  trailing: ,
+                      ),
+
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(15)),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 20,
+                            spreadRadius: 5,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
               );
             },
-            icon: Icon(
-              Icons.book,
-              color: Colors.black12,
-              size: 50,
-            ),
           ),
         ),
 

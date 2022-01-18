@@ -17,6 +17,8 @@ class AddTest_Page_2 extends StatelessWidget{
 
   String UsernameTXT = 'teacher', PasswordTXT = 'teacher';
 
+  final List<String> Exams = [];
+
   @override
   Widget build(BuildContext context) {
 
@@ -77,7 +79,7 @@ class AddTest_Page_2 extends StatelessWidget{
               onPressed: (){
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ManageQuestions())
+                  MaterialPageRoute(builder: (context) => ManageQuestions(Token: 'Token',))
                 );
               },
               child: Icon(Icons.arrow_forward_rounded, size: 40,)
@@ -92,7 +94,7 @@ class AddTest_Page_2 extends StatelessWidget{
           physics: BouncingScrollPhysics(
             parent: AlwaysScrollableScrollPhysics(),
           ),
-          itemCount: 5,
+          itemCount: Exams.length,
           itemBuilder: (BuildContext context, int index){
             return AnimationConfiguration.staggeredList(
 
@@ -119,14 +121,7 @@ class AddTest_Page_2 extends StatelessWidget{
                             MaterialPageRoute(builder: (context) => EditNewFile_Page(FileTitle: "FileTitle", FileType: "FileType", FileTime: "FileTime", FileDescription: "FileDescription", File: "File"))
                           );
                         },
-                          title: Text("Math Questions", style: TextStyle(color: Colors.black),),
-                          isThreeLine: true,
-                          subtitle: Text(
-                            "Question\n"
-                                "60 Minutes\n"
-                                "Access time",
-                            style: TextStyle(color: Colors.black54),
-                          ),
+                          title: Text("${Exams[index]}", style: TextStyle(color: Colors.black),),
                           trailing: PopupMenuButton(
                             icon: Icon(Icons.menu),
                             itemBuilder: (BuildContext context) => <PopupMenuEntry>[

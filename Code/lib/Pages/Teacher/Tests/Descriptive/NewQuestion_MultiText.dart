@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:quiz/Pages/Teacher/Tests/Descriptive/ManageQuestions.dart';
 
 class NewQuestionPage extends StatelessWidget{
 
@@ -16,6 +17,17 @@ class NewQuestionPage extends StatelessWidget{
 
       appBar: AppBar(
         backgroundColor: shrineBlue900,
+        actions: [
+          TextButton(
+            onPressed: (){
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ManageQuestions(Token: "Finish"))
+              );
+            },
+            child: Text("Add", style: TextStyle(color: Colors.white70),),
+          )
+        ],
         title: Center(
           child: Text(
             "Quiz Project",
@@ -101,7 +113,6 @@ class NewQuestionPage extends StatelessWidget{
                     children: [
                       ElevatedButton(
                         onPressed: (){
-
                         },
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.zero,
@@ -126,7 +137,10 @@ class NewQuestionPage extends StatelessWidget{
                       SizedBox(width: 90,),
                       ElevatedButton(
                         onPressed: (){
-
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => ManageQuestions(Token: "ManageQuestion"))
+                          );
                         },
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.zero,

@@ -1,9 +1,48 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:quiz/Pages/Teacher/TeacherPanel.dart';
 import 'package:quiz/Pages/Teacher/Tests/Descriptive/NewQuestion_MultiText.dart';
 
-class ManageQuestions extends StatelessWidget{
+class ManageQuestions extends StatefulWidget{
+
+  final String Token;
+  const ManageQuestions({
+    Key? key,
+    required this.Token
+}) : super(key: key);
+
+  @override
+  ManageQuestionPage createState() => ManageQuestionPage();
+
+}
+
+class ManageQuestionPage extends State<ManageQuestions>{
+
+  String Q1 = "What is ER?", A1 = "Entity–relationship";
+  String Q2 = "What is 2 x 2?", A2 = '4';
+  String S1 = "2", S2 = "1";
+
+  final List<String> QuestionsList = [];
+  final List<String> AnswersList = [];
+  final List<String> ScoresList = [];
+
+  @override
+  void initState() {
+    if(widget.Token == "ManageQuestion"){
+      QuestionsList.insert(0, Q1);
+      AnswersList.insert(0, A1);
+      ScoresList.insert(0, S1);
+    }
+    if(widget.Token == "Finish"){
+      QuestionsList.insert(0, Q1);
+      AnswersList.insert(0, A1);
+      ScoresList.insert(0, S1);
+      QuestionsList.insert(1, Q2);
+      AnswersList.insert(1, A2);
+      ScoresList.insert(1, S2);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +57,12 @@ class ManageQuestions extends StatelessWidget{
         backgroundColor: shrineBlue900,
         actions: [
           TextButton(
-            onPressed: (){},
+            onPressed: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => TeacherPanel(FullName: "Leo", ID: "1", UniversityID: "1", Token: "ManageFinish"))
+              );
+            },
             child: Text("Finish", style: TextStyle(color: Color(0xFFD4CCCA))),
           ),
         ],
@@ -36,8 +80,8 @@ class ManageQuestions extends StatelessWidget{
       floatingActionButton: FloatingActionButton(
         onPressed: (){
           Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => NewQuestionPage())
+              context,
+              MaterialPageRoute(builder: (context) => NewQuestionPage())
           );
         },
         backgroundColor: shrinePink300,
@@ -51,7 +95,7 @@ class ManageQuestions extends StatelessWidget{
           physics: BouncingScrollPhysics(
             parent: AlwaysScrollableScrollPhysics(),
           ),
-          itemCount: 5,
+          itemCount: QuestionsList.length,
           itemBuilder: (BuildContext context, int index){
             return AnimationConfiguration.staggeredList(
 
@@ -72,8 +116,8 @@ class ManageQuestions extends StatelessWidget{
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                       child: ListTile(
-                          title: Text("Questions", style: TextStyle(color: Colors.black),),
-                          subtitle: Text("Answers\n5", style: TextStyle(color: Colors.black),),
+                        title: Text("${QuestionsList[index]}", style: TextStyle(color: Colors.black),),
+                        subtitle: Text("${AnswersList[index]}\n${ScoresList[index]}", style: TextStyle(color: Colors.black),),
                         trailing: IconButton(
                           onPressed: (){},
                           icon: Icon(Icons.delete, color: Colors.red,),
@@ -102,6 +146,7 @@ class ManageQuestions extends StatelessWidget{
 
     );
   }
+
 }
 
 ThemeData _buildShrineTheme() {
