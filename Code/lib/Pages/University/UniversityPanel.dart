@@ -13,14 +13,25 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:quiz/Pages/University/LessonManagement/StudentList.dart';
 import 'package:http/http.dart' as http;
 
-class UniversityPanel extends StatelessWidget {
-  String FullName, ID, UniversityID, Token;
-  UniversityPanel({
+
+
+class UniversityPanel extends StatefulWidget {
+
+  final String FullName, ID, UniversityID, Token;
+  const UniversityPanel({
     Key? key,
     required this.FullName,
     required this.ID,
     required this.UniversityID,
-    required this.Token}) : super(key: key);
+    required this.Token,
+    myToken}) : super(key: key);
+
+  @override
+  UniversityPanelPage createState() => UniversityPanelPage();
+}
+
+class UniversityPanelPage extends State<UniversityPanel>{
+
 
   // Future<List<User>> getUsers(String STR, String str) async{
   //   String url = "http://localhost:3000/api/v1/user/list";
@@ -111,10 +122,44 @@ class UniversityPanel extends StatelessWidget {
   //   teacherList = getUsers();
   // }
 
+  final List<String> Teachers_Name = [];
+  final List<String> Teachers_Emails = [];
+
+  final List<String> Students_Name = [];
+  final List<String> Students_Emails = [];
+
+  final List<String> Lessons_Name = [];
+
+  // final List<String> Teachers_Name = <String> ['Naji', 'Leo'];
+  // final List<String> Teachers_Emails = <String> ['Naji@gmail.com', 'Leo@gmail.com'];
+  //
+  // final List<String> Students_Name = <String> ['Yeganeh', 'Peni'];
+  // final List<String> Students_Emails = <String> ['Yeganeh@gmail.com', 'Peni@gmail.com'];
+  //
+  // final List<String> Lessons_Name = <String> ['Math', 'Database'];
+
+  @override
+  void initState() {
+    if(widget.ID == 'Teacher'){
+      Teachers_Name.insert(0, 'Leo');
+      Teachers_Emails.insert(0, 'Leo@gmail.com');
+    }
+    if(widget.ID == "Student"){
+      Students_Name.insert(0, 'Peni');
+      Students_Emails.insert(0, "Peni@gmail.com");
+    }
+    if(widget.ID == "Lesson"){
+      Lessons_Name.insert(0, 'Database');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
 
-    late Future<List<User>> studentList;
+    String ID = widget.ID;
+    String FullName = widget.FullName;
+    String UniversityID = widget.UniversityID;
+    String Token = widget.Token;
 
     final double _w = MediaQuery.of(context).size.width;
 
@@ -295,83 +340,71 @@ class UniversityPanel extends StatelessWidget {
                 child: Icon(Icons.add),
               ),
 
-              body: Center(
-                child: FutureBuilder <List<User>>(
-                  future: teacherList,
-                  builder: (context, snapshop){
-                    if(snapshop.hasData){
-                      List<User>? user = snapshop.data;
-                      return ListView.builder(
-                        itemCount: user!.length,
-                        itemBuilder: (BuildContext context, int index){
-                          return Container(
-                            height: 75,
-                            child: Center(
-                              child: Text(user[index].FullName),
-                            ),
-                          );
-                        },
-                      );
-                    }
-                    else if (snapshop.hasError){
-                      return Text("${snapshop.error}");
-                    }
-                    return CircularProgressIndicator();
-                  },
-                )
-              ),
-
-              // body: AnimationLimiter(
-              //   child: ListView.builder(
-              //     padding: EdgeInsets.all(_w / 30),
-              //     physics: BouncingScrollPhysics(
-              //       parent: AlwaysScrollableScrollPhysics(),
-              //     ),
-              //     //itemCount: ,
-              //     itemBuilder: (BuildContext context, int index) {
-              //       return AnimationConfiguration.staggeredList(
-              //
-              //         position: index,
-              //         delay: Duration(milliseconds: 100),
-              //
-              //         child: SlideAnimation(
-              //           duration: Duration(milliseconds: 2500),
-              //           curve: Curves.fastLinearToSlowEaseIn,
-              //
-              //           child: FadeInAnimation(
-              //             curve: Curves.fastLinearToSlowEaseIn,
-              //             duration: Duration(milliseconds: 2500),
-              //
-              //             child: Container(
-              //               margin: EdgeInsets.only(bottom: 15),
-              //               child: ListTile(
-              //                 title: Text('List item 1',
-              //                   style: TextStyle(color: Colors.black),),
-              //                 isThreeLine: true,
-              //                 subtitle: Text('Secondary text\nTertiary text'),
-              //                 //  leading: Icon(Icons.label),
-              //                 //  trailing: ,
-              //               ),
-              //
-              //               decoration: BoxDecoration(
-              //                 color: Colors.white,
-              //                 borderRadius: BorderRadius.all(
-              //                     Radius.circular(15)),
-              //                 boxShadow: [
-              //                   BoxShadow(
-              //                     color: Colors.black.withOpacity(0.1),
-              //                     blurRadius: 20,
-              //                     spreadRadius: 5,
-              //                   ),
-              //                 ],
-              //               ),
-              //             ),
-              //           ),
-              //         ),
-              //       );
-              //     },
-              //   ),
+              // body: ListView.builder(
+              //   itemCount: Teachers_Name.length,
+              //   itemBuilder: (BuildContext context, int index){
+              //     return Container(
+              //       height: 50,
+              //       margin: EdgeInsets.all(2),
+              //       child: Text(
+              //         '${Teachers_ID[index]} (${Teachers_Name[index]}',
+              //         style: TextStyle(fontSize: 18, color: Colors.black),
+              //       ),
+              //     );
+              //   },
               // ),
+
+              body: AnimationLimiter(
+                child: ListView.builder(
+                  padding: EdgeInsets.all(_w / 30),
+                  physics: BouncingScrollPhysics(
+                    parent: AlwaysScrollableScrollPhysics(),
+                  ),
+                  itemCount: Teachers_Name.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return AnimationConfiguration.staggeredList(
+
+                      position: index,
+                      delay: Duration(milliseconds: 100),
+
+                      child: SlideAnimation(
+                        duration: Duration(milliseconds: 2500),
+                        curve: Curves.fastLinearToSlowEaseIn,
+
+                        child: FadeInAnimation(
+                          curve: Curves.fastLinearToSlowEaseIn,
+                          duration: Duration(milliseconds: 2500),
+
+                          child: Container(
+                            margin: EdgeInsets.only(bottom: 15),
+                            child: ListTile(
+                              title: Text('${Teachers_Name[index]}',
+                                style: TextStyle(color: Colors.black),),
+                              //isThreeLine: true,
+                              subtitle: Text('${Teachers_Emails[index]}'),
+                              //  leading: Icon(Icons.label),
+                              //  trailing: ,
+                            ),
+
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(15)),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.1),
+                                  blurRadius: 20,
+                                  spreadRadius: 5,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
 
             ),
 
@@ -408,7 +441,7 @@ class UniversityPanel extends StatelessWidget {
                   physics: BouncingScrollPhysics(
                     parent: AlwaysScrollableScrollPhysics(),
                   ),
-                  itemCount: 20,
+                  itemCount: Students_Emails.length,
                   itemBuilder: (BuildContext context, int index) {
                     return AnimationConfiguration.staggeredList(
 
@@ -426,10 +459,14 @@ class UniversityPanel extends StatelessWidget {
                           child: Container(
                             margin: EdgeInsets.only(bottom: 15),
                             child: ListTile(
-                              title: Text('List item 1',
+                              title: Text('${Students_Name[index]}',
                                 style: TextStyle(color: Colors.black),),
-                              isThreeLine: true,
-                              subtitle: Text('Secondary text\nTertiary text'),
+                             // isThreeLine: true,
+                              subtitle: Text('${Students_Emails[index]}',
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.black
+                              ),),
                               //  leading: Icon(Icons.label),
                               //  trailing: ,
                             ),
@@ -471,7 +508,7 @@ class UniversityPanel extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => AddLesson())
+                      MaterialPageRoute(builder: (context) => AddLesson(ID: "Lesson", UniversityID: UniversityID, FullName: FullName, Token: Token,))
                   );
                 },
                 child: Icon(Icons.add),
@@ -482,7 +519,7 @@ class UniversityPanel extends StatelessWidget {
                   physics: BouncingScrollPhysics(
                     parent: AlwaysScrollableScrollPhysics(),
                   ),
-                  //itemCount: 20,
+                  itemCount: Lessons_Name.length,
                   itemBuilder: (BuildContext context, int index) {
                     return AnimationConfiguration.staggeredList(
 
@@ -497,26 +534,17 @@ class UniversityPanel extends StatelessWidget {
                           curve: Curves.fastLinearToSlowEaseIn,
                           duration: Duration(milliseconds: 2500),
 
-                          // the shape of cards
                           child: Container(
                             margin: EdgeInsets.only(bottom: 15),
                             child: ListTile(
-                              title: Text('Course title',
+                              title: Text('${Lessons_Name[index]}',
                                 style: TextStyle(color: Colors.black),),
-                              isThreeLine: true,
-                              subtitle: Text('Teacher name'),
-                              trailing: IconButton(
-                                icon: Icon(Icons.account_circle_rounded),
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(builder: (context) =>
-                                          StudentList(LessonName: "Lesson Name",
-                                            LessonID: "Lesson ID",))
-                                  );
-                                }, // to show the list of its students
-                              ),
+                              //isThreeLine: true,
+                              subtitle: Text('${Teachers_Name[index]}'),
+                              //  leading: Icon(Icons.label),
+                              //  trailing: ,
                             ),
+
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.all(
@@ -542,6 +570,7 @@ class UniversityPanel extends StatelessWidget {
       ),
     );
   }
+
 }
 
 ThemeData _buildShrineTheme() {

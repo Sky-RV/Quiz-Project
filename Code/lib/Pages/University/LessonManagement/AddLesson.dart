@@ -5,50 +5,29 @@ import 'package:quiz/Pages/University/UniversityPanel.dart';
 import 'package:quiz/Pages/University/LessonManagement/StudentList.dart';
 import 'package:http/http.dart' as http;
 
-class AddLesson extends StatelessWidget {
+class AddLesson extends StatefulWidget {
+
+  final String FullName, ID, UniversityID, Token;
+  const AddLesson({
+    Key? key,
+    required this.FullName,
+    required this.ID,
+    required this.UniversityID,
+    required this.Token}) : super(key: key);
+
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: _buildShrineTheme(),
-      title: 'Quiz Project',
-      home: AddLesson_Page(),
-    );
-  }
+  AddLesson_Page createState() => AddLesson_Page();
 }
 
-class AddLesson_Page extends StatefulWidget {
-  @override
-  State<AddLesson_Page> createState() => _AddLesson_State();
-}
+class AddLesson_Page extends State<AddLesson>{
 
-class _AddLesson_State extends State<AddLesson_Page>{
-
-  String? mySelection = null;
-  final String url = "http://localhost:3000/api/v1/user/list";
-  List data = [];
-  Map admin = {
-    'uniId': 1,
-    'id': 1
-  };
-
-  Future<String> getData() async{
-    var res = await http.get(Uri.parse(url));
-    var resBody = json.decode(res.body);
-
-    setState(() {
-      data = resBody;
-    });
-
-    print(resBody);
-
-    return "Success";
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    this.getData();
+  String? selectValue = null;
+  List<DropdownMenuItem<String>> get dropdownItems{
+    List<DropdownMenuItem<String>> menuItems = [
+      DropdownMenuItem(child: Text("Leo"),value: "Teacher"),
+      //  DropdownMenuItem(child: Text("Answers"),value: "Answers"),
+    ];
+    return menuItems;
   }
 
   @override
@@ -65,7 +44,12 @@ class _AddLesson_State extends State<AddLesson_Page>{
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.white,),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => UniversityPanel(FullName: widget.FullName, ID: "Lesson", UniversityID: widget.UniversityID, Token: widget.Token))
+            );
+          },
         ),
         backgroundColor: shrineBlue900,
         title: Center(
@@ -114,19 +98,14 @@ class _AddLesson_State extends State<AddLesson_Page>{
 
                           // teacher's list input
                           DropdownButtonFormField(
-                              value: mySelection,
+                              value: selectValue,
                               style: TextStyle(color: Colors.black),
                               onChanged: (String? newValue) {
                                 setState(() {
-                                  mySelection = newValue!;
+                                  selectValue = newValue!;
                                 });
                               },
-                            items: data.map((item) {
-                              return new DropdownMenuItem(
-                                child: new Text(item['fullName']),
-                                value: item['id'].toString(),
-                              );
-                            }).toList(),
+                            items: dropdownItems,
                           ),
                         ],
                       ),
@@ -142,7 +121,7 @@ class _AddLesson_State extends State<AddLesson_Page>{
                         onPressed: (){
                           Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => StudentList(LessonName: "Lesson Name", LessonID: "Lesson ID",))
+                              MaterialPageRoute(builder: (context) => StudentList(LessonName: "Database", LessonID: "1",))
                           );
                         },
                         style: ElevatedButton.styleFrom(

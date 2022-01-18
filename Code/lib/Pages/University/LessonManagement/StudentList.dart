@@ -87,7 +87,7 @@ class StudentList extends StatelessWidget {
               physics: BouncingScrollPhysics(
                   parent: AlwaysScrollableScrollPhysics()
               ),
-              itemCount: 20,
+              itemCount: 1,
               itemBuilder: (BuildContext context, int index){
                 return AnimationConfiguration.staggeredList(
 
@@ -111,8 +111,62 @@ class StudentList extends StatelessWidget {
                         margin: EdgeInsets.only(bottom: 15),
 
                         child: ListTile(
-                          title: Text('Student Name', style: TextStyle(color: Colors.black),),
-                          leading: Icon(Icons.account_circle_rounded),
+                          title: Text('Peni', style: TextStyle(color: Colors.black),),
+                          leading: IconButton(
+                            icon: Icon(Icons.account_circle_rounded),
+                            onPressed: (){
+                              // Create Button
+                              Widget ADD = FlatButton(
+                                child: Text("بله", style: TextStyle(color: shrinePink400),),
+                                // onPressed: (){
+                                //   Fluttertoast.showToast(
+                                //       msg: "دانشجو اضافه شد.",
+                                //       toastLength: Toast.LENGTH_SHORT,
+                                //       gravity: ToastGravity.CENTER,
+                                //       fontSize: 16.0
+                                //   );
+                                // },
+                                onPressed: (){
+                                  //Navigator.of(context).pop();
+                                  final scaffold = ScaffoldMessenger.of(context);
+                                  scaffold.showSnackBar(
+                                    SnackBar(
+                                      content: const Text('دانشجو اضافه شد.'),
+                                      action: SnackBarAction(label: 'بازگشت', onPressed: scaffold.hideCurrentSnackBar),
+                                    ),
+                                  );
+                                },
+                              );
+
+                              Widget CANCEL = FlatButton(
+                                child: Text("خیر", style: TextStyle(color: shrinePink300),),
+                                onPressed: (){
+                                  Navigator.pop(context);
+                                },
+                              );
+
+                              // Create Alert Dialog
+                              String message = " آیا میخواهید " + 'Peni' + " را اضافه کنید؟ ";
+                              // NAME must be the name of student
+
+                              AlertDialog alert = AlertDialog(
+                                title: Text('اضافه کردن دانشجو', style: TextStyle(color: Colors.black),),
+                                content: Text(message,  style: TextStyle(color: Colors.black),),
+                                actions: [
+                                  ADD,
+                                  CANCEL
+                                ],
+                              );
+
+                              // Show the Dialog
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return alert;
+                                },
+                              );
+                            },
+                          ),
                         ),
 
                         decoration: BoxDecoration(
@@ -140,7 +194,6 @@ class StudentList extends StatelessWidget {
 
     );
   }
-
   void showAlertDialog(BuildContext context, String NAME) {
     // Create Button
     Widget ADD = FlatButton(
@@ -193,7 +246,6 @@ class StudentList extends StatelessWidget {
       },
     );
   }
-
   displayDialofInput(BuildContext context) async {
     return showDialog(
       context: context,
@@ -230,6 +282,8 @@ class StudentList extends StatelessWidget {
     );
   }
 }
+
+
 
 ThemeData _buildShrineTheme() {
   final ThemeData base = ThemeData.light();
