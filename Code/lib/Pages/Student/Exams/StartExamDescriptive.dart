@@ -3,6 +3,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:quiz/Pages/Student/Exams/CounDownTimerState.dart';
+import 'package:quiz/Pages/Student/Exams/EndExamDescriptive.dart';
 import 'package:quiz/main.dart';
 
 class StartExam extends StatefulWidget{
@@ -57,7 +58,10 @@ class StartExamPage extends State<StartExam>{
           actions: [
             TextButton(
               onPressed: (){
-                
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => EndExamDescriptive())
+                );
               },
               child: Text("Finish", style: TextStyle(color: Color(0xDCFFFFFF), fontSize: 18),),
             )
