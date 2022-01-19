@@ -155,10 +155,6 @@ class _MyHomePageState extends State<MyHomePage> {
               ListTile(
                 title: TextButton(
                   onPressed: (){
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => StudentPanelPage())
-                    );
                   },
                   child: Text("خانه", style: TextStyle(color: Colors.white),),
                 ),

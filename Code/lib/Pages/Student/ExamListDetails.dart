@@ -4,12 +4,13 @@ import 'package:quiz/main.dart';
 
 class ExamListDetails extends StatelessWidget {
 
-  String TestID, StudentID, UniversityID;
+  String ExamName, ExamTimeStart, ExamType, ExamTimeEnd;
   ExamListDetails({
     Key? key,
-    required this.TestID,
-    required this.StudentID,
-    required this.UniversityID
+    required this.ExamName,
+    required this.ExamTimeStart,
+    required this.ExamTimeEnd,
+    required this.ExamType,
 }) :super(key: key);
 
   @override
@@ -31,71 +32,6 @@ class ExamListDetails extends StatelessWidget {
               style: TextStyle(color: Colors.white),
               textAlign: TextAlign.center,
             ),
-          ),
-        ),
-
-        ////////////////////////////// DRAWER //////////////////////////////
-        drawer: Drawer(
-          child: ListView(
-            children: <Widget>[
-
-              UserAccountsDrawerHeader(
-                accountName: Text('Student Name', style: TextStyle(fontSize: 20),),
-                accountEmail: Text("Teacher Email", style: TextStyle(fontSize: 14),),
-                currentAccountPicture: CircleAvatar(
-                  backgroundColor: Colors.white,
-                  child: Text("S", style: TextStyle(fontSize: 30),),
-                ),
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(colors: [
-                      Color(0xFF363671),
-                      Color(0xFF3E5196),
-                      Color(0xFF4E65B8),
-                    ])),
-              ),
-              SizedBox(height: 20,),
-
-              ListTile(
-                title: TextButton(
-                  onPressed: (){},
-                  // onPressed: (){
-                  //   Navigator.push(context,
-                  //       MaterialPageRoute(builder: (context) => TeacherProfilePage(FullName: FullName, ID: ID, UniversityID: UniversityID)));
-                  // },
-                  child: Text("پروفایل", style: TextStyle(color: Colors.black),),
-                ),
-                leading: Icon(Icons.account_circle),
-              ),
-
-              SizedBox(height: 10,),
-              ListTile(
-                title: TextButton(
-                  onPressed: (){
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(builder: (context) => )
-                    // );
-                  },
-                  child: Text("تغییر رمز عبور", style: TextStyle(color: Colors.black),),
-                ),
-                leading: Icon(Icons.vpn_key),
-              ),
-
-              SizedBox(height: 10,),
-              ListTile(
-                title: TextButton(
-                  onPressed: (){
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => MyApp())
-                    );
-                  },
-                  child: Text("خروج", style: TextStyle(color: Colors.black),),
-                ),
-                leading: Icon(Icons.exit_to_app),
-              ),
-
-            ],
           ),
         ),
 
@@ -174,7 +110,7 @@ class ExamListDetails extends StatelessWidget {
                                   Column(
                                       children:[
                                         Padding(padding: EdgeInsets.symmetric(vertical: 10),
-                                        child: Text('Math Exam', style: TextStyle(fontSize: 16, color: Colors.black)),)
+                                        child: Text(ExamName, style: TextStyle(fontSize: 16, color: Colors.black)),)
                                       ]
                                   ),
                                 ]
@@ -187,7 +123,7 @@ class ExamListDetails extends StatelessWidget {
                                   Column(
                                       children:[
                                         Padding(padding: EdgeInsets.symmetric(vertical: 10),
-                                          child: Text('Descriptive', style: TextStyle(fontSize: 16, color: Colors.black)),)
+                                          child: Text(ExamType, style: TextStyle(fontSize: 16, color: Colors.black)),)
                                       ]
                                   ),
                                 ]
@@ -200,7 +136,7 @@ class ExamListDetails extends StatelessWidget {
                                   Column(
                                       children:[
                                         Padding(padding: EdgeInsets.symmetric(vertical: 10),
-                                          child: Text('10', style: TextStyle(fontSize: 16, color: Colors.black)),)
+                                          child: Text('2', style: TextStyle(fontSize: 16, color: Colors.black)),)
                                       ]
                                   ),
                                 ]
@@ -213,7 +149,7 @@ class ExamListDetails extends StatelessWidget {
                                   Column(
                                       children:[
                                         Padding(padding: EdgeInsets.symmetric(vertical: 10),
-                                          child: Text('1400-10-22    16:00', style: TextStyle(fontSize: 16, color: Colors.black)),)
+                                          child: Text(ExamTimeStart, style: TextStyle(fontSize: 16, color: Colors.black)),)
                                       ]
                                   ),
                                 ]
@@ -226,7 +162,7 @@ class ExamListDetails extends StatelessWidget {
                                   Column(
                                       children:[
                                         Padding(padding: EdgeInsets.symmetric(vertical: 10),
-                                          child: Text('1400-10-22    18:00', style: TextStyle(fontSize: 16, color: Colors.black)),)
+                                          child: Text(ExamTimeEnd, style: TextStyle(fontSize: 16, color: Colors.black)),)
                                       ]
                                   ),
                                 ]

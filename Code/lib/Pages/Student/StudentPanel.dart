@@ -5,10 +5,10 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:quiz/Pages/Student/ExamListDetails.dart';
 import 'package:quiz/main.dart';
 
-class StudentPanel extends StatelessWidget{
+class StudentPanel extends StatefulWidget{
 
-  String FullName, ID, UniversityID, Token;
-  StudentPanel({
+  final String FullName, ID, UniversityID, Token;
+  const StudentPanel({
     Key? key,
     required this.FullName,
     required this.ID,
@@ -17,27 +17,12 @@ class StudentPanel extends StatelessWidget{
 }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: _buildShrineTheme(),
-      title: 'Quiz Project',
-      home: StudentPanelPage(),
-    );
-  }
+  StudentPanelPage createState() => StudentPanelPage();
+
 }
 
-class StudentPanelPage extends StatefulWidget{
-  @override
-  _StudentPanelPage createState() => _StudentPanelPage();
-}
+class StudentPanelPage extends State<StudentPanel>{
 
-class _StudentPanelPage extends State<StudentPanelPage>{
-  // String FullName, ID, UniversityID;
-  // StudentPanel({Key? key,
-  //   required this.FullName,
-  //   required this.ID,
-  //   required this.UniversityID
-  // }) : super(key: key);
 
   int _counterIndex = 0;
   static const List<Widget> _options = <Widget> [
@@ -49,6 +34,31 @@ class _StudentPanelPage extends State<StudentPanelPage>{
     setState(() {
       _counterIndex = index;
     });
+  }
+
+  List<String> DescExamName = [];
+  List<String> DescExamNumber = [];
+  List<String> DescExamTime = [];
+
+  List<String> TestExamName = [];
+  List<String> TestExamNumber = [];
+  List<String> TestExamTime = [];
+
+  String Dname = "Database Exam", Dnumber = '2', Dtime = '1400-10-28 10:00';
+  String Tname = "Math Exam", Tnumber = '2', Ttime = '1400-10-29 16:30';
+
+  @override
+  void initState() {
+    if(widget.Token == 'desc'){
+      DescExamName.insert(0, Dname);
+      DescExamNumber.insert(0, Dnumber);
+      DescExamTime.insert(0, Dtime);
+    }
+    if(widget.Token == 'test'){
+      TestExamName.insert(0, Tname);
+      TestExamNumber.insert(0, Tnumber);
+      TestExamTime.insert(0, Ttime);
+    }
   }
 
   @override
@@ -182,7 +192,27 @@ Widget DashboardPage(BuildContext context, Widget type){
   Widget onlineExams = Text('Online Exams', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold, color: Colors.black));
 
   // Dashboard -> close exams and exams in process
-  // Online Exams -> all of the exams
+  // Online Exams -> all of the exam
+
+  List<String> ExamName = [];
+  List<String> ExamNumber = [];
+  List<String> ExamTimeStart = [];
+  List<String> ExamTimeEnd = [];
+  List<String> ExamType = ['Sescriptive', "Optional"];
+
+
+  String Dname = "Database Exam", Dnumber = '2', DtimeS = '1400-10-28 10:00', DtimeE = '1400-10-28 10:10';
+  String Tname = "Math Exam", Tnumber = '2', TtimeS = '1400-10-29 16:30', TtimeE = '1400-10-29 17:00';
+
+  ExamName.insert(0, Dname);
+  ExamNumber.insert(0, Dnumber);
+  ExamTimeStart.insert(0, DtimeS);
+  ExamTimeEnd.insert(0, DtimeE);
+
+  ExamName.insert(1, Tname);
+  ExamNumber.insert(1, Tnumber);
+  ExamTimeStart.insert(1, TtimeS);
+  ExamTimeEnd.insert(1, TtimeE);
 
   if (type.toString() == dashboard.toString()){
     return AnimationLimiter(
@@ -191,7 +221,7 @@ Widget DashboardPage(BuildContext context, Widget type){
         physics: BouncingScrollPhysics(
           parent: AlwaysScrollableScrollPhysics(),
         ),
-        itemCount: 5,
+        itemCount: 2,
         itemBuilder: (BuildContext context, int index){
           return AnimationConfiguration.staggeredList(
 
@@ -210,18 +240,26 @@ Widget DashboardPage(BuildContext context, Widget type){
                   margin: EdgeInsets.only(bottom: 15),
 
                   child: ListTile(
-                    title: Text('List item 1', style: TextStyle(color: Colors.black),),
-                    subtitle: Text('Start Time : 1400-10-22  16:00'),
+                    title: Text('${ExamName[index]}', style: TextStyle(color: Colors.black),),
+                    subtitle: Text('Start Time : ${ExamTimeStart[index]}'),
                     // test or text
                     leading: Icon(Icons.article_sharp),
                     // test numbers
-                    trailing: Text("10", style: TextStyle(color: Colors.black38),),
+                    trailing: Text("${ExamNumber[index]}", style: TextStyle(color: Colors.black38),),
                     onTap: (){
                       // Go for details and start
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => ExamListDetails(StudentID: "1", TestID: "1", UniversityID: "1",))
-                      );
+                      if(index == 0){
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ExamListDetails(ExamName: ExamName[index], ExamTimeStart: ExamTimeStart[index], ExamTimeEnd: ExamTimeEnd[index], ExamType: "Descriptive",) )
+                        );
+                      }
+                      else if(index == 1){
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ExamListDetails(ExamName: ExamName[index], ExamTimeStart: ExamTimeStart[index], ExamTimeEnd: ExamTimeEnd[index], ExamType: "Optional",) )
+                        );
+                      }
                     },
                   ),
 
@@ -257,7 +295,7 @@ Widget DashboardPage(BuildContext context, Widget type){
           physics: BouncingScrollPhysics(
             parent: AlwaysScrollableScrollPhysics(),
           ),
-          itemCount: 5,
+          itemCount: 2,
           itemBuilder: (BuildContext context, int index){
             return AnimationConfiguration.staggeredList(
 
@@ -276,18 +314,26 @@ Widget DashboardPage(BuildContext context, Widget type){
                     margin: EdgeInsets.only(bottom: 15),
 
                     child: ListTile(
-                      title: Text('List item 1', style: TextStyle(color: shrinePink400),),
-                      subtitle: Text('Start Time : 1400-10-22  16:00'),
+                      title: Text('${ExamName[index]}', style: TextStyle(color: shrinePink400),),
+                      subtitle: Text('Start Time : ${ExamTimeStart[index]}'),
                       // test or text
                       leading: Icon(Icons.article_sharp),
                       // test numbers
-                      trailing: Text("10", style: TextStyle(color: Colors.black38),),
+                      trailing: Text("${ExamNumber[index]}", style: TextStyle(color: Colors.black38),),
                       onTap: (){
                         // Go for details and start
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => ExamListDetails(StudentID: "1", TestID: "1", UniversityID: "1",))
-                        );
+                        if(index == 0){
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => ExamListDetails(ExamName: ExamName[index], ExamTimeStart: ExamTimeStart[index], ExamTimeEnd: ExamTimeEnd[index], ExamType: "Descriptive",) )
+                          );
+                        }
+                        else if(index == 1){
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => ExamListDetails(ExamName: ExamName[index], ExamTimeStart: ExamTimeStart[index], ExamTimeEnd: ExamTimeEnd[index], ExamType: "Optional",) )
+                          );
+                        }
                       },
                     ),
 
