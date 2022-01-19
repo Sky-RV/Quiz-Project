@@ -8,7 +8,7 @@ class CountDownTimerState extends GetxController{
 
   void StateTimerStart(){
 
-    _timer = Timer.periodic(Duration(minutes: 9, seconds: 59), (timer) {
+    _timer = Timer.periodic(Duration(minutes: 9, milliseconds: 59), (timer) {
 
       if(SCount > 0){
         SCount--;

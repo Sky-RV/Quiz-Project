@@ -1,17 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:quiz/Pages/Student/StudentPanel.dart';
 import 'package:quiz/Pages/Teacher/TeacherPanel.dart';
 
-class EndExamDescriptive extends StatefulWidget{
+class Scoring extends StatefulWidget{
 
 
   @override
-  EndExamDescriptivePage createState() => EndExamDescriptivePage();
+  ScorePage createState() => ScorePage();
 
 }
 
-class EndExamDescriptivePage extends State<EndExamDescriptive>{
+class ScorePage extends State<Scoring>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,17 +20,6 @@ class EndExamDescriptivePage extends State<EndExamDescriptive>{
       appBar: AppBar(
         backgroundColor: shrineBlue900,
         title: Text("Quiz Project", style: TextStyle(color: Colors.white),),
-        actions: [
-          TextButton(
-            child: Text("Home", style: TextStyle(color: Colors.white70, fontSize: 18),),
-            onPressed: (){
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => StudentPanel(FullName: "FullName", ID: "ID", UniversityID: "UniversityID", Token: "desc"))
-              );
-            },
-          )
-        ],
       ),
 
       ////////////////////////////// BODY //////////////////////////////
@@ -73,7 +61,7 @@ class EndExamDescriptivePage extends State<EndExamDescriptive>{
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)
                     ),
-                   // color: Color(0xFFDBA1A1),
+                    color: Color(0xFFDBA1A1),
                     elevation: 5,
                     semanticContainer: true,
                     clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -83,9 +71,9 @@ class EndExamDescriptivePage extends State<EndExamDescriptive>{
                         children: [
                           Text("QUESTION : What is ER?", style: TextStyle(color: Colors.black, fontSize: 20),),
                           SizedBox(height: 25,),
-                          Text("ANSWER : Entity–relationship", style: TextStyle(color: Colors.black, fontSize: 18),),
+                          Text("ANSWER : Entity–relationship", style: TextStyle(color: Colors.red, fontSize: 18),),
                           SizedBox(height: 25,),
-                          //Text("SCORE : 2", style: TextStyle(color: Colors.red, fontSize: 18),),
+                          Text("SCORE : 2", style: TextStyle(color: Colors.red, fontSize: 18),),
                         ],
                       ),
                     ),
@@ -105,7 +93,7 @@ class EndExamDescriptivePage extends State<EndExamDescriptive>{
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)
                     ),
-                    //color: Color(0xFFB2DBA1),
+                    color: Color(0xFFB2DBA1),
                     elevation: 5,
                     semanticContainer: true,
                     clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -115,9 +103,9 @@ class EndExamDescriptivePage extends State<EndExamDescriptive>{
                         children: [
                           Text("QUESTION : What is 2 x 2?", style: TextStyle(color: Colors.black, fontSize: 20),),
                           SizedBox(height: 25,),
-                          Text("ANSWER : 4", style: TextStyle(color: Colors.black, fontSize: 18),),
+                          Text("ANSWER : 4", style: TextStyle(color: Colors.green, fontSize: 18),),
                           SizedBox(height: 25,),
-                         // Text("SCORE : +1", style: TextStyle(color: Colors.green, fontSize: 18),),
+                          Text("SCORE : +1", style: TextStyle(color: Colors.green, fontSize: 18),),
                         ],
                       ),
                     ),
@@ -126,18 +114,13 @@ class EndExamDescriptivePage extends State<EndExamDescriptive>{
 
                 SizedBox(height: 20,),
 
-                Divider(
-                  color: shrineBlue900,
-                  thickness: 2,
-                ),
-
                 Container(
                   child: Center(
                     child: Text(
-                      'Score : - \n\nTotal : 3',
+                      'Score : 1\n\nTotal : 3',
                       style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20
+                          color: Colors.black,
+                          fontSize: 20
                       ),
                     ),
                   ),

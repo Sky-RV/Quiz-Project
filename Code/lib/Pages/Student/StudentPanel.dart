@@ -3,6 +3,7 @@ import 'dart:js';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:quiz/Pages/Student/ExamListDetails.dart';
+import 'package:quiz/Pages/Student/Exams/Scoring.dart';
 import 'package:quiz/main.dart';
 
 class StudentPanel extends StatefulWidget{
@@ -40,9 +41,9 @@ class StudentPanelPage extends State<StudentPanel>{
   List<String> DescExamNumber = [];
   List<String> DescExamTime = [];
 
-  List<String> TestExamName = [];
-  List<String> TestExamNumber = [];
-  List<String> TestExamTime = [];
+  // List<String> TestExamName = [];
+  // List<String> TestExamNumber = [];
+  // List<String> TestExamTime = [];
 
   String Dname = "Database Exam", Dnumber = '2', Dtime = '1400-10-28 10:00';
   String Tname = "Math Exam", Tnumber = '2', Ttime = '1400-10-29 16:30';
@@ -54,11 +55,11 @@ class StudentPanelPage extends State<StudentPanel>{
       DescExamNumber.insert(0, Dnumber);
       DescExamTime.insert(0, Dtime);
     }
-    if(widget.Token == 'test'){
-      TestExamName.insert(0, Tname);
-      TestExamNumber.insert(0, Tnumber);
-      TestExamTime.insert(0, Ttime);
-    }
+    // if(widget.Token == 'test'){
+    //   TestExamName.insert(0, Tname);
+    //   TestExamNumber.insert(0, Tnumber);
+    //   TestExamTime.insert(0, Ttime);
+    // }
   }
 
   @override
@@ -209,10 +210,10 @@ Widget DashboardPage(BuildContext context, Widget type){
   ExamTimeStart.insert(0, DtimeS);
   ExamTimeEnd.insert(0, DtimeE);
 
-  ExamName.insert(1, Tname);
-  ExamNumber.insert(1, Tnumber);
-  ExamTimeStart.insert(1, TtimeS);
-  ExamTimeEnd.insert(1, TtimeE);
+  // ExamName.insert(1, Tname);
+  // ExamNumber.insert(1, Tnumber);
+  // ExamTimeStart.insert(1, TtimeS);
+  // ExamTimeEnd.insert(1, TtimeE);
 
   if (type.toString() == dashboard.toString()){
     return AnimationLimiter(
@@ -221,7 +222,7 @@ Widget DashboardPage(BuildContext context, Widget type){
         physics: BouncingScrollPhysics(
           parent: AlwaysScrollableScrollPhysics(),
         ),
-        itemCount: 2,
+        itemCount: 1,
         itemBuilder: (BuildContext context, int index){
           return AnimationConfiguration.staggeredList(
 
@@ -240,26 +241,34 @@ Widget DashboardPage(BuildContext context, Widget type){
                   margin: EdgeInsets.only(bottom: 15),
 
                   child: ListTile(
-                    title: Text('${ExamName[index]}', style: TextStyle(color: Colors.black),),
-                    subtitle: Text('Start Time : ${ExamTimeStart[index]}'),
+                    title: Text('${ExamName[0]}', style: TextStyle(color: Colors.black),),
+                    subtitle: Text('Start Time : ${ExamTimeStart[0]}'),
                     // test or text
-                    leading: Icon(Icons.article_sharp),
+                    leading: IconButton(
+                      icon: Icon(Icons.article_sharp),
+                      onPressed: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Scoring())
+                        );
+                      },
+                    ),
                     // test numbers
-                    trailing: Text("${ExamNumber[index]}", style: TextStyle(color: Colors.black38),),
+                    trailing: Text("${ExamNumber[0]}", style: TextStyle(color: Colors.black38),),
                     onTap: (){
                       // Go for details and start
-                      if(index == 0){
+                      //if(index == 0){
                         Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => ExamListDetails(ExamName: ExamName[index], ExamTimeStart: ExamTimeStart[index], ExamTimeEnd: ExamTimeEnd[index], ExamType: "Descriptive",) )
+                            MaterialPageRoute(builder: (context) => ExamListDetails(ExamName: ExamName[0], ExamTimeStart: ExamTimeStart[0], ExamTimeEnd: ExamTimeEnd[0], ExamType: "Descriptive",) )
                         );
-                      }
-                      else if(index == 1){
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => ExamListDetails(ExamName: ExamName[index], ExamTimeStart: ExamTimeStart[index], ExamTimeEnd: ExamTimeEnd[index], ExamType: "Optional",) )
-                        );
-                      }
+                     // }
+                      // else if(index == 1){
+                      //   Navigator.push(
+                      //       context,
+                      //       MaterialPageRoute(builder: (context) => ExamListDetails(ExamName: ExamName[index], ExamTimeStart: ExamTimeStart[index], ExamTimeEnd: ExamTimeEnd[index], ExamType: "Optional",) )
+                      //   );
+                      // }
                     },
                   ),
 
@@ -295,7 +304,7 @@ Widget DashboardPage(BuildContext context, Widget type){
           physics: BouncingScrollPhysics(
             parent: AlwaysScrollableScrollPhysics(),
           ),
-          itemCount: 2,
+          itemCount: 1,
           itemBuilder: (BuildContext context, int index){
             return AnimationConfiguration.staggeredList(
 
@@ -314,26 +323,26 @@ Widget DashboardPage(BuildContext context, Widget type){
                     margin: EdgeInsets.only(bottom: 15),
 
                     child: ListTile(
-                      title: Text('${ExamName[index]}', style: TextStyle(color: shrinePink400),),
-                      subtitle: Text('Start Time : ${ExamTimeStart[index]}'),
+                      title: Text('${ExamName[0]}', style: TextStyle(color: shrinePink400),),
+                      subtitle: Text('Start Time : ${ExamTimeStart[0]}'),
                       // test or text
                       leading: Icon(Icons.article_sharp),
                       // test numbers
-                      trailing: Text("${ExamNumber[index]}", style: TextStyle(color: Colors.black38),),
+                      trailing: Text("${ExamNumber[0]}", style: TextStyle(color: Colors.black38),),
                       onTap: (){
                         // Go for details and start
-                        if(index == 0){
+                       // if(index == 0){
                           Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => ExamListDetails(ExamName: ExamName[index], ExamTimeStart: ExamTimeStart[index], ExamTimeEnd: ExamTimeEnd[index], ExamType: "Descriptive",) )
+                              MaterialPageRoute(builder: (context) => ExamListDetails(ExamName: ExamName[0], ExamTimeStart: ExamTimeStart[0], ExamTimeEnd: ExamTimeEnd[0], ExamType: "Descriptive",) )
                           );
-                        }
-                        else if(index == 1){
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => ExamListDetails(ExamName: ExamName[index], ExamTimeStart: ExamTimeStart[index], ExamTimeEnd: ExamTimeEnd[index], ExamType: "Optional",) )
-                          );
-                        }
+                       // }
+                        // else if(index == 1){
+                        //   Navigator.push(
+                        //       context,
+                        //       MaterialPageRoute(builder: (context) => ExamListDetails(ExamName: ExamName[index], ExamTimeStart: ExamTimeStart[index], ExamTimeEnd: ExamTimeEnd[index], ExamType: "Optional",) )
+                        //   );
+                        // }
                       },
                     ),
 

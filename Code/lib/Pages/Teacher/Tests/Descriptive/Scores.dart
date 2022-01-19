@@ -1,17 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:quiz/Pages/Student/StudentPanel.dart';
 import 'package:quiz/Pages/Teacher/TeacherPanel.dart';
 
-class EndExamDescriptive extends StatefulWidget{
+class Scores extends StatefulWidget{
 
 
   @override
-  EndExamDescriptivePage createState() => EndExamDescriptivePage();
+  ScorePage createState() => ScorePage();
 
 }
 
-class EndExamDescriptivePage extends State<EndExamDescriptive>{
+class ScorePage extends State<Scores>{
+
+  TextEditingController Score1 = TextEditingController();
+  TextEditingController Score2 = TextEditingController();
+
+  late int SCORE = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,13 +28,10 @@ class EndExamDescriptivePage extends State<EndExamDescriptive>{
         title: Text("Quiz Project", style: TextStyle(color: Colors.white),),
         actions: [
           TextButton(
-            child: Text("Home", style: TextStyle(color: Colors.white70, fontSize: 18),),
             onPressed: (){
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => StudentPanel(FullName: "FullName", ID: "ID", UniversityID: "UniversityID", Token: "desc"))
-              );
+              Navigator.pop(context);
             },
+            child: Text("Save", style: TextStyle(fontSize: 18, color: Colors.white),),
           )
         ],
       ),
@@ -67,13 +69,13 @@ class EndExamDescriptivePage extends State<EndExamDescriptive>{
                 // Question 1 with Answer
                 SizedBox(height: 10,),
                 Container(
-                  height: 200,
+                  height: 250,
                   width: double.infinity,
                   child: Card(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)
                     ),
-                   // color: Color(0xFFDBA1A1),
+                    // color: Color(0xFFDBA1A1),
                     elevation: 5,
                     semanticContainer: true,
                     clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -83,9 +85,11 @@ class EndExamDescriptivePage extends State<EndExamDescriptive>{
                         children: [
                           Text("QUESTION : What is ER?", style: TextStyle(color: Colors.black, fontSize: 20),),
                           SizedBox(height: 25,),
-                          Text("ANSWER : Entity–relationship", style: TextStyle(color: Colors.black, fontSize: 18),),
+                          Text("ANSWER : er", style: TextStyle(color: Colors.black, fontSize: 18),),
                           SizedBox(height: 25,),
-                          //Text("SCORE : 2", style: TextStyle(color: Colors.red, fontSize: 18),),
+                          Text("TOTAL SCORE : 2", style: TextStyle(color: Colors.black87, fontSize: 18),),
+                          SizedBox(height: 25,),
+                          SimpleInput(label: 'Score', cnt: Score1)
                         ],
                       ),
                     ),
@@ -99,7 +103,7 @@ class EndExamDescriptivePage extends State<EndExamDescriptive>{
 
                 // Question 2 with Answer
                 Container(
-                  height: 200,
+                  height: 250,
                   width: double.infinity,
                   child: Card(
                     shape: RoundedRectangleBorder(
@@ -117,7 +121,9 @@ class EndExamDescriptivePage extends State<EndExamDescriptive>{
                           SizedBox(height: 25,),
                           Text("ANSWER : 4", style: TextStyle(color: Colors.black, fontSize: 18),),
                           SizedBox(height: 25,),
-                         // Text("SCORE : +1", style: TextStyle(color: Colors.green, fontSize: 18),),
+                          Text("TOTAL SCORE : 1", style: TextStyle(color: Colors.black87, fontSize: 18),),
+                          SizedBox(height: 25,),
+                          SimpleInput(label: 'Score', cnt: Score2)
                         ],
                       ),
                     ),
@@ -126,19 +132,43 @@ class EndExamDescriptivePage extends State<EndExamDescriptive>{
 
                 SizedBox(height: 20,),
 
-                Divider(
-                  color: shrineBlue900,
-                  thickness: 2,
-                ),
-
                 Container(
                   child: Center(
                     child: Text(
-                      'Score : - \n\nTotal : 3',
+                      'Score : ${SCORE} \n\nTotal : 3',
                       style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20
+                          color: Colors.black,
+                          fontSize: 20
                       ),
+                    ),
+                  ),
+                ),
+
+                SizedBox(height: 30,),
+
+                ElevatedButton(
+                  onPressed: (){
+                    setState(() {
+                      SCORE = int.parse(Score1.text) + int.parse(Score2.text);
+                    });
+                  },
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.zero,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                  ),
+                  child: Ink(
+                    decoration: BoxDecoration(
+                        color: shrinePink300,
+                        borderRadius: BorderRadius.circular(15)
+                    ),
+                    child: Container(
+                      width: 180,
+                      height: 35,
+                      alignment: Alignment.center,
+                      child: Text('Caculate', style:
+                      TextStyle(fontSize: 16, color: Colors.white),),
                     ),
                   ),
                 ),
@@ -153,6 +183,18 @@ class EndExamDescriptivePage extends State<EndExamDescriptive>{
 
     );
   }
+}
+
+Widget SimpleInput({label, cnt}) {
+  return TextFormField(
+    controller: cnt,
+    style: TextStyle(color: Colors.black),
+    decoration: InputDecoration(
+      labelText: label,
+      border: OutlineInputBorder(),
+      labelStyle: TextStyle(color: shrineBlue600),
+    ),
+  );
 }
 
 ThemeData _buildShrineTheme() {
