@@ -18,7 +18,7 @@ import 'package:http/http.dart' as http;
 import '../main.dart';
 import 'package:quiz/Classes/User/User.dart';
 
-class LogIn extends StatelessWidget {
+class login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -141,7 +141,7 @@ class _LogIn_PageState extends State<LogIn_Page> {
                     onPressed: () {
                       Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => LogIn())
+                          MaterialPageRoute(builder: (context) => login())
                       );
                     },
                     style: ElevatedButton.styleFrom(
@@ -192,7 +192,7 @@ class _LogIn_PageState extends State<LogIn_Page> {
                   onPressed: () {
                     Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => LogIn())
+                        MaterialPageRoute(builder: (context) => login())
                     );
                   },
                   child: Text(
@@ -411,7 +411,7 @@ class _LogIn_PageState extends State<LogIn_Page> {
                     }
                     String role = getRole(response.body);
                     String ID = getId(response.body);
-                   // String FullName = getName(response.body);
+                    // String FullName = getName(response.body);
                     String UniversityID = getUniId(response.body);
 
                     print(response.body + "\n" + role);
@@ -422,20 +422,20 @@ class _LogIn_PageState extends State<LogIn_Page> {
 
                     if(role == "administor" || role == "Administor"){
                       Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => UniversityPanel(FullName: Username, ID: ID, UniversityID: UniversityID, Token: token,))
+                          context,
+                          MaterialPageRoute(builder: (context) => UniversityPanel(FullName: Username, ID: ID, UniversityID: UniversityID, Token: token,))
                       );
                     }
                     else if(role == "professor" || role == "Professor"){
                       Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => TeacherPanel(FullName: Username, ID: ID, UniversityID: UniversityID, Token: token,))
+                          MaterialPageRoute(builder: (context) => TeacherPanel(FullName: Username, ID: ID, UniversityID: UniversityID, Token: "ManageFinish",))
                       );
                     }
                     else if(role == "student" || role == "Student"){
                       Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => StudentPanel(FullName: Username, ID: ID, UniversityID: UniversityID, Token: token,))
+                          context,
+                          MaterialPageRoute(builder: (context) => StudentPanel(FullName: Username, ID: ID, UniversityID: UniversityID, Token: token,))
                       );
                     }
                     else{

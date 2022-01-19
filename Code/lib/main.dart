@@ -6,6 +6,7 @@ import 'package:quiz/Pages/Student/StudentPanel.dart';
 import 'package:quiz/Pages/Teacher/Tests/Descriptive/AddTest_Page_1.dart';
 import 'package:quiz/Pages/Teacher/Tests/Descriptive/AddTest_Page_2.dart';
 import 'package:quiz/Pages/Teacher/Tests/Optional/ManageTestQuestions.dart';
+import 'package:quiz/login.dart';
 
 import 'Pages/ContactWithUs.dart';
 
@@ -122,7 +123,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     onPressed: (){
                       Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => LogIn())
+                          MaterialPageRoute(builder: (context) => login())
                       );
                     },
                     style: ElevatedButton.styleFrom(
