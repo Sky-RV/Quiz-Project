@@ -145,10 +145,16 @@ class UniversityPanelPage extends State<UniversityPanel>{
       Teachers_Emails.insert(0, 'Leo@gmail.com');
     }
     if(widget.ID == "Student"){
+      Teachers_Name.insert(0, 'Leo');
+      Teachers_Emails.insert(0, 'Leo@gmail.com');
       Students_Name.insert(0, 'Peni');
       Students_Emails.insert(0, "Peni@gmail.com");
     }
     if(widget.ID == "Lesson"){
+      Teachers_Name.insert(0, 'Leo');
+      Teachers_Emails.insert(0, 'Leo@gmail.com');
+      Students_Name.insert(0, 'Peni');
+      Students_Emails.insert(0, "Peni@gmail.com");
       Lessons_Name.insert(0, 'Database');
     }
   }

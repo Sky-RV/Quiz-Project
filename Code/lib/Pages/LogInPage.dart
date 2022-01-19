@@ -429,7 +429,7 @@ class _LogIn_PageState extends State<LogIn_Page> {
                     else if(role == "professor" || role == "Professor"){
                       Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => TeacherPanel(FullName: Username, ID: ID, UniversityID: UniversityID, Token: token,))
+                          MaterialPageRoute(builder: (context) => TeacherPanel(FullName: Username, ID: ID, UniversityID: UniversityID, Token: "ManageFinish",))
                       );
                     }
                     else if(role == "student" || role == "Student"){

@@ -165,7 +165,7 @@ class AddStudent extends StatelessWidget {
                             print(student_response.body);
                             Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => UniversityPanel(FullName: FullName, ID: ID, UniversityID: UniversityID, Token: Token,))
+                                MaterialPageRoute(builder: (context) => UniversityPanel(FullName: FullName, ID: 'Student', UniversityID: UniversityID, Token: Token, myToken: 'Student',))
                             );
                           }
 
